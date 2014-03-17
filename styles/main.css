@@ -1,0 +1,82 @@
+@import url(reset.css);
+
+body {
+	background: #ccc;
+	font-size: 12px;
+	font-family: arial;
+}
+
+table {
+	margin: 5px 5px 5px 5px;
+}
+
+table td {
+	width: 150px;
+	font-size: 12px;
+	padding: 2px 2px 2px 2px;
+}
+
+select { border: solid 0px black; padding: 1px 1px 1px 1px; }
+.bold { font-weight: bold; }
+.cursive { font-style: italic; color: orange; }
+.small { font-size: 9px; color: orange; }
+
+
+#container {
+	max-width: 1600px;
+	max-height: auto;
+}
+
+#toolbar {
+	padding: 5px 0 5px 0;
+	width: 100%;
+	height: auto;
+	background: grey;
+	color: black;
+}
+
+	#toolbar li {
+		padding-right: 20px;
+		display: inline;
+	}
+
+#wrapper {
+	margin: 0 auto 0 auto;
+	background: white;
+	width: 700px;
+	height: auto;
+}
+
+#logo {
+	padding: 50px 0 50px 0;
+	text-align: center;
+}
+
+.content-block {
+	margin: 0px 15px 20px 15px;
+	border: solid 1px black;
+}
+
+.screening-list {
+	margin: 0px 15px 20px 15px;
+}
+
+#filter {
+	text-align: right;
+	background: grey;
+	padding: 5px 0 5px 0;
+	width: 100%;
+}
+
+	#filter input {
+		margin-right: 10px;
+	}
+
+.table-header {
+	background: grey;
+}
+
+.list { margin: 0 0 0 0; border: 1px solid grey; }
+.list td { border: 1px solid grey; }
+
+
