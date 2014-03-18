@@ -21,15 +21,19 @@ nav {
 		margin: 5px 5px 5px 5px;
 	}
 
-	table td {
+	table td, table th {
 		width: 150px;
 		font-size: 12px;
 		padding: 5px 2px 5px 2px;
 	}
 
+	table th {
+		font-weight: bold;
+	}
+
 .bold { font-weight: bold; }
 .cursive { font-style: italic; color: orange; }
-.small { font-size: 9px; color: orange; }
+small { font-size: 9px; color: orange; }
 
 /*
 TOOLBAR
@@ -169,8 +173,6 @@ MAIN
 	border-bottom: 1px solid black;
 	padding: 5px 0 5px 3px;
 }
-
-.list td:hover { background: #F8F8F8; }
 
 #footer {
 	height: auto;
