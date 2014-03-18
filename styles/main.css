@@ -170,6 +170,8 @@ MAIN
 	padding: 5px 0 5px 3px;
 }
 
+.list td:hover { background: #F8F8F8; }
+
 #footer {
 	height: auto;
 	width: 100%;
