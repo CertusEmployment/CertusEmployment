@@ -1,41 +1,27 @@
-@import url(reset.css);
-
-body {
-	background: #ccc;
-	font-family: arial;
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
 }
-
-li { display: inline-block; }
-
 nav {
-	position: fixed;
-	z-index: 2000;
 	background: #ccc;
 	height: 30px;
 	width: 100%;
 	box-shadow: 0px 2px 5px #888888;
 }
 
-	table {
-		border-collapse: collapse;
-		margin: 5px 5px 5px 5px;
-	}
+#nav-wrapper {
+	width: 700px;
+	margin: auto;
+}
 
-	table td {
-		width: 150px;
-		font-size: 12px;
-		padding: 5px 2px 5px 2px;
-	}
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
 
-.bold { font-weight: bold; }
-.cursive { font-style: italic; color: orange; }
-.small { font-size: 9px; color: orange; }
-
-/*
-TOOLBAR
-*/
-
-
+li { display: inline-block; }
 
 .toolbar-list-left {float: left;}
 .toolbar-list-right {float: right;}
@@ -63,7 +49,7 @@ ul.sub-menu-alert, ul.sub-menu-option {
 	border-radius: 0 0 4px 4px;
 	-moz-border-radius: 0 0 4px 4px;
 	margin-left: -5px;
-}
+} 
 
 ul.sub-menu-alert {
 	background: #ccc;
@@ -96,102 +82,3 @@ ul li:hover ul.sub-menu-alert, ul li:hover ul.sub-menu-option {
     1% {display: inline; ; opacity: 0; }
     100% { display: inline; opacity: 1; }
 }
-
-/*
-MAIN
-*/
-
-#container {
-	z-index: 1;
-	max-width: 1600px;
-	max-height: auto;
-}
-
-#wrapper {
-	margin: 0 auto 0 auto;
-	background: white;
-	width: 850px;
-	height: auto;
-}
-
-#logo {
-	padding: 80px 0 50px 0;
-	text-align: center;
-}
-
-.content-block {
-	margin: 0px 15px 20px 15px;
-	border: solid 1px black;
-}
-
-	.content-block table {
-		border-collapse: collapse;
-		margin: 5px 5px 5px 5px;
-	}
-
-	.content-block table td {
-		width: 150px;
-		font-size: 12px;
-		padding: 5px 2px 5px 2px;
-	}
-
-
-.screening-list {
-	border-bottom: solid 0px black;
-	border: solid 1px black;
-	margin: 0px 15px 20px 15px;
-}
-
-#filter {
-	text-align: right;
-	background: #ccc;
-	padding: 5px 0 5px 0;
-	width: 100%;
-}
-
-	#filter input {
-		margin-left: 20px;
-		height: 25px;
-		margin-right: 10px;
-	}
-
-	#filter select {
-		font-size: 12px;
-		border: solid 0px black; padding: 1px 1px 1px 1px;
-	}
-
-.table-header {
-	background: #ccc;
-}
-
-.list { margin: 0 0 0 0; }
-.list td { 
-	border-bottom: 1px solid black;
-	padding: 5px 0 5px 3px;
-}
-
-#footer {
-	height: auto;
-	width: 100%;
-	margin-top: 50px;
-}
-
-#footer img {
-	width: 8%;
-	padding-left: 20px;
-}
-
-#footer div {
-	display: inline-block;
-	float: right;
-	margin-right: 20px;
-	text-align: right;
-}
-
-#footer p {
-	width: 100%;
-	color: grey;
-	font-size: 10px;
-	text-align: center;
-}
-
