@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wachtwoord wijzigen | Certus Employment</title>
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
+</head>
+<body>
+
+<div id="content">
+
+	<?php include "toolbar-klant.php"; ?>
+
+	<div id="wrapper">
+
+		<div id="logo">
+			<img src="styles/images/certus_logo.png" />
+		</div>
+
+		<p id="breadcrumbs">Overzicht > <a href="#">Wachtwoord wijzigen</a></p>
+
+		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+			<div class="content-block settings-block">
+				<table>
+					<tr>
+						<td><label>Oud wachtwoord</label></td>
+					</tr>
+					<tr>
+						<td><input type="password" name="old-password" id="old-password"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p class="comment">Wachtwoord moet minimaal 6 karakters, een cijfer en een hoofdletter bevatten.</p></td>
+					</tr>
+					<tr>
+						<td><label>Nieuw wachtwoord</label></td>
+						<td><label>Herhaal wachtwoord</label></td>
+					</tr>
+					<tr>
+						<td><input type="password" name="new-password" id="new-password"></td>
+						<td><input type="password" name="new-password-repeat" id="new-password-repeat"></td>
+					</tr>
+				</table>
+			</div>
+			<input type="submit" id="next" name="submit" value="Opslaan">
+		</form>
+		
+	</div>
+</div>
+
+</body>
+</html>

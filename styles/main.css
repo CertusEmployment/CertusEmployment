@@ -115,6 +115,17 @@ ul li:hover ul.sub-menu-alert, ul li:hover ul.sub-menu-option {
 	margin-right: 20px;
 }
 
+#breadcrumbs {
+	color: #999;
+	font-size: 11px;
+	padding-left: 15px;
+	margin-bottom: 5px;
+}
+
+#breadcrumbs a {
+	color: orange;
+}
+
 /*
 MAIN
 */
@@ -185,15 +196,15 @@ MAIN
 .settings-block { padding: 30px; }
 	.settings-block p, .settings-block label { font-size: 13px; }
 
-#settings-form input[type="submit"] { 
+#settings-form #next { 
 	background: #fff;
 	border: 1px solid #000;
 	padding: 13px;
 	width: 120px;
-	margin: 0 0 20px 715px;
+	margin: 0 0 0 715px;
 }
 
-#settings-form input[type="submit"]:hover {
+#settings-form #next:hover {
 	border: 1px solid orange;
 	cursor: pointer;
 }
