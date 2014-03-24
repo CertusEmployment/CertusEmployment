@@ -20,7 +20,6 @@ nav {
 
 	table {
 		border-collapse: collapse;
-		margin: 5px 5px 5px 5px;
 	}
 
 	table td, table th {
@@ -161,12 +160,12 @@ MAIN
 
 .content-block {
 	margin: 0px 15px 20px 15px;
+	padding: 5px;
 	border: solid 1px black;
 }
 
 	.content-block table {
-		border-collapse: collapse;
-		margin: 5px 5px 5px 5px;
+		border-collapse: collapse;	
 	}
 
 	.content-block table td {
@@ -175,6 +174,23 @@ MAIN
 		padding: 5px 2px 5px 2px;
 	}
 
+.new-pw-block { padding: 30px; }
+	.new-pw-block p, .new-pw-block label { font-size: 13px; }
+	.new-pw-block-grey { color: #999999; font-size: 13px; }
+
+#new-pw-form input[type="submit"] { 
+	background: #fff;
+	border: 1px solid #000;
+	padding: 13px;
+	width: 120px;
+	margin: 0 0 10px 715px;
+}
+
+#new-pw-form input[type="password"] {
+	height: 30px;
+	width: 240px;
+	margin-top: 5px;
+}
 
 .screening-list {
 	border-bottom: solid 0px black;
@@ -205,10 +221,11 @@ MAIN
 }
 
 .list { margin: 0 0 0 0; }
-.list td { 
-	border-bottom: 1px solid black;
-	padding: 5px 0 5px 3px;
-}
+	
+	.list td { 
+		border-bottom: 1px solid black;
+		padding: 5px 0 5px 3px;
+	}
 
 #footer {
 	height: auto;
@@ -216,22 +233,22 @@ MAIN
 	margin-top: 50px;
 }
 
-#footer img {
-	width: 8%;
-	padding-left: 20px;
-}
+	#footer img {
+		width: 8%;
+		padding-left: 20px;
+	}
 
-#footer div {
-	display: inline-block;
-	float: right;
-	margin-right: 20px;
-	text-align: right;
-}
+	#footer div {
+		display: inline-block;
+		float: right;
+		margin-right: 20px;
+		text-align: right;
+	}
 
-#footer p {
-	width: 100%;
-	color: grey;
-	font-size: 10px;
-	text-align: center;
-}
+	#footer p {
+		width: 100%;
+		color: grey;
+		font-size: 10px;
+		text-align: center;
+	}
 
