@@ -25,16 +25,6 @@
 				gegenereerd, waar u uw wachtwoord kunt aanpassen.
 			</p>
 
-				<form name="password-forget">
-					<label id="email">E-mail adres: </label>
-					<input type="text" id="email" name="email">
-					<input type="submit" value="Verzenden" name="submit">
-				</form>
-
-			<p class="comment">
-				Wanneer u niet meer weet met welk e-mailadres u bent geregistreerd kunt
-				u contact op nemen met info@certus-employment.nl om deze op te vragen.
-			</p>
 
 		</div>
 	</div>

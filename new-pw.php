@@ -16,11 +16,11 @@
 			<img src="styles/images/certus_logo.png" />
 		</div>
 		
-		<form id="new-pw-form" name="new-pw-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-			<div class="content-block new-pw-block">
+		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+			<div class="content-block settings-block">
 				<p>Omdat dit de eerste keer is dat u inlogt, is er een nieuw wachtwoord nodig.</p>
 				<p class="comment">Wachtwoord moet minimaal 6 karakters, een cijfer en een hoofdletter bevatten.</p>
-				<table id="new-pw-table">
+				<table id="settings-table">
 					<tr>
 						<td><label for="new-password">Nieuw wachtwoord</label></td>
 						<td><label for="new-password-repeat">Herhaal wachtwoord</label></td>
