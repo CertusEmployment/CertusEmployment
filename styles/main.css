@@ -40,6 +40,7 @@ nav {
 .bold { font-weight: bold; }
 .cursive { font-style: italic; color: orange; }
 small { font-size: 9px; color: orange; }
+.comment { color: #999999; font-size: 13px; margin-top: 2px; }
 
 /*
 TOOLBAR
@@ -176,20 +177,40 @@ MAIN
 
 .new-pw-block { padding: 30px; }
 	.new-pw-block p, .new-pw-block label { font-size: 13px; }
-	.new-pw-block-grey { color: #999999; font-size: 13px; }
 
 #new-pw-form input[type="submit"] { 
 	background: #fff;
 	border: 1px solid #000;
 	padding: 13px;
 	width: 120px;
-	margin: 0 0 10px 715px;
+	margin: 0 0 20px 715px;
+}
+
+#new-pw-form input[type="submit"]:hover {
+	-webkit-animation: fadeInBGColor 0.2s; 
+	-moz-animation: fadeInBGColor 0.2s; 
+}
+
+@-webkit-keyframes fadeInBGColor {
+    0% { display:none; opacity: 0; }
+    1% {display: inline; ; opacity: 0; }
+    100% { display: inline; opacity: 1; }
+}
+@-moz-keyframes fadeInBGColor {
+    0% { display:none; opacity: 0; }
+    1% {display: inline; ; opacity: 0; }
+    100% { display: inline; opacity: 1; }
 }
 
 #new-pw-form input[type="password"] {
 	height: 30px;
 	width: 240px;
 	margin-top: 5px;
+	line-height: 20px;
+}
+
+#new-pw-table {
+	margin-top: 15px;
 }
 
 .screening-list {
