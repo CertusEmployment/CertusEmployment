@@ -186,21 +186,6 @@ MAIN
 	margin: 0 0 20px 715px;
 }
 
-#new-pw-form input[type="submit"]:hover {
-	-webkit-animation: fadeInBGColor 0.2s; 
-	-moz-animation: fadeInBGColor 0.2s; 
-}
-
-@-webkit-keyframes fadeInBGColor {
-    0% { display:none; opacity: 0; }
-    1% {display: inline; ; opacity: 0; }
-    100% { display: inline; opacity: 1; }
-}
-@-moz-keyframes fadeInBGColor {
-    0% { display:none; opacity: 0; }
-    1% {display: inline; ; opacity: 0; }
-    100% { display: inline; opacity: 1; }
-}
 
 #new-pw-form input[type="password"] {
 	height: 30px;
