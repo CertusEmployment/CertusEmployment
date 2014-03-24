@@ -23,7 +23,7 @@
 			<div class="content-block settings-block">
 				<table>
 					<tr>
-						<td><label>Oud wachtwoord</label></td>
+						<td><label for="old-password">Oud wachtwoord</label></td>
 					</tr>
 					<tr>
 						<td><input type="password" name="old-password" id="old-password"></td>
@@ -32,8 +32,8 @@
 						<td colspan="2"><p class="comment">Wachtwoord moet minimaal 6 karakters, een cijfer en een hoofdletter bevatten.</p></td>
 					</tr>
 					<tr>
-						<td><label>Nieuw wachtwoord</label></td>
-						<td><label>Herhaal wachtwoord</label></td>
+						<td><label for="new-password">Nieuw wachtwoord</label></td>
+						<td><label for="new-password-repeat">Herhaal wachtwoord</label></td>
 					</tr>
 					<tr>
 						<td><input type="password" name="new-password" id="new-password"></td>
