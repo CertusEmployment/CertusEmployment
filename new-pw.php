@@ -9,9 +9,11 @@
 
 <div id="container">
 
-	<?php include "toolbar-klant.php"; ?>
+	<?php //include "toolbar-klant.php"; ?>
 
 	<div id="wrapper">
+		<a href="#" id="klant-temp-logout">uitloggen</a>
+		
 		<div id="logo">
 			<img src="styles/images/certus_logo.png" />
 		</div>
@@ -31,7 +33,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="submit" name="submit" value="Opslaan">
+			<input type="submit" id="next" name="submit" value="Opslaan">
 		</form>
 
 	</div>

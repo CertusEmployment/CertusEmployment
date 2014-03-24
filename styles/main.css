@@ -108,6 +108,13 @@ ul li:hover ul.sub-menu-alert, ul li:hover ul.sub-menu-option {
     100% { display: inline; opacity: 1; }
 }
 
+#klant-temp-logout {
+	font-size: 12px;
+	color: #999;
+	float: right;
+	margin-right: 20px;
+}
+
 /*
 MAIN
 */
@@ -188,7 +195,7 @@ MAIN
 
 #settings-form input[type="submit"]:hover {
 	border: 1px solid orange;
-	color: orange;
+	cursor: pointer;
 }
 
 #settings-form input[type="password"] {
