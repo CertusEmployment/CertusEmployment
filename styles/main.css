@@ -1,0 +1,287 @@
+@import url(reset.css);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+
+body {
+	background: #ccc;
+	font-family: 'Open Sans', sans-serif;
+}
+
+li { display: inline-block; }
+
+nav {
+	position: fixed;
+	z-index: 2000;
+	background: #ccc;
+	height: 30px;
+	width: 100%;
+	box-shadow: 0px 2px 5px #888888;
+}
+
+input { font-family: 'Open Sans', sans-serif; }
+
+	table {
+		border-collapse: collapse;
+	}
+
+	table td, table th {
+		width: 150px;
+		font-size: 12px;
+		padding: 5px 2px 5px 2px;
+	}
+
+	table th {
+		font-weight: bold;
+	}
+
+	label {
+		font-size: 12px;
+		font-family: 'Open Sans', sans-serif;
+	}
+
+.bold { font-weight: bold; }
+.cursive { font-style: italic; color: orange; }
+small { font-size: 9px; color: orange; }
+.comment { color: #999999; font-size: 13px; margin-top: 2px; }
+
+/*
+TOOLBAR
+*/
+
+.toolbar-list-left {float: left;}
+.toolbar-list-right {float: right;}
+
+.toolbar-item {
+	font-family: 'Open Sans', sans-serif;
+	background: inherit;
+	border: none;
+	height: 30px;
+	cursor: pointer;
+	padding: 0 5px;
+}
+
+.toolbar-item:hover { background: #a8a8a8; }
+.toolbar-item a { font-size: 14px; color: black; text-decoration: none; }
+.toolbar-item i { margin: 5px 0 0 7px; font-size: 20px; vertical-align: -1px; }
+.alert { margin-right: 50px; }
+.alert i { margin: 5px 0; }
+
+ul.sub-menu-alert, ul.sub-menu-option {
+	font-family: 'Open Sans', sans-serif;
+	display: none;
+	position: absolute;
+	font-size: 13px;
+	top: 30px;
+	box-shadow: 0px 1px 5px #888888;
+	border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	margin-left: -5px;
+}
+
+ul.sub-menu-alert {
+	background: #ccc;
+	width: 250px;
+}
+
+ul.sub-menu-option {
+	background: #ccc;
+	width: 200px;
+}
+
+ul .sub-menu-alert li { padding: 15px 10px 10px 10px; }
+ul .sub-menu-option li { padding: 10px; }
+ul .sub-menu-alert li, ul .sub-menu-option li { display: block; }
+ul .sub-menu-alert li:hover, ul .sub-menu-option li:hover { background: #a8a8a8; }
+ul .sub-menu-alert li:last-child, ul .sub-menu-option li:last-child { border-radius: 0 0 4px 4px; -moz-border-radius: 0 0 4px 4px; }
+ul li:hover ul.sub-menu-alert, ul li:hover ul.sub-menu-option { 
+	display: block;
+	-webkit-animation: fadeInFromNone 0.2s; 
+	-moz-animation: fadeInFromNone 0.2s; 
+}
+
+@-webkit-keyframes fadeInFromNone {
+    0% { display:none; opacity: 0; }
+    1% {display: inline; ; opacity: 0; }
+    100% { display: inline; opacity: 1; }
+}
+@-moz-keyframes fadeInFromNone {
+    0% { display:none; opacity: 0; }
+    1% {display: inline; ; opacity: 0; }
+    100% { display: inline; opacity: 1; }
+}
+
+#klant-temp-logout {
+	font-size: 12px;
+	color: #999;
+	float: right;
+	margin-right: 20px;
+}
+
+#breadcrumbs {
+	color: #999;
+	font-size: 11px;
+	padding-left: 15px;
+	margin-bottom: 5px;
+}
+
+#breadcrumbs a {
+	color: orange;
+}
+
+/*
+MAIN
+*/
+
+#login-block {
+	margin: 50px auto;
+	border: solid 1px grey;
+	background: white;
+	width: 300px;
+	height: 350px;
+	text-align: center;
+}
+	
+	#login-block img {
+		padding: 40px 0 30px 0;
+	}
+
+	#login-block form { text-align: left; margin: auto; clear: both; width: 70%; }
+	#login-block form input { height: 30px; margin: auto; width: 100%;}
+	#login-block input[type=submit] { 
+		border: 1px solid darkgrey;
+		background: white;
+		color: black; 
+		width: 100px;
+		float: right;
+		clear: right;
+		margin-top: 20px;
+		height: 35px;
+	}
+
+	#login-block input.margin { margin-bottom: 10px; }
+	.reset-password { font-size: 12px; color: orange; float: right; clear: right; }
+
+#container {
+	z-index: 1;
+	max-width: 1600px;
+	max-height: auto;
+}
+
+#wrapper {
+	padding-bottom: 20px;
+	margin: 0 auto 0 auto;
+	background: white;
+	width: 850px;
+	height: auto;
+}
+
+#logo {
+	padding: 80px 0 50px 0;
+	text-align: center;
+}
+
+.content-block {
+	margin: 0px 15px 20px 15px;
+	padding: 5px;
+	border: solid 1px black;
+}
+
+	.content-block table {
+		border-collapse: collapse;	
+	}
+
+	.content-block table td {
+		width: 150px;
+		font-size: 12px;
+		padding: 5px 2px 5px 2px;
+	}
+
+.settings-block { padding: 30px; }
+	.settings-block p, .settings-block label { font-size: 13px; }
+	.settings-block a { color: orange; font-size: 13px; }
+	.settings-block h3 { padding-bottom: 10px; font-weight: bold; font-size: 14px;}
+
+#settings-form #next { 
+	background: #fff;
+	border: 1px solid #000;
+	padding: 13px;
+	width: 120px;
+	margin: 0 0 0 715px;
+}
+
+#settings-form #next:hover {
+	border: 1px solid orange;
+	cursor: pointer;
+}
+
+#settings-form input[type="password"] {
+	height: 30px;
+	width: 240px;
+	margin-top: 5px;
+	line-height: 20px;
+}
+
+#settings-table {
+	margin-top: 15px;
+}
+
+.screening-list {
+	border-bottom: solid 0px black;
+	border: solid 1px black;
+	margin: 0px 15px 20px 15px;
+}
+
+#filter {
+	text-align: right;
+	background: #ccc;
+	padding: 5px 0 5px 0;
+	width: 100%;
+}
+
+	#filter input {
+		margin-left: 20px;
+		height: 25px;
+		margin-right: 10px;
+	}
+
+	#filter select {
+		font-size: 12px;
+		border: solid 0px black; padding: 1px 1px 1px 1px;
+	}
+
+.table-header {
+	background: #ccc;
+}
+
+.list { margin: 0 0 0 0; }
+	
+	.list td { 
+		border-bottom: 1px solid black;
+		padding: 5px 0 5px 3px;
+	}
+
+#footer {
+	height: auto;
+	width: 100%;
+	margin-top: 50px;
+}
+
+	#footer img {
+		width: 8%;
+		padding-left: 20px;
+	}
+
+	#footer div {
+		display: inline-block;
+		float: right;
+		margin-right: 20px;
+		text-align: right;
+	}
+
+	#footer p {
+		width: 100%;
+		color: grey;
+		font-size: 10px;
+		text-align: center;
+	}
+
