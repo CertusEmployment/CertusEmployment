@@ -225,6 +225,10 @@ MAIN
 	margin-top: 15px;
 }
 
+#settings-table td {
+	padding-right: 15px;
+}
+
 .screening-list {
 	border-bottom: solid 0px black;
 	border: solid 1px black;
