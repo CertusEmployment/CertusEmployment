@@ -1,21 +1,22 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Admin Panel</title>
 
-	<link rel="stylesheet" type="text/css" href="styles/main.css" media="screen" />
-	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
+	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 
 </head>
 <body>
 
 <div id="container">
 	
-	<?php include "toolbar-admin.php"; ?>
+	<?php include "../toolbar-admin.php"; ?>
 
 	<div id="wrapper">
 
 		<div id="logo">
-			<img src="styles/images/certus_logo.png" />
+			<img src="../images/certus_logo.png" />
 		</div>
 
 		<div class="content-block">
@@ -27,11 +28,11 @@
 				</tr>
 				<tr>
 					<td>E-mail</td>
-					<td><small>E-mail wijzigen</small></td>
+					<td><small><a href="#">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td>Wachtwoord</td>
-					<td><small>Wachtwoord wijzigen</small></td>
+					<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
 		</div>
@@ -43,19 +44,19 @@
 					<td>Jos Dubben</td>
 					<td>Randstad</td>
 					<td>vandaag</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Jo Bonten</td>
 					<td>Olympia</td>
 					<td>Gisteren</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Roy Donders</td>
 					<td>Start People</td>
 					<td>20-02-2014</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 			</table>
 		</div>
@@ -88,7 +89,7 @@
 
 				<input type="text" name="filter" placeholder="FILTER">
 			</form>
-			<table class="list">
+			<table>
 				<tr class="table-header">
 					<th>Bedrijfsnaam</th>
 					<th>Contactpersoon</th>
@@ -103,7 +104,7 @@
 					<td>4569 DC</td>
 					<td>Utrecht</td>
 					<td>2</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Randstad</td>
@@ -111,7 +112,7 @@
 					<td>4569 DC</td>
 					<td>Utrecht</td>
 					<td>2</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Randstad</td>
@@ -119,7 +120,7 @@
 					<td>4569 DC</td>
 					<td>Utrecht</td>
 					<td>2</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Randstad</td>
@@ -127,7 +128,7 @@
 					<td>4569 DC</td>
 					<td>Utrecht</td>
 					<td>2</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 				<tr>
 					<td>Randstad</td>
@@ -135,14 +136,12 @@
 					<td>4569 DC</td>
 					<td>Utrecht</td>
 					<td>2</td>
-					<td class="cursive">link</td>
+					<td class="cursive"><a href="#">link</a></td>
 				</tr>
 			</table>
 		</div>
 
-		<div id="footer">
-			<p>(c) copyright Certus Employment 2014 - All Rights Reserved</p>
-		</div>
+		<?php include "../footer.php"; ?>
 
 		
 

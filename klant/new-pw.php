@@ -2,20 +2,20 @@
 <html>
 <head>
 	<title>Nieuw Wachtwoord</title>
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
-	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/main.css">
+	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
 <body>
 
 <div id="container">
 
-	<?php //include "toolbar-klant.php"; ?>
+	<?php //include "../toolbar-klant.php"; ?>
 
 	<div id="wrapper">
 		<a href="#" id="klant-temp-logout">uitloggen</a>
 		
 		<div id="logo">
-			<img src="styles/images/certus_logo.png" />
+			<img src="../images/certus_logo.png" />
 		</div>
 		
 		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">

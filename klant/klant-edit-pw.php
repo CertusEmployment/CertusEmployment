@@ -2,26 +2,26 @@
 <html>
 <head>
 	<title>Wachtwoord wijzigen | Certus Employment</title>
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
-	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../styles/main.css">
+	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
 <body>
 
 <div id="content">
 
-	<?php include "toolbar-klant.php"; ?>
+	<?php include "../toolbar-klant.php"; ?>
 
 	<div id="wrapper">
 
 		<div id="logo">
-			<img src="styles/images/certus_logo.png" />
+			<img src="../images/certus_logo.png" />
 		</div>
 
 		<p id="breadcrumbs">Overzicht > <a href="#">Wachtwoord wijzigen</a></p>
 
 		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="content-block settings-block">
-				<table>
+				<table id="settings-table">
 					<tr>
 						<td><label for="old-password">Oud wachtwoord</label></td>
 					</tr>

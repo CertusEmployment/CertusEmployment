@@ -1,5 +1,5 @@
 <nav>
-		<div id="wrapper">	
+		<div id="toolbar-wrapper">	
 		<ul class="toolbar-list-left">
 			<li class="toolbar-item"><a href="#">Nieuwe klant<i class="fa fa-plus"></i></a></li>
 		</ul>
@@ -17,7 +17,7 @@
 				<ul class="sub-menu-option">
 					<li>Wachtwoord wijzingen</li>
 					<li>E-mail wijzigen</li>
-					<label><li><input type="checkbox">check</li></label>
+					<label><li><input type="checkbox"> E-mail ontvangen</li></label>
 				</ul>
 			</li>
 		</ul>
