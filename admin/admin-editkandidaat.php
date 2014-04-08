@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht bedrijven</title>
+	<title>Kandidaat wijzigen</title>
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -44,7 +44,7 @@
 					</tr>
 					<tr>
 						<td><input type="text" id="straat"></td>
-						<td><input type="text" id="huisnr" style="width:100px;" ></td>
+						<td><input type="text" id="huisnr"></td>
 					</tr>
 					<tr>
 						<td><label for="postcode">Postcode</label></td>
