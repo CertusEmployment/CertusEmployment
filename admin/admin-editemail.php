@@ -31,7 +31,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="submit" id="cancel" name="submit" value="Annuleer"><input type="submit" id="next" name="submit" value="Opslaan">
+			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" id="cancel" name="submit" value="Annuleer"></div>
 		</form>
 
 	</div>

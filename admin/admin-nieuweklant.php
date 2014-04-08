@@ -113,7 +113,7 @@
 					<li><label for="vog"><input type="checkbox" name="vog" id="vog"> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label></li>
 				</ul>
 			</div>
-			<input type="submit" id="next" name="submit" value="Voltooien">
+			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"></div>
 		</form>
 
 		<?php include "../footer.php"; ?>

@@ -41,7 +41,7 @@ TOOLBAR
 */
 
 #toolbar-wrapper {
-	width: 850px;
+	max-width: 850px;
 	margin: auto;
 }
 
@@ -163,9 +163,9 @@ MAIN
 	padding-bottom: 12px;
 	margin: 0 auto 0 auto;
 	background: #fff;
-	width: 850px;
+	max-width: 850px;
 	height: auto;
-	box-shadow: 1px 1px 10px #666;
+	box-shadow: 0px 0px 15px #666;
 }
 
 #logo {
@@ -199,8 +199,9 @@ MAIN
 	padding: 13px;
 	width: 120px;
 }
-#settings-form #next { margin: 0 0 0 715px; }
-#settings-form #cancel { margin: 0 0 0 590px; position: absolute; }
+#settings-form-buttonblock {height: 44px;}
+#settings-form #next { /*margin: 0 0 0 715px;*/ float: right; margin-right: 15px; }
+#settings-form #cancel { /*margin: 0 0 0 590px;*/ position: relative; float: right; margin-right: 10px; }
 
 #settings-btn { 
 	border: 1px solid #606060;
@@ -263,7 +264,7 @@ MAIN
 #footer {
 	height: auto;
 	width: 100%;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 	#footer img { width: 8%; padding-left: 20px; }
 	#footer div {
@@ -288,7 +289,7 @@ DROPZONE
 	margin: 10px auto;
 	padding: 10px;
 	min-height: 130px!important;
-	width: 600px;
+	max-width: 600px;
 	text-align: center;
 	box-shadow: inset 1px 1px 10px #aaa;
 }
