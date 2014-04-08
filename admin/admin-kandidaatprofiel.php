@@ -83,7 +83,7 @@
 				<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
-			    	<a class="dz-remove">Remove file</a>
+			    	<a class="dz-remove">Verwijder bestand</a>
 			 	</div><p class="comment">Bestandtypes: ,pdf, doc, docx</p>
 			</form>
 

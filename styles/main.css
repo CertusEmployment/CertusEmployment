@@ -32,7 +32,7 @@ label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 
 .bold { font-weight: bold; }
 .cursive { font-style: italic; }
-small { font-size: 10px; color: orange; }
+small { font-size: 11px; color: orange; }
 .comment { color: #999999; font-size: 13px; margin-top: 2px; }
 .download-link { color: #303030!important; }
 .fa-empty { padding-left: 14px; color: #999; }
@@ -193,15 +193,16 @@ MAIN
 	.settings-block a { color: orange; font-size: 13px; }
 	.settings-block h3 { padding-bottom: 10px; font-weight: bold; font-size: 14px;}
 
-#settings-form #next { 
+#settings-form #next, #settings-form #cancel {
 	border: 1px solid #606060;
 	background: #fff;
 	border-radius: 2px;
 	box-shadow: inset 0 0 1px 1px rgb(236,236,236);
 	padding: 13px;
 	width: 120px;
-	margin: 0 0 0 715px;
 }
+#settings-form #next { margin: 0 0 0 715px; }
+#settings-form #cancel { margin: 0 0 0 590px; position: absolute; }
 
 #settings-btn { 
 	border: 1px solid #606060;
@@ -212,7 +213,7 @@ MAIN
 	width: 120px;
 }
 
-#settings-form #next:hover, #settings-btn:hover {
+#settings-form #next:hover, #settings-form #cancel:hover, #settings-btn:hover {
 	border: 1px solid orange;
 	cursor: pointer;
 }
