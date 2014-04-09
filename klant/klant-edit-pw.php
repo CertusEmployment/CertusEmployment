@@ -17,10 +17,11 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs">Overzicht > <a href="#">Wachtwoord wijzigen</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#" class="activepage">Wachtwoord wijzigen</a></p>
 
 		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="content-block settings-block">
+				<p class="content-head">Wachtwoord wijzigen</p>
 				<table id="settings-table">
 					<tr>
 						<td><label for="old-password">Oud wachtwoord</label></td>
@@ -41,7 +42,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="submit" id="next" name="submit" value="Opslaan">
+			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
 		</form>
 		
 	</div>

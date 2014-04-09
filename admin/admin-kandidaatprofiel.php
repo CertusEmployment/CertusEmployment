@@ -21,10 +21,10 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs">Overzicht > Bedrijfsprofiel > <a href="#">Kandidaatprofiel</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
 
 		<div class="content-block">
-			<table>
+			<table class="profiletable">
 				<tr>
 					<th>Kandidaatgegevens</th>
 					<th></th>

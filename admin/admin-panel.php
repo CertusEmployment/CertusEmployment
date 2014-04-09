@@ -20,7 +20,7 @@
 		</div>
 
 		<div class="content-block">
-			<table>
+			<table class="profiletable">
 				<tr><th collspan="2">Account informatie</th></tr>
 				<tr>
 					<td>Gebruikersnaam</td>

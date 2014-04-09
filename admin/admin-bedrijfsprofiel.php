@@ -17,7 +17,7 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs">Overzicht > <a href="#">Bedrijfsprofiel</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#" class="activepage">Bedrijfsprofiel</a></p>
 
 		<div class="content-block">
 			<table>

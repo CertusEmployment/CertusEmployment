@@ -33,7 +33,7 @@
 					</tr>
 				</table>
 			</div>
-			<input type="submit" id="next" name="submit" value="Opslaan">
+			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
 		</form>
 
 	</div>

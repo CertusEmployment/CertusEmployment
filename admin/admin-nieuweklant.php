@@ -17,7 +17,7 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 		
-		<p id="breadcrumbs">Overzicht > Bedrijfsprofiel > <a href="#">Wijzigen</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Wijzigen</a></p>
 
 		<form id="settings-form" method="post" action="#">
 			<div class="content-block">
