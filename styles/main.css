@@ -35,7 +35,7 @@ small { font-size: 11px; color: orange; }
 .download-link { color: #303030!important; }
 .fa-empty { padding-left: 14px; color: #999; }
 .ul-disc li { list-style: disc; }
-.wideCell { width: 320px!important; }
+.wideCell { width: 230px!important; }
 
 /*
 TOOLBAR
@@ -189,6 +189,7 @@ MAIN
 	.content-head { color: #000; font-weight: bold; padding: 2px; }
 
 .profiletable td { width: 160px; }
+.rapporttable td { width: 300px; text-align: center; }
 
 .settings-block { padding: 25px; }
 	.settings-block p, .settings-block label { font-size: 13px; }

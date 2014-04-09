@@ -93,9 +93,10 @@
 
 		<div class="content-block">
 			<p class="content-head">Rapport</p>
-			<table class="profiletable">
+			<table class="rapporttable">
 				<tr>
 					<td class="wideCell">Screeningrapport beschikbaar!</td>
+					<td class="bold">Rapport.pdf</td>
 					<td> <button class="download-btn">Download</button>
 				</tr>
 			</table>
