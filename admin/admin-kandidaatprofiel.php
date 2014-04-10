@@ -32,28 +32,37 @@
 				</tr>
 				<tr>
 					<td>Naam</td>
-					<td></td>
+					<td>Roy Thuis</td>
 					<td>Gebruikersnaam</td>
+					<td>roy.thuis</td>
 				</tr>
 				<tr>
 					<td>Straatnaam en huisnr</td>
-					<td></td>
+					<td>Lekstraat 18</td>
 					<td>E-mail</td>
+					<td>roythuis1994@hotmail.com</td>
 				</tr>
 				<tr>
-					<td>Postcode en woonplaats</td>
-					<td></td>
+					<td>Postcode</td>
+					<td>7071 VB</td>
 					<td>Wachtwoord</td>
+					<td>*****</td>
+				</tr>
+				<tr>
+					<td>Woonplaats</td>
+					<td>Ulft</td>
+				</tr>
+				<tr>
+					<td>Land</td>
+					<td>Nederland</td>
 				</tr>
 				<tr>
 					<td>Geboortedatum</td>
+					<td>05-07-1994</td>
 				</tr>
 				<tr>
 					<td>Geboorteplaats</td>
-				</tr>
-				<tr>
-					<td>Telefoonnummer</td>
-					<td></td>
+					<td>Doetinchem</td>
 					<td><small><a href="#">Gegevens wijzigen</a></small></td>
 				</tr>
 				<tr>

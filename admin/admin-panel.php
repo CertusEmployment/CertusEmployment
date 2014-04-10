@@ -89,7 +89,7 @@
 
 				<input type="text" name="filter" placeholder="FILTER">
 			</form>
-			<table>
+			<table  class="profiletable">
 				<tr class="table-header">
 					<th>Bedrijfsnaam</th>
 					<th>Contactpersoon</th>

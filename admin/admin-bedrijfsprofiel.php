@@ -20,7 +20,7 @@
 		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#" class="activepage">Bedrijfsprofiel</a></p>
 
 		<div class="content-block">
-			<table>
+			<table class="profiletable">
 				<tr>
 					<th>Bedrijfsgegevens</th>
 					<th></th>
@@ -28,35 +28,44 @@
 				</tr>
 				<tr>
 					<td>Bedrijfsnaam</td>
-					<td></td>
+					<td>Uitzendbureau B.V.</td>
 					<td>Gebruikersnaam</td>
+					<td>uitzendbureau</td>
 				</tr>
 				<tr>
 					<td>Klantnummer</td>
-					<td></td>
+					<td>2385</td>
 					<td>E-mail</td>
+					<td>info@uitzenbureau.nl</td>
 				</tr>
 				<tr>
 					<td>Adres</td>
-					<td></td>
+					<td>Industrieweg 9</td>
 					<td>Wachtwoord</td>
+					<td>******</td>
 				</tr>
 				<tr>
-					<td>Postcode en woonplaats</td>
+					<td>Postcode</td>
+					<td>6000 CC</td>
+				</tr>
+				<tr>
+					<td>Plaats</td>
+					<td>Utrecht</td>
 				</tr>
 				<tr>
 					<td>Contactpersoon</td>
+					<td>Peter Jansen</td>
 				</tr>
 				<tr>
 					<td>Telefoonnummer</td>
-					<td></td>
+					<td>026123456</td>
 					<td><small><a href="#">Gegevens wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td></td>
 				</tr>
 				<tr>
-					<th colspan="2"><a class="download-link" href=""><img src="../images/excel.png" width="25px"> Download maandoverzicht</a></th>
+					<th colspan="2"><a class="download-link" href=""><img src="../images/excel.png" width="25px"> Download maandoverzicht - Maart 2014</a></th>
 				</tr> 
 			</table>
 		</div>
@@ -100,7 +109,7 @@
 
 				<input type="text" name="filter" placeholder="FILTER">
 			</form>
-			<table>
+			<table class="profiletable">
 				<tr class="table-header">
 					<th>Naam</th>
 					<th>Contactpersoon</th>

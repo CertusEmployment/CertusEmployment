@@ -221,7 +221,6 @@ MAIN
 	border: 1px solid orange;
 	cursor: pointer;
 }
-
 #settings-form #next:active, #settings-form #cancel:active, #settings-btn:active {
 	background: #eee;
 }
@@ -278,13 +277,8 @@ MAIN
 	padding: 9px;
 	width: 120px;
 }
-.download-btn:hover {
-	cursor: pointer;
-	box-shadow: none;
-}
-.download-btn:active {
-	background: #aaa;
-}
+.download-btn:hover { cursor: pointer; box-shadow: none; }
+.download-btn:active { background: #aaa; }
 
 #footer {
 	height: auto;
@@ -304,17 +298,145 @@ MAIN
 		font-size: 10px;
 		text-align: center;
 	}
+	.double-table td { width: 200px; }
+	.form-div { float: left; padding-right: 20px; width: 240px; }
 
+
+.pakket-block { position: relative; height: 360px; width: 180px; border: 1px solid black; margin: 10px 0px 15px 10px; float: left;  }
+.pakket-block:hover { border: 1px solid darkorange; }
+.pakket-block i { text-align: center; width: 100%; font-size: 40px; padding: 15px 0 15px 0; }
+.pakket-block p { font-weight: bold; padding: 0 5px 0 5px; color:darkorange; }
+.pakket-block table { margin: 5px 0 0 5px; }
+.pakket-block li { padding-left: 1.2em; }
+.pakket-block li:before {
+	font-size: 14px;
+  	content: '\f046';
+  	font-family: FontAwesome;
+  	display: inline-block;
+  	margin-left: -1.2em;
+  	width: 1.2em;
+}​
+
+.pakket-block h2 {} /* Moet erin staan anders ingored die de class waarden */
+.pakket-prijs {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	text-align: center; 
+ 	font-size: 22px; 
+	padding: 5px 0 10px 0; 
+ 	color: darkorange; 
+	font-weight: bold; 
+}
+
+.clear-float { clear: both; }
+.fa-download { margin-right: 5px; }
+.color-reset { color: black; }
+
+.pakket-block input[type=checkbox] { display:none; }
+.pakket-block input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline;
+  font-size: 14px;
+}
+.pakket-block label { width: 150px; }
+.pakket-block input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+.pakket-block input[type=checkbox] + label:before { letter-spacing: 7px; } /* space between checkbox and label */
+.pakket-block input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+.pakket-block input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+.fa-question-circle {
+	display: inline;
+	vertical-align: top;
+	font-size: 18px;
+	padding-left: 20px;
+	padding-right: 5px;
+}
+
+.grey { color: grey;}
+
+
+ul.notification {
+	font-family: 'Open Sans', sans-serif;
+	display: none;
+	position: absolute;
+	font-size: 13px;
+	box-shadow: 0px 1px 5px #888888;
+}
+
+ul.notification { z-index: 2; background: white; width: 225px; margin-top: 5px; }
+	ul .notification li { padding: 10px 10px 10px 10px; }
+	ul .notification li, ul .sub-menu-option li { display: block!important; }
+	ul li:hover ul.notification { 
+		display: block;
+		-webkit-animation: fadeInFromNone 0.2s; 
+		-moz-animation: fadeInFromNone 0.2s; 
+	}
+
+.help-item {
+	position: absolute;
+	font-family: 'Open Sans', sans-serif;
+	background: inherit;
+	display: inline-block;
+	border: none;
+	cursor: pointer;
+	padding: 0 5px;
+}
+
+	.help-item a {  color: grey; font-size: 13px; color: black; text-decoration: none; }
+	.help-item i { color:grey; margin: 5px 0 0 7px; font-size: 20px; vertical-align: bottom; }
+
+.block {
+	margin-bottom: 10px;
+	width: 550px;
+	display: block;
+	float: left;
+}
+
+.pos1 { top: 238px; }
+.pos2 { bottom: 130px; }
+.pos3 { bottom: -92px; }
+
+.block input[type=checkbox] { display:none; }
+.block input[type=checkbox] + label:before {
+	vertical-align: bottom;
+ 	font-family: FontAwesome;
+	display: inline;
+	font-size: 18px;
+}
+.block label { width: 150px; }
+.block input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+.block input[type=checkbox] + label:before { letter-spacing: 7px; }
+.block input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+.block input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
+
+#next { 
+	border: 1px solid #606060;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: inset 0 0 1px 1px rgb(236,236,236);
+	padding: 13px;
+	width: 120px;
+	margin: 0 0 0 715px;
+}
+
+#next:hover {
+	border: 1px solid orange;
+	cursor: pointer;
+}
 
 /*
 DROPZONE
 */
 
 .dropzone {
-	margin: 10px auto;
+	clear: both;
+	margin: 30px auto 30px auto;
 	padding: 10px;
 	min-height: 130px!important;
-	max-width: 600px;
+	width: 600px;
 	text-align: center;
 	box-shadow: inset 1px 1px 10px #aaa;
 }

@@ -39,8 +39,6 @@
 				<tr>
 					<td>Postcode</td>
 					<td>7071 VB</td>
-					<td>E-mailadres</td>
-					<td>roythuis1994@hotmail.com</td>
 				</tr>
 				<tr>
 					<td>Woonplaats</td>
@@ -61,14 +59,14 @@
 					<td>roy.thuis</td>
 				</tr>
 				<tr>
-					<td>E-mail</td>
+					<td>E-mail adres</td>
 					<td>roythuis1994@hotmail.com</td>
-					<td><a href="#">E-mail wijzigen</a></td>
+					<td><small><a href="#">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td>Wachtwoon</td>
 					<td>********</td>
-					<td><a href="#">Wachtwoord wijzigen</a></td>
+					<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
 		</div>
