@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script>
+	<script src="../js/dropzoneIMG.js"></script>
 
 </head>
 <body>
@@ -42,19 +43,19 @@
 				<i class="fa font" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
-			    	<a class="dz-remove">Remove file</a>
+			    	<a class="dz-remove">Verwijder bestand</a>
 			 	</div><p class="comment">Bestandtypes: ,pdf, doc, docx</p>
 			</form>
 		
 			<p class="block">
 				Upload hier een afbeelding van uw <b>paspoort of identiteitskaart</b>, het is belangrijk dat alle gegevens goed leesbaar zijn.
 			</p>
-			<form action="klant-upload.php" class="dropzone">
+			<form action="klant-upload.php" class="dropzoneIMG">
 				<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
 			    	<a class="dz-remove">Verwijder bestand</a>
-			 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
+			 	</div><p class="comment">Bestandtypes: jpg, png, pdf</p>
 			</form>
 
 			<form action="#" method="post">

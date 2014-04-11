@@ -415,7 +415,7 @@ ul.notification { z-index: 2; background: white; width: 225px; margin-top: 5px; 
 DROPZONE
 */
 
-.dropzone {
+.dropzone, .dropzoneIMG {
 	clear: both;
 	margin: 30px auto 30px auto;
 	padding: 10px;
@@ -424,16 +424,18 @@ DROPZONE
 	text-align: center;
 	box-shadow: inset 1px 1px 10px #aaa;
 }
-.dropzone:hover { cursor: pointer; }
+.dropzone:hover, .dropzoneIMG:hover { cursor: pointer; }
+
+
 
 /*
 MEDIAQUERIES
 */
 
 @media screen and (max-width: 816px) {
-  .pos3 {top:672px;}
+  .pos3 { top: 672px; }
 }
 
 @media screen and (min-width: 200px) and (max-width: 582px) {
-  .pos3 {top:690px;}
+  .pos3 { top: 690px; }
 }
