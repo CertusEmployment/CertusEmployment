@@ -411,21 +411,6 @@ ul.notification { z-index: 2; background: white; width: 225px; margin-top: 5px; 
 .block input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
 .block input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
 
-#next { 
-	border: 1px solid #606060;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: inset 0 0 1px 1px rgb(236,236,236);
-	padding: 13px;
-	width: 120px;
-	margin: 0 0 0 715px;
-}
-
-#next:hover {
-	border: 1px solid orange;
-	cursor: pointer;
-}
-
 /*
 DROPZONE
 */

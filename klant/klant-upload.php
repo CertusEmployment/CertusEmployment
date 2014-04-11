@@ -24,7 +24,7 @@
 		</div>
 
 		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
-
+		
 		<div class="content-block">
 			<p class="content-head">Informatievoorziening</p>
 			
@@ -77,8 +77,9 @@
 			</form>
 			<br class="clear-float">
 		</div>
-		<input type="submit" id="next" name="submit" value="Opslaan">
-
+		<form method="post" action="#" id="settings-form">	
+		<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
+		</form>
 		<?php include "../footer.php"; ?>
 
 	</div> <!-- wrapper -->
