@@ -1,5 +1,5 @@
 <nav>
-	<div id="toolbar-wrapper">	
+	<div class="toolbar-wrapper">	
 		<ul class="toolbar-list-left">
 			<li class="toolbar-item"><a href="#">Nieuw bedrijf<i class="fa fa-plus"></i></a></li>
 		</ul>

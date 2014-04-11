@@ -21,7 +21,7 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs">Overzicht > Kandidaat informatie > <a href="#">Pakket keuze</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#" class="activepage">Pakket keuze</a></p>
 		<form id="settings-form" method="post" action="#">
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>

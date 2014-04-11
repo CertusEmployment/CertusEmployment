@@ -1,5 +1,5 @@
 <nav>	
-	<div id="toolbar-wrapper">	
+	<div class="toolbar-wrapper">	
 		<ul class="toolbar-list-right">
 			<li class="toolbar-item"><a href="#">Logout<i class="fa fa-power-off"></i></a></li>
 			<li class="toolbar-item"><a href="#">Opties<i class="fa fa-cog"></i></a>

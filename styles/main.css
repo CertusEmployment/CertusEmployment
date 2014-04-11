@@ -41,7 +41,7 @@ small { font-size: 11px; color: orange; }
 TOOLBAR
 */
 
-#toolbar-wrapper {
+.toolbar-wrapper {
 	max-width: 850px;
 	margin: auto;
 }
@@ -81,7 +81,7 @@ ul.sub-menu-option { background: #ccc; width: 200px; }
 	ul .sub-menu-alert li { padding: 15px 10px 10px 10px; }
 	ul .sub-menu-option li { padding: 10px; }
 	ul .sub-menu-alert li, ul .sub-menu-option li { display: block!important; }
-	ul .sub-menu-alert li:hover, ul .sub-menu-option li:hover { background: #a8a8a8; }
+	ul .sub-menu-alert li:hover, ul .sub-menu-option li:hover { background: #a8a8a8;}
 	ul .sub-menu-alert li:last-child, ul .sub-menu-option li:last-child { border-radius: 0 0 4px 4px; -moz-border-radius: 0 0 4px 4px; }
 	ul li:hover ul.sub-menu-alert, ul li:hover ul.sub-menu-option { 
 		display: block;

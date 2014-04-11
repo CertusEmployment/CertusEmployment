@@ -1,11 +1,11 @@
 <nav>
-		<div id="toolbar-wrapper">	
+	<div class="toolbar-wrapper">	
 		<ul class="toolbar-list-left">
 			<li class="toolbar-item"><a href="#">Nieuwe klant<i class="fa fa-plus"></i></a></li>
 		</ul>
 
-		<ul class="toolbar-list-right">
-			<li class="toolbar-item alert"><a href="#"><i class="fa fa-bell"></i></a>
+		<ul class="toolbar-list-right" >
+			<li class="toolbar-item alert" id="submenu"><a href="#"><i class="fa fa-bell"></i></a>
 				<ul class="sub-menu-alert">
 					<li>Matt Lauer screeningrapport beschikbaar</li>
 					<li>Erik DeWitt heeft screening afgerond</li>
@@ -21,5 +21,5 @@
 				</ul>
 			</li>
 		</ul>
-		</div>
-	</nav>
+	</div>
+</nav>

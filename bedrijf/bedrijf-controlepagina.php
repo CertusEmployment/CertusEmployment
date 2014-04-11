@@ -21,22 +21,43 @@
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs">Overzicht > Kandidaat informatie > Pakket keuze > <a href="#">Controlepagina</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
 		<div class="content-block">
 			<table class="double-table">
 				<tr><th collspan="2">Controlepagina</th></tr>
 				<tr>
-					<td>Dhr/Mvr. Volledige naam</td>
+					<td>Naam</td>
+					<td>Dhr. Roy Thuis</td>
 					<td>Telefoon nummer</td>
+					<td>06123456789</td>
 				</tr>
 				<tr>
 					<td>Adres</td>
+					<td>Lekstraat 18</td>
 					<td>E-mail adres</td>
+					<td>roythuis1994@hotmail.com</td>
 				</tr>
-				<tr><td>Postcode en woonplaats</td></tr>
+				<tr>
+					<td>Postcode</td>
+					<td>7071 VB</td>
+				</tr>
+				<tr>
+					<td>Woonplaats</td>
+					<td>Ulft</td>
+				</tr>
+				<tr>
+					<td>Geboortedatum</td>
+					<td>05-07-1994</td>
+				</tr>
 				<tr>
 					<td>Geboorteplaats</td>
-					<td class="bold"><i class="fa fa-download"></i><a class="color-reset" href="#">CV.docx</a></td>
+					<td>Doetinchem</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="bold"><i class="fa fa-download"></i><a class="color-reset download-link" href="#">CV.docx</a></td>
 				</tr>
 				<tr><td><small><a href="#">Gegevens wijzigen</a></small></td></tr>
 			</table>
