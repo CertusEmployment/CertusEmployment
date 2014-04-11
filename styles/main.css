@@ -390,14 +390,13 @@ ul.notification { z-index: 2; background: white; width: 225px; margin-top: 5px; 
 
 .block {
 	margin-bottom: 10px;
-	width: 550px;
+	width: 70%;
 	display: block;
 	float: left;
 }
 
 .pos1 { top: 238px; }
-.pos2 { bottom: 130px; }
-.pos3 { bottom: -92px; }
+.pos3 { top: 655px; }
 
 .block input[type=checkbox] { display:none; }
 .block input[type=checkbox] + label:before {
@@ -435,9 +434,21 @@ DROPZONE
 	clear: both;
 	margin: 30px auto 30px auto;
 	padding: 10px;
+	max-width: 600px;
 	min-height: 130px!important;
-	width: 600px;
 	text-align: center;
 	box-shadow: inset 1px 1px 10px #aaa;
 }
 .dropzone:hover { cursor: pointer; }
+
+/*
+MEDIAQUERIES
+*/
+
+@media screen and (max-width: 816px) {
+  .pos3 {top:672px;}
+}
+
+@media screen and (min-width: 200px) and (max-width: 582px) {
+  .pos3 {top:690px;}
+}
