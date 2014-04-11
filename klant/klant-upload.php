@@ -7,9 +7,7 @@
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script>
-	<script src="../js/main.js"></script>
 
-	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
 <body>
 
@@ -40,7 +38,7 @@
 						</ul>
 					</li>
 				</ul>
-			<form action="admin-kandidaatprofiel.php" class="dropzone">
+			<form action="klant-upload.php" class="dropzone">
 				<i class="fa font" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
@@ -51,15 +49,15 @@
 			<p class="block">
 				Upload hier een afbeelding van uw <b>paspoort of identiteitskaart</b>, het is belangrijk dat alle gegevens goed leesbaar zijn.
 			</p>
-			<form action="admin-kandidaatprofiel.php" class="dropzone">
-				<i class="fa font" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
+			<form action="klant-upload.php" class="dropzone">
+				<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
-			    	<a class="dz-remove">Remove file</a>
-			 	</div><p class="comment">Bestandtypes: ,pdf, jpeg, png</p>
+			    	<a class="dz-remove">Verwijder bestand</a>
+			 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
 			</form>
 
-			<form action="#">
+			<form action="#" method="post">
 				<p class="block">
 					<input type="checkbox" id="digid" name="digid" />
 					<label for="digid">Ik beschik over een geldig DigiD.</label>
@@ -93,16 +91,16 @@
 
 <?php
 
-$ds          = DIRECTORY_SEPARATOR;  //1
+$ds          = DIRECTORY_SEPARATOR; 
  
-$storeFolder = 'file-upload';   //2
+$storeFolder = 'file-upload';  
  
 if (!empty($_FILES)) {
      
-    $tempFile = $_FILES['file']['tmp_name'];          //3                
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4   
-    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
-    move_uploaded_file($tempFile,$targetFile); //6
+    $tempFile = $_FILES['file']['tmp_name'];                         
+    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;    
+    $targetFile =  $targetPath. $_FILES['file']['name']; 
+    move_uploaded_file($tempFile,$targetFile);
      
 }
 
