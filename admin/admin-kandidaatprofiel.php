@@ -56,7 +56,7 @@ $navresult = mysql_query($navquery);
 					</tr>
 					<tr>
 						<td>Straatnaam en huisnr</td>
-						<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
+						<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer']." ".$row['huistoevoeging']; ?></td>
 						<td>E-mail</td>
 						<td><?php echo $row['email']; ?></td>
 					</tr>
@@ -76,7 +76,7 @@ $navresult = mysql_query($navquery);
 					</tr>
 					<tr>
 						<td>Geboortedatum</td>
-						<td><?php echo $row['geboortedatum']; ?></td>
+						<td><?php echo date('d M Y', strtotime($row['geboortedatum'])); ?></td>
 					</tr>
 					<tr>
 						<td>Geboorteplaats</td>
@@ -105,7 +105,7 @@ $navresult = mysql_query($navquery);
 			<div class="content-block">
 				<p class="content-head">Screeningsinformatie</p>
 				<p>Pakket <?php echo $row['pakket']; ?></p>
-				<p>Opleverdatum: <?php echo $row['opleverdatum']; ?></p>
+				<p>Opleverdatum: <?php echo date('d M Y', strtotime($row['opleverdatum'])); ?></p>
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 				 	<div class="fallback">
