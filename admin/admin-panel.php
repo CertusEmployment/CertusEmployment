@@ -1,3 +1,16 @@
+<?php
+
+include "../connect.php";
+
+$query_admin = "SELECT * FROM admin";
+$result_admin = mysql_query($query_admin);
+
+$query_bedrijf = "SELECT * FROM bedrijf";
+$result_bedrijf = mysql_query($query_bedrijf);
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +35,26 @@
 		<div class="content-block">
 			<table class="profiletable">
 				<tr><th collspan="2">Account informatie</th></tr>
-				<tr>
-					<td>Gebruikersnaam</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>E-mail</td>
-					<td><small><a href="#">E-mail wijzigen</a></small></td>
-				</tr>
-				<tr>
-					<td>Wachtwoord</td>
-					<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
-				</tr>
+				<?php
+				while ($row = mysql_fetch_array($result_admin)) {
+					?>
+					<tr>
+						<td>Gebruikersnaam</td>
+						<td><?php echo $row['gebruikersnaam']; ?></td>
+					</tr>
+					<tr>
+						<td>E-mail</td>
+						<td><?php echo $row['email']; ?></td>
+						<td><small><a href="#">E-mail wijzigen</a></small></td>
+					</tr>
+					<tr>
+						<td>Wachtwoord</td>
+						<td><?php echo $row['wachtwoord']; ?></td>
+						<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
+					</tr>
+					<?php
+				}
+				?>
 			</table>
 		</div>
 
@@ -98,46 +119,22 @@
 					<th>Lopende screenings</th>
 					<th>Profiel</th>
 				</tr>
-				<tr>
-					<td>Randstad</td>
-					<td>Linda Huls</td>
-					<td>4569 DC</td>
-					<td>Utrecht</td>
-					<td>2</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Randstad</td>
-					<td>Linda Huls</td>
-					<td>4569 DC</td>
-					<td>Utrecht</td>
-					<td>2</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Randstad</td>
-					<td>Linda Huls</td>
-					<td>4569 DC</td>
-					<td>Utrecht</td>
-					<td>2</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Randstad</td>
-					<td>Linda Huls</td>
-					<td>4569 DC</td>
-					<td>Utrecht</td>
-					<td>2</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Randstad</td>
-					<td>Linda Huls</td>
-					<td>4569 DC</td>
-					<td>Utrecht</td>
-					<td>2</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
+				<?php
+
+				while ($row = mysql_fetch_array($result_bedrijf)) {
+					?>
+					<tr>
+						<td><?php echo $row['bedrijfnaam']; ?></td>
+						<td><?php echo $row['vn_contact']." ".$row['an_contact']; ?></td>
+						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
+						<td><?php echo $row['plaats']; ?></td>
+						<td>wait for it</td>
+						<td><a href="admin-bedrijfsprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
+					</tr>
+					<?php
+				}	//ENDWHILE
+
+				?>
 			</table>
 		</div>
 
