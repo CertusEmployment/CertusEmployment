@@ -37,18 +37,17 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		</div>
 
 		<?php
-		if (isset($_POST['submit']) && $_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){
-			while ($row=mysql_fetch_array($result)) {
-				if($_POST['old-pw'] == $row['wachtwoord']) {
-					mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
-					if($_GET['table']=='bedrijf'){
-						header('Location: ../bedrijf/bedrijf-panel.php');
-					}
-					if($_GET['table']=='klant'){
-						header('Location: ../klant/klant-panel.php');
-					} else {
-						header("Location: admin-panel.php");
-					}
+		while ($row=mysql_fetch_array($result)) {
+		if (isset($_POST['submit']) && $_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){		
+			if($_POST['old-pw'] == $row['wachtwoord']) {
+				mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
+				if($_GET['table']=='bedrijf'){
+					header('Location: ../bedrijf/bedrijf-panel.php');
+				}
+				if($_GET['table']=='klant'){
+					header('Location: ../klant/klant-panel.php');
+				} else {
+					header("Location: admin-panel.php");
 				}
 			}
 		} 
@@ -59,7 +58,6 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			unset($_POST['new-password-repeat']);
 		} 
 
-		while ($row = mysql_fetch_array($result)) {
 		?>
 			<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 				<div class="content-block settings-block">
