@@ -11,7 +11,6 @@ $result_bedrijf = mysql_query($query_bedrijf);
 $recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.opleverdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id LIMIT 0,4";
 $recentresult = mysql_query($recentquery);
 
-
 ?>
 
 <!DOCTYPE html>
@@ -66,18 +65,18 @@ $recentresult = mysql_query($recentquery);
 				<tr><th collspan="4">Recente screenings</th></tr>
 				<?php
 				while ($recentrow = mysql_fetch_array($recentresult)) {
+					$date1 = new DateTime(date('Y-m-d', strtotime($recentrow['opleverdatum']))); //opleverdatum
+					$date2 = new DateTime(date('Y-m-d')); //huidige datum
+					if ($date1 <= $date2) {
 					?>
 					<tr>
 						<td><?php echo ucfirst($recentrow['voornaam'])." ".ucfirst($recentrow['achternaam']); ?></td>
 						<td><?php echo $recentrow['bedrijfnaam']; ?></td>
-						<td><?php 
-						$date1 = new DateTime(date('Y-m-d', strtotime($recentrow['opleverdatum'])));
-						$date2 = new DateTime(date('Y-m-d'));
-						echo $date1->diff($date2)->days; ?></td>
-						<td><?php echo $recentrow['opleverdatum']; ?></td>
+						<td><?php echo $date1->diff($date2)->days." dagen geleden"; ?></td>
 						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $recentrow['id'] ;?>">link</a></td>
 					</tr>
 					<?php
+					}
 				}
 				?>
 			</table>
@@ -140,12 +139,6 @@ $recentresult = mysql_query($recentquery);
 		</div>
 
 		<?php include "../footer.php"; ?>
-
-		
-
-
-
-
 
 	</div>
 </div>
