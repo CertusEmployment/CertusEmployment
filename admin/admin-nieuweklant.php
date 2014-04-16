@@ -51,8 +51,6 @@ if(!isset($_POST['submit'])) {
 	if($posting == true) {
 		header("Location: admin-panel.php");
 	}
-
-
 }
 
 if(!$posting) {

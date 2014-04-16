@@ -48,12 +48,12 @@ $recentresult = mysql_query($recentquery);
 					<tr>
 						<td>E-mail</td>
 						<td><?php echo $row['email']; ?></td>
-						<td><small><a href="#">E-mail wijzigen</a></small></td>
+						<td><small><a href="admin-editemail.php?table=admin&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
 					</tr>
 					<tr>
 						<td>Wachtwoord</td>
 						<td><?php echo $row['wachtwoord']; ?></td>
-						<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
+						<td><small><a href="admin-editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
 					</tr>
 					<?php
 				}
