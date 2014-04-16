@@ -60,7 +60,7 @@ $navresult = mysql_query($navquery);
 						<td>Straatnaam en huisnr</td>
 						<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer']." ".$row['huistoevoeging']; ?></td>
 						<td>E-mail</td>
-						<td><?php echo $row['email']; ?></td>
+						<td><a href="mailto:<?php echo $row['email']; ?>"><?php echo $row['email']; ?></a></td>
 					</tr>
 					<tr>
 						<td>Postcode</td>
