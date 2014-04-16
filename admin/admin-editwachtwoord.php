@@ -38,19 +38,24 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 		<?php
 		while ($row=mysql_fetch_array($result)) {
-		if (isset($_POST['submit']) && $_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){		
-			if($_POST['old-pw'] == $row['wachtwoord']) {
-				mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
-				if($_GET['table']=='bedrijf'){
-					header('Location: ../bedrijf/bedrijf-panel.php');
-				}
-				if($_GET['table']=='klant'){
-					header('Location: ../klant/klant-panel.php');
-				} else {
-					header("Location: admin-panel.php");
-				}
+		if (isset($_POST['submit']) && $_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){
+			
+				if($_POST['old-pw'] == $row['wachtwoord']) {
+					mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
+					if($_GET['table']=='bedrijf'){
+						header('Location: ../bedrijf/bedrijf-panel.php');
+					}
+					if($_GET['table']=='klant'){
+						header('Location: ../klant/klant-panel.php');
+					} else {
+						header("Location: admin-panel.php");
+					}
 			}
 		} 
+		if ($_POST['submit'] && $_POST['old-pw'] != $row['wachtwoord']) {
+			$errormessage = "Het oude wachtwoord is incorrect.";
+			$errorclassold = "class='errorinput'";
+		}
 		if ($_POST['new-password'] != $_POST['new-password-repeat']) {
 			$errormessage = "Herhaal het wachtwoord op de juiste manier";
 			$errorclass = "class='errorinput'";
@@ -67,15 +72,15 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 							<td><label for="old-pw">Huidig wachtwoord: <?php echo $row['wachtwoord']; ?></label></td>
 						</tr>
 						<tr>
-							<td><input <?php echo $errorclassold; ?> type="password" name="old-pw" id="old-pw"></td>
+							<td><input <?php echo $errorclassold; ?> type="password" name="old-pw" id="old-pw" required></td>
 						</tr>
 						<tr>
 							<td><label for="new-password">Nieuw wachtwoord</label></td>
 							<td><label for="new-password-repeat">Herhaal wachtwoord</label></td>
 						</tr>
 						<tr>
-							<td><input <?php echo $errorclass; ?> type="password" name="new-password" id="new-password"></td>
-							<td><input <?php echo $errorclass; ?> type="password" name="new-password-repeat" id="new-password-repeat"></td>
+							<td><input <?php echo $errorclass; ?> type="password" name="new-password" id="new-password" required></td>
+							<td><input <?php echo $errorclass; ?> type="password" name="new-password-repeat" id="new-password-repeat" required></td>
 						</tr>
 					</table>
 				</div>
