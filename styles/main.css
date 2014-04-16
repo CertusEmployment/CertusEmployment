@@ -61,6 +61,7 @@ TOOLBAR
 	.toolbar-item:hover { background: #a8a8a8; }
 	.toolbar-item a { font-size: 14px; color: black; text-decoration: none; }
 	.toolbar-item i { margin: 5px 0 0 7px; font-size: 20px; vertical-align: -1px; }
+	.toolbar-item ul li ul li a, .toolbar-item ul li ul li a { font-size: 12px; }
 	.alert { margin-right: 50px; }
 	.alert i { margin: 5px 0; }
 
@@ -78,6 +79,7 @@ ul.sub-menu-alert, ul.sub-menu-option {
 
 ul.sub-menu-alert { background: #ccc; width: 250px; }
 ul.sub-menu-option { background: #ccc; width: 200px; }
+	.sub-menu-option a, .sub-menu-option a { font-size: 12px; }
 	ul .sub-menu-alert li { padding: 15px 10px 10px 10px; }
 	ul .sub-menu-option li { padding: 10px; }
 	ul .sub-menu-alert li, ul .sub-menu-option li { display: block!important; }

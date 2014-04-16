@@ -1,5 +1,7 @@
 <?php
 
+$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
+
 include "../connect.php";
 
 $query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
@@ -34,7 +36,7 @@ $navresult = mysql_query($navquery);
 
 		<?php
 		while ($navrow = mysql_fetch_array($navresult)) {
-		?><p id="breadcrumbs"><a href="admin-panel">Overzicht</a> > <a href="admin-bedrijfsprofiel.php?id=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
+		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-bedrijfsprofiel.php?id=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
 		}?>
 
 
