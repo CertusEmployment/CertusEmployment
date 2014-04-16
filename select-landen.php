@@ -1,4 +1,4 @@
-<select id="iCountry" name="iCountry">
+<select id="iCountry" name="iCountry" required>
 <option value="AF">Afghanistan</option>
 <option value="AX">Åland</option>
 <option value="AL">Albanië</option>

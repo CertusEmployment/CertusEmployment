@@ -92,12 +92,12 @@ if(!$posting) {
 						<td><label for="achternaam">Achternaam</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="voornaam" name="voornaam"></td>
-						<td><input type="text" id="achternaam" name="achternaam"></td>
+						<td><input type="text" id="voornaam" name="voornaam" required></td>
+						<td><input type="text" id="achternaam" name="achternaam" required></td>
 					</tr>
 					<tr>
 						<td>
-							<label for="man"><input style="margin:20px 0 20px 30px;" type="radio" name="sex" id="man" value="m"> Man</label>
+							<label for="man"><input style="margin:20px 0 20px 30px;" type="radio" name="sex" id="man" value="m" required> Man</label>
 							<label for="vrouw"><input style="margin:20px 0 20px 30px;" type="radio" name="sex" id="vrouw" value="v"> Vrouw</label>
 						</td>
 					</tr>
@@ -106,16 +106,16 @@ if(!$posting) {
 						<td><label for="huisnr">Huisnummer</label><label for="toevoeging" style="margin-left: 60px;">Toevoeging</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="straat" name="straat"></td>
-						<td><input type="text" id="huisnr" name="huisnr" style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">,
+						<td><input type="text" id="straat" name="straat" required></td>
+						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">,
 					</tr>
 					<tr>
 						<td><label for="postcode">Postcode</label></td>
 						<td><label for="plaats">Woonplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="postcode" name="postcode" placeholder="0000AA"></td>
-						<td><input type="text" id="plaats" name="plaats"></td>
+						<td><input type="text" id="postcode" name="postcode" placeholder="0000AA" required></td>
+						<td><input type="text" id="plaats" name="plaats" required></td>
 					</tr>
 					<tr>
 						<td><label for="land">Land</label></td>
@@ -128,8 +128,8 @@ if(!$posting) {
 						<td><label for="gebplaats">Geboorteplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="gebdatum" name="gebdatum"></td>
-						<td><input type="text" id="gebplaats" name="gebplaats"></td>
+						<td><input type="text" id="gebdatum" name="gebdatum" required></td>
+						<td><input type="text" id="gebplaats" name="gebplaats" required></td>
 					</tr>
 				</table>
 			</div>
@@ -142,8 +142,8 @@ if(!$posting) {
 						<td><label for="email">E-mailadres</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="telnr" name="telnr"></td>
-						<td><input <?php if($warning==true){ echo "class='warning' placeholder='Voer een geldig email adres in'"; } ?> type="text" id="email" name="email"></td>
+						<td><input type="text" id="telnr" name="telnr" required></td>
+						<td><input <?php if($warning==true){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" required></td>
 					</tr>
 				</table>
 			</div>
