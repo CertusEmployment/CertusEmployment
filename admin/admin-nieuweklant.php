@@ -24,6 +24,7 @@ if(!isset($_POST['submit'])) {
 	$toevoeging = htmlentities(strip_tags(trim($_POST['toevoeging'])));
 	$postcode = htmlentities(strip_tags(trim($_POST['postcode'])));
 	$plaats = htmlentities(strip_tags(trim($_POST['plaats'])));
+	$land = htmlentities(strip_tags(trim($_POST['land'])));
 	//contactgegevens
 	$contact_vn = htmlentities(strip_tags(trim($_POST['voornaam'])));
 	$contact_an = htmlentities(strip_tags(trim($_POST['achternaam'])));
@@ -32,7 +33,7 @@ if(!isset($_POST['submit'])) {
 	//login gegevens
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
 	$password = htmlentities(strip_tags(trim($_POST['password'])));
-	$repeat = htmlentities(strip_tags(trim($_POST['repeat-password'])));
+	$repeat = htmlentities(strip_tags(trim($_POST['repeat'])));
 	//maatwerkpakket
 
 	if(!preg_match($regex, $contact_email)){ 
@@ -43,8 +44,8 @@ if(!isset($_POST['submit'])) {
 		$posting = false;
 	}
 
-	$sql = "INSERT INTO bedrijf(bedrijfsnaam, straatnaam, huisnr, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
-			VALUES ('$bedrijfsnaam, '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$password')";
+	$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
+			VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$password')";
 	$result = mysql_query($sql);
 
 	if($posting == true) {
@@ -94,7 +95,7 @@ if(!$posting) {
 						<td><label for="postcode">Postcode</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="toevoeging" name="toevoeging" required></td>
+						<td><input type="text" id="toevoeging" name="toevoeging"></td>
 						<td><input type="text" id="postcode" name="postcode" required></td>
 					<tr>
 						<td><label for="plaats">Plaats</label></td>
@@ -138,11 +139,11 @@ if(!$posting) {
 					</tr>
 					<tr>
 						<td><label for="password">Wachtwoord</label></td>
-						<td><label for="repeat-password">Herhaal wachtwoord</label></td>
+						<td><label for="repeat">Herhaal wachtwoord</label></td>
 					</tr>
 					<tr>
 						<td><input type="password" name="password" id="password"></td>
-						<td><input type="password" name="repeat-password" id="repeat-password"></td>
+						<td><input type="password" name="repeat" id="repeat"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
