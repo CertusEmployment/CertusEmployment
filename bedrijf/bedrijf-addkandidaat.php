@@ -147,6 +147,7 @@ if(!$posting) {
 					</tr>
 				</table>
 			</div>
+
 			<div id="settings-form-buttonblock">
 				<input type="submit" id="next" name="submit" value="Opslaan">
 			</div>
