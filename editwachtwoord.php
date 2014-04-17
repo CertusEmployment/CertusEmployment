@@ -6,7 +6,8 @@ include "connect.php";
 $query = "SELECT * FROM ".$_GET['table']." WHERE id = '".$_GET['id']."' ";
 $result = mysql_query($query);
 //var_dump($query);
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+$errormessage = "";
+$errorclass = "";
 
 ?>
 <!DOCTYPE html>

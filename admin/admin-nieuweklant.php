@@ -67,7 +67,7 @@ if(!$posting) {
 			<img src="../images/certus_logo.png" />
 		</div>
 		
-		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Wijzigen</a></p>
+		<p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="#" class="activepage">Nieuw bedrijf</a></p>
 
 		<form id="settings-form" method="post">
 			<div class="content-block">

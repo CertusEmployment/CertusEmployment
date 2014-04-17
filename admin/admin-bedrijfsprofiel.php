@@ -72,7 +72,7 @@ $result = mysql_query($query);
 				<tr>
 					<td>Telefoonnummer</td>
 					<td><?php echo $row['telbedrijf']; ?></td>
-					<td><small><a href="#">Gegevens wijzigen</a></small></td>
+					<td><small><a href="admin-editklant.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td></td>
