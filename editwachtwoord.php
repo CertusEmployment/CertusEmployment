@@ -1,7 +1,7 @@
 <?php
 
 
-include "../connect.php";
+include "connect.php";
 
 $query = "SELECT * FROM ".$_GET['table']." WHERE id = '".$_GET['id']."' ";
 $result = mysql_query($query);
@@ -13,27 +13,27 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 <html>
 <head>
 	<title>Wachtwoord wijzigen</title>
-	<link rel="stylesheet" type="text/css" href="../styles/main.css">
-	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
 <body>
 
 <div id="container">
 	<?php
 		if($_GET['table']=='bedrijf'){
-			include "../toolbar-bedrijf.php";
+			include "toolbar-bedrijf.php";
 		}
 		if($_GET['table']=='admin'){
-			include "../toolbar-admin.php";
+			include "toolbar-admin.php";
 		} else {
-			include "../toolbar-klant.php";
+			include "toolbar-klant.php";
 		}
 	?>
 
 	<div id="wrapper">
 		
 		<div id="logo">
-			<img src="../images/certus_logo.png" />
+			<img src="images/certus_logo.png" />
 		</div>
 
 		<?php
@@ -43,12 +43,12 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 				if($_POST['old-pw'] == $row['wachtwoord']) {
 					mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
 					if($_GET['table']=='bedrijf'){
-						header('Location: ../bedrijf/bedrijf-panel.php');
+						header('Location: bedrijf/bedrijf-panel.php');
 					}
 					if($_GET['table']=='klant'){
-						header('Location: ../klant/klant-panel.php');
+						header('Location: klant/klant-panel.php');
 					} else {
-						header("Location: admin-panel.php");
+						header("Location: admin/admin-panel.php");
 					}
 			}
 		} 
