@@ -22,7 +22,7 @@
 		</div>
 
 		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#" class="activepage">Pakket keuze</a></p>
-		<form id="settings-form" method="post" action="#">
+		<form id="settings-form" method="post">
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>
 				<p class="comment cursive">Vul hieronder de gewenste opleverdatum in.</p>
@@ -114,6 +114,7 @@
 						<li>Opleiding</li>
 						<li>Werkervaring</li>
 						<li>Online onderzoek</li>
+						<li>Financiele situatie en gerechtelijke uitspraken</li>
 						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>

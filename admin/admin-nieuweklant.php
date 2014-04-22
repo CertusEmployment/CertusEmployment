@@ -40,15 +40,14 @@ if(!isset($_POST['submit'])) {
 		$posting = false;
 	}
 
-	if($password == $repeat) {
+	if($password !== $repeat) {
 		$posting = false;
 	}
 
-	$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
-			VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$password')";
-	$result = mysql_query($sql);
-
 	if($posting == true) {
+		$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
+				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$password')";
+		$result = mysql_query($sql);
 		header("Location: admin-panel.php");
 	}
 }

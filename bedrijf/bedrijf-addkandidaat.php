@@ -58,11 +58,10 @@ if(!isset($_POST['submit'])) {
 		$warning = true;
 	}
 
-
-	$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword)
-			VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
-
-	if($posting == true){
+	if($posting == true) {
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword)
+				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
+		$result = mysql_query($sql);
 		header("Location: bedrijf-pakketselectie.php");
 	}
 }

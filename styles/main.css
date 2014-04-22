@@ -305,8 +305,16 @@ MAIN
 	.double-table td { width: 200px; }
 	.form-div { float: left; padding-right: 20px; width: 240px; }
 
-
-.pakket-block { position: relative; height: 360px; width: 180px; border: 1px solid black; margin: 10px 0px 15px 10px; float: left;  }
+.pakket-block { 
+	position: relative; 
+	height: 360px; 
+	width: 180px; 
+	border: 1px solid black; 
+	margin: 10px 0px 15px 10px; 
+	float: left; 
+	text-align: left;  
+	background: white;
+}
 .pakket-block:hover { border: 1px solid darkorange; }
 .pakket-block i { text-align: center; width: 100%; font-size: 40px; padding: 15px 0 15px 0; }
 .pakket-block p { font-weight: bold; padding: 0 5px 0 5px; color:darkorange; }
