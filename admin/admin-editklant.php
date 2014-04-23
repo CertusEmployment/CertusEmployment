@@ -64,7 +64,7 @@ if(!isset($_POST['submit'])) {
 	// }
 
 
-	if ($posting && $password == $repeat && isset($password) && isset($repeat)) {
+	if ($posting) {
 		$update_sql = "UPDATE bedrijf SET 
 		bedrijfnaam='".$bedrijfsnaam."',
 		straatnaam='".$straat."',

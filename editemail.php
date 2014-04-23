@@ -78,7 +78,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						</tr>
 					</table>
 				</div>
-				<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
+				<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='<?php echo $_GET['table']; ?>/<?php echo $_GET['table']; ?>-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
 			</form>
 			<?php
 		}

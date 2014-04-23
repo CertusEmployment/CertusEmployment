@@ -26,41 +26,38 @@ $recentresult = mysql_query($recentquery);
 
 <div id="container">
 	<?php
-	while ($row = mysql_fetch_array($result_admin)) {
-		include "../toolbar-admin.php"; 
-		?>
+	include "../toolbar-admin.php"; 
+	?>
 
 		<div id="wrapper">
 
-			<div id="logo">
-				<img src="../images/certus_logo.png" />
-			</div>
+		<div id="logo">
+			<img src="../images/certus_logo.png" />
+		</div>
 
-			<div class="content-block">
-				<table class="profiletable">
-					<tr><th collspan="2">Account informatie</th></tr>
-
-						<tr>
-							<td>Gebruikersnaam</td>
-							<td><?php echo $row['gebruikersnaam']; ?></td>
-						</tr>
-						<tr>
-							<td>E-mail</td>
-							<td><?php echo $row['email']; ?></td>
-							<td><small><a href="../editemail.php?table=admin&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
-						</tr>
-						<tr>
-							<td>Wachtwoord</td>
-							<td><?php echo $row['wachtwoord']; ?></td>
-							<td><small><a href="../editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
-						</tr>
-
-				</table>
-			</div>
-
-		<?php
-		}
-		?>
+		<div class="content-block">
+			<table class="profiletable">
+				<tr><th collspan="2">Account informatie</th></tr>
+				<?php while ($row = mysql_fetch_array($result_admin)) { ?>
+					<tr>
+						<td>Gebruikersnaam</td>
+						<td><?php echo $row['gebruikersnaam']; ?></td>
+					</tr>
+					<tr>
+						<td>E-mail</td>
+						<td><?php echo $row['email']; ?></td>
+						<td><small><a href="../editemail.php?table=admin&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
+					</tr>
+					<tr>
+						<td>Wachtwoord</td>
+						<td><?php echo $row['wachtwoord']; ?></td>
+						<td><small><a href="../editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
+					</tr>
+					<?php
+						}
+					?>
+			</table>
+		</div>
 
 		<div class="content-block">
 			<table class="profiletable">
@@ -102,12 +99,12 @@ $recentresult = mysql_query($recentquery);
 				</select>
 
 				<select>
-					<option>2009</option>
-					<option>2010</option>
-					<option>2011</option>
-					<option>2012</option>
-					<option>2013</option>
 					<option>2014</option>
+					<option>2013</option>
+					<option>2012</option>
+					<option>2011</option>
+					<option>2010</option>
+					<option>2009</option>
 				</select>
 
 				<input type="text" name="filter" placeholder="FILTER">
