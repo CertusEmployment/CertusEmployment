@@ -1,6 +1,7 @@
 <?php
 	$query_adminuser = "SELECT * FROM admin";
 	$result_user = mysql_query($query_adminuser);
+
 ?>
 <nav>
 	<div class="toolbar-wrapper">	

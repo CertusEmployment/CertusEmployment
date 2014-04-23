@@ -1,6 +1,5 @@
 <?php
 
-
 include "connect.php";
 
 $query = "SELECT * FROM ".$_GET['table']." WHERE id = '".$_GET['id']."' ";
@@ -24,7 +23,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			include "toolbar-bedrijf.php";
 		}
 		if($_GET['table']=='admin'){
-			include "toolbar-admin.php";
+			include "admin/toolbar-admin.php";
 		} else {
 			include "toolbar-klant.php";
 		}

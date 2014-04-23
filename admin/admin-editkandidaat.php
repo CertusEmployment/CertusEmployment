@@ -13,7 +13,7 @@
 
 <div id="container">
 
-	<?php include "../toolbar-admin.php"; ?>
+	<?php include "toolbar-admin.php"; ?>
 
 	<div id="wrapper">
 

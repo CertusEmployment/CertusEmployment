@@ -26,7 +26,7 @@ $recentresult = mysql_query($recentquery);
 
 <div id="container">
 	<?php
-	include "../toolbar-admin.php"; 
+	include "toolbar-admin.php"; 
 	?>
 
 		<div id="wrapper">
