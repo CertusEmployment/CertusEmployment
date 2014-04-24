@@ -5,6 +5,7 @@ include "../connect.php";
 <html>
 <head>
 	<title>Beheerderspaneel</title>
+	<?php include "../connect.php"; ?>
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -13,9 +14,11 @@ include "../connect.php";
 
 <?php
 
-$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
+/**
+Pak ID vanuit login window
+**/
 
-include "../connect.php";
+$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
 $query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, opleverdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."'";
 $result = mysql_query($query);
