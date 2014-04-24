@@ -360,6 +360,8 @@ MAIN
 .pakket-block input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
 .pakket-block input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
 
+.pakket-link { background: white; color: black; }
+
 .fa-question-circle {
 	display: inline;
 	vertical-align: top;

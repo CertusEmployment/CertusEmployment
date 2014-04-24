@@ -24,7 +24,7 @@ if(!isset($_POST['submit'])) {
 	$toevoeging = htmlentities(strip_tags(trim($_POST['toevoeging'])));
 	$postcode = htmlentities(strip_tags(trim($_POST['postcode'])));
 	$plaats = htmlentities(strip_tags(trim($_POST['plaats'])));
-	$land = htmlentities(strip_tags(trim($_POST['land'])));
+	$land = $_POST['iCountry'];
 	//contactgegevens
 	$contact_vn = htmlentities(strip_tags(trim($_POST['voornaam'])));
 	$contact_an = htmlentities(strip_tags(trim($_POST['achternaam'])));
@@ -81,26 +81,26 @@ if(!$posting) {
 					</tr>
 					<tr>
 						<td><label for="straat">Straatnaam</label></td>
-						<td><label for="huisnr">Nummer</label></td>
+						<td><label for="huisnr">Nummer</label><label for="toevoeging" style="margin-left: 80px;">Toevoeging</label></td>
 					</tr>
 					<tr>
 						<td><input type="text" id="straat" name="straat" required></td>
-						<td><input type="text" id="huisnr" name="huisnr" required></td>
+						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">
 					</tr>
+
 					<tr>
-						<td><label for="toevoeging">Huis toevoeging</label></td>
 						<td><label for="postcode">Postcode</label></td>
+						<td><label for="plaats">Plaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="toevoeging" name="toevoeging"></td>
 						<td><input type="text" id="postcode" name="postcode" required></td>
+						<td><input type="text" id="plaats" name="plaats" required></td>
+					</tr>
 					<tr>
-						<td><label for="plaats">Plaats</label></td>
 						<td><label for="land">Land</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="plaats" name="plaats" required></td>
-						<td><input type="text" id="land" name="land" required></td>
+						<td colspan="2"><?php include "../select-landen.php"; ?></td>
 					</tr>
 				</table>
 			</div>

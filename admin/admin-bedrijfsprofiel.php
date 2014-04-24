@@ -41,8 +41,7 @@ $tableresult = mysql_query($tablequery);
 			while ($row = mysql_fetch_array($bedrijfresult)) {
 				?>
 				<tr>
-					<th>Bedrijfsgegevens</th>
-					<th></th>
+					<th colspan="2">Bedrijfsgegevens</th>
 					<th>Accountgegevens</th>
 				</tr>
 				<tr>
@@ -140,6 +139,7 @@ $tableresult = mysql_query($tablequery);
 					<th>Profiel</th>
 				</tr>
 				</thead>
+<<<<<<< HEAD
 				<!-- <tr>
 					<td>Daan Blauw</td>
 					<td>Eric Groen</td>
@@ -149,6 +149,10 @@ $tableresult = mysql_query($tablequery);
 					<td class="cursive"><a href="#">link</a></td>
 				</tr> -->
 				<?php while ($row=mysql_fetch_array($tableresult)) { ?>
+=======
+
+	
+>>>>>>> FETCH_HEAD
 					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d-m-Y', strtotime($row['aanmaakdatum'])); ?></td>
