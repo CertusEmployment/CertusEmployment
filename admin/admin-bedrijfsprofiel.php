@@ -139,20 +139,7 @@ $tableresult = mysql_query($tablequery);
 					<th>Profiel</th>
 				</tr>
 				</thead>
-<<<<<<< HEAD
-				<!-- <tr>
-					<td>Daan Blauw</td>
-					<td>Eric Groen</td>
-					<td>4028 ES</td>
-					<td>Enchede</td>
-					<td class="cursive">In afwachting</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr> -->
 				<?php while ($row=mysql_fetch_array($tableresult)) { ?>
-=======
-
-	
->>>>>>> FETCH_HEAD
 					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d-m-Y', strtotime($row['aanmaakdatum'])); ?></td>

@@ -5,6 +5,10 @@ include "../connect.php";
 $gegevens_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
 $gegevens_result = mysql_query($gegevens_query);
 
+$test_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
+$test_result = mysql_query($test_query);
+
+
 $errormessage = "";
 $errorclass = "";
 
@@ -45,24 +49,27 @@ if(!isset($_POST['submit'])) {
 	//login gegevens
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
 	$password = htmlentities(strip_tags(trim($_POST['password'])));
-	$repeat = htmlentities(strip_tags(trim($_POST['repeat'])));
 	//maatwerkpakket
 
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
 	}
-	if($password != $repeat) {
-		$posting = false;
-		$errormessage = "Vul de wachtwoorden op de juiste manier in.";
-		$errorclass = "class='errorinput'";
-	}
+	// if($password != $repeat) {
+	// 	$posting = false;
+	// 	$errormessage = "Herhaal de wachtwoorden op de juiste manier.";
+	// 	$errorclass = "class='errorinput'";
+	// }
 
-	if (strlen($password >=6)  && strlen($repeat >=6)) {
-		$posting = false;
-		$errormessage = "Minimaal 6 karakters";
-		$errorclass = "class='errorinput'";
-	}
-
+	// if (strlen($password >=5)) {
+	// 	$posting = false;
+	// 	$errormessage = "Minimaal 6 karakters";
+	// 	$errorclass = "class='errorinput'";
+	// }
+	// if (preg_match($regexpass, $password)) {
+	// 	$posting = false;
+	// 	$errormessage = "Wachtwoord komt niet overeen met de eisen";
+	// 	$errorclass = "class='errorinput'";
+	// }
 
 	if ($posting) {
 		$update_sql = "UPDATE bedrijf SET 
@@ -172,23 +179,15 @@ if(!$posting) {
 							<td colspan="2"><input value="<?php echo $row['gebruikersnaam']; ?>" type="text" name="username" id="username"></td>
 						</tr>
 						<tr>
-							<td><label for="old-pw">Huidig wachtwoord</label></td>
-						</tr>
-						<tr>
-							<td><input type="password" name="old-pw" id="old-pw" required></td>
-						</tr>
-						<tr>
 							<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
 						</tr>
 						<?php echo (empty($errormessage)) ? "" : "<tr><td class='errormessage'>".$errormessage."</td></tr>" ;?>
 						<tr>
 							<td><label for="password">Wachtwoord</label></td>
-							<td><label for="repeat">Herhaal wachtwoord</label></td>
 						</tr>
 
 						<tr>
-							<td><input <?php echo $errorclass; ?> type="password" name="password" id="password"></td>
-							<td><input <?php echo $errorclass; ?> type="password" name="repeat" id="repeat"></td>
+							<td><input type="text" value="<?php echo $row['wachtwoord']; ?>" name="password" id="password" <?php echo $errorclass; ?> ></td>
 						</tr>
 
 					</table>
