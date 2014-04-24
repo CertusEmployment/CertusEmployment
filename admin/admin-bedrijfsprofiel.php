@@ -1,11 +1,16 @@
 <?php
 
-$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
+//$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
 include "../connect.php";
 
-$query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, opleverdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."'";
-$result = mysql_query($query);
+// $query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, aanmaakdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."' GROUP BY bedrijfid";
+// $result = mysql_query($query);
+
+$bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_GET['id']."";
+$bedrijfresult = mysql_query($bedrijfquery);
+$tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_GET['id']."";
+$tableresult = mysql_query($tablequery);
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +38,7 @@ $result = mysql_query($query);
 		<div class="content-block">
 			<table class="profiletable">
 			<?php
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = mysql_fetch_array($bedrijfresult)) {
 				?>
 				<tr>
 					<th>Bedrijfsgegevens</th>
@@ -44,7 +49,7 @@ $result = mysql_query($query);
 					<td>Bedrijfsnaam</td>
 					<td><?php echo $row['bedrijfnaam']; ?></td>
 					<td>Gebruikersnaam</td>
-					<td><?php echo $row['gebruikersnaam_bedrijf']; ?></td>
+					<td><?php echo $row['gebruikersnaam']; ?></td>
 				</tr>
 				<tr>
 					<td>Klantnummer</td>
@@ -56,15 +61,15 @@ $result = mysql_query($query);
 					<td>Adres</td>
 					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
 					<td>Wachtwoord</td>
-					<td><?php echo $row['wacthwoord_bedrijf']; ?></td>
+					<td><?php echo $row['wachtwoord']; ?></td>
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo chunk_split(strtoupper($row['postcode_bedrijf']), 4, " "); ?></td>
+					<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
 				</tr>
 				<tr>
 					<td>Plaats</td>
-					<td><?php echo ucfirst($row['plaats_bedrijf']); ?></td>
+					<td><?php echo ucfirst($row['plaats']); ?></td>
 				</tr>
 				<tr>
 					<td>Contactpersoon</td>
@@ -72,7 +77,7 @@ $result = mysql_query($query);
 				</tr>
 				<tr>
 					<td>Telefoonnummer</td>
-					<td><?php echo $row['telbedrijf']; ?></td>
+					<td><?php echo $row['telnr_contact']; ?></td>
 					<td><small><a href="admin-editklant.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
 				</tr>
 				<tr>
@@ -81,6 +86,7 @@ $result = mysql_query($query);
 				<tr>
 					<th colspan="2"><a class="download-link" href=""><img src="../images/excel.png" width="25px"> Download maandoverzicht - Maart 2014</a></th>
 				</tr> 
+				<?php } ?>
 			</table>
 		</div>
 
@@ -127,7 +133,7 @@ $result = mysql_query($query);
 				<thead>
 				<tr class="table-header">
 					<th>Naam</th>
-					<th>Contactpersoon</th>
+					<th>Startdatum</th>
 					<th>Postcode</th>
 					<th>Plaats</th>
 					<th>Rapport beschikbaar</th>
@@ -142,17 +148,17 @@ $result = mysql_query($query);
 					<td class="cursive">In afwachting</td>
 					<td class="cursive"><a href="#">link</a></td>
 				</tr> -->
-	
+				<?php while ($row=mysql_fetch_array($tableresult)) { ?>
 					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
-						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
-						<td><?php echo chunk_split(strtoupper($row['postcode_klant']),4," "); ?></td>
-						<td><?php echo ucfirst($row['plaats_klant']); ?></td>
+						<td><?php echo date('d-m-Y', strtotime($row['aanmaakdatum'])); ?></td>
+						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
+						<td><?php echo ucfirst($row['plaats']); ?></td>
 						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
 						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id_klant']; ?>">link</a></td>
 					</tr>
 					<?php
-				}  //ENDWHILE
+				 } //ENDWHILE
 				?>
 			</table>
 		</div>

@@ -21,12 +21,13 @@ $errorclass = "";
 <div id="container">
 	<?php
 		if($_GET['table']=='bedrijf'){
-			include "toolbar-bedrijf.php";
+			include "bedrijf/toolbar-bedrijf.php";
 		}
 		if($_GET['table']=='admin'){
 			include "admin/toolbar-admin.php";
-		} else {
-			include "toolbar-klant.php";
+		}
+		if($_GET['table']=='klant'){
+			include "klant/toolbar-klant.php";
 		}
 	?>
 
@@ -73,7 +74,7 @@ $errorclass = "";
 						<table id="settings-table">
 							<?php echo (empty($errormessage)) ? "" : "<tr><td class='errormessage'>".$errormessage."</td></tr>" ;?>
 							<tr>
-								<td><label for="old-pw">Huidig wachtwoord: <?php echo $row['wachtwoord']; ?></label></td>
+								<td><label for="old-pw">Huidig wachtwoord</label></td>
 							</tr>
 							<tr>
 								<td><input <?php echo $errorclass; ?> type="password" name="old-pw" id="old-pw" required></td>

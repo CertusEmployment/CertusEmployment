@@ -57,11 +57,11 @@ if(!isset($_POST['submit'])) {
 		$errorclass = "class='errorinput'";
 	}
 
-	// if (strlen($password >=3)  && strlen($repeat >=3)) {
-	// 	$posting = false;
-	// 	$errormessage = "Minimaal 3 karakters";
-	// 	$errorclass = "class='errorinput'";
-	// }
+	if (strlen($password >=6)  && strlen($repeat >=6)) {
+		$posting = false;
+		$errormessage = "Minimaal 6 karakters";
+		$errorclass = "class='errorinput'";
+	}
 
 
 	if ($posting) {
@@ -81,7 +81,8 @@ if(!isset($_POST['submit'])) {
 		wachtwoord='".$password."' 
 		WHERE id=".$_GET['id']." ";
 		$update_result = mysql_query($update_sql);
-		header("Location: admin-bedrijfsprofiel.php");
+		$pageid = $_GET['id'];
+		header("Location: admin-bedrijfsprofiel.php?id=$pageid");
 	}
 }
 
@@ -170,11 +171,11 @@ if(!$posting) {
 						<tr>
 							<td colspan="2"><input value="<?php echo $row['gebruikersnaam']; ?>" type="text" name="username" id="username"></td>
 						</tr>
-						<!-- <tr>
-							<td><label for="old-pw">Huidig wachtwoord **<?php echo $row['wachtwoord']; ?>**</label></td>
-						</tr> -->
 						<tr>
-							<td><input type="password" value="<?php echo $row['wachtwoord']; ?>" name="old-pw" id="old-pw" required></td>
+							<td><label for="old-pw">Huidig wachtwoord</label></td>
+						</tr>
+						<tr>
+							<td><input type="password" name="old-pw" id="old-pw" required></td>
 						</tr>
 						<tr>
 							<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>

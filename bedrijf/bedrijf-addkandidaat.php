@@ -42,13 +42,15 @@ if(!isset($_POST['submit'])) {
 	$postcode = $_POST['postcode'];
 	$plaats = $_POST['plaats'];
 	$land = $_POST['iCountry'];
-	$gebdatum = $_POST['gebdatum'];
+	$timeformat = strtotime($_POST['gebdatum']);
+	$gebdatum = date('Y-m-d',$timeformat);
 	$gebplaats = $_POST['gebplaats'];
 	$geslacht = $_POST['sex'];
 	//contactinformatie
 	$telnr = $_POST['telnr'];
 	$email = $_POST['email'];
 	//standaardvars
+	$aanmaakdatum = date('Y-m-d');
 	$username = $vn .".". $an;
 	$temppassword = 1;
 	$password = randomPassword(); // random wachtwoord vanuit function
@@ -59,8 +61,8 @@ if(!isset($_POST['submit'])) {
 	}
 
 	if($posting == true) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword)
-				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, aanmaakdatum)
+				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword', '$aanmaakdatum')";
 		$result = mysql_query($sql);
 		header("Location: bedrijf-pakketselectie.php");
 	}
@@ -71,7 +73,7 @@ if(!$posting) {
 
 <div id="container">
 
-	<?php include "../toolbar-bedrijf.php"; ?>
+	<?php include "toolbar-bedrijf.php"; ?>
 
 	<div id="wrapper">
 
@@ -140,6 +142,7 @@ if(!$posting) {
 						<td><label for="telnr">Telefoonnummer</label></td>
 						<td><label for="email">E-mailadres</label></td>
 					</tr>
+					<?php if($warning==true){ echo "<tr><td class='errormessage'>Voer een kloppend e-mailadres in</td></tr>"; } ?>
 					<tr>
 						<td><input type="text" id="telnr" name="telnr" required></td>
 						<td><input <?php if($warning==true){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" required></td>

@@ -1,3 +1,6 @@
+<?php
+include "../connect.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +13,7 @@
 
 <div id="container">
 	
-	<?php include "../toolbar-bedrijf.php"; ?>
+	<?php include "toolbar-bedrijf.php"; ?>
 
 	<div id="wrapper">
 

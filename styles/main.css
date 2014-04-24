@@ -38,6 +38,7 @@ small { font-size: 11px; color: orange; }
 .fa-empty { padding-left: 14px; color: #999; }
 .ul-disc li { list-style: disc; }
 .wideCell { width: 230px!important; }
+.order-table {width: 100%;}
 
 /*
 TOOLBAR
@@ -271,7 +272,7 @@ MAIN
 		border: solid 0px black; padding: 1px 1px 1px 1px;
 	}
 
-.table-header { background: #ccc; border-bottom: 1px solid black; width: 100%; }
+.table-header { background: #ccc; border-bottom: 1px solid black; }
 
 .download-btn { 
 	border: 1px solid #606060;

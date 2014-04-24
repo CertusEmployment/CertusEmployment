@@ -20,12 +20,12 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 <div id="container">
 	<?php
 		if($_GET['table']=='bedrijf'){
-			include "toolbar-bedrijf.php";
+			include "bedrijf/toolbar-bedrijf.php";
 		}
 		if($_GET['table']=='admin'){
 			include "admin/toolbar-admin.php";
 		} else {
-			include "toolbar-klant.php";
+			include "klant/toolbar-klant.php";
 		}
 	?>
 

@@ -1,3 +1,8 @@
+<?php
+	$query_bedrijfuser = "SELECT * FROM bedrijf";
+	$result_user = mysql_query($query_bedrijfuser);
+
+?>
 <nav>
 	<div class="toolbar-wrapper">	
 		<ul class="toolbar-list-left">
@@ -14,11 +19,13 @@
 			</li>
 			<li class="toolbar-item"><a href="#">Logout<i class="fa fa-power-off"></i></a></li>
 			<li class="toolbar-item"><a href="#">Opties<i class="fa fa-cog"></i></a>
-				<ul class="sub-menu-option">
-					<li>Wachtwoord wijzingen</li>
-					<li>E-mail wijzigen</li>
-					<label><li><input type="checkbox"> E-mail ontvangen</li></label>
-				</ul>
+				<?php while ($row = mysql_fetch_array($result_user)) { ?>
+					<ul class="sub-menu-option">
+						<li><a href="../editwachtwoord.php?table=bedrijf&id=<?php echo $row['id']; ?>">Wachtwoord wijzingen</a></li>
+						<li><a href="../editemail.php?table=bedrijf&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></li>
+						<label><li><input type="checkbox"> E-mail ontvangen</li></label>
+					</ul>
+				<?php } ?>
 			</li>
 		</ul>
 	</div>
