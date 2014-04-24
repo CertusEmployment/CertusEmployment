@@ -58,7 +58,7 @@ if(!isset($_POST['submit'])) {
 		$warning = true;
 	}
 
-	if($posting == true) {
+	if($posting) {
 		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword)
 				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
 		$result = mysql_query($sql);
@@ -106,7 +106,7 @@ if(!$posting) {
 					</tr>
 					<tr>
 						<td><input type="text" id="straat" name="straat" required></td>
-						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">,
+						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">
 					</tr>
 					<tr>
 						<td><label for="postcode">Postcode</label></td>
@@ -142,7 +142,7 @@ if(!$posting) {
 					</tr>
 					<tr>
 						<td><input type="text" id="telnr" name="telnr" required></td>
-						<td><input <?php if($warning==true){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" required></td>
+						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" required></td>
 					</tr>
 				</table>
 			</div>
