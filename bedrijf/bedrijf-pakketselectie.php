@@ -6,8 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
-	<script src="../js/dropzone.js"></script> 
-	<!--<script src="../js/dropzone.min.js"></script> -->
+	<script src="../js/dropzone.js"></script>
 </head>
 <body>
 
@@ -34,7 +33,8 @@
 				<p class="comment cursive">Selecteer hieronder een screenings pakket.
 					Hou hierbij rekening met de verschillende diensten per pakket.</p>
 
-				<div class="pakket-block">
+				<a class="pakket-link" href="1">
+					<div class="pakket-block">
 					<i class="fa fa-users"></i>
 					<p>Volledige employment screening op alle onderdelen</p>
 					<ul>
@@ -46,8 +46,9 @@
 						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div>
+				</div></a>
 
+				<a class="pakket-link" href="2">
 				<div class="pakket-block">
 					<i class="fa fa-globe"></i>
 					<p>Controle van een kandidaat met een buitenlands diploma.</p>
@@ -59,8 +60,9 @@
 						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div>
+				</div></a>
 
+				<a class="pakket-link" href="3">
 				<div class="pakket-block">
 					<i class="fa fa-cogs"></i>
 					<p>Stel uw eigen Employment Screening samen.</p>
@@ -95,6 +97,7 @@
 								<input type="checkbox" id="financieel" name="financieel" />
 								<label for="financieel">Financiele situatie en gerechtelijke uitspraken</label>
 							</td>
+						</tr>
 						<tr>
 							<td>
 								<input type="checkbox" id="vog" name="vog" />
@@ -104,8 +107,9 @@
 					</table>
 
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div>
+				</div></a>
 
+				<a class="pakket-link" href="4">
 				<div class="pakket-block">
 					<i class="fa fa-star"></i>
 					<p>Pakket op maat, speciaal voor u.</p>
@@ -118,7 +122,7 @@
 						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div>
+				</div></a>
 
 				<br class="clear-float">
 

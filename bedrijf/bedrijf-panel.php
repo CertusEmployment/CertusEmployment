@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<?php
+
+$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
+
+include "../connect.php";
+
+$query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, opleverdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."'";
+$result = mysql_query($query);
+
+?>
+
 <div id="container">
 	
 	<?php include "../toolbar-bedrijf.php"; ?>
@@ -19,11 +30,25 @@
 		</div>
 
 		<div class="content-block">
-			<table class="double-table">
-				<tr><th collspan="2">Bedrijfs informatie</th></tr>
-				<tr><td>Bedrijfsnaam</td><td>Telefoon nummer</td></tr>
-				<tr><td>Adres</td><td>Mobiel nummer</td></tr>
-				<tr><td>Postcode en woonplaats</td></tr>
+			<table class="profiletable">
+			<?php while ($row = mysql_fetch_array($result)) { ?>
+				<tr>
+					<th collspan="2">Bedrijfs informatie</th>
+				</tr>
+				<tr>
+					<td>Bedrijfsnaam</td>
+					<td><?php echo $row['bedrijfnaam']; ?></td>
+					<td>Telefoon nummer</td>
+					<td><?php echo $row['telbedrijf']; ?></td>
+				</tr>
+				<tr>
+					<td>Adres</td>
+					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
+				</tr>
+				<tr>
+					<td>Postcode en woonplaats</td>
+					<td><?php echo chunk_split(strtoupper($row['postcode_bedrijf']), 4, " ") ." ". $row['plaats_bedrijf']; ?>
+				</tr>
 			</table>
 		</div>
 
@@ -62,51 +87,41 @@
 				</select>
 
 				<select>
-					<option>2009</option>
-					<option>2010</option>
-					<option>2011</option>
-					<option>2012</option>
-					<option>2013</option>
 					<option>2014</option>
+					<option>2013</option>
+					<option>2012</option>
+					<option>2011</option>
+					<option>2010</option>
+					<option>2009</option>
 				</select>
 
-				<input type="text" name="filter" placeholder="FILTER">
+				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
 			</form>
-			<table class="profiletable">
+			<table class="profiletable order-table table">
+				<thead>
 				<tr class="table-header">
-					<th>Volledige naam</th>
-					<th>Geboortedatum</th>
-					<th>Woonplaats</th>
-					<th>Screening datum</th>
+					<th>Naam</th>
+					<th>Contactpersoon</th>
+					<th>Postcode</th>
+					<th>Plaats</th>
 					<th>Rapport beschikbaar</th>
 					<th>Profiel</th>
 				</tr>
-				<tr>
-					<td>Jo Bonten</td>
-					<td>12-12-1980</td>
-					<td>Utrecht</td>
-					<td>01-04-2014</td>
-					<td>Nee</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Rob Hummelink</td>
-					<td>14-08-1990</td>
-					<td>Amsterdam</td>
-					<td>Gisteren</td>
-					<td>Nee</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
-				<tr>
-					<td>Roy Donders</td>
-					<td>19-11-1976</td>
-					<td>Rotterdam</td>
-					<td>15-01-2014</td>
-					<td>Ja</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr>
+				</thead>	
+					<tr>
+						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
+						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
+						<td><?php echo chunk_split(strtoupper($row['postcode_klant']),4," "); ?></td>
+						<td><?php echo ucfirst($row['plaats_klant']); ?></td>
+						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
+						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id_klant']; ?>">link</a></td>
+					</tr>
+					<?php
+				}  //ENDWHILE
+				?>
 			</table>
 		</div>
+
 
 		<?php include "../footer.php"; ?>
 

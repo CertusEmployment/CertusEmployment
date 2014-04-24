@@ -36,8 +36,7 @@ $result = mysql_query($query);
 			while ($row = mysql_fetch_array($result)) {
 				?>
 				<tr>
-					<th>Bedrijfsgegevens</th>
-					<th></th>
+					<th colspan="2">Bedrijfsgegevens</th>
 					<th>Accountgegevens</th>
 				</tr>
 				<tr>
@@ -134,14 +133,7 @@ $result = mysql_query($query);
 					<th>Profiel</th>
 				</tr>
 				</thead>
-				<!-- <tr>
-					<td>Daan Blauw</td>
-					<td>Eric Groen</td>
-					<td>4028 ES</td>
-					<td>Enchede</td>
-					<td class="cursive">In afwachting</td>
-					<td class="cursive"><a href="#">link</a></td>
-				</tr> -->
+
 	
 					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
