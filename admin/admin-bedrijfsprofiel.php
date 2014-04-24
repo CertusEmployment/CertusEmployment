@@ -14,6 +14,7 @@ $result = mysql_query($query);
 	<title>Overzicht bedrijven</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<script src="../js/main.js"></script>
 </head>
 <body>
 
@@ -120,9 +121,10 @@ $result = mysql_query($query);
 					<option>2009</option>
 				</select>
 
-				<input type="text" name="filter" placeholder="FILTER">
+				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
 			</form>
-			<table class="profiletable">
+			<table class="profiletable order-table table">
+				<thead>
 				<tr class="table-header">
 					<th>Naam</th>
 					<th>Contactpersoon</th>
@@ -131,6 +133,7 @@ $result = mysql_query($query);
 					<th>Rapport beschikbaar</th>
 					<th>Profiel</th>
 				</tr>
+				</thead>
 				<!-- <tr>
 					<td>Daan Blauw</td>
 					<td>Eric Groen</td>

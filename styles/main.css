@@ -271,7 +271,7 @@ MAIN
 		border: solid 0px black; padding: 1px 1px 1px 1px;
 	}
 
-.table-header { background: #ccc; border-bottom: 1px solid black; }
+.table-header { background: #ccc; border-bottom: 1px solid black; width: 100%; }
 
 .download-btn { 
 	border: 1px solid #606060;

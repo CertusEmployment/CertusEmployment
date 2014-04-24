@@ -20,6 +20,7 @@ $recentresult = mysql_query($recentquery);
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<script src="../js/main.js"></script>
 
 </head>
 <body>
@@ -107,9 +108,10 @@ $recentresult = mysql_query($recentquery);
 					<option>2009</option>
 				</select>
 
-				<input type="text" name="filter" placeholder="FILTER">
+				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
 			</form>
-			<table  class="profiletable">
+			<table  class="profiletable order-table table">
+				<thead>
 				<tr class="table-header">
 					<th>Bedrijfsnaam</th>
 					<th>Contactpersoon</th>
@@ -118,6 +120,7 @@ $recentresult = mysql_query($recentquery);
 					<th>Lopende screenings</th>
 					<th>Profiel</th>
 				</tr>
+				</thead>
 				<?php
 
 				while ($row = mysql_fetch_array($result_bedrijf)) {

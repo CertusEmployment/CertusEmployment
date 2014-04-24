@@ -12,7 +12,7 @@ $errorclass = "";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Nieuwe klant</title>
+	<title>Klant wijzigen</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
@@ -170,9 +170,9 @@ if(!$posting) {
 						<tr>
 							<td colspan="2"><input value="<?php echo $row['gebruikersnaam']; ?>" type="text" name="username" id="username"></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td><label for="old-pw">Huidig wachtwoord **<?php echo $row['wachtwoord']; ?>**</label></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td><input type="password" value="<?php echo $row['wachtwoord']; ?>" name="old-pw" id="old-pw" required></td>
 						</tr>
