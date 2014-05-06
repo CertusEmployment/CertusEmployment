@@ -54,22 +54,22 @@ if(!isset($_POST['submit'])) {
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
 	}
-	// if($password != $repeat) {
-	// 	$posting = false;
-	// 	$errormessage = "Herhaal de wachtwoorden op de juiste manier.";
-	// 	$errorclass = "class='errorinput'";
-	// }
+	if($password != $repeat) {
+		$posting = false;
+		$errormessage = "Herhaal de wachtwoorden op de juiste manier.";
+		$errorclass = "class='errorinput'";
+	}
 
 	// if (strlen($password >=5)) {
 	// 	$posting = false;
 	// 	$errormessage = "Minimaal 6 karakters";
 	// 	$errorclass = "class='errorinput'";
 	// }
-	// if (preg_match($regexpass, $password)) {
-	// 	$posting = false;
-	// 	$errormessage = "Wachtwoord komt niet overeen met de eisen";
-	// 	$errorclass = "class='errorinput'";
-	// }
+	if (preg_match($regexpass, $password)) {
+		$posting = false;
+		$errormessage = "Wachtwoord komt niet overeen met de eisen";
+		$errorclass = "class='errorinput'";
+	}
 
 	if ($posting) {
 		$update_sql = "UPDATE bedrijf SET 

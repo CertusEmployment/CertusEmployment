@@ -60,7 +60,7 @@ $tableresult = mysql_query($tablequery);
 					<td>Adres</td>
 					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
 					<td>Wachtwoord</td>
-					<td><?php echo $row['wachtwoord']; ?></td>
+					<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
 				</tr>
 				<tr>
 					<td>Postcode</td>

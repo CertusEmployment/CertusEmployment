@@ -64,7 +64,7 @@
 					<td><small><a href="#">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
-					<td>Wachtwoon</td>
+					<td>Wachtwoord</td>
 					<td>********</td>
 					<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
 				</tr>

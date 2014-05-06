@@ -39,17 +39,10 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		$regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 		if (isset($_POST['submit']) && $_POST['new-email'] == $_POST['new-email-repeat'] && isset($_POST['new-email']) && isset($_POST['new-email-repeat'])){
 			if (preg_match($regex, $_POST['new-email'])){
-				mysql_query("UPDATE ".$_GET['table']." SET email = '".$_POST['new-email']."' WHERE id = '".$_GET['id']."'");
-				if($_GET['table']=='bedrijf'){
-					header('Location: bedrijf/bedrijf-panel.php');
-				}
-				if($_GET['table']=='klant'){
-					header('Location: klant/klant-panel.php');
-				} else {
-					header("Location: admin/admin-panel.php");
-				}
+				( $_GET['table'] == 'bedrijf' ? mysql_query("UPDATE ".$_GET['table']." SET email_contact = '".$_POST['new-email']."' WHERE id = '".$_GET['id']."'") : mysql_query("UPDATE ".$_GET['table']." SET email = '".$_POST['new-email']."' WHERE id = '".$_GET['id']."'") ) ;
+				header("Location: ".$_GET['table']."/".$_GET['table']."-panel.php");
 			} else {
-				$errormessage = "Dit e-mail adres voldoet niet aan de eisen.";
+				$errormessage = "Voer een geldig e-mail adres in.";
 				$errorclass = "class='errorinput'";
 			}
 		} 
@@ -64,7 +57,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			?>
 			<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 				<div class="content-block settings-block">
-					<p>Huidig e-mail adres: <?php echo $row['email']; ?></p>
+					<p>Huidig e-mail adres: <?php echo ($_GET['table'] == 'bedrijf' ? $row['email_contact'] : $row['email']); ?></p>
 					<table id="settings-table">
 						<?php echo (empty($errormessage)) ? "" : "<tr><td class='errormessage'>".$errormessage."</td></tr>" ;?>
 						<tr>

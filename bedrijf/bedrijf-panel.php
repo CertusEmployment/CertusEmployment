@@ -9,6 +9,7 @@ include "../connect.php";
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<script src="../js/main.js"></script>
 </head>
 <body>
 
@@ -20,8 +21,11 @@ Pak ID vanuit login window
 
 $_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
-$query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, opleverdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."'";
-$result = mysql_query($query);
+$query_bedrijf = "SELECT * FROM bedrijf WHERE id =  ".$_GET['id']." ";
+$result = mysql_query($query_bedrijf);
+
+$query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_GET['id']." ";
+$result_klant = mysql_query($query_klant);
 
 ?>
 
@@ -34,10 +38,10 @@ $result = mysql_query($query);
 		<div id="logo">
 			<img src="../images/certus_logo.png" />
 		</div>
-
+<?php while ($row = mysql_fetch_array($result)) { ?>
 		<div class="content-block">
 			<table class="profiletable">
-			<?php while ($row = mysql_fetch_array($result)) { ?>
+			
 				<tr>
 					<th collspan="2">Bedrijfs informatie</th>
 				</tr>
@@ -45,7 +49,7 @@ $result = mysql_query($query);
 					<td>Bedrijfsnaam</td>
 					<td><?php echo $row['bedrijfnaam']; ?></td>
 					<td>Telefoon nummer</td>
-					<td><?php echo $row['telbedrijf']; ?></td>
+					<td><?php echo $row['telnr']; ?></td>
 				</tr>
 				<tr>
 					<td>Adres</td>
@@ -53,28 +57,31 @@ $result = mysql_query($query);
 				</tr>
 				<tr>
 					<td>Postcode en woonplaats</td>
-					<td><?php echo chunk_split(strtoupper($row['postcode_bedrijf']), 4, " ") ." ". $row['plaats_bedrijf']; ?>
+					<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " ") ." ". $row['plaats']; ?>
 				</tr>
+
 			</table>
 		</div>
 
 		<div class="content-block">
-			<table>
-				<tr><th collspan="2">Account informatie</th></tr>
+			<table class="profiletable">
 				<tr>
-					<td collspan="2">Gebruikersnaam</td>
+					<td>Gebruikersnaam</td>
+					<td><?php echo $row['gebruikersnaam']; ?></td>
 				</tr>
 				<tr>
 					<td>E-mail</td>
-					<td><small><a href="#">E-mail wijzigen</a></small></td>
+					<td><?php echo $row['email_contact']; ?></td>
+					<td><small><a href="../editemail.php?table=bedrijf	&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td>Wachtwoord</td>
-					<td><small><a href="#">Wachtwoord wijzigen</a></small></td>
+					<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
+					<td><small><a href="../editwachtwoord.php?table=bedrijf	&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
 		</div>
-
+<?php } ?>
 		<div class="screening-list">
 			<form name="filter" id="filter">
 				<select>
@@ -107,27 +114,25 @@ $result = mysql_query($query);
 				<thead>
 				<tr class="table-header">
 					<th>Naam</th>
-					<th>Contactpersoon</th>
+					<th>Opleverdatum</th>
 					<th>Postcode</th>
 					<th>Plaats</th>
 					<th>Rapport beschikbaar</th>
 					<th>Profiel</th>
 				</tr>
 				</thead>	
+				<?php while ($row = mysql_fetch_array($result_klant)) { ?>
 					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
-						<td><?php echo chunk_split(strtoupper($row['postcode_klant']),4," "); ?></td>
-						<td><?php echo ucfirst($row['plaats_klant']); ?></td>
+						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
+						<td><?php echo ucfirst($row['plaats']); ?></td>
 						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
-						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id_klant']; ?>">link</a></td>
+						<td class="cursive"><a href="../admin/admin-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
-					<?php
-				}  //ENDWHILE
-				?>
+				<?php } ?>
 			</table>
 		</div>
-
 
 		<?php include "../footer.php"; ?>
 

@@ -1,3 +1,8 @@
+<?php 
+$errormessage = "";
+$errorclass = "";
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +17,17 @@
 
 if(!isset($_POST['submit'])) {
 	$posting = false;
-
+	$_POST['bedrijfsnaam'] = "";
+	$_POST['straat'] = "";
+	$_POST['huisnr'] = "";
+	$_POST['toevoeging'] = "";
+	$_POST['postcode'] = "";
+	$_POST['plaats'] = "";
+	$_POST['voornaam'] = "";
+	$_POST['achternaam'] = "";
+	$_POST['telnr'] = "";
+	$_POST['email'] = "";
+	$_POST['username'] = "";
 } else {
 
 	$posting = true;
@@ -34,19 +49,33 @@ if(!isset($_POST['submit'])) {
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
 	$password = htmlentities(strip_tags(trim($_POST['password'])));
 	$repeat = htmlentities(strip_tags(trim($_POST['repeat'])));
+
+	$hashed = hash('sha1', $password);
+
+
 	//maatwerkpakket
 
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
 	}
 
+	if(empty($password)) {
+		$posting = false;
+		$errormessage = "<tr><td class='errormessage'>Geen wachtwoord ingevuld.</td></tr>";
+		$errorclass = "class='errorinput'";
+	}
+
 	if($password !== $repeat) {
 		$posting = false;
+		$errormessage = "<tr><td class='errormessage'>De wachtwoorden komen niet overeen.</td></tr>";
+		$errorclass = "class='errorinput'";
+	} else {
+		$hashed = hash('sha1', $password);
 	}
 
 	if($posting == true) {
 		$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
-				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$password')";
+				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$hashed')";
 		$result = mysql_query($sql);
 		header("Location: admin-panel.php");
 	}
@@ -77,15 +106,15 @@ if(!$posting) {
 						<td><label for="bedrijfsnaam">Bedrijfsnaam</label></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="text" name="bedrijfsnaam" id="bedrijfsnaam" style="width:505px;" required></td>
+						<td colspan="2"><input type="text" value="<?php echo $_POST['bedrijfsnaam']; ?>" name="bedrijfsnaam" id="bedrijfsnaam" style="width:505px;" required></td>
 					</tr>
 					<tr>
 						<td><label for="straat">Straatnaam</label></td>
 						<td><label for="huisnr">Nummer</label><label for="toevoeging" style="margin-left: 80px;">Toevoeging</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="straat" name="straat" required></td>
-						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">
+						<td><input type="text" value="<?php echo $_POST['straat']; ?>" id="straat" name="straat" required></td>
+						<td><input type="text" value="<?php echo $_POST['huisnr']; ?>" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" value="<?php echo $_POST['toevoeging']; ?>" name="toevoeging" style="width:110px; margin-left: 10px;">
 					</tr>
 
 					<tr>
@@ -93,8 +122,8 @@ if(!$posting) {
 						<td><label for="plaats">Plaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="postcode" name="postcode" required></td>
-						<td><input type="text" id="plaats" name="plaats" required></td>
+						<td><input type="text" value="<?php echo $_POST['postcode']; ?>" id="postcode" name="postcode" required></td>
+						<td><input type="text" value="<?php echo $_POST['plaats']; ?>" id="plaats" name="plaats" required></td>
 					</tr>
 					<tr>
 						<td><label for="land">Land</label></td>
@@ -112,16 +141,16 @@ if(!$posting) {
 						<td><label for="achternaam">Achternaam</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" name="voornaam" id="voornaam" required></td>
-						<td><input type="text" name="achternaam" id="achternaam" required></td>
+						<td><input type="text" value="<?php echo $_POST['voornaam']; ?>" name="voornaam" id="voornaam" required></td>
+						<td><input type="text" value="<?php echo $_POST['achternaam']; ?>" name="achternaam" id="achternaam" required></td>
 					</tr>
 					<tr>
 						<td><label for="telnr">Telefoonnummer</label></td>
 						<td><label for="email">E-mail adres</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" name="telnr" id="telnr" required></td>
-						<td><input type="text" name="email" id-"email" required></td>
+						<td><input type="text" value="<?php echo $_POST['telnr']; ?>" name="telnr" id="telnr" required></td>
+						<td><input type="text" value="<?php echo $_POST['email']; ?>" name="email" id-"email" required></td>
 					</tr>
 				</table>
 			</div>
@@ -132,15 +161,16 @@ if(!$posting) {
 						<td colspan="2"><label for="username">Gebruikersnaam</label></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="text" name="username" id="username"></td>
+						<td colspan="2"><input type="text" value="<?php echo $_POST['username']; ?>" name="username" id="username"></td>
 					</tr>
+					<?php echo $errormessage; ?>
 					<tr>
 						<td><label for="password">Wachtwoord</label></td>
 						<td><label for="repeat">Herhaal wachtwoord</label></td>
 					</tr>
 					<tr>
-						<td><input type="password" name="password" id="password"></td>
-						<td><input type="password" name="repeat" id="repeat"></td>
+						<td><input <?php echo $errorclass; ?> type="password" name="password" id="password"></td>
+						<td><input <?php echo $errorclass; ?> type="password" name="repeat" id="repeat"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
@@ -158,7 +188,7 @@ if(!$posting) {
 					<li><label for="vog"><input type="checkbox" name="vog" id="vog"> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label></li>
 				</ul>
 			</div>
-			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"></div>
+			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
 		</form>
 		
 		<?php include "../footer.php"; ?>

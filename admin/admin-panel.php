@@ -51,7 +51,7 @@ $recentresult = mysql_query($recentquery);
 					</tr>
 					<tr>
 						<td>Wachtwoord</td>
-						<td><?php echo $row['wachtwoord']; ?></td>
+						<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
 						<td><small><a href="../editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
 					</tr>
 					<?php
