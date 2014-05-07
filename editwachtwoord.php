@@ -90,7 +90,7 @@ $errorclassold = "";
 							</tr>
 						</table>
 					</div>
-					<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='<?php echo $_GET['table']; ?>/<?php echo $_GET['table']; ?>-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
+					<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='<?php echo $_GET['table']; ?>/<?php echo $_GET['table']; ?>-panel.php'" id="cancel" name="cancel" value="Annuleer"></div>
 				</form>
 			<?php
 			} //endif

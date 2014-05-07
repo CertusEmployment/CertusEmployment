@@ -1,13 +1,10 @@
 <?php
+session_start();
 
 include "../connect.php";
 
 $gegevens_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
 $gegevens_result = mysql_query($gegevens_query);
-
-$test_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
-$test_result = mysql_query($test_query);
-
 
 $errormessage = "";
 $errorclass = "";
@@ -24,6 +21,10 @@ $errorclass = "";
 
 <?php
 
+if(isset($_POST['cancel'])) {
+	$pageid = $_GET['id'];
+	header("Location: admin-bedrijfsprofiel.php?id=$pageid");
+}
 if(!isset($_POST['submit'])) {
 	$posting = false;
 	unset($password);
@@ -50,26 +51,29 @@ if(!isset($_POST['submit'])) {
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
 	$password = htmlentities(strip_tags(trim($_POST['password'])));
 	//maatwerkpakket
-
+	
+	if(empty($password)) {
+			$posting = false;
+			$errormessage = "<tr><td class='errormessage'>Geen wachtwoord ingevuld.</td></tr>";
+			$errorclass = "class='errorinput'";
+		}else {
+		$hashed = hash('sha1', $password);
+	}
+	
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
 	}
-	if($password != $repeat) {
-		$posting = false;
-		$errormessage = "Herhaal de wachtwoorden op de juiste manier.";
-		$errorclass = "class='errorinput'";
-	}
-
-	// if (strlen($password >=5)) {
+	// if($password != $repeat) {
 	// 	$posting = false;
-	// 	$errormessage = "Minimaal 6 karakters";
+	// 	$errormessage = "Herhaal de wachtwoorden op de juiste manier.";
 	// 	$errorclass = "class='errorinput'";
 	// }
-	if (preg_match($regexpass, $password)) {
-		$posting = false;
-		$errormessage = "Wachtwoord komt niet overeen met de eisen";
-		$errorclass = "class='errorinput'";
-	}
+
+	// if (preg_match($regexpass, $password)) {
+	// 	$posting = false;
+	// 	$errormessage = "Wachtwoord komt niet overeen met de eisen";
+	// 	$errorclass = "class='errorinput'";
+	// } 
 
 	if ($posting) {
 		$update_sql = "UPDATE bedrijf SET 
@@ -85,9 +89,9 @@ if(!isset($_POST['submit'])) {
 		telnr_contact='".$contact_tel."',
 		email_contact='".$contact_email."',
 		gebruikersnaam='".$username."',
-		wachtwoord='".$password."' 
+		wachtwoord='".$hashed."'
 		WHERE id=".$_GET['id']." ";
-		$update_result = mysql_query($update_sql);
+		$update_result = mysql_query($update_sql) or die(mysql_error());
 		$pageid = $_GET['id'];
 		header("Location: admin-bedrijfsprofiel.php?id=$pageid");
 	}
@@ -137,7 +141,7 @@ if(!$posting) {
 						</tr>
 						<tr>
 							<td><input value="<?php echo $row['huistoevoeging']; ?>" type="text" id="toevoeging" name="toevoeging"></td>
-							<td><input value="<?php echo $row['postcode']; ?>" type="text" id="postcode" name="postcode" required></td>
+							<td><input value="<?php echo $row['postcode']; ?>" type="text" id="postcode" name="postcode" maxlength="6" required></td>
 						<tr>
 							<td><label for="plaats">Plaats</label></td>
 							<td><label for="land">Land</label></td>
@@ -187,7 +191,7 @@ if(!$posting) {
 						</tr>
 
 						<tr>
-							<td><input type="text" value="<?php echo $row['wachtwoord']; ?>" name="password" id="password" <?php echo $errorclass; ?> ></td>
+							<td><input type="text" name="password" id="password" <?php echo $errorclass; ?> ></td>
 						</tr>
 
 					</table>
@@ -203,7 +207,7 @@ if(!$posting) {
 						<li><label for="vog"><input type="checkbox" name="vog" id="vog"> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label></li>
 					</ul>
 				</div>
-				<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"></div>
+				<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" id="cancel" name="cancel" value="Annuleer"></div>
 			</form>
 		<?php
 		} //ENDWHILE

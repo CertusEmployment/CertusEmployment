@@ -42,8 +42,7 @@ if(!isset($_POST['submit'])) {
 	$postcode = $_POST['postcode'];
 	$plaats = $_POST['plaats'];
 	$land = $_POST['iCountry'];
-	$timeformat = strtotime($_POST['gebdatum']);
-	$gebdatum = date('Y-m-d',$timeformat);
+	$gebdatum = date('Y-m-d',strtotime($_POST['gebdatum']));
 	$gebplaats = $_POST['gebplaats'];
 	$geslacht = $_POST['sex'];
 	//contactinformatie

@@ -41,7 +41,8 @@
 <option value="CA">Canada</option>
 <option value="KY">Caymaneilanden</option>
 <option value="CF">Centraal-Afrikaanse Republiek</option>
-<option value="CL">Chili</option><option value="CN">China</option>
+<option value="CL">Chili</option>
+<option value="CN">China</option>
 <option value="CX">Christmaseiland</option>
 <option value="CC">Cocoseilanden</option>
 <option value="CO">Colombia</option>

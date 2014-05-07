@@ -15,16 +15,12 @@ include "../connect.php";
 
 <?php
 
-/**
-Pak ID vanuit login window
-**/
 
-$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
-$query_bedrijf = "SELECT * FROM bedrijf WHERE id =  ".$_GET['id']." ";
+$query_bedrijf = "SELECT * FROM bedrijf WHERE id =  ".$_SESSION['id']." ";
 $result = mysql_query($query_bedrijf);
 
-$query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_GET['id']." ";
+$query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_SESSION['id']." ";
 $result_klant = mysql_query($query_klant);
 
 ?>
@@ -49,7 +45,7 @@ $result_klant = mysql_query($query_klant);
 					<td>Bedrijfsnaam</td>
 					<td><?php echo $row['bedrijfnaam']; ?></td>
 					<td>Telefoon nummer</td>
-					<td><?php echo $row['telnr']; ?></td>
+					<td><?php echo $row['telnr_contact']; ?></td>
 				</tr>
 				<tr>
 					<td>Adres</td>

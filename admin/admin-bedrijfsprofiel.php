@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
 include "../connect.php";
@@ -60,7 +60,7 @@ $tableresult = mysql_query($tablequery);
 					<td>Adres</td>
 					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
 					<td>Wachtwoord</td>
-					<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
+					<td>&#8226;&#8226;&#8226;&#8226;</td>
 				</tr>
 				<tr>
 					<td>Postcode</td>
@@ -146,7 +146,7 @@ $tableresult = mysql_query($tablequery);
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
 						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
-						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id_klant']; ?>">link</a></td>
+						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 					<?php
 				 } //ENDWHILE

@@ -1,13 +1,14 @@
 <?php
+session_start();
 
-$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
+//$_SESSION['id'] = (empty($_SESSION['id'])) ? 1 : $_SESSION['id'] ;
 
 include "../connect.php";
 
 $query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
 $result = mysql_query($query);
 
-$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_GET['id']."' ";
+$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['id']."' ";
 $navresult = mysql_query($navquery);
 
 ?>
@@ -66,7 +67,7 @@ $navresult = mysql_query($navquery);
 						<td>Postcode</td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
 						<td>Wachtwoord</td>
-						<td><?php echo $row['wachtwoord']; ?></td>
+						<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
 					</tr>
 					<tr>
 						<td>Woonplaats</td>
@@ -83,7 +84,7 @@ $navresult = mysql_query($navquery);
 					<tr>
 						<td>Geboorteplaats</td>
 						<td><?php echo ucfirst($row['geboorteplaats']); ?></td>
-						<td><small><a href="#">Gegevens wijzigen</a></small></td>
+						<td><small><a href="admin-editkandidaat.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
 					</tr>
 					<tr>
 						<td></td>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include "../connect.php";
 
@@ -70,7 +71,7 @@ $recentresult = mysql_query($recentquery);
 					<tr>
 						<td><?php echo ucfirst($recentrow['voornaam'])." ".ucfirst($recentrow['achternaam']); ?></td>
 						<td><?php echo $recentrow['bedrijfnaam']; ?></td>
-						<td><?php echo $recentrow['aanmaakdatum']." dagen geleden"; ?></td>
+						<td><?php echo $recentrow['aanmaakdatum']." aangemaakt"; ?></td>
 						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $recentrow['id'] ;?>">link</a></td>
 					</tr>
 					<?php
