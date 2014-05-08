@@ -43,9 +43,10 @@ $errorclassold = "";
 			
 			if (isset($_POST['submit'])) {
 				if ($_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){
-				
-					if($_POST['old-pw'] == $row['wachtwoord']) {
-						mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$_POST['new-password']."' WHERE id = '".$_GET['id']."'");
+					$oldpwhash = hash('sha1',$_POST['old-pw']);
+					if($oldpwhash == $row['wachtwoord']) {
+						$newpwhash = hash('sha1',$_POST['new-password']);
+						mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$newpwhash."' WHERE id = '".$_GET['id']."'");
 						header("Location: ".$_GET['table']."/".$_GET['table']."-panel.php");
 					}
 					$posting = true;

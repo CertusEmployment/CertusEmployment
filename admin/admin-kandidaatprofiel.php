@@ -1,15 +1,7 @@
 <?php
-session_start();
 
 //$_SESSION['id'] = (empty($_SESSION['id'])) ? 1 : $_SESSION['id'] ;
-
 include "../connect.php";
-
-$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
-$result = mysql_query($query);
-
-$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['id']."' ";
-$navresult = mysql_query($navquery);
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +19,15 @@ $navresult = mysql_query($navquery);
 
 <div id="container">
 
-	<?php include "toolbar-admin.php"; ?>
+	<?php 
+	include "toolbar-admin.php"; 
+
+	$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
+	$result = mysql_query($query);
+
+	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['id']."' ";
+	$navresult = mysql_query($navquery);
+	?>
 
 	<div id="wrapper">
 
@@ -58,7 +58,7 @@ $navresult = mysql_query($navquery);
 						<td><?php echo $row['gebruikersnaam']; ?></td>
 					</tr>
 					<tr>
-						<td>Straatnaam en huisnr</td>
+						<td>Adres</td>
 						<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer']." ".$row['huistoevoeging']; ?></td>
 						<td>E-mail</td>
 						<td><a href="mailto:<?php echo $row['email']; ?>"><?php echo $row['email']; ?></a></td>

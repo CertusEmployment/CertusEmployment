@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 //$_GET['id'] = (empty($_GET['id'])) ? 1 : $_GET['id'] ;
 
 include "../connect.php";

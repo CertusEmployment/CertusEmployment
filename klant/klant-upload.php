@@ -14,7 +14,7 @@
 
 <div id="container">
 
-	<?php include "../toolbar-klant.php"; ?>
+	<?php include "toolbar-klant.php"; ?>
 
 	<div id="wrapper">
 

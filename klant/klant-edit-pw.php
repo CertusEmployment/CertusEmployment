@@ -9,7 +9,7 @@
 
 <div id="content">
 
-	<?php include "../toolbar-klant.php"; ?>
+	<?php include "toolbar-klant.php"; ?>
 
 	<div id="wrapper">
 

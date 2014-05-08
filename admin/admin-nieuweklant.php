@@ -1,5 +1,5 @@
 <?php 
-session_start();
+include "../connect.php";
 
 $errormessage = "";
 $errorclass = "";
@@ -11,7 +11,6 @@ $errorclass = "";
 	<title>Nieuwe klant</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
-	<?php include "../connect.php"; ?>
 </head>
 <body>
 
@@ -99,7 +98,7 @@ if(!$posting) {
 		
 		<p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="#" class="activepage">Nieuw bedrijf</a></p>
 
-		<form id="settings-form" method="post">
+		<form id="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="content-block">
 				<p class="content-head">Bedrijfsinformatie</p>
 				<p class="comment cursive">Vul hieronder de bedrijfsgegevens in.</p>

@@ -5,7 +5,6 @@ include "../connect.php";
 <html>
 <head>
 	<title>Beheerderspaneel</title>
-	<?php include "../connect.php"; ?>
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -13,8 +12,11 @@ include "../connect.php";
 </head>
 <body>
 
-<?php
+<div id="container">
+	
+<?php 
 
+include "toolbar-bedrijf.php";
 
 
 $query_bedrijf = "SELECT * FROM bedrijf WHERE id =  ".$_SESSION['id']." ";
@@ -24,10 +26,6 @@ $query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_SESSION['id']." ";
 $result_klant = mysql_query($query_klant);
 
 ?>
-
-<div id="container">
-	
-	<?php include "toolbar-bedrijf.php"; ?>
 
 	<div id="wrapper">
 
