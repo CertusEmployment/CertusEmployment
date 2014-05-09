@@ -16,7 +16,7 @@
 <nav>
 	<div class="toolbar-wrapper">	
 		<ul class="toolbar-list-left">
-			<li class="toolbar-item"><a href="#">Nieuwe klant<i class="fa fa-plus"></i></a></li>
+			<li class="toolbar-item"><a href="bedrijf-addkandidaat.php">Nieuwe klant<i class="fa fa-plus"></i></a></li>
 		</ul>
 		<form name="navmenuform" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<ul class="toolbar-list-right" >

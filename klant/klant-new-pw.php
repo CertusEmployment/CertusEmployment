@@ -1,3 +1,4 @@
+<?php include "../connect.php" ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,11 @@
 </head>
 <body>
 
-<?php
 
-session_start();
+
+<div id="container">
+
+<?php include "toolbar-klant.php";
 
 $query = "SELECT * FROM klant WHERE id = '".$_SESSION['id']."'";
 $result = mysql_query($query);
@@ -37,23 +40,19 @@ if(!isset($_POST['submit'])) {
 		// Update Query
 		$update_sql = "UPDATE klant SET 
 		wachtwoord='".$password."',
-		temppassword='0'
+		temppassword=0
 		WHERE id=".$_SESSION['id']." ";
-		$update = mysql_query($update_sql);
+		$update = mysql_query($update_sql) or die("<br>error : ".mysql_error());
 		header("Location: klant-upload.php");
 	}
 }
 
 if(!$posting) {
+	
 
 ?>
 
-<div id="container">
-
-	<?php include "toolbar-klant.php"; ?>
-
 	<div id="wrapper">
-		<a href="#" id="klant-temp-logout">uitloggen</a>
 		
 		<div id="logo">
 			<img src="../images/certus_logo.png" />

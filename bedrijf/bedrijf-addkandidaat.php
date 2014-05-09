@@ -50,9 +50,11 @@ if(!isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	//standaardvars
 	$aanmaakdatum = date('Y-m-d');
+	$vn = str_replace(' ', '', $vn);
+	$an = str_replace(' ', '', $an);
 	$username = $vn .".". $an;
 	$temppassword = 1;
-	$password = randomPassword(); // random wachtwoord vanuit function
+	$password = hash('sha1', randomPassword() ); // random wachtwoord vanuit function
 
 	if(!preg_match($regex, $email)) {
 		$posting = false;
@@ -129,7 +131,7 @@ if(!$posting) {
 						<td><label for="gebplaats">Geboorteplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="gebdatum" name="gebdatum" required></td>
+						<td><input type="text"  id="gebdatum" name="gebdatum" required></td>
 						<td><input type="text" id="gebplaats" name="gebplaats" required></td>
 					</tr>
 				</table>

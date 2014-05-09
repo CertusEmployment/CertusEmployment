@@ -54,7 +54,19 @@ if(!isset($_POST['submit'])) {
 	$hashed = hash('sha1', $password);
 
 
+	
 	//maatwerkpakket
+	$idcheck = 0;
+	$opleiding = 0;
+	$vog = 0;
+	$werkervaring = 0;
+	$financieel = 0;
+
+	if(isset($_POST['idcheck'])) { $idcheck = 1; }
+	if(isset($_POST['werkervaring'])) { $werkervaring = 1; }
+	if(isset($_POST['opleiding'])) { $opleiding = 1; }
+	if(isset($_POST['financieel'])) { $financieel = 1; }
+	if(isset($_POST['vog'])) { $vog = 1; }
 
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
@@ -78,6 +90,10 @@ if(!isset($_POST['submit'])) {
 		$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
 				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$hashed')";
 		$result = mysql_query($sql);
+		//INSERT maatwerkpakket
+		$maatwerk = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog)
+					 VALUES('$idcheck', '$werkervaring', '$opleiding', '$financieel', '$vog')";
+		$pakket = mysql_query($maatwerk);
 		header("Location: admin-panel.php");
 	}
 }

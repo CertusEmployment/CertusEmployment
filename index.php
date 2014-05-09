@@ -10,7 +10,6 @@
 
 <?php
 session_start();
-echo $_SESSION['id'];
 
 $error = "";
 $errorclass = "";
@@ -19,6 +18,10 @@ if(!isset($_POST['submit'])) {
 	$posting = false;
 
 } else {
+
+	if(!empty($_SESSION['id'])) {
+		
+	}
 
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
 	$temp = htmlentities(strip_tags(trim($_POST['password'])));
@@ -98,7 +101,7 @@ if(!$posting) {
 			<img src="images/certus_logo.png" />
 
 			<form name="login" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
-				<p class="red"><?php echo $error; ?></p>
+				<p class="loginred"><?php echo $error; ?></p>
 				<label id="username">Gebruikersnaam:</label><br />
 				<input class="margin <?php echo $errorclass; ?>" type="text" name="username" id="username" /><br />
 

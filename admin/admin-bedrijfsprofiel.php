@@ -11,6 +11,9 @@ $bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_GET['id']."";
 $bedrijfresult = mysql_query($bedrijfquery);
 $tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_GET['id']."";
 $tableresult = mysql_query($tablequery);
+$maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_GET['id']."";
+$maatwerkresult = mysql_query($maatwerkquery);
+$pakket = mysql_fetch_assoc($maatwerkresult);
 
 ?>
 <!DOCTYPE html>
@@ -92,11 +95,11 @@ $tableresult = mysql_query($tablequery);
 		<div class="content-block">
 			<p class="content-head">Maatwerkpakket</p>
 			<ul>
-				<li><i class="fa fa-check"> ID check</i></li>
-				<li><i class="fa fa-empty"> Werkervaring</i></li>
-				<li><i class="fa fa-check"> Opleiding</i></li>
-				<li><i class="fa fa-empty"> Financiele situatie en gerechtelijke uitspraken</i></li>
-				<li><i class="fa fa-check"> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</i></li>
+				<li><?php if($pakket['idcheck'] == 1){ echo '<i class="fa fa-check">'; ?> ID check</i></li>
+				<li><?php if($pakket['werkervaring'] == 1) { echo '<i class="fa fa-empty">'; ?> Werkervaring</i></li>
+				<li><?php if($pakket['opleiding'] == 1) { echo '<i class="fa fa-check">'; ?> Opleiding</i></li>
+				<li><?php if($pakket['financieel'] == 1) { echo '<i class="fa fa-empty">'; ?> Financiele situatie en gerechtelijke uitspraken</i></li>
+				<li><?php if($pakket['vog'] == 1) { echo '<i class="fa fa-check">'; ?> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</i></li>
 			</ul>
 		</div>
 

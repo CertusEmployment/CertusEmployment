@@ -46,7 +46,7 @@ if(!isset($_POST['submit'])) {
 	$postcode = htmlentities(strip_tags(trim($_POST['postcode'])));
 	$plaats = htmlentities(strip_tags(trim($_POST['plaats'])));
 	$land = $_POST['iCountry'];
-	$geboortedatum = htmlentities(strip_tags(trim($_POST['geboortedatum'])));
+	$geboortedatum = date('Y-m-d',strtotime($_POST['geboortedatum']));
 	$geboorteplaats = htmlentities(strip_tags(trim($_POST['geboorteplaats'])));
 	$telnr = htmlentities(strip_tags(trim($_POST['telnr'])));
 	$email = htmlentities(strip_tags(trim($_POST['email'])));
