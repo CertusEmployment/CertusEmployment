@@ -4,9 +4,6 @@
 
 include "../connect.php";
 
-// $query = "SELECT b.bedrijfnaam, b.id, b.straatnaam, b.huisnummer, b.huistoevoeging, b.postcode as 'postcode_bedrijf', b.plaats as 'plaats_bedrijf', b.vn_contact, b.an_contact, b.telnr as 'telbedrijf', b.gebruikersnaam as 'gebruikersnaam_bedrijf', b.email_contact, b.wachtwoord as 'wacthwoord_bedrijf',k.id as 'id_klant', k.voornaam, k.tussenvoegsel, k.achternaam, k.postcode as 'postcode_klant', k.plaats as 'plaats_klant', k.rapport, aanmaakdatum  FROM bedrijf b, klant k WHERE b.id = k.bedrijfid  and b.id = '".$_GET['id']."' GROUP BY bedrijfid";
-// $result = mysql_query($query);
-
 $bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_GET['id']."";
 $bedrijfresult = mysql_query($bedrijfquery);
 $tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_GET['id']."";
@@ -63,7 +60,7 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 					<td>Adres</td>
 					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
 					<td>Wachtwoord</td>
-					<td>&#8226;&#8226;&#8226;&#8226;</td>
+					<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
 				</tr>
 				<tr>
 					<td>Postcode</td>
@@ -88,18 +85,18 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 				<tr>
 					<th colspan="2"><a class="download-link" href=""><img src="../images/excel.png" width="25px"> Download maandoverzicht - Maart 2014</a></th>
 				</tr> 
-				<?php } ?>
+				<?php } //ENDWHILE ?>
 			</table>
 		</div>
 
 		<div class="content-block">
 			<p class="content-head">Maatwerkpakket</p>
 			<ul>
-				<li><?php if($pakket['idcheck'] == 1){ echo '<i class="fa fa-check">'; ?> ID check</i></li>
-				<li><?php if($pakket['werkervaring'] == 1) { echo '<i class="fa fa-empty">'; ?> Werkervaring</i></li>
-				<li><?php if($pakket['opleiding'] == 1) { echo '<i class="fa fa-check">'; ?> Opleiding</i></li>
-				<li><?php if($pakket['financieel'] == 1) { echo '<i class="fa fa-empty">'; ?> Financiele situatie en gerechtelijke uitspraken</i></li>
-				<li><?php if($pakket['vog'] == 1) { echo '<i class="fa fa-check">'; ?> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</i></li>
+				<li><?php if($pakket['idcheck'] == 1){ echo "<i class='fa fa-check'>"; } else { echo "<i class='fa fa-empty'>"; }?> ID check</i></li>
+				<li><?php if($pakket['werkervaring'] == 1) { echo "<i class='fa fa-check'>"; } else { echo "<i class='fa fa-empty'>"; }?> Werkervaring</i></li>
+				<li><?php if($pakket['opleiding'] == 1) { echo "<i class='fa fa-check'>"; } else { echo "<i class='fa fa-empty'>"; }?> Opleiding</i></li>
+				<li><?php if($pakket['financieel'] == 1) { echo "<i class='fa fa-check'>"; } else { echo "<i class='fa fa-empty'>"; }?> Financiele situatie en gerechtelijke uitspraken</i></li>
+				<li><?php if($pakket['vog'] == 1) { echo "<i class='fa fa-check'>"; } else { echo "<i class='fa fa-empty'>"; }?> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</i></li>
 			</ul>
 		</div>
 
@@ -162,6 +159,5 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 	</div> <!-- wrapper -->
 
 </div>
-
 </body>
 </html>

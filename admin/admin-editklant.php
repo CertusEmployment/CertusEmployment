@@ -4,6 +4,9 @@ include "../connect.php";
 
 $gegevens_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
 $gegevens_result = mysql_query($gegevens_query);
+$maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_GET['id']."";
+$maatwerkresult = mysql_query($maatwerkquery);
+$pakket = mysql_fetch_assoc($maatwerkresult);
 
 $errormessage = "";
 $errorclass = "";
@@ -26,8 +29,7 @@ if(isset($_POST['cancel'])) {
 }
 if(!isset($_POST['submit'])) {
 	$posting = false;
-	unset($password);
-	unset($repeat);
+	//unset($password);
 
 } else {
 
@@ -48,16 +50,21 @@ if(!isset($_POST['submit'])) {
 	$contact_email = htmlentities(strip_tags(trim($_POST['email'])));
 	//login gegevens
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
-	$password = htmlentities(strip_tags(trim($_POST['password'])));
+	//$password = htmlentities(strip_tags(trim($_POST['password'])));
 	//maatwerkpakket
+	$idcheck = ($_POST['idcheck']==1) ? 1 : 0 ;
+	$werkervaring = ($_POST['werkervaring']==1) ? 1 : 0 ;
+	$opleiding = ($_POST['opleiding']==1) ? 1 : 0 ;
+	$financieel = ($_POST['financieel']==1) ? 1 : 0 ;
+	$vog = ($_POST['vog']==1) ? 1 : 0 ;
 	
-	if(empty($password)) {
-			$posting = false;
-			$errormessage = "<tr><td class='errormessage'>Geen wachtwoord ingevuld.</td></tr>";
-			$errorclass = "class='errorinput'";
-		}else {
-		$hashed = hash('sha1', $password);
-	}
+	// if(empty($password)) {
+	// 		$posting = false;
+	// 		$errormessage = "<tr><td class='errormessage'>Geen wachtwoord ingevuld.</td></tr>";
+	// 		$errorclass = "class='errorinput'";
+	// 	}else {
+	// 	$hashed = hash('sha1', $password);
+	// }
 	
 	if(!preg_match($regex, $contact_email)){ 
 		$posting = false;
@@ -87,10 +94,18 @@ if(!isset($_POST['submit'])) {
 		an_contact='".$contact_an."',
 		telnr_contact='".$contact_tel."',
 		email_contact='".$contact_email."',
-		gebruikersnaam='".$username."',
-		wachtwoord='".$hashed."'
+		gebruikersnaam='".$username."'
 		WHERE id=".$_GET['id']." ";
-		$update_result = mysql_query($update_sql) or die(mysql_error());
+		mysql_query($update_sql) or die(mysql_error());
+
+		$update_maatwerk = "UPDATE maatwerk SET
+		idcheck = ".$idcheck.",
+		werkervaring = ".$werkervaring.",
+		opleiding = ".$opleiding.",
+		financieel = ".$financieel.",
+		vog = ".$vog."
+		WHERE id = ".$_GET['id']." ";
+		mysql_query($update_maatwerk) or die(mysql_error());
 		$pageid = $_GET['id'];
 		header("Location: admin-bedrijfsprofiel.php?id=$pageid");
 	}
@@ -181,7 +196,7 @@ if(!$posting) {
 						<tr>
 							<td colspan="2"><input value="<?php echo $row['gebruikersnaam']; ?>" type="text" name="username" id="username"></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
 						</tr>
 						<?php echo (empty($errormessage)) ? "" : "<tr><td class='errormessage'>".$errormessage."</td></tr>" ;?>
@@ -192,18 +207,18 @@ if(!$posting) {
 						<tr>
 							<td><input type="text" name="password" id="password" <?php echo $errorclass; ?> ></td>
 						</tr>
-
+ -->
 					</table>
 				</div>
 				<div class="content-block">
 					<p class="content-head">Maatwerkpakket</p>
 					<p class="comment">Selecteer hieronder de opties die van toepassing zijn op deze klant. <br>Dit kan later altijd nog gewijzigd worden.</p>
 					<ul>
-						<li><label for="idcheck"><input type="checkbox" name="idcheck" id="idcheck"> ID check</label></li>
-						<li><label for="werkervaring"><input type="checkbox" name="werkervaring" id="werkervaring"> Werkervaring</label></li>
-						<li><label for="opleiding"><input type="checkbox" name="opleiding" id="opleiding"> Opleiding</label></li>
-						<li><label for="financieel"><input type="checkbox" name="financieel" id="financieel"> Financiele situatie en gerechtelijke uitspraken</label></li>
-						<li><label for="vog"><input type="checkbox" name="vog" id="vog"> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label></li>
+						<li><label for="idcheck"><input type="checkbox" name="idcheck" id="idcheck" value="1" <?php echo ($pakket['idcheck']==1) ? "checked" : "" ; ?>> ID check</label></li>
+						<li><label for="werkervaring"><input type="checkbox" name="werkervaring" id="werkervaring" value="1" <?php echo ($pakket['werkervaring']==1) ? "checked" : "" ; ?>> Werkervaring</label></li>
+						<li><label for="opleiding"><input type="checkbox" name="opleiding" value="1" id="opleiding" <?php echo ($pakket['opleiding']==1) ? "checked" : "" ; ?>> Opleiding</label></li>
+						<li><label for="financieel"><input type="checkbox" name="financieel" value="1" id="financieel" <?php echo ($pakket['financieel']==1) ? "checked" : "" ; ?>> Financiele situatie en gerechtelijke uitspraken</label></li>
+						<li><label for="vog"><input type="checkbox" name="vog" value="1" id="vog" <?php echo ($pakket['vog']==1) ? "checked" : "" ; ?>> Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label></li>
 					</ul>
 				</div>
 				<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" id="cancel" name="cancel" value="Annuleer"></div>

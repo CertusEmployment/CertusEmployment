@@ -108,7 +108,7 @@ include "../connect.php";
 			<div class="content-block">
 				<p class="content-head">Screeningsinformatie</p>
 				<p>Pakket <?php echo $row['pakket']; ?></p>
-				<p>Opleverdatum: <?php echo date('d M Y', strtotime($row['opleverdatum'])); ?></p>
+				<p>Opleverdatum: <?php echo date('d-m-Y', strtotime($row['opleverdatum'])); ?></p>
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 				 	<div class="fallback">

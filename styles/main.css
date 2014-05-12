@@ -278,6 +278,7 @@ MAIN
 	}
 
 .table-header { background: #ccc; border-bottom: 1px solid black; }
+.table-header th { min-width: 115px; } /* vanwege filter */
 
 .download-btn { 
 	border: 1px solid #606060;

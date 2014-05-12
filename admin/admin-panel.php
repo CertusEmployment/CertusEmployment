@@ -8,7 +8,7 @@ $result_admin = mysql_query($query_admin);
 $query_bedrijf = "SELECT * FROM bedrijf";
 $result_bedrijf = mysql_query($query_bedrijf);
 
-$recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.aanmaakdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id LIMIT 0,4";
+$recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.aanmaakdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id ORDER BY aanmaakdatum DESC LIMIT 0,4";
 $recentresult = mysql_query($recentquery);
 
 ?>
@@ -39,7 +39,7 @@ $recentresult = mysql_query($recentquery);
 		<div class="content-block">
 			<table class="profiletable">
 				<tr><th collspan="2">Account informatie</th></tr>
-				<?php while ($row = mysql_fetch_array($result_admin)) { ?>
+				<?php while ($row = mysql_fetch_assoc($result_admin)) { ?>
 					<tr>
 						<td>Gebruikersnaam</td>
 						<td><?php echo $row['gebruikersnaam']; ?></td>
@@ -51,7 +51,7 @@ $recentresult = mysql_query($recentquery);
 					</tr>
 					<tr>
 						<td>Wachtwoord</td>
-						<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
+						<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
 						<td><small><a href="../editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
 					</tr>
 					<?php
@@ -64,18 +64,26 @@ $recentresult = mysql_query($recentquery);
 			<table class="profiletable">
 				<tr><th collspan="4">Recente screenings</th></tr>
 				<?php
-				while ($recentrow = mysql_fetch_array($recentresult)) {
-					if ($recentrow['aanmaakdatum'] !== '0000-00-00') {
-					?>
-					<tr>
-						<td><?php echo ucfirst($recentrow['voornaam'])." ".ucfirst($recentrow['achternaam']); ?></td>
-						<td><?php echo $recentrow['bedrijfnaam']; ?></td>
-						<td><?php echo $recentrow['aanmaakdatum']." aangemaakt"; ?></td>
-						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $recentrow['id'] ;?>">link</a></td>
-					</tr>
+					while ($recentrow = mysql_fetch_array($recentresult)) {
+						$date1 = new DateTime(date('d-m-Y', strtotime($recentrow['aanmaakdatum']))); //aanmaakdatum
+						$date2 = new DateTime(date('d-m-Y')); //huidige datum
+						if ($date1 <= $date2) {
+						?>
+						<tr>
+							<td><?php echo ucfirst($recentrow['voornaam'])." ".ucfirst($recentrow['achternaam']); ?></td>
+							<td><?php echo $recentrow['bedrijfnaam']; ?></td>
+
+							<!-- Verschil tussen de aanmaakdatum en de huidige datum in dagen -->
+							<?php 
+								if($date1->diff($date2)->days == 0) { ?> <td>Vandaag</td> <?php } //Screening vandaag aangemaakt
+								elseif ($date1->diff($date2)->days == 1) { ?> <td>Gisteren</td> <?php } //Screening gisteren aangemaakt
+								else { ?><td><?php echo $date1->diff($date2)->days." dagen geleden"; ?></td> <?php } //Screening ouder dan gisteren
+							?>
+							<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $recentrow['id'] ;?>">link</a></td>
+						</tr>
 					<?php
-					}
-				}
+					} //ENDIF
+				} //ENDWHILE
 				?>
 			</table>
 		</div>

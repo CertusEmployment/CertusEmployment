@@ -27,7 +27,7 @@
 						<li>Maatwerkpakket is gewijzigd</li>
 					</ul>
 				</li>
-				<li class="toolbar-item"><button type="submit" name="logout">Logout<i class="fa fa-power-off"></i></button></li>
+				<li class="toolbar-item"><button type="submit" name="logout">Log uit<i class="fa fa-power-off"></i></button></li>
 				<li class="toolbar-item"><a href="#">Opties<i class="fa fa-cog"></i></a>
 					<?php while ($row = mysql_fetch_array($result_user)) { ?>
 						<ul class="sub-menu-option">

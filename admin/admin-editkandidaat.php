@@ -166,7 +166,7 @@ if(!$posting) {
 							<td><label for="geboorteplaats">Geboorteplaats</label></td>
 						</tr>
 						<tr>
-							<td><input type="text" value="<?php echo $row['geboortedatum']; ?>" placeholder="YYYY-MM-DD" id="geboortedatum" name="geboortedatum" required></td>
+							<td><input type="text" value="<?php echo date('d-m-Y', strtotime($row['geboortedatum'])); ?>" placeholder="YYYY-MM-DD" id="geboortedatum" name="geboortedatum" required></td>
 							<td><input type="text" value="<?php echo $row['geboorteplaats']; ?>" id="geboorteplaats" name="geboorteplaats" required></td>
 						</tr>
 					</table>

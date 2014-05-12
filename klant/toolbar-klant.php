@@ -14,7 +14,7 @@
 	<div class="toolbar-wrapper">
 		<form name="navmenuform" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">	
 			<ul class="toolbar-list-right">
-				<li class="toolbar-item"><button type="submit" name="logout">Logout<i class="fa fa-power-off"></i></button></li>
+				<li class="toolbar-item"><button type="submit" name="logout">Log uit<i class="fa fa-power-off"></i></button></li>
 				<li class="toolbar-item"><a href="#">Opties<i class="fa fa-cog"></i></a>
 					<ul class="sub-menu-option">
 						<li>Wachtwoord wijzingen</li>

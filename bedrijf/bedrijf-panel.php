@@ -70,7 +70,7 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 				<tr>
 					<td>Wachtwoord</td>
-					<td><?php for ($i=0; $i < strlen($row['wachtwoord']); $i++) { echo "&#8226;"; } ?></td>
+					<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
 					<td><small><a href="../editwachtwoord.php?table=bedrijf	&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
