@@ -4,7 +4,9 @@
 	$query_adminuser = "SELECT * FROM admin";
 	$result_user = mysql_query($query_adminuser);
 	
-	session_start();
+	if(!isset($_SESSION)) {
+		session_start();
+	}
 
 	if(!$_SESSION['id']) {
 		header('location: ../index.php');

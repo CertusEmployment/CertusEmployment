@@ -5,7 +5,7 @@ include "../connect.php";
 <html>
 <head>
 	<title>Beheerderspaneel</title>
-
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
@@ -122,7 +122,7 @@ $result_klant = mysql_query($query_klant);
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
 						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
-						<td class="cursive"><a href="../admin/admin-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
+						<td class="cursive"><a href="bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 				<?php } ?>
 			</table>

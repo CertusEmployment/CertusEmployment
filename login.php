@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Login</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<?php include "connect.php"; ?>
 	<link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>

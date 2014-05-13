@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Login</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<?php include "connect.php"; ?>
 	<link rel="stylesheet" type="text/css" href="styles/main.css" />
 	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
@@ -46,6 +47,7 @@ if(!isset($_POST['submit'])) {
 	if(!empty($klantdata['wachtwoord'])) {
 		if($password==$klantdata['wachtwoord']) {
 			$_SESSION['id'] = $klantdata['id'];
+			$_SESSION['table'] = "klant";
 			//check temp password
 			if($klantdata['temppassword'] == '1') {
 				header("Location: klant/klant-new-pw.php");
@@ -64,6 +66,7 @@ if(!isset($_POST['submit'])) {
 	if(!empty($bedrijfdata['wachtwoord'])) {	
 		if($password==$bedrijfdata['wachtwoord']) { 
 			$_SESSION['id'] = $bedrijfdata['id'];
+			$_SESSION['table'] = "bedrijf";
 			header("Location: bedrijf/bedrijf-panel.php");
 		} else { 
 			$posting = false;
@@ -76,6 +79,7 @@ if(!isset($_POST['submit'])) {
 	if(!empty($admindata['wachtwoord'])) {
 		if($password==$admindata['wachtwoord']) {
 			$_SESSION['id'] = $admindata['id'];
+			$_SESSION['table'] = "admin";
 			header("Location: admin/admin-panel.php");
 		} else {
 			$posting = false;

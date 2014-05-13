@@ -1,8 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Informatievoorziening</title>
-
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
@@ -50,10 +51,11 @@ if(!isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	//standaardvars
 	$aanmaakdatum = date('Y-m-d');
-	$vn = str_replace(' ', '', $vn);
-	$an = str_replace(' ', '', $an);
-	$username = $vn .".". $an;
+	$vnuser = str_replace(' ', '', $vn);
+	$anuser = str_replace(' ', '', $an);
+	$username = $vnuser .".". $anuser;
 	$temppassword = 1;
+	$bedrijfid = $_SESSION['id'];
 	$password = hash('sha1', randomPassword() ); // random wachtwoord vanuit function
 
 	if(!preg_match($regex, $email)) {
@@ -62,8 +64,8 @@ if(!isset($_POST['submit'])) {
 	}
 
 	if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword)
-				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid)
+				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword', '$bedrijfid')" or die(mysql_error());
 		
 		$result = mysql_query($sql);
 		header("Location: bedrijf-pakketselectie.php");
@@ -76,6 +78,7 @@ if(!$posting) {
 <div id="container">
 
 	<?php include "toolbar-bedrijf.php"; ?>
+
 
 	<div id="wrapper">
 
@@ -117,7 +120,7 @@ if(!$posting) {
 						<td><label for="plaats">Woonplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="postcode" name="postcode" placeholder="0000AA" required></td>
+						<td><input type="text" id="postcode" name="postcode" placeholder="0000AA" maxlength="6" required></td>
 						<td><input type="text" id="plaats" name="plaats" required></td>
 					</tr>
 					<tr>

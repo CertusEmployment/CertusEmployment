@@ -20,7 +20,7 @@ include "../connect.php";
 <div id="container">
 
 	<?php 
-	include "toolbar-admin.php"; 
+	include "toolbar-bedrijf.php"; 
 
 	$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
 	$result = mysql_query($query);
@@ -37,7 +37,7 @@ include "../connect.php";
 
 		<?php
 		while ($navrow = mysql_fetch_array($navresult)) {
-		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-bedrijfsprofiel.php?id=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
+		?><p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
 		}?>
 
 
@@ -84,7 +84,6 @@ include "../connect.php";
 					<tr>
 						<td>Geboorteplaats</td>
 						<td><?php echo ucfirst($row['geboorteplaats']); ?></td>
-						<td><small><a href="admin-editkandidaat.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
 					</tr>
 					<tr>
 						<td></td>

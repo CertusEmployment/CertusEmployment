@@ -2,22 +2,13 @@
 
 include "../connect.php";
 
-$query_admin = "SELECT * FROM admin";
-$result_admin = mysql_query($query_admin);
-
-$query_bedrijf = "SELECT * FROM bedrijf";
-$result_bedrijf = mysql_query($query_bedrijf);
-
-$recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.aanmaakdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id ORDER BY aanmaakdatum DESC LIMIT 0,4";
-$recentresult = mysql_query($recentquery);
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin Panel</title>
-
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
@@ -28,6 +19,14 @@ $recentresult = mysql_query($recentquery);
 <div id="container">
 	<?php
 	include "toolbar-admin.php"; 
+	$query_admin = "SELECT * FROM admin WHERE id = ".$_SESSION['id']." ";
+	$result_admin = mysql_query($query_admin);
+
+	$query_bedrijf = "SELECT * FROM bedrijf";
+	$result_bedrijf = mysql_query($query_bedrijf);
+
+	$recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.aanmaakdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id ORDER BY aanmaakdatum DESC LIMIT 0,4";
+	$recentresult = mysql_query($recentquery);
 	?>
 
 		<div id="wrapper">
