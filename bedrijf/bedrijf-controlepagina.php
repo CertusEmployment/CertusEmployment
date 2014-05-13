@@ -1,12 +1,12 @@
-<?php 
+<?php
 	session_start();
-	include "../connect.php"; 
+	include "../connect.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Controle pagina</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 
@@ -14,17 +14,14 @@
 <body>
 
 <?php
-
-$sql = "SELECT * FROM klant WHERE id ='".$_SESSION['id']."'";
-$result = mysql_query($sql);
-$klantdata = mysql_fetch_assoc($result);
+$posting = false;
 
 if(!isset($_POST['submit'])) {
 	$posting = false;
 } else {
-
+	$posting = true;
 	$password = $_SESSION['password'];
-	$to = $_SESSION['mail'];
+	$to = $_SESSION['email'];
 
 	//mail header
 	$header = "MIME-version: 1.0\n"; 
@@ -40,20 +37,45 @@ if(!isset($_POST['submit'])) {
 
     $message = 
     "
-    Geachte ".$aanhef." ".$_SESSION['achternaam'].",<br><br>
+    Geachte ".$aanhef." ".$_SESSION['an'].",<br><br>
     Welkom bij Certus-Employment, Dit is een automatisch gegenereerd bericht, 
     Hieronder vind u uw tijdelijke inlog gegevens.<br><br>
     Gebruikersnaam: ".$_SESSION['username']."<br>
     Wachtwoord: ".$_SESSION['password']."<br><br>
     <a href='http://www.cairansteverink.com/certusemployment'>Klik hier om in te loggen</a>
-    ";	
+    ";
 
-    if(mail($to, $subject, $message, $header)) {
-    	header("Location: bedrijf-panel.php");
-    } else {
-    	$posting = false;
-    	die(mysql_error());
-    }
+    if($posting) {
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid)
+				VALUES(
+					'".$_SESSION['vn']."',
+					'".$_SESSION['an']."', 
+					'".$_SESSION['sex']."', 
+					'".$_SESSION['straat']."', 
+					".$_SESSION['huisnr'].", 
+					'".$_SESSION['toevoeging']."', 
+					'".$_SESSION['postcode']."', 
+					'".$_SESSION['plaats']."', 
+					'".$_SESSION['land']."', 
+					'".$_SESSION['gebdatum']."', 
+					'".$_SESSION['gebplaats']."', 
+					".$_SESSION['telnr'].", 
+					'".$_SESSION['email']."', 
+					'".$_SESSION['username']."', 
+					'".$_SESSION['password']."', 
+					".$_SESSION['temppassword'].",
+					".$_SESSION['id'].")";
+		$result = mysql_query($sql);
+		if(mail($to, $subject, $message, $header)) {
+    		header("Location: bedrijf-panel.php");
+    	} else {
+    		$posting = false;
+    		die(mysql_error());
+    	}
+    	
+	} else {
+		!$posting;
+	}
 
 }
 
@@ -71,37 +93,37 @@ if(!$posting) {
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="bedrijf-addkandidaat.php">Kandidaat informatie</a> > <a href="bedrijf-pakketselectie.php">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
+		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
 		<div class="content-block">
 			<table class="double-table">
 				<tr><th collspan="2">Controlepagina</th></tr>
 				<tr>
 					<td>Naam</td>
-					<td><?php echo $klantdata['voornaam']." ".$klantdata['achternaam']; ?></td>
+					<td><?php echo $_SESSION['vn']." ".$_SESSION['an']; ?></td>
 					<td>Telefoon nummer</td>
-					<td><?php echo $klantdata['telnr']; ?></td>
+					<td><?php echo $_SESSION['telnr']; ?></td>
 				</tr>
 				<tr>
 					<td>Adres</td>
-					<td><?php echo $klantdata['straatnaam']; ?></td>
+					<td><?php echo $_SESSION['straat']; ?></td>
 					<td>E-mail adres</td>
-					<td><?php echo $klantdata['email']; ?></td>
+					<td><?php echo $_SESSION['email']; ?></td>
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo $klantdata['postcode']; ?></td>
+					<td><?php echo $_SESSION['postcode']; ?></td>
 				</tr>
 				<tr>
 					<td>Woonplaats</td>
-					<td><?php echo $klantdata['plaats']; ?></td>
+					<td><?php echo $_SESSION['plaats']; ?></td>
 				</tr>
 				<tr>
 					<td>Geboortedatum</td>
-					<td><?php echo $klantdata['geboortedatum']; ?></td>
+					<td><?php echo $_SESSION['gebdatum']; ?></td>
 				</tr>
 				<tr>
 					<td>Geboorteplaats</td>
-					<td><?php echo $klantdata['geboorteplaats']; ?></td>
+					<td><?php echo $_SESSION['gebplaats']; ?></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -122,7 +144,7 @@ if(!$posting) {
 			</table>
 		</div>
 
-		<input type="submit" id="next" name="submit" value="Opslaan">
+		<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
 		</form>
 
 		<?php include "../footer.php"; ?>

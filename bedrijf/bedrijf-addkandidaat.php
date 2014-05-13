@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Informatievoorziening</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<?php
+<?php 
 $warning = false;
 
 if(!isset($_POST['submit'])) {
@@ -35,58 +35,49 @@ if(!isset($_POST['submit'])) {
 	$regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 	$posting = true;
 	//persoonlijke informatie
-	$vn = $_POST['voornaam'];
-	$an = $_POST['achternaam'];
-	$straat = $_POST['straat'];
-	$huisnr = $_POST['huisnr'];
-	$toevoeging = $_POST['toevoeging'];
-	$postcode = $_POST['postcode'];
-	$plaats = $_POST['plaats'];
-	$land = $_POST['iCountry'];
-	$gebdatum = date('Y-m-d',strtotime($_POST['gebdatum']));
-	$gebplaats = $_POST['gebplaats'];
-	$geslacht = $_POST['sex'];
-	//contactinformatie
-	$telnr = $_POST['telnr'];
-	$email = $_POST['email'];
+	$_SESSION['vn'] = $_POST['voornaam'];
+	$_SESSION['an'] = $_POST['achternaam']; 
+	$_SESSION['straat'] = $_POST['straat'];
+	$_SESSION['huisnr'] = $_POST['huisnr'];
+	$_SESSION['toevoeging'] = $_POST['toevoeging'];
+	$_SESSION['postcode'] = $_POST['postcode'];
+	$_SESSION['plaats'] = $_POST['plaats'];
+	$_SESSION['land'] = $_POST['iCountry'];
+	$_SESSION['gebdatum'] = date('Y-m-d',strtotime($_POST['gebdatum'])); 
+	$_SESSION['gebplaats'] = $_POST['gebplaats'];
+	$_SESSION['sex'] = $_POST['sex'];
+	//contactinformatie 
+	$_SESSION['telnr'] = $_POST['telnr'];
+	$_SESSION['email'] = $_POST['email']; 
 	//standaardvars
-	$aanmaakdatum = date('Y-m-d');
-	$vnuser = str_replace(' ', '', $vn);
-	$anuser = str_replace(' ', '', $an);
-	$username = $vnuser .".". $anuser;
-	$temppassword = 1;
-	$bedrijfid = $_SESSION['id'];
-	$temp = randomPassword();
-	$password = hash('sha1', randomPassword() ); // random wachtwoord vanuit function
+	$_SESSION['aanmaakdatum'] = date('Y-m-d');
+	//$vn = str_replace(' ', '', $vn);
+	//$an = str_replace(' ', '', $an);
+	$username = $vn .".". $an;
+	$_SESSION['temppassword'] = 1;
+	$temp = randomPassword(); //random wachtwoord
+	$_SESSION['password'] = hash('sha1', $temp);
 
 	//SESSION VARS
-	$_SESSION['password'] = $temp;
-	$_SESSION['mail'] = $email;
-	$_SESSION['sex'] = $geslacht;
-	$_SESSION['achternaam'] = $an;
+	$_SESSION['temp'] = $temp;
 	$_SESSION['username'] = $username;
 
-	if(!preg_match($regex, $email)) {
+	if(!preg_match($regex, $_SESSION['email'])) {
 		$posting = false;
 		$warning = true;
 	}
 
 	if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid, aanmaakdatum)
-				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword', '$bedrijfid', '$aanmaakdatum')" or die(mysql_error());
-		
-		$result = mysql_query($sql);
 		header("Location: bedrijf-controlepagina.php");
 	}
 }
 
-if(!$posting) {
+if(!$posting) { 
 ?>
 
 <div id="container">
 
 	<?php include "toolbar-bedrijf.php"; ?>
-
 
 	<div id="wrapper">
 
