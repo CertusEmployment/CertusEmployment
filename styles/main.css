@@ -428,7 +428,7 @@ ul.notification { z-index: 2; background: white; width: 245px; margin-top: 5px; 
 }
 .block label { width: 150px; }
 .block input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
-.block input[type=checkbox] + label:before { letter-spacing: 7px; }
+.block input[type=checkbox] + label:before { letter-spacing: 8px; }
 .block input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
 .block input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
 

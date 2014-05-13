@@ -11,6 +11,25 @@
 	<script src="../js/dropzoneIMG.js"></script>
 
 </head>
+
+<?php
+
+if(!isset($_POST['submit'])){
+	$posting = false;
+} else {
+
+	$toestemming = "//url to file";
+	$identiteit = "//url to file";
+
+	$digid = 0;
+
+	if(isset($_POST['digid'])) { $digid = 1; }
+}
+
+if(!$posting) {
+
+?>
+
 <body>
 
 <div id="container">
@@ -92,6 +111,8 @@
 <!-- INSTEAD OF UPLOAD.PHP -->
 
 <?php
+}
+
 
 $ds          = DIRECTORY_SEPARATOR; 
  
