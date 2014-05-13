@@ -25,7 +25,7 @@ include "../connect.php";
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#" class="activepage">Pakketselectie</a></p>	
+		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="bedrijf-addkandidaat.php">Kandidaat informatie</a> > <a href="#" class="activepage">Pakketselectie</a></p>	
 		<form id="settings-form" method="post">
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>

@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+	include "../connect.php"; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +71,7 @@ if(!$posting) {
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
+		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="bedrijf-addkandidaat.php">Kandidaat informatie</a> > <a href="bedrijf-pakketselectie.php">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
 		<div class="content-block">
 			<table class="double-table">
 				<tr><th collspan="2">Controlepagina</th></tr>

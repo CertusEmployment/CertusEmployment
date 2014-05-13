@@ -66,12 +66,12 @@ $result_klant = mysql_query($query_klant);
 				<tr>
 					<td>E-mail</td>
 					<td><?php echo $row['email_contact']; ?></td>
-					<td><small><a href="../editemail.php?table=bedrijf	&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
+					<td><small><a href="../editemail.php ">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td>Wachtwoord</td>
 					<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
-					<td><small><a href="../editwachtwoord.php?table=bedrijf	&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
+					<td><small><a href="../editwachtwoord.php ">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
 		</div>

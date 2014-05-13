@@ -1,8 +1,8 @@
 <?php
-
+session_start();
 include "connect.php";
 
-$query = "SELECT * FROM ".$_GET['table']." WHERE id = '".$_GET['id']."' ";
+$query = "SELECT * FROM ".$_SESSION['table']." WHERE id = '".$_SESSION['id']."' ";
 $result = mysql_query($query);
 //var_dump($query);
 $errormessage = "";
@@ -21,13 +21,13 @@ $errorclassold = "";
 
 <div id="container">
 	<?php
-		if($_GET['table']=='bedrijf'){
+		if($_SESSION['table']=='bedrijf'){
 			include "bedrijf/toolbar-bedrijf.php";
 		}
-		if($_GET['table']=='admin'){
+		if($_SESSION['table']=='admin'){
 			include "admin/toolbar-admin.php";
 		}
-		if($_GET['table']=='klant'){
+		if($_SESSION['table']=='klant'){
 			include "klant/toolbar-klant.php";
 		}
 	?>
@@ -47,8 +47,8 @@ $errorclassold = "";
 					$oldpwhash = hash('sha1',$_POST['old-pw']);
 					if($oldpwhash == $row['wachtwoord']) {
 						$newpwhash = hash('sha1',$_POST['new-password']);
-						mysql_query("UPDATE ".$_GET['table']." SET wachtwoord = '".$newpwhash."' WHERE id = '".$_GET['id']."'");
-						header("Location: ".$_GET['table']."/".$_GET['table']."-panel.php");
+						mysql_query("UPDATE ".$_SESSION['table']." SET wachtwoord = '".$newpwhash."' WHERE id = '".$_SESSION['id']."'");
+						header("Location: ".$_SESSION['table']."/".$_SESSION['table']."-panel.php");
 					}
 					$posting = true;
 				} 
@@ -92,7 +92,7 @@ $errorclassold = "";
 							</tr>
 						</table>
 					</div>
-					<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='<?php echo $_GET['table']; ?>/<?php echo $_GET['table']; ?>-panel.php'" id="cancel" name="cancel" value="Annuleer"></div>
+					<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"><input type="submit" onclick="location.href='<?php echo $_SESSION['table']; ?>/<?php echo $_SESSION['table']; ?>-panel.php'" id="cancel" name="cancel" value="Annuleer"></div>
 				</form>
 			<?php
 			} //endif

@@ -45,12 +45,12 @@ include "../connect.php";
 					<tr>
 						<td>E-mail</td>
 						<td><?php echo $row['email']; ?></td>
-						<td><small><a href="../editemail.php?table=admin&id=<?php echo $row['id']; ?>">E-mail wijzigen</a></small></td>
+						<td><small><a href="../editemail.php">E-mail wijzigen</a></small></td>
 					</tr>
 					<tr>
 						<td>Wachtwoord</td>
 						<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
-						<td><small><a href="../editwachtwoord.php?table=admin&id=<?php echo $row['id']; ?>">Wachtwoord wijzigen</a></small></td>
+						<td><small><a href="../editwachtwoord.php">Wachtwoord wijzigen</a></small></td>
 					</tr>
 					<?php
 						}
@@ -127,14 +127,16 @@ include "../connect.php";
 				</thead>
 				<?php
 
-				while ($row = mysql_fetch_array($result_bedrijf)) {
+				while ($row = mysql_fetch_assoc($result_bedrijf)) {
+					$query_lopend = "SELECT COUNT(id) as 'count' FROM klant WHERE bedrijfid = ".$row['id']." AND rapport = '' ";
+					$lopend = mysql_fetch_assoc(mysql_query($query_lopend));
 					?>
 					<tr>
 						<td><?php echo $row['bedrijfnaam']; ?></td>
 						<td><?php echo $row['vn_contact']." ".$row['an_contact']; ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
 						<td><?php echo $row['plaats']; ?></td>
-						<td>wait for it</td>
+						<td><?php echo $lopend['count']; ?></td>
 						<td><a href="admin-bedrijfsprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 					<?php

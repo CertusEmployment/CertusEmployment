@@ -72,8 +72,8 @@ if(!isset($_POST['submit'])) {
 	}
 
 	if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid)
-				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword', '$bedrijfid')" or die(mysql_error());
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid, aanmaakdatum)
+				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword', '$bedrijfid', '$aanmaakdatum')" or die(mysql_error());
 		
 		$result = mysql_query($sql);
 		header("Location: bedrijf-controlepagina.php");
