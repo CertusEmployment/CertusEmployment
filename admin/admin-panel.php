@@ -2,7 +2,7 @@
 
 include "../connect.php";
 
-$query_admin = "SELECT * FROM admin";
+$query_admin = "SELECT * FROM admin WHERE id=".$_SESSION['id']."";
 $result_admin = mysql_query($query_admin);
 
 $query_bedrijf = "SELECT * FROM bedrijf";
