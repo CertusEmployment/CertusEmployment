@@ -54,7 +54,15 @@ if(!isset($_POST['submit'])) {
 	$an = str_replace(' ', '', $an);
 	$username = $vn .".". $an;
 	$temppassword = 1;
+	$temp = randomPassword();
 	$password = hash('sha1', randomPassword() ); // random wachtwoord vanuit function
+
+	//SESSION VARS
+	$_SESSION['password'] = $temp;
+	$_SESSION['mail'] = $email;
+	$_SESSION['sex'] = $geslacht;
+	$_SESSION['achternaam'] = $an;
+	$_SESSION['username'] = $username;
 
 	if(!preg_match($regex, $email)) {
 		$posting = false;
@@ -66,7 +74,7 @@ if(!isset($_POST['submit'])) {
 				VALUES('$vn', '$an', '$geslacht', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$gebdatum', '$gebplaats', '$telnr', '$email', '$username', '$password', '$temppassword')";
 		
 		$result = mysql_query($sql);
-		header("Location: bedrijf-pakketselectie.php");
+		header("Location: bedrijf-controlepagina.php");
 	}
 }
 
