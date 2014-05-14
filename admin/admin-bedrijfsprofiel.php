@@ -72,6 +72,10 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 					<td><?php echo ucfirst($row['plaats']); ?></td>
 				</tr>
 				<tr>
+					<td>Plaats</td>
+					<td><?php echo ucfirst($row['land']); ?></td>
+				</tr>
+				<tr>
 					<td>Contactpersoon</td>
 					<td><?php echo ucfirst($row['vn_contact'])." ".ucfirst($row['an_contact']); ?></td>
 				</tr>
@@ -104,6 +108,12 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 		<div class="screening-list">
 			<form name="filter" id="filter">
 				<select>
+					<option>Nieuw</option>
+					<option>In bewerking</option>
+					<option>Afgerond</option>
+				</select>
+
+				<select>
 					<option>januari</option>
 					<option>februari</option>
 					<option>maart</option>
@@ -133,7 +143,7 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 				<thead>
 				<tr class="table-header">
 					<th>Naam</th>
-					<th>Startdatum</th>
+					<th>Aanmaakdatum</th>
 					<th>Postcode</th>
 					<th>Plaats</th>
 					<th>Rapport beschikbaar</th>
@@ -141,12 +151,12 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 				</tr>
 				</thead>
 				<?php while ($row=mysql_fetch_array($tableresult)) { ?>
-					<tr>
+					<tr class="trlink" onclick="document.location = 'admin-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';">
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d-m-Y', strtotime($row['aanmaakdatum'])); ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
-						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
+						<td class="cursive"><?php if(empty($row['rapport'])) echo "In bewerking"; else echo "Rapport beschikbaar"; ?></td>
 						<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 					<?php

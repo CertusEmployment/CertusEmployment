@@ -41,6 +41,7 @@ small { font-size: 11px; color: orange; }
 .ul-disc li { list-style: disc; }
 .wideCell { width: 230px!important; }
 .order-table {width: 100%;}
+.order-table .trlink { cursor: pointer; }
 
 /*
 TOOLBAR
@@ -278,7 +279,7 @@ MAIN
 	}
 
 .table-header { background: #ccc; border-bottom: 1px solid black; }
-.table-header th { min-width: 115px; } /* vanwege filter */
+.table-header th { min-width: 118px; } /* voorkomt verspringen dmv vanwege filter */
 
 .download-btn { 
 	border: 1px solid #606060;

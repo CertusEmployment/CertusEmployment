@@ -112,7 +112,7 @@ if(!$posting) {
 				<label id="password">Wachtwoord:</label><br />
 				<input class="no-padding <?php echo $errorclass; ?>" type="password" name="password" id="password" /><br />
 
-				<a class="reset-password" href="#">Wachtwoord vergeten</a><br />
+				<a class="reset-password" href="password-forget.php">Wachtwoord vergeten</a><br />
 				<input type="submit" name="submit" value="Inloggen" /><small></small>
 			</form>
 

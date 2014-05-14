@@ -46,7 +46,7 @@ if(!isset($_POST['submit'])) {
     ";
 
     if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, bedrijfid)
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid)
 				VALUES(
 					'".$_SESSION['vn']."',
 					'".$_SESSION['an']."', 
@@ -64,9 +64,28 @@ if(!isset($_POST['submit'])) {
 					'".$_SESSION['username']."', 
 					'".$_SESSION['password']."', 
 					".$_SESSION['temppassword'].",
-					".$_SESSION['id'].")";
+					'".$_SESSION['opleverdatum']."',
+			 		".$_SESSION['id'].")";
+		
 		$result = mysql_query($sql);
 		if(mail($to, $subject, $message, $header)) {
+					unset($_SESSION['vn']);
+					unset($_SESSION['an']); 
+					unset($_SESSION['sex']); 
+					unset($_SESSION['straat']); 
+					unset($_SESSION['huisnr']); 
+					unset($_SESSION['toevoeging']); 
+					unset($_SESSION['postcode']); 
+					unset($_SESSION['plaats']); 
+					unset($_SESSION['land']); 
+					unset($_SESSION['gebdatum']); 
+					unset($_SESSION['gebplaats']); 
+					unset($_SESSION['telnr']);
+					unset($_SESSION['email']); 
+					unset($_SESSION['username']); 
+					unset($_SESSION['password']); 
+					unset($_SESSION['temppassword']);
+					unset($_SESSION['opleverdatum']);
     		header("Location: bedrijf-panel.php");
     	} else {
     		$posting = false;
@@ -93,7 +112,7 @@ if(!$posting) {
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
+		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
 		<div class="content-block">
 			<table class="double-table">
 				<tr><th collspan="2">Controlepagina</th></tr>
@@ -111,7 +130,9 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo $_SESSION['postcode']; ?></td>
+					<td><?php echo chunk_split(strtoupper($_SESSION['postcode']), 4, " "); ?></td>
+					<td>Gebruikersnaam</td>
+					<td><?php echo $_SESSION['username']; ?></td>
 				</tr>
 				<tr>
 					<td>Woonplaats</td>
@@ -119,7 +140,7 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Geboortedatum</td>
-					<td><?php echo $_SESSION['gebdatum']; ?></td>
+					<td><?php echo date('d-m-Y', strtotime($_SESSION['gebdatum'])); ?></td>
 				</tr>
 				<tr>
 					<td>Geboorteplaats</td>
@@ -136,11 +157,20 @@ if(!$posting) {
 		</div>
 
 		<div class="content-block">
-			<table>
-				<tr><th>Screening informatie</th></tr>
-				<tr><td>Opleverdatum</td></tr>
-				<tr><td>Pakketkeuze</td></tr>
-				<tr><td><small><a href="#">Gegevens wijzigen</a></small></td></tr>
+			<table class="double-table">
+				<tr>
+					<th>Screening informatie</th>
+				</tr>
+				<tr>
+					<td>Opleverdatum</td>
+					<td><?php echo date('d-m-Y', strtotime($_SESSION['opleverdatum'])); ?></td>
+				</tr>
+				<tr>
+					<td>Pakketkeuze</td>
+				</tr>
+				<tr>
+					<td><small><a href="bedrijf-pakketselectie.php">Gegevens wijzigen</a></small></td>
+				</tr>
 			</table>
 		</div>
 

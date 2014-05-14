@@ -1,3 +1,6 @@
+<?php
+include "connect.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +12,58 @@
 </head>
 <body>
 
+<?php
+
+$posting=false;
+if(!isset($_POST['submit'])){
+	$posting=false;
+} else{
+
+	$posting=true;
+
+	$queryklant = "SELECT * FROM klant WHERE email ='".$_POST['email']."' ";
+	$k = mysql_query($queryklant);
+	$klant = mysql_fetch_assoc($k);
+
+	$querybedrijf = "SELECT * FROM bedrijf WHERE email_contact ='".$_POST['email']."' ";
+	$b = mysql_query($querybedrijf);
+	$bedrijf = mysql_fetch_assoc($b);
+
+	$queryadmin = "SELECT * FROM admin WHERE email ='".$_POST['email']."' ";
+	$a = mysql_query($queryadmin);
+	$admin = mysql_fetch_assoc($a);
+
+	if(isset($klant['email'])) {
+		$to = $klant['email'];
+		$header = "MIME-version: 1.0\n"; 
+	    $header .= "content-type: text/html;charset=utf-8\n";
+	    $header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+	    $message = 
+    "
+    Geachte ".$klant['voornaam']." ".$klant['achternaam'].",<br><br>
+    
+    ";
+		
+	} else {
+		$posting=false;
+	}
+	if(isset($bedrijf['email_contact'])) {
+		echo "bedrijf ".$bedrijf['email_contact'];
+		
+	} else {
+		$posting=false;
+	}
+	if(isset($admin['email'])) {
+		echo "admin ".$admin['email'];
+		
+	} else {
+		$posting=false;
+	}
+}
+
+if(!$posting) {
+?>
+
 <div id="container">
 
 	<div id="wrapper">
@@ -16,7 +71,7 @@
 		<div id="logo">
 			<img src="images/certus_logo.png" />
 		</div>
-
+		<p id="breadcrumbs"><a href="index.php">Startscherm</a> > <a class="activepage" href="#">Wachtwoord vergeten</a></p>
 		<div class="content-block settings-block">
 			
 				<h3 >Wachtwoord herstellen</h3>
@@ -27,9 +82,9 @@
 					gegenereerd, waar u uw wachtwoord kunt aanpassen.
 				</p>
 				<br>
-				<form id="settings-form" name="password-forget">
+				<form id="settings-form" name="password-forget" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 					<label for="password-forget">E-mail adres: </label>
-					<input id="password-forget" type="text" name="email">&nbsp;
+					<input id="password-forget" type="text" required name="email">&nbsp;
 					<input type="submit" id="settings-btn" value="Verzenden" name="submit">
 				</form>
 				<br>
@@ -43,7 +98,8 @@
 			
 		</div>
 		<?php include "footer.php"; ?>
-	</div>
+	</div> <!-- END WRAP -->
+	<?php } ?>
 
 </div>
 

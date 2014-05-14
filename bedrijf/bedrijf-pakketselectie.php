@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include "../connect.php";
 
 ?>
@@ -14,7 +14,25 @@ include "../connect.php";
 	<script src="../js/dropzone.js"></script>
 </head>
 <body>
+<?php
+$posting=false;
 
+if(!isset($_POST['submit'])) {
+	$posting = false;
+
+} else {
+	$posting=true;
+	$_SESSION['opleverdatum'] = date('Y-m-d',strtotime($_POST['leverdatum']));
+
+	if($posting) {
+		header("Location: bedrijf-controlepagina.php");
+	} else {
+		$posting=false;
+	}
+}
+
+if (!$posting) {
+?>
 <div id="container">
 
 	<?php include "toolbar-bedrijf.php"; ?>
@@ -30,7 +48,7 @@ include "../connect.php";
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>
 				<p class="comment cursive">Vul hieronder de gewenste opleverdatum in.</p>
-				<input type="text" name="leverdatum" placeholder="00-00-0000" style="margin-bottom: 15px;">
+				<input type="text" name="leverdatum" placeholder="00-00-0000" required style="margin-bottom: 15px;">
 			</div>
 
 			<div class="content-block">
@@ -48,7 +66,7 @@ include "../connect.php";
 						<li>Werkervaring</li>
 						<li>Online onderzoek</li>
 						<li>Financiele situatie en gerechtelijke uitspraken</li>
-						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
+						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></a>
@@ -62,7 +80,7 @@ include "../connect.php";
 						<li>Opleiding</li>
 						<li>Werkervaring</li>
 						<li>Online onderzoek</li>
-						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
+						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></a>
@@ -106,7 +124,7 @@ include "../connect.php";
 						<tr>
 							<td>
 								<input type="checkbox" id="vog" name="vog" />
-								<label for="vog">Verklaring Omtrent Gedrag &amp Integriteitsverklaring</label>
+								<label for="vog">Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label>
 							</td>
 						</tr>
 					</table>
@@ -124,7 +142,7 @@ include "../connect.php";
 						<li>Werkervaring</li>
 						<li>Online onderzoek</li>
 						<li>Financiele situatie en gerechtelijke uitspraken</li>
-						<li>Verklaring Omtrent Gedrag &amp Integriteitsverklaring</li>
+						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></a>
@@ -137,6 +155,7 @@ include "../connect.php";
 		</form>
 
 		<?php include "../footer.php"; ?>
+		<?php } //close if ?>
 
 	</div> <!-- wrapper -->
 

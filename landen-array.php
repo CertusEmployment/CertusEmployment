@@ -1,5 +1,6 @@
 <?php 
 $arrayLanden = array(
+'--' => "-- Selecteer een land --",
 'AF' => "Afghanistan",
 'AX' => "&Aring;land",
 'AL' => "Albani&euml;",
@@ -63,6 +64,7 @@ $arrayLanden = array(
 'EC' => "Ecuador",
 'EG' => "Egypte",
 'SV' => "El Salvador",
+'EN' => "Engeland",
 'GQ' => "Equatoriaal-Guinea",
 'ER' => "Eritrea",
 'EE' => "Estland",
@@ -241,6 +243,7 @@ $arrayLanden = array(
 'AE' => "Verenigde Arabische Emiraten",
 'US' => "Verenigde Staten",
 'VN' => "Vietnam",
+'WA' => "Wales",
 'WF' => "Wallis en Futuna",
 'ZM' => "Zambia",
 'ZW' => "Zimbabwe",
