@@ -131,7 +131,7 @@ include "../connect.php";
 					$query_lopend = "SELECT COUNT(id) as 'count' FROM klant WHERE bedrijfid = ".$row['id']." AND rapport = '' ";
 					$lopend = mysql_fetch_assoc(mysql_query($query_lopend));
 					?>
-					<tr>
+					<tr class="trlink" onclick="document.location = 'admin-bedrijfsprofiel.php?id=<?php echo $row['id']; ?>';">
 						<td><?php echo $row['bedrijfnaam']; ?></td>
 						<td><?php echo $row['vn_contact']." ".$row['an_contact']; ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>

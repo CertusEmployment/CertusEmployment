@@ -25,7 +25,7 @@ include "../connect.php";
 	$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
 	$result = mysql_query($query);
 
-	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['id']."' ";
+	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_GET['id']."' ";
 	$navresult = mysql_query($navquery);
 	?>
 
@@ -36,7 +36,9 @@ include "../connect.php";
 		</div>
 
 		<?php
+		echo $_SESSION['id'];
 		while ($navrow = mysql_fetch_array($navresult)) {
+			echo $navrow['bedrijfid'];
 		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-bedrijfsprofiel.php?id=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
 		}?>
 

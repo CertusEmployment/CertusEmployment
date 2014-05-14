@@ -1,6 +1,7 @@
 <?php
 
 include "../connect.php";
+include "../landen-array.php";
 
 $gegevens_query = "SELECT * FROM bedrijf WHERE id = '".$_GET['id']."'";
 $gegevens_result = mysql_query($gegevens_query);
@@ -43,7 +44,7 @@ if(!isset($_POST['submit'])) {
 	$toevoeging = htmlentities(strip_tags(trim($_POST['toevoeging'])));
 	$postcode = htmlentities(strip_tags(trim($_POST['postcode'])));
 	$plaats = htmlentities(strip_tags(trim($_POST['plaats'])));
-	$land = htmlentities(strip_tags(trim($_POST['land'])));
+	$land = htmlentities(strip_tags(trim($_POST['iCountry'])));
 	//contactgegevens
 	$contact_vn = htmlentities(strip_tags(trim($_POST['voornaam'])));
 	$contact_an = htmlentities(strip_tags(trim($_POST['achternaam'])));
@@ -151,7 +152,7 @@ if(!$posting) {
 							<td><input value="<?php echo $row['huisnummer']; ?>" type="text" id="huisnr" name="huisnr" required></td>
 						</tr>
 						<tr>
-							<td><label for="toevoeging">Huis toevoeging</label></td>
+							<td><label for="toevoeging">Toevoeging</label></td>
 							<td><label for="postcode">Postcode</label></td>
 						</tr>
 						<tr>
@@ -159,11 +160,28 @@ if(!$posting) {
 							<td><input value="<?php echo $row['postcode']; ?>" type="text" id="postcode" name="postcode" maxlength="6" required></td>
 						<tr>
 							<td><label for="plaats">Plaats</label></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input value="<?php echo $row['plaats']; ?>" type="text" id="plaats" name="plaats" style="width:505px;" required></td>
+						</tr>
+						<tr>
 							<td><label for="land">Land</label></td>
 						</tr>
 						<tr>
-							<td><input value="<?php echo $row['plaats']; ?>" type="text" id="plaats" name="plaats" required></td>
-							<td><input value="<?php echo $row['land']; ?>" type="text" id="land" name="land" required></td>
+							<td colspan="2">
+								<select id="iCountry" name="iCountry">
+									<?php	
+										foreach ($arrayLanden as $code => $landnaam) {
+											if ($landnaam == $row['land']) {
+												$isSelected = " selected='' "; 
+											} else {
+												$isSelected = "";
+											}
+											echo "<option value='".$landnaam."' ".$isSelected.">".$landnaam."</option>";
+										}
+									?>
+								</select>
+							</td>
 						</tr>
 					</table>
 				</div>

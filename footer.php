@@ -4,6 +4,8 @@
 
 <?php
 
-mysql_close($db);
+if(isset($db)){
+	mysql_close($db);
+}
 
 ?>

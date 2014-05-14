@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+include "../connect.php";
+include "../landen-array.php";
+$mChecked = "";
+$vChecked = "";
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +15,15 @@
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script> 
-	<?php include "../connect.php"; ?>
 	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
 <body>
 
 <?php 
 $warning = false;
-
+if(isset($_POST['cancel'])) {
+	header('location: bedrijf-panel.php');
+}
 if(!isset($_POST['submit'])) {
 	$posting = false;
 
@@ -53,14 +61,10 @@ if(!isset($_POST['submit'])) {
 	$_SESSION['aanmaakdatum'] = date('Y-m-d');
 	//$vn = str_replace(' ', '', $vn);
 	//$an = str_replace(' ', '', $an);
-	$username = $vn .".". $an;
+	$_SESSION['username'] = str_replace(' ', '', strtolower($_POST['voornaam'])) .".". str_replace(' ', '', strtolower($_POST['achternaam']));
 	$_SESSION['temppassword'] = 1;
-	$temp = randomPassword(); //random wachtwoord
-	$_SESSION['password'] = hash('sha1', $temp);
-
-	//SESSION VARS
-	$_SESSION['temp'] = $temp;
-	$_SESSION['username'] = $username;
+	$_SESSION['temp'] = randomPassword(); //random wachtwoord
+	$_SESSION['password'] = hash('sha1', $_SESSION['temppassword']);
 
 	if(!preg_match($regex, $_SESSION['email'])) {
 		$posting = false;
@@ -68,11 +72,13 @@ if(!isset($_POST['submit'])) {
 	}
 
 	if($posting) {
-		header("Location: bedrijf-controlepagina.php");
+		header("Location: bedrijf-pakketselectie.php");
 	}
 }
 
 if(!$posting) { 
+
+	($_POST['sex'] == 'm' ? $mChecked = "checked='checked'" : $vChecked = "checked='checked'");
 ?>
 
 <div id="container">
@@ -97,13 +103,13 @@ if(!$posting) {
 						<td><label for="achternaam">Achternaam</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="voornaam" name="voornaam" required></td>
-						<td><input type="text" id="achternaam" name="achternaam" required></td>
+						<td><input type="text" id="voornaam" value="<?php echo (!empty($_SESSION['vn']))? $_SESSION['vn'] : '' ; ?>" name="voornaam" required></td>
+						<td><input type="text" id="achternaam" value="<?php echo (!empty($_SESSION['an']))? $_SESSION['an'] : '' ; ?>" name="achternaam" required></td>
 					</tr>
 					<tr>
 						<td>
-							<label for="man"><input style="margin:20px 0 20px 30px;" type="radio" name="sex" id="man" value="m" required> Man</label>
-							<label for="vrouw"><input style="margin:20px 0 20px 30px;" type="radio" name="sex" id="vrouw" value="v"> Vrouw</label>
+							<label for="man"><input style="margin:20px 0 20px 30px;" <?php echo $mChecked; ?> type="radio" name="sex" id="man" value="m"> Man</label>
+							<label for="vrouw"><input style="margin:20px 0 20px 30px;" <?php echo $vChecked; ?> type="radio" name="sex" id="vrouw" value="v"> Vrouw</label>
 						</td>
 					</tr>
 					<tr>
@@ -111,30 +117,43 @@ if(!$posting) {
 						<td><label for="huisnr">Huisnummer</label><label for="toevoeging" style="margin-left: 60px;">Toevoeging</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="straat" name="straat" required></td>
-						<td><input type="text" id="huisnr" name="huisnr" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">
+						<td><input type="text" id="straat" name="straat" value="<?php echo (!empty($_SESSION['straat']))? $_SESSION['straat'] : '' ; ?>" required></td>
+						<td><input type="text" id="huisnr" name="huisnr" value="<?php echo (!empty($_SESSION['huisnr']))? $_SESSION['huisnr'] : '' ; ?>" required style="width:110px;"><input type="text" id="toevoeging" name="toevoeging" style="width:110px; margin-left: 10px;">
 					</tr>
 					<tr>
 						<td><label for="postcode">Postcode</label></td>
 						<td><label for="plaats">Woonplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="postcode" name="postcode" placeholder="0000AA" maxlength="6" required></td>
-						<td><input type="text" id="plaats" name="plaats" required></td>
+						<td><input type="text" id="postcode" name="postcode" value="<?php echo (!empty($_SESSION['postcode']))? $_SESSION['postcode'] : '' ; ?>" placeholder="0000AA" maxlength="6" required></td>
+						<td><input type="text" id="plaats" name="plaats" value="<?php echo (!empty($_SESSION['plaats']))? $_SESSION['plaats'] : '' ; ?>" required></td>
 					</tr>
 					<tr>
 						<td><label for="land">Land</label></td>
 					</tr>
 					<tr>
-						<td colspan="2"><?php include "../select-landen.php"; ?></td>
+						<td colspan="2">
+							<select id="iCountry" name="iCountry">
+								<?php	
+									foreach ($arrayLanden as $code => $landnaam) {
+										if ($landnaam == $row['land'] OR $landnaam == $_SESSION['land']) {
+											$isSelected = " selected='' "; 
+										} else {
+											$isSelected = "";
+										}
+										echo "<option value='".$landnaam."' ".$isSelected.">".$landnaam."</option>";
+									}
+								?>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td><label for="gebdatum">Geboortedatum</label></td>
 						<td><label for="gebplaats">Geboorteplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text"  id="gebdatum" name="gebdatum" required></td>
-						<td><input type="text" id="gebplaats" name="gebplaats" required></td>
+						<td><input type="text"  id="gebdatum" name="gebdatum" value="<?php echo (!empty($_SESSION['gebdatum']))? $_SESSION['gebdatum'] : '' ; ?>" required></td>
+						<td><input type="text" id="gebplaats" name="gebplaats" value="<?php echo (!empty($_SESSION['gebplaats']))? $_SESSION['gebplaats'] : '' ; ?>" required></td>
 					</tr>
 				</table>
 			</div>
@@ -148,14 +167,14 @@ if(!$posting) {
 					</tr>
 					<?php if($warning==true){ echo "<tr><td class='errormessage'>Voer een kloppend e-mailadres in</td></tr>"; } ?>
 					<tr>
-						<td><input type="text" id="telnr" name="telnr" required></td>
-						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" required></td>
+						<td><input type="text" id="telnr" name="telnr" value="<?php echo (!empty($_SESSION['telnr']))? $_SESSION['telnr'] : '' ; ?>" required></td>
+						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email"></td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="settings-form-buttonblock">
-				<input type="submit" id="next" name="submit" value="Opslaan">
+				<input type="submit" id="next" name="submit" value="Opslaan"><button id="next" onclick="location.href='bedrijf-panel.php'">Annuleer</button>
 			</div>
 		</form>
 

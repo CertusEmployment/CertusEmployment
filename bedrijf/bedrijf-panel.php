@@ -1,5 +1,18 @@
 <?php
 include "../connect.php";
+session_start();
+unset($_SESSION['vn']);
+	unset($_SESSION['an']);
+	unset($_SESSION['straat']);
+	unset($_SESSION['huisnr']);
+	unset($_SESSION['toevoeging']);
+	unset($_SESSION['postcode']);
+	unset($_SESSION['plaats']);
+	unset($_SESSION['land']);
+	unset($_SESSION['gebdatum']);
+	unset($_SESSION['gebplaats']);
+	unset($_SESSION['telnr']);
+	unset($_SESSION['email']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,6 +73,9 @@ $result_klant = mysql_query($query_klant);
 		<div class="content-block">
 			<table class="profiletable">
 				<tr>
+					<th collspan="2">Account informatie</th>
+				</tr>
+				<tr>
 					<td>Gebruikersnaam</td>
 					<td><?php echo $row['gebruikersnaam']; ?></td>
 				</tr>
@@ -78,6 +94,11 @@ $result_klant = mysql_query($query_klant);
 <?php } ?>
 		<div class="screening-list">
 			<form name="filter" id="filter">
+				<select>
+					<option>Nieuw</option>
+					<option>In bewerking</option>
+					<option>Afgerond</option>
+				</select>
 				<select>
 					<option>januari</option>
 					<option>februari</option>
@@ -116,12 +137,12 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 				</thead>	
 				<?php while ($row = mysql_fetch_array($result_klant)) { ?>
-					<tr>
+					<tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';">
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
-						<td class="cursive"><?php if(empty($row['rapport'])) echo "In afwachting"; else echo "Rapport beschikbaar"; ?></td>
+						<td class="cursive"><?php if(empty($row['rapport'])) echo "In bewerking"; else echo "Rapport beschikbaar"; ?></td>
 						<td class="cursive"><a href="bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 				<?php } ?>

@@ -1,5 +1,6 @@
 <?php 
 include "../connect.php";
+include "../landen-array.php";
 
 $errormessage = "";
 $errorclass = "";
@@ -147,7 +148,20 @@ if(!$posting) {
 						<td><label for="land">Land</label></td>
 					</tr>
 					<tr>
-						<td colspan="2"><?php include "../select-landen.php"; ?></td>
+						<td colspan="2">
+							<select id="iCountry" name="iCountry">
+								<?php	
+									foreach ($arrayLanden as $code => $landnaam) {
+										if ($landnaam == $row['land']) {
+											$isSelected = " selected='' "; 
+										} else {
+											$isSelected = "";
+										}
+										echo "<option value='".$landnaam."' ".$isSelected.">".$landnaam."</option>";
+									}
+								?>
+							</select>
+						</td>
 					</tr>
 				</table>
 			</div>
