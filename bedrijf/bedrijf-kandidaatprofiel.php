@@ -22,9 +22,6 @@ include "../connect.php";
 	<?php 
 	include "toolbar-bedrijf.php"; 
 
-	$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
-	$result = mysql_query($query);
-
 	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['id']."' ";
 	$navresult = mysql_query($navquery);
 	?>
@@ -36,101 +33,96 @@ include "../connect.php";
 		</div>
 
 		<?php
-		while ($navrow = mysql_fetch_array($navresult)) {
-		?><p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
-		}?>
+		while ($navrow = mysql_fetch_array($navresult)) { ?>
+			<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
+		} 
 
+		if(!isset($_SESSION['klantid'])) {
+			?><div class="content-block">
+				<p>Er is iets mis gegaan met het ophalen van de klantgegevens</p>
+				<a href="bedrijf-panel.php">Ga terug naar het overzicht.</a>
+			</div><?php
+		} else {
+			$query = "SELECT * FROM klant WHERE id = '".$_SESSION['klantid']."'";
+			$result = mysql_query($query);
+			while ($row = mysql_fetch_array($result)) {
+			?>
+				<div class="content-block">
+					<table class="profiletable">
+						<tr>
+							<th>Kandidaatgegevens</th>
+							<th></th>
+							<th>Accountgegevens</th>
+						</tr>
+						<tr>
+							<td>Naam</td>
+							<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
+							<td>Gebruikersnaam</td>
+							<td><?php echo $row['gebruikersnaam']; ?></td>
+						</tr>
+						<tr>
+							<td>Adres</td>
+							<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer']." ".$row['huistoevoeging']; ?></td>
+							<td>E-mail</td>
+							<td><a href="mailto:<?php echo $row['email']; ?>"><?php echo $row['email']; ?></a></td>
+						</tr>
+						<tr>
+							<td>Postcode</td>
+							<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
+							<td>Wachtwoord</td>
+							<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
+						</tr>
+						<tr>
+							<td>Woonplaats</td>
+							<td><?php echo ucfirst($row['plaats']); ?></td>
+						</tr>
+						<tr>
+							<td>Land</td>
+							<td><?php echo ucfirst($row['land']); ?></td>
+						</tr>
+						<tr>
+							<td>Geboortedatum</td>
+							<td><?php echo date('d M Y', strtotime($row['geboortedatum'])); ?></td>
+						</tr>
+						<tr>
+							<td>Geboorteplaats</td>
+							<td><?php echo ucfirst($row['geboorteplaats']); ?></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<th colspan="2"><?php echo $row['digid'] = (empty($row['digid'])) ? "Geen DigiD beschikbaar" : "DigiD beschikbaar" ; ?></th>
+						</tr> 
+					</table>
+				</div>
 
-		<?php
-		while ($row = mysql_fetch_array($result)) {
-		?>
-			<div class="content-block">
-				<table class="profiletable">
-					<tr>
-						<th>Kandidaatgegevens</th>
-						<th></th>
-						<th>Accountgegevens</th>
-					</tr>
-					<tr>
-						<td>Naam</td>
-						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
-						<td>Gebruikersnaam</td>
-						<td><?php echo $row['gebruikersnaam']; ?></td>
-					</tr>
-					<tr>
-						<td>Adres</td>
-						<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer']." ".$row['huistoevoeging']; ?></td>
-						<td>E-mail</td>
-						<td><a href="mailto:<?php echo $row['email']; ?>"><?php echo $row['email']; ?></a></td>
-					</tr>
-					<tr>
-						<td>Postcode</td>
-						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
-						<td>Wachtwoord</td>
-						<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
-					</tr>
-					<tr>
-						<td>Woonplaats</td>
-						<td><?php echo ucfirst($row['plaats']); ?></td>
-					</tr>
-					<tr>
-						<td>Land</td>
-						<td><?php echo ucfirst($row['land']); ?></td>
-					</tr>
-					<tr>
-						<td>Geboortedatum</td>
-						<td><?php echo date('d M Y', strtotime($row['geboortedatum'])); ?></td>
-					</tr>
-					<tr>
-						<td>Geboorteplaats</td>
-						<td><?php echo ucfirst($row['geboorteplaats']); ?></td>
-					</tr>
-					<tr>
-						<td></td>
-					</tr>
-					<tr>
-						<th colspan="2"><?php echo $row['digid'] = (empty($row['digid'])) ? "Geen DigiD beschikbaar" : "DigiD beschikbaar" ; ?></th>
-					</tr> 
-				</table>
-			</div>
+				<div class="content-block">
+					<p class="content-head">Bestanden</p>
+					<table class="recenttable">
+						<tr>
+							<td><a style="color:black;" href="#">CV.docx</a></td>
+						</tr>
+						<tr>
+							<td><a style="color:black;" href="#">ID.jpeg</a></td>
+						</tr>
+						<tr>
+							<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
+						</tr>
+						<tr>
+							<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
+						</tr>
+					</table>
+				</div>
 
-			<div class="content-block">
-				<p class="content-head">Bestanden</p>
-				<table class="recenttable">
-					<tr>
-						<td><a style="color:black;" href="#">CV.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">ID.jpeg</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-				</table>
-			</div>
-
-			<div class="content-block">
-				<p class="content-head">Screeningsinformatie</p>
-				<p>Pakket <?php echo $row['pakket']; ?></p>
-				<p>Opleverdatum: <?php echo date('d-m-Y', strtotime($row['opleverdatum'])); ?></p>
-				<form action="admin-kandidaatprofiel.php" class="dropzone">
-					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
-				 	<div class="fallback">
-				    	<input name="file" type="file" multiple />
-				    	<a class="dz-remove">Verwijder bestand</a>
-				 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
-				</form>
-
-			</div>
-		<?php
-		} //ENDWHILE
+				<div class="content-block">
+					<p class="content-head">Screeningsinformatie</p>
+					<p>Pakket <?php echo ($row['pakket']==0)? "<i>Geen pakket geselecteerd</i>" : $row['pakket'] ; ?></p>
+					<p>Opleverdatum: <?php echo date('d-m-Y', strtotime($row['opleverdatum'])); ?></p>
+				</div>
+			<?php
+			} //ENDWHILE
+		} //ENDIF
 		?>
 
 		<?php include "../footer.php"; ?>
@@ -146,17 +138,17 @@ include "../connect.php";
 
 <?php
 
-$ds          = DIRECTORY_SEPARATOR; 
+// $ds          = DIRECTORY_SEPARATOR; 
  
-$storeFolder = 'file-upload';  
+// $storeFolder = 'file-upload';  
  
-if (!empty($_FILES)) {
+// if (!empty($_FILES)) {
      
-    $tempFile = $_FILES['file']['tmp_name'];                         
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;    
-    $targetFile =  $targetPath. $_FILES['file']['name']; 
-    move_uploaded_file($tempFile,$targetFile);
+//     $tempFile = $_FILES['file']['tmp_name'];                         
+//     $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;    
+//     $targetFile =  $targetPath. $_FILES['file']['name']; 
+//     move_uploaded_file($tempFile,$targetFile);
      
-}
+// }
 
 ?>

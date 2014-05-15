@@ -11,13 +11,17 @@
 	}
 	if(isset($_POST['logout'])) {
 		session_destroy();
-		if($basename !== "editwachtwoord" && $basename !== "editemail") {
-			header("location: /certusemployment/index.php");
-		}
-		else {
-			header("location: /certusemployment/index.php");
-		}
+		header("location: /certusemployment/index.php");
 	}
+
+	// 20 mins in seconds
+	// $inactive = 1200;
+	// $_session['timeout']=time();
+	// $session_life = time() - $_session['timeout']; 
+	// if($session_life > $inactive) {
+	//    session_destroy(); header("Location: ../index.php");
+	// }
+	
 
 ?>
 <nav>

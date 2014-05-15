@@ -99,12 +99,24 @@ include "../connect.php";
 
 			<div class="content-block">
 				<p class="content-head">Bestanden</p>
-				<ul class="ul-disc">
-					<li>CV.docx</li>
-					<li>ID.jpg</li>
-					<li>Toestemmingsverklaring.docx</li>
-					<li>Integriteitstest.pdf</li>
-				</ul>
+				<table class="recenttable">
+					<tr>
+						<td><a style="color:black;" href="#">CV.docx</a></td>
+						<td><a href="#">verwijderen</a></td>
+					</tr>
+					<tr>
+						<td><a style="color:black;" href="#">ID.jpeg</a></td>
+						<td><a href="#">verwijderen</a></td>
+					</tr>
+					<tr>
+						<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
+						<td><a href="#">verwijderen</a></td>
+					</tr>
+					<tr>
+						<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
+						<td><a href="#">verwijderen</a></td>
+					</tr>
+				</table>
 			</div>
 
 			<div class="content-block">

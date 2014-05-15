@@ -1,23 +1,18 @@
 <?php
 include "../connect.php";
 session_start();
-unset($_SESSION['vn']);
-	unset($_SESSION['an']);
-	unset($_SESSION['straat']);
-	unset($_SESSION['huisnr']);
-	unset($_SESSION['toevoeging']);
-	unset($_SESSION['postcode']);
-	unset($_SESSION['plaats']);
-	unset($_SESSION['land']);
-	unset($_SESSION['gebdatum']);
-	unset($_SESSION['gebplaats']);
-	unset($_SESSION['telnr']);
-	unset($_SESSION['email']);
+if(isset($_GET['klantid'])) {
+	$_SESSION['klantid'] = $_GET['klantid'];
+	header("location: bedrijf-kandidaatprofiel.php");
+} else {
+	unset($_SESSION['klantid']);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Beheerderspaneel</title>
+	<title>Bedrijfs panel</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -37,6 +32,8 @@ $result = mysql_query($query_bedrijf);
 
 $query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_SESSION['id']." ";
 $result_klant = mysql_query($query_klant);
+
+
 
 ?>
 
@@ -135,21 +132,29 @@ $result_klant = mysql_query($query_klant);
 					<th>Rapport beschikbaar</th>
 					<th>Profiel</th>
 				</tr>
-				</thead>	
-				<?php while ($row = mysql_fetch_array($result_klant)) { ?>
-					<tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';">
+				</thead>
+				<?php while ($row = mysql_fetch_array($result_klant)) {
+				 ?>
+					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';"> -->
+					<tr>
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
 						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
-						<td class="cursive"><?php if(empty($row['rapport'])) echo "In bewerking"; else echo "Rapport beschikbaar"; ?></td>
-						<td class="cursive"><a href="bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
+						<td class="cursive"><?php echo (empty($row['rapport'])) ? "In bewerking" : "Rapport beschikbaar" ; ?></td>
+						<td><a href="bedrijf-panel.php?klantid=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
-				<?php } ?>
+				<?php 
+
+				}
+				?>
 			</table>
 		</div>
 
-		<?php include "../footer.php"; ?>
+		<?php include "../footer.php";
+		
+		 
+		?>
 
 	</div>
 </div>
