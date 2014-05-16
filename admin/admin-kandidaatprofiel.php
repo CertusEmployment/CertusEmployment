@@ -67,7 +67,7 @@ include "../connect.php";
 					</tr>
 					<tr>
 						<td>Postcode</td>
-						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
+						<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
 						<td>Wachtwoord</td>
 						<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
 					</tr>

@@ -7,6 +7,7 @@ if(isset($_GET['klantid'])) {
 } else {
 	unset($_SESSION['klantid']);
 }
+unset($_SESSION['vn']); unset($_SESSION['an']); unset($_SESSION['straat']); unset($_SESSION['huisnr']); unset($_SESSION['toevoeging']); unset($_SESSION['postcode']); unset($_SESSION['plaats']); unset($_SESSION['land']); unset($_SESSION['gebdatum']); unset($_SESSION['gebplaats']); unset($_SESSION['sex']); unset($_SESSION['telnr']); unset($_SESSION['email']); unset($_SESSION['aanmaakdatum']); unset($_SESSION['username']); unset($_SESSION['temppassword']); unset($_SESSION['temp']); unset($_SESSION['password']);
 
 ?>
 <!DOCTYPE html>
@@ -60,8 +61,12 @@ $result_klant = mysql_query($query_klant);
 					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
 				</tr>
 				<tr>
-					<td>Postcode en woonplaats</td>
-					<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " ") ." ". $row['plaats']; ?>
+					<td>Postcode</td>
+					<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
+				</tr>
+				<tr>
+					<td>Plaats</td>
+					<td><?php echo ucfirst($row['plaats']); ?></td>
 				</tr>
 
 			</table>

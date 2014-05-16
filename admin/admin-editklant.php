@@ -157,7 +157,7 @@ if(!$posting) {
 						</tr>
 						<tr>
 							<td><input value="<?php echo $row['huistoevoeging']; ?>" type="text" id="toevoeging" name="toevoeging"></td>
-							<td><input value="<?php echo $row['postcode']; ?>" type="text" id="postcode" name="postcode" maxlength="6" required></td>
+							<td><input value="<?php echo $row['postcode']; ?>" type="text" id="postcode" name="postcode" required></td>
 						<tr>
 							<td><label for="plaats">Plaats</label></td>
 						</tr>

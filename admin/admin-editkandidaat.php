@@ -138,7 +138,7 @@ if(!$posting) {
 							<td><label for="plaats">Woonplaats</label></td>
 						</tr>
 						<tr>
-							<td><input type="text" value="<?php echo $row['postcode']; ?>" id="postcode" name="postcode" placeholder="1234AA" maxlength="6" required></td>
+							<td><input type="text" value="<?php echo $row['postcode']; ?>" id="postcode" name="postcode" required></td>
 							<td><input type="text" value="<?php echo $row['plaats']; ?>" id="plaats" name="plaats" required></td>
 						</tr>
 						<tr>

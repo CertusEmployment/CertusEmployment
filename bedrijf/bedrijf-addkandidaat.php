@@ -13,8 +13,16 @@ $vChecked = "";
 
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script src="../js/dropzone.js"></script> 
+	<script>
+	  $(function() {
+	    $( "#gebdatum" ).datepicker();
+	  });
+	 </script>
 	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
 <body>
@@ -64,7 +72,7 @@ if(!isset($_POST['submit'])) {
 	$_SESSION['username'] = str_replace(' ', '', strtolower($_POST['voornaam'])) .".". str_replace(' ', '', strtolower($_POST['achternaam']));
 	$_SESSION['temppassword'] = 1;
 	$_SESSION['temp'] = randomPassword(); //random wachtwoord
-	$_SESSION['password'] = hash('sha1', $_SESSION['temppassword']);
+	$_SESSION['password'] = hash('sha1', $_SESSION['temp']);
 
 	if(!preg_match($regex, $_SESSION['email'])) {
 		$posting = false;
@@ -73,17 +81,19 @@ if(!isset($_POST['submit'])) {
 
 	if($posting) {
 		header("Location: bedrijf-pakketselectie.php");
-	}
+		echo randomPassword();
+		}
 }
 
 if(!$posting) { 
-
-	($_POST['sex'] == 'm' ? $mChecked = "checked='checked'" : $vChecked = "checked='checked'");
+	if(isset($_SESSION['sex'])) {
+		($_SESSION['sex'] == 'v' ? $vChecked = "checked='checked'" : $mChecked = "checked='checked'");
+	}
 ?>
 
 <div id="container">
 
-	<?php include "toolbar-bedrijf.php"; ?>
+	<?php include "toolbar-bedrijf.php"; $_SESSION['aanmaakdatum'] = date('Y-m-d');?>
 
 	<div id="wrapper">
 
@@ -125,7 +135,7 @@ if(!$posting) {
 						<td><label for="plaats">Woonplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="postcode" name="postcode" value="<?php echo (!empty($_SESSION['postcode']))? $_SESSION['postcode'] : '' ; ?>" placeholder="0000AA" maxlength="6" required></td>
+						<td><input type="text" id="postcode" name="postcode" value="<?php echo (!empty($_SESSION['postcode']))? $_SESSION['postcode'] : '' ; ?>" required></td>
 						<td><input type="text" id="plaats" name="plaats" value="<?php echo (!empty($_SESSION['plaats']))? $_SESSION['plaats'] : '' ; ?>" required></td>
 					</tr>
 					<tr>
@@ -152,7 +162,7 @@ if(!$posting) {
 						<td><label for="gebplaats">Geboorteplaats</label></td>
 					</tr>
 					<tr>
-						<td><input type="text"  id="gebdatum" name="gebdatum" value="<?php echo (!empty($_SESSION['gebdatum']))? $_SESSION['gebdatum'] : '' ; ?>" required></td>
+						<td><input type="text"  id="gebdatum" name="gebdatum" value="<?php echo (!empty($_SESSION['gebdatum']))? $_SESSION['gebdatum'] : '' ; ?>" placeholder="00-00-0000" required></td>
 						<td><input type="text" id="gebplaats" name="gebplaats" value="<?php echo (!empty($_SESSION['gebplaats']))? $_SESSION['gebplaats'] : '' ; ?>" required></td>
 					</tr>
 				</table>
@@ -165,16 +175,16 @@ if(!$posting) {
 						<td><label for="telnr">Telefoonnummer</label></td>
 						<td><label for="email">E-mailadres</label></td>
 					</tr>
-					<?php if($warning==true){ echo "<tr><td class='errormessage'>Voer een kloppend e-mailadres in</td></tr>"; } ?>
+					<?php if($warning==true){ echo "<tr><td></td><td class='errormessage'>Voer een kloppend e-mailadres in</td></tr>"; } ?>
 					<tr>
 						<td><input type="text" id="telnr" name="telnr" value="<?php echo (!empty($_SESSION['telnr']))? $_SESSION['telnr'] : '' ; ?>" required></td>
-						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email"></td>
+						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" value="<?php echo (!empty($_SESSION['email']))? $_SESSION['email'] : '' ; ?>"></td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="settings-form-buttonblock">
-				<input type="submit" id="next" name="submit" value="Opslaan"><button id="next" onclick="location.href='bedrijf-panel.php'">Annuleer</button>
+				<input type="submit" id="next" name="submit" value="Opslaan"><a id="next" href="bedrijf-panel.php">Annuleer</a><!-- <button id="next" onclick="location.href='bedrijf-panel.php'">Annuleer</button> -->
 			</div>
 		</form>
 

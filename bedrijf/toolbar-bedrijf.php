@@ -14,13 +14,13 @@
 		header("location: /certusemployment/index.php");
 	}
 
-	// 20 mins in seconds
+//	20 mins in seconds
 	// $inactive = 1200;
-	// $_session['timeout']=time();
-	// $session_life = time() - $_session['timeout']; 
+	// $session_life = time() - $_SESSION['timeout']; 
 	// if($session_life > $inactive) {
 	//    session_destroy(); header("Location: ../index.php");
 	// }
+	// $_SESSION['timeout']=time();
 	
 
 ?>

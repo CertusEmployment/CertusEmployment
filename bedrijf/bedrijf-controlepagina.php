@@ -46,7 +46,7 @@ if(!isset($_POST['submit'])) {
     ";
 
     if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid)
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid, aanmaakdatum)
 				VALUES(
 					'".$_SESSION['vn']."',
 					'".$_SESSION['an']."', 
@@ -65,7 +65,8 @@ if(!isset($_POST['submit'])) {
 					'".$_SESSION['password']."', 
 					".$_SESSION['temppassword'].",
 					'".$_SESSION['opleverdatum']."',
-			 		".$_SESSION['id'].")";
+					'".$_SESSION['id']."',
+			 		'".$_SESSION['aanmaakdatum']."')";
 		
 		$result = mysql_query($sql);
 		if(mail($to, $subject, $message, $header)) {
@@ -86,6 +87,7 @@ if(!isset($_POST['submit'])) {
 					unset($_SESSION['password']); 
 					unset($_SESSION['temppassword']);
 					unset($_SESSION['opleverdatum']);
+					unset($_SESSION['aanmaakdatum']);
     		header("Location: bedrijf-panel.php");
     	} else {
     		$posting = false;
@@ -111,7 +113,7 @@ if(!$posting) {
 		<div id="logo">
 			<img src="../images/certus_logo.png" />
 		</div>
-
+		
 		<p id="breadcrumbs"><a href="bedrijf-panel.php">Overzicht</a> > <a href="#">Kandidaat informatie</a> > <a href="#">Pakket keuze</a> > <a href="#" class="activepage">Controlepagina</a></p>
 		<div class="content-block">
 			<table class="double-table">
@@ -130,7 +132,7 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo chunk_split(strtoupper($_SESSION['postcode']), 4, " "); ?></td>
+					<td><?php echo (strlen($_SESSION['postcode'])==6)? chunk_split(strtoupper($_SESSION['postcode']), 4, " ") : $_SESSION['postcode'] ; ?></td>
 					<td>Gebruikersnaam</td>
 					<td><?php echo $_SESSION['username']; ?></td>
 				</tr>

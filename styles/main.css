@@ -214,9 +214,13 @@ MAIN
 	box-shadow: inset 0 0 1px 1px rgb(236,236,236);
 	padding: 13px;
 	width: 120px;
+	font-size: 11px; 
+	text-decoration: none; 
+	color: black; 
 }
 #settings-form-buttonblock {height: 44px;}
 #settings-form #next { /*margin: 0 0 0 715px;*/ float: right; margin-right: 15px; }
+#settings-form a#next {width: 92px; text-align: center;}
 #settings-form #cancel { /*margin: 0 0 0 590px;*/ position: relative; float: right; margin-right: 10px; }
 
 #settings-btn { 
@@ -238,8 +242,10 @@ MAIN
 
 #settings-form input[type="text"],
 #settings-form input[type="password"],
+#settings-form input[type="date"],
 #settings-table input[type="text"],
-#settings-table input[type="password"] {
+#settings-table input[type="password"],
+#settings-table input[type="date"] {
 	height: 30px;
 	width: 240px;
 	margin-top: 5px;

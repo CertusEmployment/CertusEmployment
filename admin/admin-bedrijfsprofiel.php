@@ -65,7 +65,7 @@ $pakket = mysql_fetch_assoc($maatwerkresult);
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
+					<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
 				</tr>
 				<tr>
 					<td>Plaats</td>

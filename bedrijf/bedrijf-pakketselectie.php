@@ -48,7 +48,7 @@ if (!$posting) {
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>
 				<p class="comment cursive">Vul hieronder de gewenste opleverdatum in.</p>
-				<input type="text" name="leverdatum" placeholder="00-00-0000" required style="margin-bottom: 15px;">
+				<input type="text" name="leverdatum" placeholder="00-00-0000" value="<?php echo (!empty($_SESSION['opleverdatum']))? date('d-m-Y',strtotime($_SESSION['opleverdatum'])) : '' ; ?>" required style="margin-bottom: 15px;">
 			</div>
 
 			<div class="content-block">
