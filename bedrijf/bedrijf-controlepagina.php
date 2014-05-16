@@ -22,6 +22,7 @@ if(!isset($_POST['submit'])) {
 	$posting = true;
 	$password = $_SESSION['password'];
 	$to = $_SESSION['email'];
+	$subject = "Welkom bij Certus Employment";
 
 	//mail header
 	$header = "MIME-version: 1.0\n"; 
@@ -35,15 +36,7 @@ if(!isset($_POST['submit'])) {
     	$aanhef = "mevrouw";
     }
 
-    $message = 
-    "
-    Geachte ".$aanhef." ".$_SESSION['an'].",<br><br>
-    Welkom bij Certus-Employment, Dit is een automatisch gegenereerd bericht, 
-    Hieronder vind u uw tijdelijke inlog gegevens.<br><br>
-    Gebruikersnaam: ".$_SESSION['username']."<br>
-    Wachtwoord: ".$_SESSION['password']."<br><br>
-    <a href='http://www.cairansteverink.com/certusemployment'>Klik hier om in te loggen</a>
-    ";
+    $message = include "../email/klant-welkom.html";
 
     if($posting) {
 		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid)
