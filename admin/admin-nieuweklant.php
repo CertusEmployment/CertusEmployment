@@ -33,6 +33,17 @@ if(!isset($_POST['submit'])) {
 	$_POST['username'] = "";
 } else {
 
+	function randomPassword() {
+    	$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    	$pass = array();
+    	$alphaLength = strlen($alphabet) - 1;
+    	for ($i = 0; $i < 8; $i++) {
+    	    $n = rand(0, $alphaLength);
+    	    $pass[] = $alphabet[$n];
+    	}
+    	return implode($pass);
+	}
+
 	$posting = true;
 	$regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 	//Bedrijfsgegevens
@@ -48,21 +59,28 @@ if(!isset($_POST['submit'])) {
 	$contact_an = htmlentities(strip_tags(trim($_POST['achternaam'])));
 	$contact_tel = htmlentities(strip_tags(trim($_POST['telnr'])));
 	$contact_email = htmlentities(strip_tags(trim($_POST['email'])));
+	
 	//login gegevens
 	$username = htmlentities(strip_tags(trim($_POST['username'])));
-	$password = htmlentities(strip_tags(trim($_POST['password'])));
-	$repeat = htmlentities(strip_tags(trim($_POST['repeat'])));
-
+	$password = randomPassword();
 	$hashed = hash('sha1', $password);
 
-
-	
 	//maatwerkpakket
 	$idcheck = 0;
 	$opleiding = 0;
 	$vog = 0;
 	$werkervaring = 0;
 	$financieel = 0;
+
+	//Mail settings
+	$header = "MIME-version: 1.0\n"; 
+    $header .= "content-type: text/html;charset=utf-8\n";
+    $header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+    $to = $contact_email;
+    $subject = "Welkom bij Certus Employment";
+    $subject_tips = "Handige tips";
+    $message = include "../email/bedrijf-welkom.html";
+    $message_tips = include "../email/bedrijf-tips.html";
 
 	if(isset($_POST['idcheck'])) { $idcheck = 1; }
 	if(isset($_POST['werkervaring'])) { $werkervaring = 1; }
@@ -74,28 +92,21 @@ if(!isset($_POST['submit'])) {
 		$posting = false;
 	}
 
-	if(empty($password)) {
-		$posting = false;
-		$errormessage = "<tr><td class='errormessage'>Geen wachtwoord ingevuld.</td></tr>";
-		$errorclass = "class='errorinput'";
-	}
-
-	if($password !== $repeat) {
-		$posting = false;
-		$errormessage = "<tr><td class='errormessage'>De wachtwoorden komen niet overeen.</td></tr>";
-		$errorclass = "class='errorinput'";
-	} else {
-		$hashed = hash('sha1', $password);
-	}
-
 	if($posting == true) {
-		$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord) 
-				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$hashed')";
+		//Send mail
+		mail($to, $subject, $message, $header);
+		mail($to, $subject_tips, $message_tips, $header);
+		$temppassword = 1;
+
+		// SQL
+		$sql = "INSERT INTO bedrijf(bedrijfnaam, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, vn_contact, an_contact, telnr_contact, email_contact, gebruikersnaam, wachtwoord, temppassword) 
+				VALUES ('$bedrijfsnaam', '$straat', '$huisnr', '$toevoeging', '$postcode', '$plaats', '$land', '$contact_vn', '$contact_an', '$contact_tel', '$contact_email', '$username', '$hashed', '$temppassword')";
 		$result = mysql_query($sql);
 		//INSERT maatwerkpakket
 		$maatwerk = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog)
 					 VALUES('$idcheck', '$werkervaring', '$opleiding', '$financieel', '$vog')";
 		$pakket = mysql_query($maatwerk);
+		unset($_SESSION['an']);
 		header("Location: admin-panel.php");
 	}
 }
@@ -141,7 +152,11 @@ if(!$posting) {
 						<td><label for="plaats">Plaats</label></td>
 					</tr>
 					<tr>
+<<<<<<< HEAD
 						<td><input type="text" value="<?php echo $_POST['postcode']; ?>" id="postcode" name="postcode" required></td>
+=======
+						<td><input type="text" value="<?php echo $_POST['postcode']; ?>" id="postcode" name="postcode" placeholder="1234AA" required></td>
+>>>>>>> FETCH_HEAD
 						<td><input type="text" value="<?php echo $_POST['plaats']; ?>" id="plaats" name="plaats" required></td>
 					</tr>
 					<tr>
@@ -194,18 +209,6 @@ if(!$posting) {
 					</tr>
 					<tr>
 						<td colspan="2"><input type="text" value="<?php echo $_POST['username']; ?>" name="username" id="username"></td>
-					</tr>
-					<?php echo $errormessage; ?>
-					<tr>
-						<td><label for="password">Wachtwoord</label></td>
-						<td><label for="repeat">Herhaal wachtwoord</label></td>
-					</tr>
-					<tr>
-						<td><input <?php echo $errorclass; ?> type="password" name="password" id="password"></td>
-						<td><input <?php echo $errorclass; ?> type="password" name="repeat" id="repeat"></td>
-					</tr>
-					<tr>
-						<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
 					</tr>
 				</table>
 			</div>
