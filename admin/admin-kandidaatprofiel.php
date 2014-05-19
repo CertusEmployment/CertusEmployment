@@ -3,6 +3,13 @@
 //$_SESSION['id'] = (empty($_SESSION['id'])) ? 1 : $_SESSION['id'] ;
 include "../connect.php";
 
+session_start();
+
+if(isset($_GET['bedrijfid'])) {
+	$_SESSION['bedrijfid'] = $_GET['bedrijfid'];
+	header('location: admin-bedrijfsprofiel.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,10 +29,10 @@ include "../connect.php";
 	<?php 
 	include "toolbar-admin.php"; 
 
-	$query = "SELECT * FROM klant WHERE id = '".$_GET['id']."'";
+	$query = "SELECT * FROM klant WHERE id = '".$_SESSION['klantid']."'";
 	$result = mysql_query($query);
 
-	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_GET['id']."' ";
+	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['klantid']."' ";
 	$navresult = mysql_query($navquery);
 	?>
 
@@ -36,10 +43,8 @@ include "../connect.php";
 		</div>
 
 		<?php
-		echo $_SESSION['id'];
 		while ($navrow = mysql_fetch_array($navresult)) {
-			echo $navrow['bedrijfid'];
-		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-bedrijfsprofiel.php?id=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
+		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-kandidaatprofiel.php?bedrijfid=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
 		}?>
 
 

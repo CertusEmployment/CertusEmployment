@@ -1,6 +1,7 @@
 <?php
 
 include "../connect.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,11 @@ include "../connect.php";
 
 	$recentquery = "SELECT k.id, k.voornaam, k.achternaam, b.bedrijfnaam, k.aanmaakdatum FROM klant k, bedrijf b WHERE k.bedrijfid=b.id ORDER BY aanmaakdatum DESC LIMIT 0,4";
 	$recentresult = mysql_query($recentquery);
+
+	if(isset($_GET['bedrijfid'])) {
+		$_SESSION['bedrijfid'] = $_GET['bedrijfid'];
+		header('location: admin-bedrijfsprofiel.php');
+	}
 	?>
 
 		<div id="wrapper">
@@ -114,7 +120,7 @@ include "../connect.php";
 
 				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
 			</form>
-			<table  class="profiletable order-table table">
+			<table id="myTable" class="profiletable order-table table">
 				<thead>
 				<tr class="table-header">
 					<th>Bedrijfsnaam</th>
@@ -131,13 +137,13 @@ include "../connect.php";
 					$query_lopend = "SELECT COUNT(id) as 'count' FROM klant WHERE bedrijfid = ".$row['id']." AND rapport = '' ";
 					$lopend = mysql_fetch_assoc(mysql_query($query_lopend));
 					?>
-					<tr class="trlink" onclick="document.location = 'admin-bedrijfsprofiel.php?id=<?php echo $row['id']; ?>';">
+					<tr class="trlink" onclick="document.location = 'admin-panel.php?bedrijfid=<?php echo $row['id']; ?>';">
 						<td><?php echo $row['bedrijfnaam']; ?></td>
 						<td><?php echo $row['vn_contact']." ".$row['an_contact']; ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
 						<td><?php echo $row['plaats']; ?></td>
 						<td><?php echo $lopend['count']; ?></td>
-						<td><a href="admin-bedrijfsprofiel.php?id=<?php echo $row['id']; ?>">link</a></td>
+						<td><a href="admin-panel.php?bedrijfid=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 					<?php
 				}	//ENDWHILE

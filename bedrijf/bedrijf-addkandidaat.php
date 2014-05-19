@@ -10,18 +10,25 @@ $vChecked = "";
 <html>
 <head>
 	<title>Informatievoorziening</title>
-
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
+	<script src="../js/dropzone.js"></script> 
+	<!-- datepicker -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	<script src="../js/dropzone.js"></script> 
 	<script>
-	  $(function() {
-	    $( "#gebdatum" ).datepicker();
-	  });
+	//http://jqueryui.com/datepicker/  
+	$(function() {
+	    $( "#gebdatum" ).datepicker({
+	      changeMonth: true,
+	      changeYear: true,
+	      yearRange: "-80:+0",
+	      minDate: "-80Y", maxDate: "+0"
+	    });
+	 });
 	 </script>
 	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>

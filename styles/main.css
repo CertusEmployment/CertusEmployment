@@ -266,7 +266,7 @@ MAIN
 	.screening-list td { border-bottom: 1px solid black; padding: 5px 0 5px 10px;}
 	.screening-list th { padding: 0 0 3px 10px; }
 	.screening-list tr:hover { background: #F0F0F0; }
-	.screening-list .table-header:hover { background: #ccc; }
+	.screening-list .table-header:hover, .screening-list .table-header-filter:hover { background: #ccc; }
 
 #filter {
 	text-align: right;
@@ -281,11 +281,12 @@ MAIN
 	}
 	#filter select {
 		font-size: 12px;
-		border: solid 0px black; padding: 1px 1px 1px 1px;
+		/*border: solid 0px black; padding: 1px 1px 1px 1px;*/*/
 	}
 
 .table-header { background: #ccc; border-bottom: 1px solid black; }
-.table-header th { min-width: 118px; } /* voorkomt verspringen dmv vanwege filter */
+.table-header th, { min-width: 118px; } /* voorkomt verspringen dmv vanwege filter */
+.table-header-filter { border-bottom: 0; background: #ccc;}
 
 .download-btn { 
 	border: 1px solid #606060;

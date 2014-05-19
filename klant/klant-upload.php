@@ -17,7 +17,7 @@
 if(!isset($_POST['submit'])){
 	$posting = false;
 } else {
-
+	$posting =true;
 	$toestemming = "//url to file";
 	$identiteit = "//url to file";
 

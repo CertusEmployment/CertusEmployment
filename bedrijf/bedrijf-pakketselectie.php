@@ -12,6 +12,20 @@ include "../connect.php";
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script>
+	//http://jqueryui.com/datepicker/  
+	$(function() {
+	    $( "#leverdatum" ).datepicker({
+	      changeMonth: true,
+	      changeYear: true,
+	      yearRange: "+0:+5",
+	      minDate: "+0Y", maxDate: "+5Y"
+	    });
+	 });
+	 </script>
 </head>
 <body>
 <?php
@@ -48,7 +62,7 @@ if (!$posting) {
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>
 				<p class="comment cursive">Vul hieronder de gewenste opleverdatum in.</p>
-				<input type="text" name="leverdatum" placeholder="00-00-0000" value="<?php echo (!empty($_SESSION['opleverdatum']))? date('d-m-Y',strtotime($_SESSION['opleverdatum'])) : '' ; ?>" required style="margin-bottom: 15px;">
+				<input type="text" id="leverdatum" name="leverdatum" placeholder="00-00-0000" value="<?php echo (!empty($_SESSION['opleverdatum']))? date('d-m-Y',strtotime($_SESSION['opleverdatum'])) : '' ; ?>" required style="margin-bottom: 15px;">
 			</div>
 
 			<div class="content-block">
