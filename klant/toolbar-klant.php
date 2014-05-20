@@ -32,6 +32,7 @@
 						<label><li><input type="checkbox"> E-mail ontvangen</li></label>
 					</ul>
 				</li>
+				<?php } ?>
 			</ul>
 		</form>
 	</div>

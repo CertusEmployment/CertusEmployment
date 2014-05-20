@@ -18,6 +18,15 @@ unset($_SESSION['vn']); unset($_SESSION['an']); unset($_SESSION['straat']); unse
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
+	<!-- Tablefilter -->
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+	<script src="../js/ddtf.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$('#filterTable').ddTableFilter();
+	});
+	</script>
 </head>
 <body>
 
@@ -27,11 +36,12 @@ unset($_SESSION['vn']); unset($_SESSION['an']); unset($_SESSION['straat']); unse
 
 include "toolbar-bedrijf.php";
 
+$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 
 $query_bedrijf = "SELECT * FROM bedrijf WHERE id =  ".$_SESSION['id']." ";
 $result = mysql_query($query_bedrijf);
 
-$query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_SESSION['id']." ";
+$query_klant = "SELECT * FROM klant WHERE bedrijfid = ".$_SESSION['id']." ORDER BY opleverdatum ASC";
 $result_klant = mysql_query($query_klant);
 
 
@@ -95,58 +105,34 @@ $result_klant = mysql_query($query_klant);
 		</div>
 <?php } ?>
 		<div class="screening-list">
-			<form name="filter" id="filter">
-				<select>
-					<option>Nieuw</option>
-					<option>In bewerking</option>
-					<option>Afgerond</option>
-				</select>
-				<select>
-					<option>januari</option>
-					<option>februari</option>
-					<option>maart</option>
-					<option>april</option>
-					<option>mei</option>
-					<option>juni</option>
-					<option>juli</option>
-					<option>augustus</option>
-					<option>september</option>
-					<option>oktober</option>
-					<option>november</option>
-					<option>december</option>
-				</select>
-
-				<select>
-					<option>2014</option>
-					<option>2013</option>
-					<option>2012</option>
-					<option>2011</option>
-					<option>2010</option>
-					<option>2009</option>
-				</select>
-
-				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
-			</form>
-			<table class="profiletable order-table table">
+			<table id="filterTable" class="profiletable order-table table">
 				<thead>
-				<tr class="table-header">
-					<th>Naam</th>
-					<th>Opleverdatum</th>
-					<th>Postcode</th>
-					<th>Plaats</th>
-					<th>Rapport beschikbaar</th>
-					<th>Profiel</th>
+				<tr class="table-header-filter">
+					<th class="skip-filter"></th>
+					<th class="noskip-filter">--Opleverperiode--</th>
+					<th class="skip-filter"></th>
+					<th class="skip-filter"></th>
+					<th class="noskip-filter">--Rapport--</th>
+					<th class="skip-filter"><form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form></th>
 				</tr>
 				</thead>
+				<tr class="table-header">
+					<th class="skip-filter">Naam</th>
+					<th class="skip-filter">Opleverperiode</th>
+					<th class="skip-filter">Postcode</th>
+					<th class="skip-filter">Plaats</th>
+					<th class="skip-filter">Rapport</th>
+					<th class="skip-filter">Profiel</th>
+				</tr>
 				<?php while ($row = mysql_fetch_array($result_klant)) {
 				 ?>
 					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';"> -->
-					<tr>
+					<tr class="trlink" onclick="document.location = 'bedrijf-panel.php?klantid=<?php echo $row['id']; ?>';">
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
-						<td><?php echo date('d F Y', strtotime($row['opleverdatum'])); ?></td>
+						<td><?php echo $datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
-						<td class="cursive"><?php echo (empty($row['rapport'])) ? "In bewerking" : "Rapport beschikbaar" ; ?></td>
+						<td class="cursive"><?php echo (empty($row['rapport'])) ? "In bewerking" : "Rapport voltooid" ; ?></td>
 						<td><a href="bedrijf-panel.php?klantid=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
 				<?php 

@@ -14,6 +14,8 @@ $maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_SESSION['bedrijfid']."";
 $maatwerkresult = mysql_query($maatwerkquery);
 $pakket = mysql_fetch_assoc($maatwerkresult);
 
+$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
+
 if(isset($_GET['klantid'])) {
 	$_SESSION['klantid'] = $_GET['klantid'];
 	header('location: admin-kandidaatprofiel.php');
@@ -28,12 +30,13 @@ if(isset($_GET['klantid'])) {
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
+	<!-- Tablefilter -->
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
 	<script src="../js/ddtf.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
-		$('#myTable').ddTableFilter();
+		$('#filterTable').ddTableFilter();
 	});
 	</script>
 </head>
@@ -121,14 +124,14 @@ if(isset($_GET['klantid'])) {
 		</div>
 
 		<div class="screening-list">
-			<table id="myTable" class="profiletable order-table table">
+			<table id="filterTable" class="profiletable order-table table">
 				<thead>
 				<tr class="table-header-filter">
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">Periode</th>
+					<th class="noskip-filter">--Periode--</th>
 					<th class="skip-filter"></th>
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">Rapport</th>
+					<th class="noskip-filter">--Rapport--</th>
 					<th class="skip-filter"><form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form></th>
 				</tr>
 				</thead>
@@ -145,7 +148,7 @@ if(isset($_GET['klantid'])) {
 					$rapport = (empty($row['rapport'])) ? "In bewerking" : "Rapport beschikbaar"; ?>
 					<tr class="trlink" onclick="document.location = 'admin-bedrijfsprofiel.php?klantid=<?php echo $row['id']; ?>';">
 						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
-						<td><?php echo date('M Y', strtotime($row['aanmaakdatum'])); ?></td>
+						<td><?php echo $datumArray[date('n', strtotime($row['aanmaakdatum']))].' '.date('Y', strtotime($row['aanmaakdatum'])); ?></td>
 						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
 						<td><?php echo ucfirst($row['plaats']); ?></td>
 						<td class="cursive"><?php echo $rapport; ?></td>

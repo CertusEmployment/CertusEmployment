@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include "../connect.php";
+	$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 ?>
 <!DOCTYPE html>
 <html>
@@ -135,7 +136,7 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Geboortedatum</td>
-					<td><?php echo date('d-m-Y', strtotime($_SESSION['gebdatum'])); ?></td>
+					<td><?php echo date('d', strtotime($_SESSION['gebdatum'])).' '.$datumArray[date('n', strtotime($_SESSION['gebdatum']))].' '.date('Y', strtotime($_SESSION['gebdatum'])); ?></td>
 				</tr>
 				<tr>
 					<td>Geboorteplaats</td>
@@ -162,6 +163,7 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Pakketkeuze</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><small><a href="bedrijf-pakketselectie.php">Gegevens wijzigen</a></small></td>

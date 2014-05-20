@@ -93,35 +93,9 @@ include "../connect.php";
 		</div>
 
 		<div class="screening-list">
-			<form name="filter" id="filter">
-				<select>
-					<option>januari</option>
-					<option>februari</option>
-					<option>maart</option>
-					<option>april</option>
-					<option>mei</option>
-					<option>juni</option>
-					<option>juli</option>
-					<option>augustus</option>
-					<option>september</option>
-					<option>oktober</option>
-					<option>november</option>
-					<option>december</option>
-				</select>
-
-				<select>
-					<option>2014</option>
-					<option>2013</option>
-					<option>2012</option>
-					<option>2011</option>
-					<option>2010</option>
-					<option>2009</option>
-				</select>
-
-				<input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER">
-			</form>
+		<form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form>
 			<table id="myTable" class="profiletable order-table table">
-				<thead>
+			<thead>
 				<tr class="table-header">
 					<th>Bedrijfsnaam</th>
 					<th>Contactpersoon</th>
@@ -130,7 +104,7 @@ include "../connect.php";
 					<th>Lopende screenings</th>
 					<th>Profiel</th>
 				</tr>
-				</thead>
+			</thead>
 				<?php
 
 				while ($row = mysql_fetch_assoc($result_bedrijf)) {

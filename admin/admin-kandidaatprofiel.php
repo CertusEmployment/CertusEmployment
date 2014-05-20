@@ -31,9 +31,13 @@ if(isset($_GET['bedrijfid'])) {
 
 	$query = "SELECT * FROM klant WHERE id = '".$_SESSION['klantid']."'";
 	$result = mysql_query($query);
+	$row = mysql_fetch_array($result);
 
 	$navquery = "SELECT k.id, k.bedrijfid, b.id FROM klant k, bedrijf b WHERE k.bedrijfid=b.id and k.id='".$_SESSION['klantid']."' ";
 	$navresult = mysql_query($navquery);
+	$navrow = mysql_fetch_array($navresult);
+
+	$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 	?>
 
 	<div id="wrapper">
@@ -42,15 +46,8 @@ if(isset($_GET['bedrijfid'])) {
 			<img src="../images/certus_logo.png" />
 		</div>
 
-		<?php
-		while ($navrow = mysql_fetch_array($navresult)) {
-		?><p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-kandidaatprofiel.php?bedrijfid=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p><?php
-		}?>
+		<p id="breadcrumbs"><a href="admin-panel.php">Overzicht</a> > <a href="admin-kandidaatprofiel.php?bedrijfid=<?php echo $navrow['bedrijfid']; ?>">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
 
-
-		<?php
-		while ($row = mysql_fetch_array($result)) {
-		?>
 			<div class="content-block">
 				<table class="profiletable">
 					<tr>
@@ -86,7 +83,7 @@ if(isset($_GET['bedrijfid'])) {
 					</tr>
 					<tr>
 						<td>Geboortedatum</td>
-						<td><?php echo date('d M Y', strtotime($row['geboortedatum'])); ?></td>
+						<td><?php echo date('d', strtotime($row['geboortedatum'])).' '.$datumArray[date('n', strtotime($row['geboortedatum']))].' '.date('Y', strtotime($row['geboortedatum'])); ?></td>
 					</tr>
 					<tr>
 						<td>Geboorteplaats</td>
@@ -98,6 +95,8 @@ if(isset($_GET['bedrijfid'])) {
 					</tr>
 					<tr>
 						<th colspan="2"><?php echo $row['digid'] = (empty($row['digid'])) ? "Geen DigiD beschikbaar" : "DigiD beschikbaar" ; ?></th>
+						<th></th>
+						<th><small><a href="#" class="red">Verwijder</a></small></th>
 					</tr> 
 				</table>
 			</div>
@@ -127,7 +126,7 @@ if(isset($_GET['bedrijfid'])) {
 			<div class="content-block">
 				<p class="content-head">Screeningsinformatie</p>
 				<p>Pakket <?php echo $row['pakket']; ?></p>
-				<p>Opleverdatum: <?php echo date('d-m-Y', strtotime($row['opleverdatum'])); ?></p>
+				<p>Opleverdatum: <?php echo date('d', strtotime($row['opleverdatum'])).' '.$datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></p>
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 				 	<div class="fallback">
@@ -138,7 +137,7 @@ if(isset($_GET['bedrijfid'])) {
 
 			</div>
 		<?php
-		} //ENDWHILE
+	
 		?>
 
 		<?php include "../footer.php"; ?>

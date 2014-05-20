@@ -42,7 +42,7 @@ small { font-size: 11px; color: orange; }
 .wideCell { width: 230px!important; }
 .order-table {width: 100%;}
 .order-table .trlink { cursor: pointer; }
-
+#filterTable th select option:nth-child(1){ display: none; }
 /*
 TOOLBAR
 */
@@ -101,12 +101,12 @@ ul.sub-menu-option { background: #ccc; width: 200px; }
 
 @-webkit-keyframes fadeInFromNone {
     0% { display:none; opacity: 0; }
-    1% { display: inline; ; opacity: 0; }
+    1% { display: inline; opacity: 0; }
     100% { display: inline; opacity: 1; }
 }
 @-moz-keyframes fadeInFromNone {
     0% { display:none; opacity: 0; }
-    1% { display: inline; ; opacity: 0; }
+    1% { display: inline; opacity: 0; }
     100% { display: inline; opacity: 1; }
 }
 
@@ -281,7 +281,7 @@ MAIN
 	}
 	#filter select {
 		font-size: 12px;
-		/*border: solid 0px black; padding: 1px 1px 1px 1px;*/*/
+		/*border: solid 0px black; padding: 1px 1px 1px 1px;*/
 	}
 
 .table-header { background: #ccc; border-bottom: 1px solid black; }
@@ -300,9 +300,8 @@ MAIN
 .download-btn:active { background: #aaa; }
 
 #footer {
-	height: auto;
 	width: 100%;
-	margin-top: 30px;
+	margin-top: 35px;
 }
 	#footer img { width: 8%; padding-left: 20px; }
 	#footer div {

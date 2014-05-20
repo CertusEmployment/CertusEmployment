@@ -11,7 +11,7 @@
 
 <?php
 session_start();
-
+unset($_SESSION['id']);
 $error = "";
 $errorclass = "";
 
@@ -106,10 +106,10 @@ if(!$posting) {
 
 			<form name="login" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
 				<p class="loginred"><?php echo $error; ?></p>
-				<label id="username">Gebruikersnaam:</label><br />
+				<label for="username">Gebruikersnaam:</label><br />
 				<input class="margin <?php echo $errorclass; ?>" type="text" name="username" id="username" /><br />
 
-				<label id="password">Wachtwoord:</label><br />
+				<label for="password">Wachtwoord:</label><br />
 				<input class="no-padding <?php echo $errorclass; ?>" type="password" name="password" id="password" /><br />
 
 				<a class="reset-password" href="password-forget.php">Wachtwoord vergeten</a><br />

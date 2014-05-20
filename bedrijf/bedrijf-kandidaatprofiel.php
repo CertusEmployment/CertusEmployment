@@ -2,7 +2,7 @@
 
 //$_SESSION['id'] = (empty($_SESSION['id'])) ? 1 : $_SESSION['id'] ;
 include "../connect.php";
-
+$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,7 +82,7 @@ include "../connect.php";
 						</tr>
 						<tr>
 							<td>Geboortedatum</td>
-							<td><?php echo date('d M Y', strtotime($row['geboortedatum'])); ?></td>
+							<td><?php echo date('d', strtotime($row['geboortedatum'])).' '.$datumArray[date('n', strtotime($row['geboortedatum']))].' '.date('Y', strtotime($row['geboortedatum'])); ?></td>
 						</tr>
 						<tr>
 							<td>Geboorteplaats</td>
@@ -118,7 +118,7 @@ include "../connect.php";
 				<div class="content-block">
 					<p class="content-head">Screeningsinformatie</p>
 					<p>Pakket <?php echo ($row['pakket']==0)? "<i>Geen pakket geselecteerd</i>" : $row['pakket'] ; ?></p>
-					<p>Opleverdatum: <?php echo date('d-m-Y', strtotime($row['opleverdatum'])); ?></p>
+					<p>Opleverdatum: <?php echo date('d', strtotime($row['opleverdatum'])).' '.$datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></p>
 				</div>
 			<?php
 			} //ENDWHILE
