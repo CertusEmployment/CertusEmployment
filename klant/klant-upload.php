@@ -56,7 +56,7 @@ if(!isset($_POST['submit'])){
 	if($posting) {
 		$sql = "INSERT INTO klant(identiteit, toestemming) VALUES ('".$identiteit."','".$verklaring."')";
 		mysql_query($sql);
-		header("Location: klant-panel.php");
+		header("Location: klant-integriteit.php");
 	}
 
 }
