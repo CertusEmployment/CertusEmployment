@@ -1,6 +1,9 @@
 <?php include "../connect.php"; 
-mkdir("../file-upload/".$_SESSION['id'], 0777);
 session_start();
+
+$sql = "SELECT * FROM integriteit";
+$result = mysql_query($sql);
+
 
 ?>
 <!DOCTYPE html>
@@ -42,12 +45,33 @@ if(!$posting) {
 
 		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
 		
-		<div class="content-block">
-
-		</div>
+		<?
 		
+		while ($row=mysql_fetch_assoc($result)) {
+		echo "<div class='content-block integriteit'>";
+		echo "<p style='margin: 10px 0 10px 0'>".$row['vraag']."</p>";
+
+		if($row['radiobutton']==1) {
+			echo "<div style='width: 100%; margin-bottom: 10px;'>";
+			echo "<label for='ja'><input style='margin:20px 5px 20px 30px;' type='radio' name='antwoord' id='ja' value='Ja'>Ja</label>";
+			echo "<label for='nee'><input style='margin:20px 5px 20px 30px;' type='radio' name='antwoord' id='nee' value='Nee'>Nee</label>";
+			echo "</div>";
+		}
+
+		if($row['toelichting']==1) {
+			echo "<label class='bold' for='toelichting'>Toelichting</label>";
+			echo "<textarea id='toelichting'></textarea>";
+		}
+
+		echo "</div>";
+		}
+
+
+		?>
+
+
 		<form method="post" action="#" id="settings-form">	
-		<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
+		<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Verzenden"></div>
 		</form>
 		<?php include "../footer.php"; ?>
 

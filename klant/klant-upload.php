@@ -1,6 +1,6 @@
 <?php include "../connect.php"; 
-mkdir("../file-upload/".$_SESSION['id'], 0777);
 session_start();
+mkdir("../file-upload/".$_SESSION['id'], 0777);
 
 ?>
 <!DOCTYPE html>
