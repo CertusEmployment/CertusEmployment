@@ -1,4 +1,8 @@
-<?php include "../connect.php"; ?>
+<?php include "../connect.php"; 
+mkdir("../file-upload/".$_SESSION['id'], 0777);
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +21,44 @@
 if(!isset($_POST['submit'])){
 	$posting = false;
 } else {
-	$posting =true;
-	$toestemming = "//url to file";
-	$identiteit = "//url to file";
-
+	$posting = true;
 	$digid = 0;
 
+	//If digiD box is ticket set to 1
 	if(isset($_POST['digid'])) { $digid = 1; }
+
+	//Search folder for files (verklaring) matching the specified extentions.
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.pdf") as $filename) {
+		$verklaring = $filename;
+	}
+
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.doc") as $filename) {
+		$verklaring = $filename;
+	}
+
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.docx") as $filename) {
+		$verklaring = $filename;
+	}
+
+	//Search folder for files (ID Kaart) matching the below extentions.
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.png") as $filename) {
+		$identiteit = $filename;
+	}
+
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.jpg") as $filename) {
+		$identiteit= $filename;
+	}
+
+	foreach (glob("../file-upload/".$_SESSION['id']."/*.jpeg") as $filename) {
+		$identiteit = $filename;
+	}
+
+	if($posting) {
+		$sql = "INSERT INTO klant(identiteit, toestemming) VALUES ('".$identiteit."','".$verklaring."')";
+		mysql_query($sql);
+		header("Location: klant-panel.php");
+	}
+
 }
 
 if(!$posting) {
@@ -114,9 +149,9 @@ if(!$posting) {
 }
 
 
-$ds          = DIRECTORY_SEPARATOR; 
+$ds = DIRECTORY_SEPARATOR; 
  
-$storeFolder = 'file-upload';  
+$storeFolder = "../file-upload/".$_SESSION['id'];  
  
 if (!empty($_FILES)) {
      
