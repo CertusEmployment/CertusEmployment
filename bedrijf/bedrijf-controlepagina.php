@@ -40,7 +40,7 @@ if(!isset($_POST['submit'])) {
     $message = include "../email/klant-welkom.html";
 
     if($posting) {
-		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid, aanmaakdatum)
+		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid, aanmaakdatum, pakket)
 				VALUES(
 					'".$_SESSION['vn']."',
 					'".$_SESSION['an']."', 
@@ -60,9 +60,10 @@ if(!isset($_POST['submit'])) {
 					".$_SESSION['temppassword'].",
 					'".$_SESSION['opleverdatum']."',
 					'".$_SESSION['id']."',
-			 		'".$_SESSION['aanmaakdatum']."')";
+			 		'".$_SESSION['aanmaakdatum']."',
+			 		".$_SESSION['pakket'].")";
 		
-		$result = mysql_query($sql);
+		$result = mysql_query($sql) or die(mysql_error());
 		if(mail($to, $subject, $message, $header)) {
 					unset($_SESSION['vn']);
 					unset($_SESSION['an']); 
@@ -163,7 +164,7 @@ if(!$posting) {
 				</tr>
 				<tr>
 					<td>Pakketkeuze</td>
-					<td></td>
+					<td><?php echo $_SESSION['pakket']; ?></td>
 				</tr>
 				<tr>
 					<td><small><a href="bedrijf-pakketselectie.php">Gegevens wijzigen</a></small></td>

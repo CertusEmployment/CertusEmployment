@@ -19,6 +19,7 @@ $vChecked = "";
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script> 
+	<script src="../js/main.js"></script>
 	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
 <body>
@@ -180,7 +181,7 @@ if(!$posting) {
 							<td><label for="mail">E-mailadres</label></td>
 						</tr>
 						<tr>
-							<td><input type="text" value="<?php echo $row['telnr']; ?>" id="telnr" name="telnr" required></td>
+							<td><input type="text" value="<?php echo $row['telnr']; ?>" onkeypress='return isNumberKey(event)' id="telnr" name="telnr" required></td>
 							<td><input type="text" value="<?php echo $row['email']; ?>" id="mail" name="email" required></td>
 						</tr>
 					</table>

@@ -33,6 +33,10 @@ label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 small { font-size: 11px; color: orange; }
 .comment { color: #999999; font-size: 13px; margin-top: 2px; }
 .red { color: darkred; }
+/*#pakketform label { color: red; }
+#pakketform label + input[type="radio"]:checked {
+    color: red;
+}*/
 .red:visited { color: darkred;}
 .loginred { color: darkred; position: absolute; margin-top: -25px;}
 .errormessage { color: #990000; }
@@ -44,6 +48,28 @@ small { font-size: 11px; color: orange; }
 .order-table {width: 100%;}
 .order-table .trlink { cursor: pointer; }
 #filterTable th select option:nth-child(1){ display: none; }
+
+
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.selected {
+    background-color: #ccc;
+}
+
+#pakketform label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+#pakketform label i {
+    padding: 3px;
+}
+
+
+
 /*
 TOOLBAR
 */
@@ -329,8 +355,9 @@ MAIN
 	float: left; 
 	text-align: left;  
 	background: white;
+	border-radius: 2px;
 }
-.pakket-block:hover { border: 1px solid darkorange; }
+.pakket-block:hover { border: 1px solid darkorange; cursor: pointer; }
 .pakket-block i { text-align: center; width: 100%; font-size: 40px; padding: 15px 0 15px 0; }
 .pakket-block p { font-weight: bold; padding: 0 5px 0 5px; color:darkorange; }
 .pakket-block table { margin: 5px 0 0 5px; }
@@ -338,7 +365,7 @@ MAIN
 .pakket-block li:before {
 	font-size: 14px;
   	content: '\f046';
-  	font-family: FontAwesome;
+  	font-family: 'FontAwesome';
   	display: inline-block;
   	margin-left: -1.2em;
   	width: 1.2em;

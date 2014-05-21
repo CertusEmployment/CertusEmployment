@@ -25,6 +25,11 @@ include "../connect.php";
 	      minDate: "+0Y", maxDate: "+5Y"
 	    });
 	 });
+	$(function() {
+		$('.pakketlabel input:radio').addClass('input_hidden');
+		$('.pakketlabel label').click(function(){
+	    $(this).addClass('selected').siblings().removeClass('selected');
+	});
 	 </script>
 </head>
 <body>
@@ -37,6 +42,7 @@ if(!isset($_POST['submit'])) {
 } else {
 	$posting=true;
 	$_SESSION['opleverdatum'] = date('Y-m-d',strtotime($_POST['leverdatum']));
+	$_SESSION['pakket'] = $_POST['pakketselect'];
 
 	if($posting) {
 		header("Location: bedrijf-controlepagina.php");
@@ -65,14 +71,16 @@ if (!$posting) {
 				<input type="text" id="leverdatum" name="leverdatum" placeholder="00-00-0000" value="<?php echo (!empty($_SESSION['opleverdatum']))? date('d-m-Y',strtotime($_SESSION['opleverdatum'])) : '' ; ?>" required style="margin-bottom: 15px;">
 			</div>
 
-			<div class="content-block">
+			<div class="content-block" id="pakketform">
+				
 				<p class="content-head">Pakket keuze</p>
 				<p class="comment cursive">Selecteer hieronder een screenings pakket.
 					Hou hierbij rekening met de verschillende diensten per pakket.</p>
 
-				<a class="pakket-link" href="1">
+				<label class="pakketlabel" for="pakketradio1">
 					<div class="pakket-block">
 					<i class="fa fa-users"></i>
+					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio1" value="1"></i>
 					<p>Volledige employment screening op alle onderdelen</p>
 					<ul>
 						<li>ID check</li>
@@ -83,11 +91,12 @@ if (!$posting) {
 						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div></a>
+				</div></label>
 
-				<a class="pakket-link" href="2">
+				<label class="pakketlabel" for="pakketradio2">
 				<div class="pakket-block">
 					<i class="fa fa-globe"></i>
+					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio2" value="2"></i>
 					<p>Controle van een kandidaat met een buitenlands diploma.</p>
 					<ul>
 						<li>ID check</li>
@@ -97,11 +106,12 @@ if (!$posting) {
 						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div></a>
+				</div></label>
 
-				<a class="pakket-link" href="3">
+				<label class="pakketlabel" for="pakketradio3">
 				<div class="pakket-block">
 					<i class="fa fa-cogs"></i>
+					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio3" value="3"></i>
 					<p>Stel uw eigen Employment Screening samen.</p>
 					
 					<table>
@@ -144,11 +154,12 @@ if (!$posting) {
 					</table>
 
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div></a>
+				</div></label>
 
-				<a class="pakket-link" href="4">
+				<label class="pakketlabel" for="pakketradio4">
 				<div class="pakket-block">
 					<i class="fa fa-star"></i>
+					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio4" value="4"></i>
 					<p>Pakket op maat, speciaal voor u.</p>
 					<ul>
 						<li>ID check</li>
@@ -159,10 +170,10 @@ if (!$posting) {
 						<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>
 					</ul>
 					<h2 class="pakket-prijs">&euro;175</h2>
-				</div></a>
+				</div></label>
 
 				<br class="clear-float">
-
+				
 			</div>
 
 			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>

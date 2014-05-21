@@ -15,6 +15,7 @@ $errorclass = "";
 	<title>Nieuwe klant</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<script src="../js/main.js"></script>
 </head>
 <body>
 
@@ -194,7 +195,7 @@ if(!$posting) {
 						<td><label for="email">E-mail adres</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" value="<?php echo $_POST['telnr']; ?>" name="telnr" id="telnr" required></td>
+						<td><input type="text" value="<?php echo $_POST['telnr']; ?>" name="telnr" id="telnr" onkeypress='return isNumberKey(event)' required></td>
 						<td><input type="text" value="<?php echo $_POST['email']; ?>" name="email" id-"email" required></td>
 					</tr>
 				</table>

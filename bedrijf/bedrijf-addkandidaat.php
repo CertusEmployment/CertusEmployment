@@ -14,7 +14,8 @@ $vChecked = "";
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
-	<script src="../js/dropzone.js"></script> 
+	<script src="../js/dropzone.js"></script>
+	<script src="../js/main.js"></script>
 	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -184,7 +185,7 @@ if(!$posting) {
 					</tr>
 					<?php if($warning==true){ echo "<tr><td></td><td class='errormessage'>Voer een kloppend e-mailadres in</td></tr>"; } ?>
 					<tr>
-						<td><input type="text" id="telnr" name="telnr" value="<?php echo (!empty($_SESSION['telnr']))? $_SESSION['telnr'] : '' ; ?>" required></td>
+						<td><input type="text" id="telnr" name="telnr" onkeypress='return isNumberKey(event)' value="<?php echo (!empty($_SESSION['telnr']))? $_SESSION['telnr'] : '' ; ?>" required></td>
 						<td><input <?php if($warning){ echo "class='errorinput'"; } ?> type="text" id="email" name="email" value="<?php echo (!empty($_SESSION['email']))? $_SESSION['email'] : '' ; ?>"></td>
 					</tr>
 				</table>
