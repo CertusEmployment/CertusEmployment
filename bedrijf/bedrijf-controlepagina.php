@@ -64,6 +64,10 @@ if(!isset($_POST['submit'])) {
 			 		".$_SESSION['pakket'].")";
 		
 		$result = mysql_query($sql) or die(mysql_error());
+		if($_SESSION['pakket'] == 3) {
+			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['opleiding'].", ".$_SESSION['werkervaring'].",  ".$_SESSION['onderzoek'].", ".$_SESSION['financieel'].", ".$_SESSION['vog']." ";
+			mysql_query($maatwerksql);
+		}
 		if(mail($to, $subject, $message, $header)) {
 					unset($_SESSION['vn']);
 					unset($_SESSION['an']); 
@@ -83,6 +87,12 @@ if(!isset($_POST['submit'])) {
 					unset($_SESSION['temppassword']);
 					unset($_SESSION['opleverdatum']);
 					unset($_SESSION['aanmaakdatum']);
+					unset($_SESSION['pakket']);
+					unset($_SESSION['identiteit']);
+					unset($_SESSION['opleiding']);
+					unset($_SESSION['werkervaring']);
+					unset($_SESSION['financieel']);
+					unset($_SESSION['vog']);
     		header("Location: bedrijf-panel.php");
     	} else {
     		$posting = false;
@@ -166,6 +176,14 @@ if(!$posting) {
 					<td>Pakketkeuze</td>
 					<td><?php echo $_SESSION['pakket']; ?></td>
 				</tr>
+				<?php if($_SESSION['pakket'] ==3) { ?>
+					<tr>
+						<td>Maatwerkpakket</td>
+						<td> <?php echo (isset($_SESSION['identiteit'])) ? "ID Check<br>" : ""; 
+						echo (isset($_SESSION['werkervaring'])) ? "Werkervaring<br>" : ""; echo (isset($_SESSION['opleiding'])) ? "Opleiding<br>" : ""; echo (isset($_SESSION['financieel'])) ? "Financiele situatie en gerechtelijke uitspraken<br>" : ""; echo (isset($_SESSION['vog'])) ? " Verklaring Omtrent Gedrag &amp; Integriteitsverklaring" : ""; ?>
+						</td>
+					</tr>
+				<?php } ?>
 				<tr>
 					<td><small><a href="bedrijf-pakketselectie.php">Gegevens wijzigen</a></small></td>
 				</tr>

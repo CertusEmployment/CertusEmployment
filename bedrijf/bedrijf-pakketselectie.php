@@ -25,11 +25,6 @@ include "../connect.php";
 	      minDate: "+0Y", maxDate: "+5Y"
 	    });
 	 });
-	$(function() {
-		$('.pakketlabel input:radio').addClass('input_hidden');
-		$('.pakketlabel label').click(function(){
-	    $(this).addClass('selected').siblings().removeClass('selected');
-	});
 	 </script>
 </head>
 <body>
@@ -40,9 +35,24 @@ if(!isset($_POST['submit'])) {
 	$posting = false;
 
 } else {
-	$posting=true;
+	$posting = true;
 	$_SESSION['opleverdatum'] = date('Y-m-d',strtotime($_POST['leverdatum']));
 	$_SESSION['pakket'] = $_POST['pakketselect'];
+	if($_SESSION['pakket']==3){
+		$_SESSION['identiteit'] = $_POST['identiteit'];
+		$_SESSION['opleiding'] = $_POST['opleiding'];
+		$_SESSION['werkervaring'] = $_POST['werkervaring'];
+		$_SESSION['onderzoek'] = $_POST['onderzoek'];
+		$_SESSION['financieel'] = $_POST['financieel'];
+		$_SESSION['vog'] = $_POST['vog'];
+	}
+	echo $_SESSION['identiteit'];
+	echo $_SESSION['opleiding'];
+	echo $_SESSION['werkervaring'];
+	echo $_SESSION['onderzoek'];
+	echo $_SESSION['financieel'];
+	echo $_SESSION['vog'];
+	//die();
 
 	if($posting) {
 		header("Location: bedrijf-controlepagina.php");
@@ -76,11 +86,11 @@ if (!$posting) {
 				<p class="content-head">Pakket keuze</p>
 				<p class="comment cursive">Selecteer hieronder een screenings pakket.
 					Hou hierbij rekening met de verschillende diensten per pakket.</p>
-
+				
+				<input type="radio" class="input_hidden" style="display:;" name="pakketselect" id="pakketradio1" value="1">
 				<label class="pakketlabel" for="pakketradio1">
 					<div class="pakket-block">
 					<i class="fa fa-users"></i>
-					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio1" value="1"></i>
 					<p>Volledige employment screening op alle onderdelen</p>
 					<ul>
 						<li>ID check</li>
@@ -93,11 +103,11 @@ if (!$posting) {
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></label>
 
+				<input type="radio" class="input_hidden" style="display:;" name="pakketselect" id="pakketradio2" value="2">
 				<label class="pakketlabel" for="pakketradio2">
 				<div class="pakket-block">
 					<i class="fa fa-globe"></i>
-					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio2" value="2"></i>
-					<p>Controle van een kandidaat met een buitenlands diploma.</p>
+					<p>Controle van kandidaat met een buitenlands diploma.</p>
 					<ul>
 						<li>ID check</li>
 						<li>Opleiding</li>
@@ -108,17 +118,17 @@ if (!$posting) {
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></label>
 
+				<input type="radio" class="input_hidden" style="display:;" name="pakketselect" id="pakketradio3" value="3">
 				<label class="pakketlabel" for="pakketradio3">
 				<div class="pakket-block">
 					<i class="fa fa-cogs"></i>
-					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio3" value="3"></i>
 					<p>Stel uw eigen Employment Screening samen.</p>
 					
 					<table>
 						<tr>
 							<td>
-								<input type="checkbox" id="id" name="id" />
-								<label for="id">ID</label>
+								<input type="checkbox" id="identiteit" name="identiteit" />
+								<label for="identiteit">ID</label>
 							</td>
 						</tr>
 						<tr>
@@ -156,11 +166,11 @@ if (!$posting) {
 					<h2 class="pakket-prijs">&euro;175</h2>
 				</div></label>
 
+				<input type="radio" class="input_hidden" style="display:;" name="pakketselect" id="pakketradio4" value="4">
 				<label class="pakketlabel" for="pakketradio4">
 				<div class="pakket-block">
 					<i class="fa fa-star"></i>
-					<i class="fa" style="font-size:1px;"><input type="radio" style="display:;" name="pakketselect" id="pakketradio4" value="4"></i>
-					<p>Pakket op maat, speciaal voor u.</p>
+					<p>Pakket op maat,<br> speciaal voor u.</p>
 					<ul>
 						<li>ID check</li>
 						<li>Opleiding</li>
