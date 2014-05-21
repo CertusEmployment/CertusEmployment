@@ -23,10 +23,15 @@ if(isset($_GET['integriteitid'])) {
 
 <?php
 
+if(isset($_POST[''])) {
+	header("Location: admin-panel.php");
+}
+
 if(!isset($_POST['submit'])) {
 	$posting = false;
 } else {
 	$posting = true;
+	header("Location: admin-integriteit-toevoegen.php");
 }
 
 if(!$posting) {
@@ -91,7 +96,10 @@ if(!$posting) {
 
 
 
-			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
+			<div id="settings-form-buttonblock">
+				<input type="submit" id="next" name="submit" value="Toevoegen">
+				<input type="submit" id="cancel" name="cancel" value="Vorige pagina">
+			</div>
 		</form>
 		
 		<?php include "../footer.php"; ?>
