@@ -47,7 +47,7 @@ $errorclassold = "";
 					$oldpwhash = hash('sha1',$_POST['old-pw']);
 					if($oldpwhash == $row['wachtwoord']) {
 						$newpwhash = hash('sha1',$_POST['new-password']);
-						mysql_query("UPDATE ".$_SESSION['table']." SET wachtwoord = '".$newpwhash."' WHERE id = '".$_SESSION['id']."'");
+						mysql_query("UPDATE ".$_SESSION['table']." SET wachtwoord = '".$newpwhash."', temppassword=0 WHERE id = '".$_SESSION['id']."'");
 						header("Location: ".$_SESSION['table']."/".$_SESSION['table']."-panel.php");
 					}
 					$posting = true;

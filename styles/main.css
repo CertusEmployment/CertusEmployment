@@ -34,6 +34,7 @@ label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 small { font-size: 11px; color: orange; }
 .comment { color: #999999; font-size: 13px; margin-top: 2px; }
 .red { color: darkred; }
+.red:visited { color: darkred;}
 .loginred { color: darkred; position: absolute; margin-top: -25px;}
 .errormessage { color: #990000; }
 .errorinput { background: rgba(204, 0, 0, 0.2);border: 1px solid red }
