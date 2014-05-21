@@ -28,6 +28,7 @@ table th { font-weight: bold; }
 table img { vertical-align: -6px; }
 label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 
+.trlink { cursor: pointer; }
 .bold { font-weight: bold; }
 .cursive { font-style: italic; }
 small { font-size: 11px; color: orange; }
@@ -471,6 +472,22 @@ DROPZONE
 	padding: 5px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 12px; 
+}
+
+#vraagstelling {
+	margin: 10px 0 10px 0;
+	width: 99%;
+	height: 60px;
+	padding: 5px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 12px;
+}
+
+#optie { margin-right: 5px; }
+#toelichting { margin-right: 5px; }
+
+.label-margin {
+	margin-left: 50px;
 }
 
 
