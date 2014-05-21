@@ -109,10 +109,10 @@ $result_klant = mysql_query($query_klant);
 				<thead>
 				<tr class="table-header-filter">
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">--Opleverperiode--</th>
+					<th class="noskip-filter"><select><option>--Opleverperiode--</option></select></th>
 					<th class="skip-filter"></th>
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">--Rapport--</th>
+					<th class="noskip-filter"><select><option>--Rapport--</option></select></th>
 					<th class="skip-filter"><form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form></th>
 				</tr>
 				</thead>

@@ -2,6 +2,8 @@
 include "../connect.php";
 include "../landen-array.php";
 
+session_start();
+
 $errormessage = "";
 $errorclass = "";
 
@@ -79,8 +81,8 @@ if(!isset($_POST['submit'])) {
     $to = $contact_email;
     $subject = "Welkom bij Certus Employment";
     $subject_tips = "Handige tips";
-    $message = include "../email/bedrijf-welkom.html";
-    $message_tips = include "../email/bedrijf-tips.html";
+    include "../email/bedrijf-welkom.php";
+  	include "../email/bedrijf-tips.php";
 
 	if(isset($_POST['idcheck'])) { $idcheck = 1; }
 	if(isset($_POST['werkervaring'])) { $werkervaring = 1; }
@@ -152,11 +154,7 @@ if(!$posting) {
 						<td><label for="plaats">Plaats</label></td>
 					</tr>
 					<tr>
-<<<<<<< HEAD
 						<td><input type="text" value="<?php echo $_POST['postcode']; ?>" id="postcode" name="postcode" required></td>
-=======
-						<td><input type="text" value="<?php echo $_POST['postcode']; ?>" id="postcode" name="postcode" placeholder="1234AA" required></td>
->>>>>>> FETCH_HEAD
 						<td><input type="text" value="<?php echo $_POST['plaats']; ?>" id="plaats" name="plaats" required></td>
 					</tr>
 					<tr>

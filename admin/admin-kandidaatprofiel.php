@@ -10,6 +10,12 @@ if(isset($_GET['bedrijfid'])) {
 	header('location: admin-bedrijfsprofiel.php');
 }
 
+if(isset($_GET['delete'])) {
+	$delsql = "DELETE FROM klant WHERE id = ".$_SESSION['klantid']." ";
+	mysql_query($delsql);
+	header('location: admin-bedrijfsprofiel.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,14 +95,13 @@ if(isset($_GET['bedrijfid'])) {
 						<td>Geboorteplaats</td>
 						<td><?php echo ucfirst($row['geboorteplaats']); ?></td>
 						<td><small><a href="admin-editkandidaat.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
+						<td><small><a href="admin-kandidaatprofiel.php?delete=true" onclick="return confirm('Weet u zeker dat u deze gebruiker wilt verwijderen?');" class="red">Verwijder <?php echo $row['voornaam']." ".$row['achternaam']; ?></a></small></td>
 					</tr>
 					<tr>
 						<td></td>
 					</tr>
 					<tr>
 						<th colspan="2"><?php echo $row['digid'] = (empty($row['digid'])) ? "Geen DigiD beschikbaar" : "DigiD beschikbaar" ; ?></th>
-						<th></th>
-						<th><small><a href="#" class="red">Verwijder</a></small></th>
 					</tr> 
 				</table>
 			</div>

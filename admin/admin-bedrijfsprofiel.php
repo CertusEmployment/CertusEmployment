@@ -21,6 +21,12 @@ if(isset($_GET['klantid'])) {
 	header('location: admin-kandidaatprofiel.php');
 }
 
+if(isset($_GET['delete'])) {
+	$delsql = "DELETE FROM bedrijf WHERE id = ".$_SESSION['bedrijfid']." ";
+	mysql_query($delsql);
+	header('location: admin-panel.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,6 +107,7 @@ if(isset($_GET['klantid'])) {
 					<td>Telefoonnummer</td>
 					<td><?php echo $row['telnr_contact']; ?></td>
 					<td><small><a href="admin-editklant.php?id=<?php echo $row['id']; ?>">Gegevens wijzigen</a></small></td>
+					<td><small><a href="admin-bedrijfsprofiel.php?delete=true" onclick="return confirm('Weet u zeker dat u deze gebruiker wilt verwijderen?');" class="red">Verwijder <?php echo $row['bedrijfnaam']; ?></a></small></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -128,10 +135,10 @@ if(isset($_GET['klantid'])) {
 				<thead>
 				<tr class="table-header-filter">
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">--Periode--</th>
+					<th class="noskip-filter"><select><option>--Periode--</option></select></th>
 					<th class="skip-filter"></th>
 					<th class="skip-filter"></th>
-					<th class="noskip-filter">--Rapport--</th>
+					<th class="noskip-filter"><select><option>--Rapport--</option></select></th>
 					<th class="skip-filter"><form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form></th>
 				</tr>
 				</thead>

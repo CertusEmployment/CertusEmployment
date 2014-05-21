@@ -34,11 +34,11 @@ if(!isset($_POST['submit'])) {
 	$result = mysql_query($retrieve);
 	$klantdata = mysql_fetch_assoc($result);
 
-	$bedrijf = "SELECT wachtwoord, id FROM bedrijf WHERE gebruikersnaam='$username'";
+	$bedrijf = "SELECT wachtwoord, id, temppassword FROM bedrijf WHERE gebruikersnaam='$username'";
 	$b = mysql_query($bedrijf);
 	$bedrijfdata = mysql_fetch_assoc($b);
 
-	$admin = "SELECT wachtwoord, id FROM admin WHERE gebruikersnaam='$username'";
+	$admin = "SELECT wachtwoord, id, temppassword FROM admin WHERE gebruikersnaam='$username'";
 	$a = mysql_query($admin);
 	$admindata = mysql_fetch_assoc($a);
 
@@ -67,7 +67,12 @@ if(!isset($_POST['submit'])) {
 		if($password==$bedrijfdata['wachtwoord']) { 
 			$_SESSION['id'] = $bedrijfdata['id'];
 			$_SESSION['table'] = "bedrijf";
-			header("Location: bedrijf/bedrijf-panel.php");
+			//check temp password
+			if($bedrijfdata['temppassword'] == '1') {
+				header("Location: bedrijf/bedrijf-new-pw.php");
+			} else {
+				header("Location: bedrijf/bedrijf-panel.php");
+			}
 		} else { 
 			$posting = false;
 			$errorclass = "errorinput"; 
@@ -80,7 +85,12 @@ if(!isset($_POST['submit'])) {
 		if($password==$admindata['wachtwoord']) {
 			$_SESSION['id'] = $admindata['id'];
 			$_SESSION['table'] = "admin";
-			header("Location: admin/admin-panel.php");
+			//check temp password
+			if($admindata['temppassword'] == '1') {
+				header("Location: admin/admin-new-pw.php");
+			} else {
+				header("Location: admin/admin-panel.php");
+			}
 		} else {
 			$posting = false;
 			$errorclass = "errorinput"; 
