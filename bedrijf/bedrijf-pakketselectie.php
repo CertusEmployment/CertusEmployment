@@ -1,6 +1,10 @@
 <?php
 session_start();
 include "../connect.php";
+$dateerrormessage = "";
+$dateerrorclass = "";
+$pakketerrormessage = "";
+$pakketerrorclass = "";
 
 ?>
 <!DOCTYPE html>
@@ -36,8 +40,20 @@ if(!isset($_POST['submit'])) {
 
 } else {
 	$posting = true;
-	$_SESSION['opleverdatum'] = date('Y-m-d',strtotime($_POST['leverdatum']));
-	$_SESSION['pakket'] = $_POST['pakketselect'];
+	if(isset($_POST['leverdatum'])){
+		$_SESSION['opleverdatum'] = date('Y-m-d',strtotime($_POST['leverdatum']));
+	} else {
+		$posting = false;
+		$dateerrormessage = "Selecteer de opleverdatum.";
+		$dateerrorclass = "class='errorinput'";
+	}
+	if (isset($_POST['pakketselect'])){
+		$_SESSION['pakket'] = $_POST['pakketselect'];
+	} else {
+		$posting = false;
+		$pakketerrormessage = "Selecteer een pakket.";
+		$pakketerrorclass = "class='errorinput'";
+	}
 	if($_SESSION['pakket']==3){
 		$_SESSION['identiteit'] = $_POST['identiteit'];
 		$_SESSION['opleiding'] = $_POST['opleiding'];
@@ -45,13 +61,8 @@ if(!isset($_POST['submit'])) {
 		$_SESSION['onderzoek'] = $_POST['onderzoek'];
 		$_SESSION['financieel'] = $_POST['financieel'];
 		$_SESSION['vog'] = $_POST['vog'];
+		$_SESSION['pakketboolean'] = 1;
 	}
-	echo $_SESSION['identiteit'];
-	echo $_SESSION['opleiding'];
-	echo $_SESSION['werkervaring'];
-	echo $_SESSION['onderzoek'];
-	echo $_SESSION['financieel'];
-	echo $_SESSION['vog'];
 	//die();
 
 	if($posting) {
@@ -78,6 +89,7 @@ if (!$posting) {
 			<div class="content-block">
 				<p class="content-head">Opleverdatum</p>
 				<p class="comment cursive">Vul hieronder de gewenste opleverdatum in.</p>
+				<p <?php echo $dateerrorclass ?>><?php echo $dateerrormessage; ?></p>
 				<input type="text" id="leverdatum" name="leverdatum" placeholder="00-00-0000" value="<?php echo (!empty($_SESSION['opleverdatum']))? date('d-m-Y',strtotime($_SESSION['opleverdatum'])) : '' ; ?>" required style="margin-bottom: 15px;">
 			</div>
 
@@ -86,6 +98,7 @@ if (!$posting) {
 				<p class="content-head">Pakket keuze</p>
 				<p class="comment cursive">Selecteer hieronder een screenings pakket.
 					Hou hierbij rekening met de verschillende diensten per pakket.</p>
+				<p <?php echo $pakketerrorclass ?>><?php echo $pakketerrormessage; ?></p>
 				
 				<input type="radio" class="input_hidden" style="display:;" name="pakketselect" id="pakketradio1" value="1">
 				<label class="pakketlabel" for="pakketradio1">
@@ -127,37 +140,37 @@ if (!$posting) {
 					<table>
 						<tr>
 							<td>
-								<input type="checkbox" id="identiteit" name="identiteit" />
+								<input type="checkbox" value="1" id="identiteit" name="identiteit" />
 								<label for="identiteit">ID</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="opleiding" name="opleiding" />
+								<input type="checkbox" value="1" id="opleiding" name="opleiding" />
 								<label for="opleiding">Opleiding</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="ervaring" name="ervaring" />
+								<input type="checkbox" value="1" id="ervaring" name="werkervaring" />
 								<label for="ervaring">Werkervaring</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="onderzoek" name="onderzoek" />
+								<input type="checkbox" value="1" id="onderzoek" name="onderzoek" />
 								<label for="onderzoek">Online onderzoek</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="financieel" name="financieel" />
+								<input type="checkbox" value="1" id="financieel" name="financieel" />
 								<label for="financieel">Financiele situatie en gerechtelijke uitspraken</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" id="vog" name="vog" />
+								<input type="checkbox" value="1" id="vog" name="vog" />
 								<label for="vog">Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</label>
 							</td>
 						</tr>

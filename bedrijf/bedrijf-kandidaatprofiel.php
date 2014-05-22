@@ -117,8 +117,23 @@ $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 
 
 				<div class="content-block">
 					<p class="content-head">Screeningsinformatie</p>
-					<p>Pakket <?php echo ($row['pakket']==0)? "<i>Geen pakket geselecteerd</i>" : $row['pakket'] ; ?></p>
 					<p>Opleverdatum: <?php echo date('d', strtotime($row['opleverdatum'])).' '.$datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></p>
+					<p>Pakket <?php echo ($row['pakket']==0)? "<i>Geen pakket geselecteerd</i>" : $row['pakket'] ; ?></p>
+					<?php 
+						if($row['pakket']==3) {
+							$pakketsql = "SELECT * FROM maatwerk WHERE klantid=".$_SESSION['klantid']." ";
+							$pakketresult = mysql_query($pakketsql);
+							$pakket = mysql_fetch_assoc($pakketresult);
+							echo "<p>Pakketsamenstelling</p>";
+							echo "<ul class='ul-disc'>";
+							echo ($pakket['idcheck']==1) ? "<li>ID Check</li>" : ""; 
+							echo ($pakket['werkervaring']==1) ? "<li>Werkervaring</li>" : ""; 
+							echo ($pakket['opleiding']==1) ? "<li>Opleiding</li>" : ""; 
+							echo ($pakket['financieel']==1) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
+							echo ($pakket['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
+							echo "</ul>";
+						} 
+					?>
 				</div>
 			<?php
 			} //ENDWHILE

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include "../connect.php";
-	$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
+	$datumArray = array('1' => 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@ if(!isset($_POST['submit'])) {
     	$aanhef = "mevrouw";
     }
 
-    $message = include "../email/klant-welkom.html";
+    include "../email/klant-welkom.php";
 
     if($posting) {
 		$sql = "INSERT INTO klant(voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr, email, gebruikersnaam, wachtwoord, temppassword, opleverdatum, bedrijfid, aanmaakdatum, pakket)
@@ -64,35 +64,36 @@ if(!isset($_POST['submit'])) {
 			 		".$_SESSION['pakket'].")";
 		
 		$result = mysql_query($sql) or die(mysql_error());
+		$klantid = mysql_insert_id();
 		if($_SESSION['pakket'] == 3) {
-			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['opleiding'].", ".$_SESSION['werkervaring'].",  ".$_SESSION['onderzoek'].", ".$_SESSION['financieel'].", ".$_SESSION['vog']." ";
-			mysql_query($maatwerksql);
+			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog, klantid) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['opleiding'].", ".$_SESSION['werkervaring'].", ".$_SESSION['financieel'].", ".$_SESSION['vog'].", ".$klantid.") ";
+			mysql_query($maatwerksql) or die(mysql_error());
 		}
-		if(mail($to, $subject, $message, $header)) {
-					unset($_SESSION['vn']);
-					unset($_SESSION['an']); 
-					unset($_SESSION['sex']); 
-					unset($_SESSION['straat']); 
-					unset($_SESSION['huisnr']); 
-					unset($_SESSION['toevoeging']); 
-					unset($_SESSION['postcode']); 
-					unset($_SESSION['plaats']); 
-					unset($_SESSION['land']); 
-					unset($_SESSION['gebdatum']); 
-					unset($_SESSION['gebplaats']); 
-					unset($_SESSION['telnr']);
-					unset($_SESSION['email']); 
-					unset($_SESSION['username']); 
-					unset($_SESSION['password']); 
-					unset($_SESSION['temppassword']);
-					unset($_SESSION['opleverdatum']);
-					unset($_SESSION['aanmaakdatum']);
-					unset($_SESSION['pakket']);
-					unset($_SESSION['identiteit']);
-					unset($_SESSION['opleiding']);
-					unset($_SESSION['werkervaring']);
-					unset($_SESSION['financieel']);
-					unset($_SESSION['vog']);
+		if(mail($to, $subject, $messageklantwelkom, $header)) {
+			unset($_SESSION['vn']);
+			unset($_SESSION['an']); 
+			unset($_SESSION['sex']); 
+			unset($_SESSION['straat']); 
+			unset($_SESSION['huisnr']); 
+			unset($_SESSION['toevoeging']); 
+			unset($_SESSION['postcode']); 
+			unset($_SESSION['plaats']); 
+			unset($_SESSION['land']); 
+			unset($_SESSION['gebdatum']); 
+			unset($_SESSION['gebplaats']); 
+			unset($_SESSION['telnr']);
+			unset($_SESSION['email']); 
+			unset($_SESSION['username']); 
+			unset($_SESSION['password']); 
+			unset($_SESSION['temppassword']);
+			unset($_SESSION['opleverdatum']);
+			unset($_SESSION['aanmaakdatum']);
+			unset($_SESSION['pakket']);
+			unset($_SESSION['identiteit']);
+			unset($_SESSION['opleiding']);
+			unset($_SESSION['werkervaring']);
+			unset($_SESSION['financieel']);
+			unset($_SESSION['vog']);
     		header("Location: bedrijf-panel.php");
     	} else {
     		$posting = false;
@@ -156,9 +157,9 @@ if(!$posting) {
 				<tr>
 					<td></td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td class="bold"><i class="fa fa-download"></i><a class="color-reset download-link" href="#">CV.docx</a></td>
-				</tr>
+				</tr> -->
 				<tr><td><small><a href="bedrijf-addkandidaat.php">Gegevens wijzigen</a></small></td></tr>
 			</table>
 		</div>
@@ -178,10 +179,15 @@ if(!$posting) {
 				</tr>
 				<?php if($_SESSION['pakket'] ==3) { ?>
 					<tr>
-						<td>Maatwerkpakket</td>
-						<td> <?php echo (isset($_SESSION['identiteit'])) ? "ID Check<br>" : ""; 
-						echo (isset($_SESSION['werkervaring'])) ? "Werkervaring<br>" : ""; echo (isset($_SESSION['opleiding'])) ? "Opleiding<br>" : ""; echo (isset($_SESSION['financieel'])) ? "Financiele situatie en gerechtelijke uitspraken<br>" : ""; echo (isset($_SESSION['vog'])) ? " Verklaring Omtrent Gedrag &amp; Integriteitsverklaring" : ""; ?>
-						</td>
+						<td>Pakketsamenstelling</td>
+						<td><ul class="controleul"><?php if($_SESSION['pakketboolean'] == 1){ 
+						echo (isset($_SESSION['identiteit'])) ? "<li>ID Check</li>" : ""; 
+						echo (isset($_SESSION['werkervaring'])) ? "<li>Werkervaring</li>" : ""; 
+						echo (isset($_SESSION['opleiding'])) ? "<li>Opleiding</li>" : ""; 
+						echo (isset($_SESSION['financieel'])) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
+						echo (isset($_SESSION['vog'])) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
+						} else { echo "Geen pakket samengesteld."; } ?>
+						</ul></td>
 					</tr>
 				<?php } ?>
 				<tr>

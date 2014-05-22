@@ -1,3 +1,6 @@
+<?php
+include "../connect.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +16,7 @@
 	<?php 
 
 	include "toolbar-klant.php";
-
+	echo $_SESSION['id'];
 	$sql = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
 	$result = mysql_query($sql);
 	$info = mysql_fetch_assoc($result);
@@ -26,6 +29,8 @@
 
 	if(!empty($info['toestemming'])) {
 		$toestemming = "<a href='#'>Download</a>";
+	} else {
+		$toestemming = "Geen Toestemmingsverklaring geupload. <a href='klant-upload.php'>Upload hier</a>";
 	}
 
 	if(!empty($info['rapport'])) {
@@ -68,7 +73,7 @@
 				</tr>
 				<tr>
 					<td>Land</td>
-					<td><?php echo ucfirst($row['land']); ?></td>
+					<td><?php echo ucfirst($info['land']); ?></td>
 				</tr>
 			</table>
 		</div>
