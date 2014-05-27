@@ -25,12 +25,18 @@ if(!isset($_POST['submit'])) {
 	$posting = true;
 	$optie = 0;
 	$toelichting = 0;
+	$verplichttext = 0;
+	$verplichtoptie = 0;
 	$vraagstelling = $_POST['vraagstelling'];
+
+
 	if(isset($_POST['optie'])) { $optie = 1; }
 	if(isset($_POST['toelichting'])) { $toelichting = 1; }
+	if(isset($_POST['optie-verplicht'])) { $verplichtoptie = 1; }
+	if(isset($_POST['toelichting-verplicht'])) { $verplichttext = 1; }
 
 	if(!empty($vraagstelling)) {
-		$update = "UPDATE integriteit SET vraag='".$vraagstelling."', radiobutton=".$optie.", toelichting=".$toelichting." WHERE id=".$_SESSION['integriteitid']." ";
+		$update = "UPDATE integriteit SET vraag='".$vraagstelling."', radiobutton=".$optie.", toelichting=".$toelichting.", optieverplicht=".$verplichtoptie.", textverplicht=".$verplichttext." WHERE id=".$_SESSION['integriteitid']." ";
 		mysql_query($update);
 		header("Location: admin-integriteit-overzicht.php");
 	}
@@ -57,14 +63,22 @@ if(!$posting) {
 				<p class="content-head">Vraagstelling <?php echo $_SESSION['integriteitid'] +1; ?></p>
 				<textarea id="vraagstelling" name="vraagstelling" required><?php echo $data['vraag']; ?></textarea>
 
-				<label class="label-marign" for="optie">
-					<input type="checkbox" id="optie" name="optie" <?php if($data['radiobutton'] == 1){ echo 'checked'; } ?> >Ja/Nee optie weergeven
-				</label>
-
-				<label class="label-margin" for="toelichting">
-					<input type="checkbox" id="toelichting" name="toelichting" <?php if($data['toelichting'] == 1){ echo 'checked'; } ?> >Tekstvak toelichting weergeven
-				</label>
-
+				<div style="width: 170px; float: left;">
+					<label for="optie"><input type="checkbox" id="optie" name="optie" <?php if($data['radiobutton'] == 1) { echo "checked"; } ?> >Ja/Nee optie weergeven</label>
+				</div>
+				<div style="width: 200px; float: left;">
+					<label for="optie-verplicht"><input style="margin-right: 5px;" type="checkbox" id="optie-verplicht" name="optie-verplicht" <?php if($data['optieverplicht'] == 1) { echo "checked"; } ?> >Verplicht!</label>
+				</div>
+				<br>
+				<div style="width: 210px; float: left;">
+					<label for="toelichting"><input type="checkbox" id="toelichting" name="toelichting" <?php if($data['toelichting'] == 1) { echo "checked"; } ?> >Tekstvak toelichting weergeven</label>
+				</div>
+				<div style="float: left;">
+					<label for="toelichting-verplicht"><input style="margin-right: 5px;" type="checkbox" id="toelichting-verplicht" name="toelichting-verplicht" <?php if($data['textverplicht'] == 1) { echo "checked"; } ?> >Verplicht!</label>
+				</div>
+				<br style="clear:both;">
+				<br>
+	
 			</div>
 
 			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer"></div>

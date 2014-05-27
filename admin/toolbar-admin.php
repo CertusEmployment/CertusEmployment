@@ -29,6 +29,7 @@
 				<?php if($basename !== "editwachtwoord" && $basename !== "editemail") { ?>
 					<li class="toolbar-item"><a href="#">Opties<i class="fa fa-cog"></i></a>
 						<ul class="sub-menu-option">
+							<li><a href="admin-integriteit-overzicht.php">Integriteits verklaring aanpassen</a></li>
 							<li><a href="../editwachtwoord.php">Wachtwoord wijzingen</a></li>
 							<li><a href="../editemail.php">E-mail wijzigen</a></li>
 							<label><li><input type="checkbox"> E-mail ontvangen</li></label>

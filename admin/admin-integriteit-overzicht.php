@@ -23,7 +23,7 @@ if(isset($_GET['integriteitid'])) {
 
 <?php
 
-if(isset($_POST[''])) {
+if(isset($_POST['cancel'])) {
 	header("Location: admin-panel.php");
 }
 
