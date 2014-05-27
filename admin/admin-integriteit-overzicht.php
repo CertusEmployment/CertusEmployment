@@ -15,6 +15,7 @@ if(isset($_GET['integriteitid'])) {
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<title>Integriteit overzicht</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -80,7 +81,7 @@ if(!$posting) {
 					?>
 
 					<tr class="trlink" onclick="document.location = 'admin-integriteit-overzicht.php?integriteitid=<?php echo $row['id']; ?>';">
-						<td><?php echo $row['id'] + 1; ?></td>
+						<td><?php echo $row['id']; ?></td>
 						<td><?php echo substr($row['vraag'], 0, 10); ?></td>
 						<td><?php echo $radiobutton; ?></td>
 						<td><?php echo $toelichting; ?></td>

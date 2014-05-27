@@ -1,19 +1,24 @@
 <?php
+
 session_start();
 include "connect.php";
 
 $query = "SELECT * FROM ".$_SESSION['table']." WHERE id = '".$_SESSION['id']."' ";
 $result = mysql_query($query);
-//var_dump($query);
+
 $errormessage = "";
 $errorclass = "";
 $errorclassold = "";
+
+$regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/'; //6 characters, 1 hoofdletter, 1 cijfer
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Wachtwoord wijzigen</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 	<link rel="stylesheet" href="font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
@@ -43,29 +48,48 @@ $errorclassold = "";
 		while ($row = mysql_fetch_array($result)) {
 			
 			if (isset($_POST['submit'])) {
-				if ($_POST['new-password'] == $_POST['new-password-repeat'] && isset($_POST['new-password']) && isset($_POST['new-password-repeat'])){
-					$oldpwhash = hash('sha1',$_POST['old-pw']);
-					if($oldpwhash == $row['wachtwoord']) {
-						$newpwhash = hash('sha1',$_POST['new-password']);
-						mysql_query("UPDATE ".$_SESSION['table']." SET wachtwoord = '".$newpwhash."', temppassword=0 WHERE id = '".$_SESSION['id']."'");
-						header("Location: ".$_SESSION['table']."/".$_SESSION['table']."-panel.php");
-					}
-					$posting = true;
-				} 
-				if ($_POST['old-pw'] != $row['wachtwoord']) {
-					$errormessage = "Het oude wachtwoord is incorrect.";
+				
+				$oldpwhash = hash('sha1',$_POST['old-pw']);
+				
+				if($oldpwhash !== $row['wachtwoord']) {
+					$errormessage = "Het oude wachtwoord is niet goed gehashed.";
 					$errorclassold = "class='errorinput'";
-					unset($_POST['submit']);
-					$posting = false;
+					$posting=false;
+				} else {
+					$posting=true;
+				}
+
+				if (!isset($_POST['new-password']) OR !isset($_POST['new-password-repeat'])) {
+					$errormessage = "Herhaal het wachtwoord op de juiste manier.";
+					$errorclass = "class='errorinput'";
+					$posting=false;
 				}
 
 				if ($_POST['new-password'] != $_POST['new-password-repeat']) {
-					$errormessage = "Herhaal het wachtwoord op de juiste manier";
+					$errormessage = "Herhaal het wachtwoord op de juiste manier.";
 					$errorclass = "class='errorinput'";
 					unset($_POST['new-password']);
 					unset($_POST['new-password-repeat']);
 					$posting = false;
-				} 
+				} else {
+					$posting=true;
+				}
+
+				if (!preg_match($regex, $_POST['new-password'])) {
+					$errormessage = "Wachtwoord voldoet niet aan de eisen.";
+					$errorclass = "class='errorinput'";
+					unset($_POST['new-password']);
+					unset($_POST['new-password-repeat']);
+					$posting=false;
+				} else {
+					$posting=true;
+				}
+
+				if($posting){
+					$newpwhash = hash('sha1',$_POST['new-password']);
+					mysql_query("UPDATE ".$_SESSION['table']." SET wachtwoord = '".$newpwhash."', temppassword=0 WHERE id = '".$_SESSION['id']."'")or die(mysql_error());
+					header("Location: ".$_SESSION['table']."/".$_SESSION['table']."-panel.php");
+				}
 			}
 			
 			if(!$posting) {
