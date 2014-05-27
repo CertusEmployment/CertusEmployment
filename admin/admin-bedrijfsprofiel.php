@@ -135,7 +135,7 @@ if(isset($_GET['delete'])) {
 				<thead>
 				<tr class="table-header-filter">
 					<th class="skip-filter"></th>
-					<th class="noskip-filter"><select><option>--Periode--</option></select></th>
+					<th class="noskip-filter"><select><option>--Opleverperiode--</option></select></th>
 					<th class="skip-filter"></th>
 					<th class="skip-filter"></th>
 					<th class="noskip-filter"><select><option>--Rapport--</option></select></th>
@@ -144,7 +144,7 @@ if(isset($_GET['delete'])) {
 				</thead>
 				<tr class="table-header">
 					<th class="skip-filter">Naam</th>
-					<th class="skip-filter">Periode</th>
+					<th class="skip-filter">Opleverperiode</th>
 					<th class="skip-filter">Postcode</th>
 					<th class="skip-filter">Plaats</th>
 					<th class="skip-filter">Rapport</th>

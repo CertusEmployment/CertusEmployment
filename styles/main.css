@@ -49,25 +49,8 @@ small { font-size: 11px; color: orange; }
 .order-table {width: 100%;}
 .order-table .trlink { cursor: pointer; }
 #filterTable th select option:nth-child(1){ display: none; }
-
-
-.input_hidden {
-    position: absolute;
-    left: -9999px;
-}
-
-.selected {
-    background-color: #ccc;
-}
-
-#pakketform label {
-    display: inline-block;
-    cursor: pointer;
-}
-
-#pakketform label i {
-    padding: 3px;
-}
+.input_hidden { position: absolute; left: -9999px; }
+.controleul li {list-style: disc;}
 
 
 
@@ -196,8 +179,6 @@ MAIN
 
 #container {
 	z-index: 1;
-	max-width: 1600px;
-	max-height: auto;
 }
 
 #wrapper {
@@ -294,11 +275,11 @@ MAIN
 	.screening-list td { border-bottom: 1px solid black; padding: 5px 0 5px 10px;}
 	.screening-list th { padding: 0 0 3px 10px; }
 	.screening-list tr:hover { background: #F0F0F0; }
-	.screening-list .table-header:hover, .screening-list .table-header-filter:hover { background: #ccc; }
+	.screening-list .table-header:hover, .screening-list .table-header-filter:hover { background: #ddd; }
 
 #filter {
 	text-align: right;
-	background: #ccc;
+	background: #ddd;
 	padding: 5px 0 5px 0;
 	width: 100%;
 }
@@ -312,9 +293,9 @@ MAIN
 		/*border: solid 0px black; padding: 1px 1px 1px 1px;*/
 	}
 
-.table-header { background: #ccc; border-bottom: 1px solid black; }
+.table-header { background: #ddd; border-bottom: 1px solid black; }
 .table-header th, { min-width: 118px; } /* voorkomt verspringen dmv vanwege filter */
-.table-header-filter { border-bottom: 0; background: #ccc;}
+.table-header-filter { border-bottom: 0; background: #ddd;}
 
 .download-btn { 
 	border: 1px solid #606060;
@@ -347,6 +328,8 @@ MAIN
 	.double-table td { width: 200px; }
 	.form-div { float: left; padding-right: 20px; width: 240px; }
 
+#pakketform input[type='radio']:checked + label div{ background: #F8F8F8; border: 1px solid darkorange; box-shadow: 0px 0px 5px darkorange; }
+#pakketform input[type='radio']:checked + label i { color: darkorange; }
 .pakket-block { 
 	position: relative; 
 	height: 360px; 
@@ -356,11 +339,11 @@ MAIN
 	float: left; 
 	text-align: left;  
 	background: white;
-	border-radius: 2px;
+	border-radius: 5px;
 }
-.pakket-block:hover { border: 1px solid darkorange; cursor: pointer; }
+.pakket-block:hover { background: #F8F8F8; box-shadow: 3px 3px 5px #ddd;}
 .pakket-block i { text-align: center; width: 100%; font-size: 40px; padding: 15px 0 15px 0; }
-.pakket-block p { font-weight: bold; padding: 0 5px 0 5px; color:darkorange; }
+.pakket-block p { font-weight: bold; padding: 0 5px 0 5px; color:darkorange; text-align: center; }
 .pakket-block table { margin: 5px 0 0 5px; }
 .pakket-block li { padding-left: 1.2em; }
 .pakket-block li:before {
@@ -390,7 +373,7 @@ MAIN
 .fa-download { margin-right: 5px; }
 .color-reset { color: black; }
 
-.pakket-block input[type=checkbox] { display:none; }
+.pakket-block input[type=checkbox] { display:; }
 .pakket-block input[type=checkbox] + label:before {
   font-family: FontAwesome;
   display: inline;
