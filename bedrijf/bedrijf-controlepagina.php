@@ -62,11 +62,12 @@ if(!isset($_POST['submit'])) {
 					'".$_SESSION['id']."',
 			 		'".$_SESSION['aanmaakdatum']."',
 			 		".$_SESSION['pakket'].")";
-		
 		$result = mysql_query($sql) or die(mysql_error());
 		$klantid = mysql_insert_id();
+		
+		
 		if($_SESSION['pakket'] == 3) {
-			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, financieel, vog, klantid) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['opleiding'].", ".$_SESSION['werkervaring'].", ".$_SESSION['financieel'].", ".$_SESSION['vog'].", ".$klantid.") ";
+			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, onderzoek, financieel, vog, klantid) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['werkervaring'].", ".$_SESSION['opleiding'].", ".$_SESSION['onderzoek'].", ".$_SESSION['financieel'].", ".$_SESSION['vog'].", ".$klantid.") ";
 			mysql_query($maatwerksql) or die(mysql_error());
 		}
 		if(mail($to, $subject, $messageklantwelkom, $header)) {
@@ -163,7 +164,7 @@ if(!$posting) {
 				<tr><td><small><a href="bedrijf-addkandidaat.php">Gegevens wijzigen</a></small></td></tr>
 			</table>
 		</div>
-
+<?php echo "ID ".$_SESSION['identiteit']."<br>Werkervaring ". $_SESSION['werkervaring']."<br>Opleiding ".$_SESSION['opleiding']."<br>Online onderzoek ".$_SESSION['onderzoek']."<br>Financieel ".$_SESSION['financieel']."<br>VOG ".$_SESSION['vog']."<br>Klantid ".$klantid; ?>
 		<div class="content-block">
 			<table class="double-table">
 				<tr>
@@ -181,11 +182,12 @@ if(!$posting) {
 					<tr>
 						<td>Pakketsamenstelling</td>
 						<td><ul class="controleul"><?php if($_SESSION['pakketboolean'] == 1){ 
-						echo (isset($_SESSION['identiteit'])) ? "<li>ID Check</li>" : ""; 
-						echo (isset($_SESSION['werkervaring'])) ? "<li>Werkervaring</li>" : ""; 
-						echo (isset($_SESSION['opleiding'])) ? "<li>Opleiding</li>" : ""; 
-						echo (isset($_SESSION['financieel'])) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
-						echo (isset($_SESSION['vog'])) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
+						echo ($_SESSION['identiteit']==1) ? "<li>ID Check</li>" : ""; 
+						echo ($_SESSION['werkervaring']==1) ? "<li>Werkervaring</li>" : ""; 
+						echo ($_SESSION['opleiding']==1) ? "<li>Opleiding</li>" : ""; 
+						echo ($_SESSION['onderzoek']==1) ? "<li>Online onderzoek</li>" : ""; 
+						echo ($_SESSION['financieel']==1) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
+						echo ($_SESSION['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
 						} else { echo "Geen pakket samengesteld."; } ?>
 						</ul></td>
 					</tr>

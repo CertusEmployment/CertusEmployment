@@ -53,7 +53,7 @@ $result_klant = mysql_query($query_klant);
 		<div id="logo">
 			<img src="../images/certus_logo.png" />
 		</div>
-<?php while ($row = mysql_fetch_array($result)) { ?>
+<?php $bedrijfinfo = mysql_fetch_array($result); ?>
 		<div class="content-block">
 			<table class="profiletable">
 			
@@ -62,21 +62,21 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 				<tr>
 					<td>Bedrijfsnaam</td>
-					<td><?php echo $row['bedrijfnaam']; ?></td>
+					<td><?php echo $bedrijfinfo['bedrijfnaam']; ?></td>
 					<td>Telefoon nummer</td>
-					<td><?php echo $row['telnr_contact']; ?></td>
+					<td><?php echo $bedrijfinfo['telnr_contact']; ?></td>
 				</tr>
 				<tr>
 					<td>Adres</td>
-					<td><?php echo ucfirst($row['straatnaam'])." ".$row['huisnummer'].$row['huistoevoeging']; ?></td>
+					<td><?php echo ucfirst($bedrijfinfo['straatnaam'])." ".$bedrijfinfo['huisnummer'].$bedrijfinfo['huistoevoeging']; ?></td>
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
+					<td><?php echo (strlen($bedrijfinfo['postcode'])==6)? chunk_split(strtoupper($bedrijfinfo['postcode']), 4, " ") : $bedrijfinfo['postcode'] ; ?></td>
 				</tr>
 				<tr>
 					<td>Plaats</td>
-					<td><?php echo ucfirst($row['plaats']); ?></td>
+					<td><?php echo ucfirst($bedrijfinfo['plaats']); ?></td>
 				</tr>
 
 			</table>
@@ -89,21 +89,21 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 				<tr>
 					<td>Gebruikersnaam</td>
-					<td><?php echo $row['gebruikersnaam']; ?></td>
+					<td><?php echo $bedrijfinfo['gebruikersnaam']; ?></td>
 				</tr>
 				<tr>
 					<td>E-mail</td>
-					<td><?php echo $row['email_contact']; ?></td>
+					<td><?php echo $bedrijfinfo['email_contact']; ?></td>
 					<td><small><a href="../editemail.php ">E-mail wijzigen</a></small></td>
 				</tr>
 				<tr>
 					<td>Wachtwoord</td>
-					<td><?php echo (($row['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
+					<td><?php echo (($bedrijfinfo['wachtwoord'])=='')? '<i>No password</i>' : '&#8226;&#8226;&#8226;&#8226;' ; ?></td>
 					<td><small><a href="../editwachtwoord.php ">Wachtwoord wijzigen</a></small></td>
 				</tr>
 			</table>
 		</div>
-<?php } ?>
+
 		<div class="screening-list">
 			<table id="filterTable" class="profiletable order-table table">
 				<thead>
@@ -124,16 +124,16 @@ $result_klant = mysql_query($query_klant);
 					<th class="skip-filter">Rapport</th>
 					<th class="skip-filter">Profiel</th>
 				</tr>
-				<?php while ($row = mysql_fetch_array($result_klant)) {
+				<?php while ($kandidaten = mysql_fetch_array($result_klant)) {
 				 ?>
-					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';"> -->
-					<tr class="trlink" onclick="document.location = 'bedrijf-panel.php?klantid=<?php echo $row['id']; ?>';">
-						<td><?php echo ucfirst($row['voornaam'])." ".ucfirst($row['achternaam']); ?></td>
-						<td><?php echo $datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></td>
-						<td><?php echo chunk_split(strtoupper($row['postcode']),4," "); ?></td>
-						<td><?php echo ucfirst($row['plaats']); ?></td>
-						<td class="cursive"><?php echo (empty($row['rapport'])) ? "In bewerking" : "Rapport voltooid" ; ?></td>
-						<td><a href="bedrijf-panel.php?klantid=<?php echo $row['id']; ?>">link</a></td>
+					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $kandidaten['id']; ?>';"> -->
+					<tr class="trlink" onclick="document.location = 'bedrijf-panel.php?klantid=<?php echo $kandidaten['id']; ?>';">
+						<td><?php echo ucfirst($kandidaten['voornaam'])." ".ucfirst($kandidaten['achternaam']); ?></td>
+						<td><?php echo $datumArray[date('n', strtotime($kandidaten['opleverdatum']))].' '.date('Y', strtotime($kandidaten['opleverdatum'])); ?></td>
+						<td><?php echo chunk_split(strtoupper($kandidaten['postcode']),4," "); ?></td>
+						<td><?php echo ucfirst($kandidaten['plaats']); ?></td>
+						<td class="cursive"><?php echo (empty($kandidaten['rapport'])) ? "In bewerking" : "Rapport voltooid" ; ?></td>
+						<td><a href="bedrijf-panel.php?klantid=<?php echo $kandidaten['id']; ?>">link</a></td>
 					</tr>
 				<?php 
 

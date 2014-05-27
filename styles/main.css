@@ -74,21 +74,22 @@ TOOLBAR
 	height: 30px;
 	cursor: pointer;
 	padding: 0 5px;
+	font-size: 14px;
 }
 	.toolbar-item:hover { background: #a8a8a8; }
-	.toolbar-item a { font-size: 14px; color: black; text-decoration: none; }
+	.toolbar-item a {  color: black; text-decoration: none; }
 	.toolbar-item i { margin: 5px 0 0 7px; font-size: 20px; vertical-align: -1px; }
 	.toolbar-item ul li ul li a, .toolbar-item ul li ul li a { font-size: 12px; }
 	.toolbar-item button[type='submit'] { background: none; border: none; margin:0; padding:0; font-size: 14px; font-family: 'Open Sans', sans-serif; }
-	.toolbar-item button[type='submit']:hover {cursor: pointer;}
-	.alert { margin-right: 50px; }
+	.toolbar-item button[type='submit']:hover { cursor: pointer; }
+	.alert { margin-right: 58px; }
 	.alert i { margin: 5px 0; }
 
 ul.sub-menu-alert, ul.sub-menu-option {
 	font-family: 'Open Sans', sans-serif;
 	display: none;
 	position: absolute;
-	font-size: 13px;
+	font-size: 12px;
 	top: 30px;
 	box-shadow: 0px 1px 5px #a0a0a0;
 	border-radius: 0 0 4px 4px;
@@ -99,6 +100,8 @@ ul.sub-menu-alert, ul.sub-menu-option {
 ul.sub-menu-alert { background: #ccc; width: 250px; }
 ul.sub-menu-option { background: #ccc; width: 200px; }
 	.sub-menu-option a, .sub-menu-option a { font-size: 12px; }
+	ul .sub-menu-alert p { padding: 7px 10px; }
+	ul .sub-menu-alert p:hover { cursor: default; }
 	ul .sub-menu-alert li { padding: 15px 10px 10px 10px; }
 	ul .sub-menu-option li { padding: 10px; }
 	ul .sub-menu-alert li, ul .sub-menu-option li { display: block!important; }
@@ -348,7 +351,7 @@ MAIN
 .pakket-block li { padding-left: 1.2em; }
 .pakket-block li:before {
 	font-size: 14px;
-  	content: '\f046';
+  	content: '\f00c';
   	font-family: 'FontAwesome';
   	display: inline-block;
   	margin-left: -1.2em;
@@ -373,7 +376,7 @@ MAIN
 .fa-download { margin-right: 5px; }
 .color-reset { color: black; }
 
-.pakket-block input[type=checkbox] { display:; }
+.pakket-block input[type=checkbox] { display:none; }
 .pakket-block input[type=checkbox] + label:before {
   font-family: FontAwesome;
   display: inline;
@@ -472,7 +475,7 @@ DROPZONE
 	border: 1px solid #bababa;
 	width: 515px;
 	height: 30px;
-	line-height: 142px;
+	padding: 5px;
 	border-radius: 5px;
 }
 

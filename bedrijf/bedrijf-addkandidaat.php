@@ -156,7 +156,11 @@ if(!$posting) {
 									foreach ($arrayLanden as $code => $landnaam) {
 										if ($landnaam == $row['land'] OR $landnaam == $_SESSION['land']) {
 											$isSelected = " selected='' "; 
-										} else {
+										}
+										elseif (!isset($row['land']) && $landnaam == 'Nederland') {
+											$isSelected = " selected='' "; 
+										}
+										 else {
 											$isSelected = "";
 										}
 										echo "<option value='".$landnaam."' ".$isSelected.">".$landnaam."</option>";
