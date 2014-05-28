@@ -28,15 +28,15 @@
 				<li class="toolbar-item alert" id="submenu"><a href="#"><i class="fa fa-bell"></i></a>
 					<ul class="sub-menu-alert">
 						<p style="border-bottom:1px solid #ddd;"><b>Meldingen</b></p>
-					<?php while($alert = mysql_fetch_assoc($alertresult)) { 
-						$date1 = new DateTime(date('d-m-Y', strtotime($alert['opleverdatum']))); //opleverdatum
-						$date2 = new DateTime(date('d-m-Y')); //huidige datum
-						if($date1 > $date2 && $alert['rapport']==0) {
-							?><li class="errorinput" style="border:none;">Leverdatum <?php echo $alert['voornaam']." ".$alert['achternaam']; ?> verstreken</li><?php
-						} elseif ($date1 < $date2) {
-					?><li><a href="bedrijf-panel.php?klantid=<?php echo $alert['id'] ?>"><?php echo $alert['voornaam']." ".$alert['achternaam']; ?> screening aangemaakt</a></li><?php 
-						}
-					} ?>
+						<?php while($alert = mysql_fetch_assoc($alertresult)) { 
+							$date1 = new DateTime(date('d-m-Y', strtotime($alert['opleverdatum']))); //opleverdatum
+							$date2 = new DateTime(date('d-m-Y')); //huidige datum
+							if($date1 > $date2 && $alert['rapport']==0) {
+								?><li class="errorinput" style="border:none;"><a href="bedrijf-panel.php?klantid=<?php echo $alert['id'] ?>">Leverdatum <?php echo $alert['voornaam']." ".$alert['achternaam']; ?> verstreken</a></li><?php
+							} elseif ($date1 < $date2) {
+						?><li><a href="bedrijf-panel.php?klantid=<?php echo $alert['id'] ?>"><?php echo $alert['voornaam']." ".$alert['achternaam']; ?> screening aangemaakt</a></li><?php 
+							}
+						} ?>
 					</ul>
 				</li>
 				<li class="toolbar-item"><button type="submit" name="logout">Log uit<i class="fa fa-power-off"></i></button></li>

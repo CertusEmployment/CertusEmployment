@@ -41,7 +41,7 @@ small { font-size: 11px; color: orange; }
 .red:visited { color: darkred;}
 .loginred { color: darkred; position: absolute; margin-top: -25px;}
 .errormessage { color: #990000; }
-.errorinput { background: rgba(204, 0, 0, 0.2);border: 1px solid red }
+.errorinput { background: rgba(204, 0, 0, 0.2);border: 1px solid red; }
 .download-link { color: #303030!important; }
 .fa-empty { padding-left: 14px; color: #999; }
 .ul-disc li { list-style: disc; }
@@ -100,7 +100,7 @@ ul.sub-menu-alert, ul.sub-menu-option {
 ul.sub-menu-alert { background: #ccc; width: 250px; }
 ul.sub-menu-option { background: #ccc; width: 200px; }
 	.sub-menu-option a, .sub-menu-option a { font-size: 12px; }
-	ul .sub-menu-alert p { padding: 7px 10px; }
+	ul .sub-menu-alert p { padding: 7px 10px; text-align: center; }
 	ul .sub-menu-alert p:hover { cursor: default; }
 	ul .sub-menu-alert li { padding: 15px 10px 10px 10px; }
 	ul .sub-menu-option li { padding: 10px; }

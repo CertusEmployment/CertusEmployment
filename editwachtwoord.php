@@ -74,15 +74,16 @@ $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/'; //6 characters, 1 h
 				} else {
 					$posting=true;
 				}
-
-				if (!preg_match($regex, $_POST['new-password'])) {
-					$errormessage = "Wachtwoord voldoet niet aan de eisen.";
-					$errorclass = "class='errorinput'";
-					unset($_POST['new-password']);
-					unset($_POST['new-password-repeat']);
-					$posting=false;
-				} else {
-					$posting=true;
+				if ($_SESSION['table']!='admin'){
+					if (!preg_match($regex, $_POST['new-password'])) {
+						$errormessage = "Wachtwoord voldoet niet aan de eisen.";
+						$errorclass = "class='errorinput'";
+						unset($_POST['new-password']);
+						unset($_POST['new-password-repeat']);
+						$posting=false;
+					} else {
+						$posting=true;
+					}
 				}
 
 				if($posting){
@@ -106,6 +107,7 @@ $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/'; //6 characters, 1 h
 							<tr>
 								<td><input <?php echo $errorclassold; ?> type="password" name="old-pw" id="old-pw" required></td>
 							</tr>
+							<?php if($_SESSION['table']!='admin'){?><tr><td><p class="comment">Wachtwoord moet minimaal:<ul class="ul-disc comment"><li>6 tekens bestaan</li><li>&eacute;&eacute;n hoofdletter bevatten</li><li>&eacute;&eacute;n cijfer</li><li>mag geen speciale tekens bevatten</li></ul></p></td></tr><?php } ?>
 							<tr>
 								<td><label for="new-password">Nieuw wachtwoord</label></td>
 								<td><label for="new-password-repeat">Herhaal wachtwoord</label></td>
