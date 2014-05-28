@@ -79,8 +79,6 @@ if(!$posting) {
 		<div id="logo">
 			<img src="../images/certus_logo.png" />
 		</div>
-
-		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
 		
 		<div class="content-block">
 			<p class="content-head">Informatievoorziening</p>

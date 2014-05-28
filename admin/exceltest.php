@@ -6,7 +6,7 @@ $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 
 $sql = "SELECT id as 'klantid', voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr as 'telefoonnummer', email, opleverdatum, aanmaakdatum FROM klant WHERE bedrijfid = ".$_GET['bedrijfid']." ";
 $result = mysql_query($sql) or die(mysql_error());
 
-$filename = "Overzicht ".$datumArray[$_GET['maand']]." ".$_GET['jaar'];
+$filename = "Overzicht_".$datumArray[$_GET['maand']]."_".$_GET['jaar'];
 $file_ending = "xls";
 $sep = "\t"; //tabbed character
 
