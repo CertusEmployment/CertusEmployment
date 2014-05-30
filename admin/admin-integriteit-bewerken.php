@@ -42,6 +42,12 @@ if(!isset($_POST['submit'])) {
 	}
 }
 
+if(isset($_POST['delete'])) {
+	$delete = "DELETE FROM integriteit WHERE id=".$_SESSION['integriteitid']."";
+	mysql_query($delete);
+	header("Location: admin-integriteit-overzicht.php");
+}
+
 if(!$posting) {
 
 ?>
@@ -60,7 +66,7 @@ if(!$posting) {
 
 		<form id="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="content-block">
-				<p class="content-head">Vraagstelling <?php echo $_SESSION['integriteitid'] +1; ?></p>
+				<p class="content-head">Vraagstelling <?php echo $_SESSION['integriteitid']; ?></p>
 				<textarea id="vraagstelling" name="vraagstelling" required><?php echo $data['vraag']; ?></textarea>
 
 				<div style="width: 170px; float: left;">
@@ -81,7 +87,11 @@ if(!$posting) {
 	
 			</div>
 
-			<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Voltooien"><input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer"></div>
+			<div id="settings-form-buttonblock">
+				<input type="submit" id="next" name="submit" value="Voltooien">
+				<input type="submit" id="next" name="delete" value="Verwijderen">
+				<input type="submit" onclick="location.href='admin-panel.php'" id="cancel" name="submit" value="Annuleer">
+			</div>
 		</form>
 		
 		<?php include "../footer.php"; ?>

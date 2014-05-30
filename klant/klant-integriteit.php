@@ -18,7 +18,6 @@ $result = mysql_query($sql);
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script>
 	<script src="../js/dropzoneIMG.js"></script>
-
 </head>
 
 <?php
@@ -34,12 +33,22 @@ if(!isset($_POST['submit'])){
 	$_SESSION['amount'] = $_SESSION['i'];
 
 	for($_SESSION['p'] = 1; $_SESSION['p']<$_SESSION['i']; $_SESSION['p']++) {
-		$_SESSION['toelichting'.$_SESSION['p'].''] = $_POST['toelichting'.$_SESSION['p'].''];
-		echo $_SESSION['toelichting'.$_SESSION['p']];
+
+		if(isset($_POST['toelichting'.$_SESSION['p'].''])) {
+			$_SESSION['toelichting'.$_SESSION['p'].''] = $_POST['toelichting'.$_SESSION['p'].''];
+			echo $_SESSION['toelichting'.$_SESSION['p']];
+			echo "<br><br>";
+		}
+
+		if(isset($_POST['antwoord'.$_SESSION['p']])){
+			$_SESSION['antwoord'.$_SESSION['p'].''] = $_POST['antwoord'.$_SESSION['p'].''];
+			echo $_SESSION['antwoord'.$_SESSION['p']];
+			echo "<br>";
+		}
 	}
 
 	$posting = true;
-	//header("Location: klant-create-pdf.php");
+	header("Location: klant-create-pdf.php");
 }
 
 if(!$posting) {
@@ -61,13 +70,13 @@ if(!$posting) {
 		<p id="breadcrumbs"><a href="#">Overzicht</a> > <a href="#">Bedrijfsprofiel</a> > <a href="#" class="activepage">Kandidaatprofiel</a></p>
 		<form method="post" id="settings-form">	
 		<?
-
-		$radio_req = "";
-		$text_req = "";
 		
 		while ($row=mysql_fetch_assoc($result)) {
 		echo "<div class='content-block integriteit'>";
-		echo "<p class='integriteit-vraag'>".$row['vraag']."</p>";
+		echo "<p class='integriteit-vraag'><b>".$_SESSION['i'].". </b>".$row['vraag']."</p>";
+
+		$radio_req = "";
+		$text_req = "";
 
 		if($row['optieverplicht'] == 1) {
 			$radio_req = "required";
@@ -80,8 +89,8 @@ if(!$posting) {
 		if($row['radiobutton']==1) {
 		?>
 			<div style='width: 100%; margin-bottom: 10px;'>
-			<label for="ja<?php echo $_SESSION['i']; ?>"><input style="margin:20px 5px 20px 30px;" type="radio" name="antwoord<?php echo $_SESSION['i']; ?>" id="ja<?php echo $_SESSION['i']; ?>" value="Ja" <?php echo $radio_req; ?>>Ja</label>
-			<label for="nee<?php echo $_SESSION['i']; ?>"><input style="margin:20px 5px 20px 30px;" type="radio" name="antwoord<?php echo $_SESSION['i']; ?>" id="nee<?php echo $_SESSION['i']; ?>" value="Nee" <?php echo $radio_req; ?>>Nee</label>
+				<label for="ja<?php echo $_SESSION['i']; ?>"><input style="margin:20px 5px 20px 30px;" type="radio" name="antwoord<?php echo $_SESSION['i']; ?>" id="ja<?php echo $_SESSION['i']; ?>" value="Ja" <?php echo $radio_req; ?>>Ja</label>
+				<label for="nee<?php echo $_SESSION['i']; ?>"><input style="margin:20px 5px 20px 30px;" type="radio" name="antwoord<?php echo $_SESSION['i']; ?>" id="nee<?php echo $_SESSION['i']; ?>" value="Nee" <?php echo $radio_req; ?>>Nee</label>
 			</div>
 
 		<?php
@@ -90,8 +99,8 @@ if(!$posting) {
 		if($row['toelichting']==1) {
 		?>
 		
-			<label class="bold" for="toelichting<?php echo $_SESSION['i']; ?>">Toelichting</label>";
-			<textarea id="toelichting<?php echo $_SESSION['i']; ?>" name="toelichting<?php echo $_SESSION['i']; ?>" <?php echo $text_req; ?>></textarea>
+			<label class="bold" for="toelichting<?php echo $_SESSION['i']; ?>">Toelichting<?php if($text_req == "required") { echo "<span class='red bold big'> * </span>"; } ?></label>
+			<textarea id="toelichting<?php echo $_SESSION['i']; ?>" maxlenght="10" name="toelichting<?php echo $_SESSION['i']; ?>" <?php echo $text_req; ?>></textarea>
 		
 		<?php
 		}

@@ -2,6 +2,8 @@
 include "../connect.php";
 session_start();
 
+$p = 1;
+
 $sql = "SELECT * FROM integriteit";
 $result = mysql_query($sql);
 
@@ -80,14 +82,15 @@ if(!$posting) {
 					?>
 
 					<tr class="trlink" onclick="document.location = 'admin-integriteit-overzicht.php?integriteitid=<?php echo $row['id']; ?>';">
-						<td><?php echo $row['id'] + 1; ?></td>
-						<td><?php echo substr($row['vraag'], 0, 10); ?></td>
+						<td><?php echo $p; ?></td>
+						<td><?php echo substr($row['vraag'], 0, 15); ?></td>
 						<td><?php echo $radiobutton; ?></td>
 						<td><?php echo $toelichting; ?></td>
 						<td><a href="admin-integriteit-overzicht.php?integriteitid=<?php echo $row['id']; ?>">Bewerken</a></td>
 					</tr>
 
 				<?php
+				$p++;
 				}
 				?>
 				</table>

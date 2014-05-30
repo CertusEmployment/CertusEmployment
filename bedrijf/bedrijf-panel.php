@@ -53,7 +53,8 @@ $result_klant = mysql_query($query_klant);
 		<div id="logo">
 			<img src="../images/certus_logo.png" />
 		</div>
-<?php while ($row = mysql_fetch_array($result)) { ?>
+
+		<?php while ($row = mysql_fetch_array($result)) { ?>
 		<div class="content-block">
 			<table class="profiletable">
 			
@@ -103,7 +104,8 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 			</table>
 		</div>
-<?php } ?>
+		<?php } ?>
+
 		<div class="screening-list">
 			<table id="filterTable" class="profiletable order-table table">
 				<thead>
@@ -124,6 +126,7 @@ $result_klant = mysql_query($query_klant);
 					<th class="skip-filter">Rapport</th>
 					<th class="skip-filter">Profiel</th>
 				</tr>
+
 				<?php while ($row = mysql_fetch_array($result_klant)) {
 				 ?>
 					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $row['id']; ?>';"> -->
@@ -135,10 +138,8 @@ $result_klant = mysql_query($query_klant);
 						<td class="cursive"><?php echo (empty($row['rapport'])) ? "In bewerking" : "Rapport voltooid" ; ?></td>
 						<td><a href="bedrijf-panel.php?klantid=<?php echo $row['id']; ?>">link</a></td>
 					</tr>
-				<?php 
-
-				}
-				?>
+				<?php } ?>
+				
 			</table>
 		</div>
 
