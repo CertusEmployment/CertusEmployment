@@ -2,6 +2,8 @@
 include "../connect.php"; 
 session_start();
 
+ob_start();
+
 $_SESSION['p'] = 1;
 
 $sql = "SELECT * FROM integriteit";
