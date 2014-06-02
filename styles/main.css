@@ -49,6 +49,7 @@ small { font-size: 11px; color: orange; }
 #filterTable th select option:nth-child(1){ display: none; }
 .input_hidden { position: absolute; left: -9999px; }
 .controleul li {list-style: disc;}
+.skip-filter, .no-skip-filter {width: 100%;}
 
 
 

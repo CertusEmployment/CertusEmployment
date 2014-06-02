@@ -106,10 +106,6 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 			</table>
 		</div>
-<<<<<<< HEAD
-		<?php } ?>
-=======
->>>>>>> FETCH_HEAD
 
 		<div class="screening-list">
 			<table id="filterTable" class="profiletable order-table table">
@@ -131,12 +127,8 @@ $result_klant = mysql_query($query_klant);
 					<th class="skip-filter">Rapport</th>
 					<th class="skip-filter">Profiel</th>
 				</tr>
-<<<<<<< HEAD
 
-				<?php while ($row = mysql_fetch_array($result_klant)) {
-=======
 				<?php while ($kandidaten = mysql_fetch_array($result_klant)) {
->>>>>>> FETCH_HEAD
 				 ?>
 					<!-- <tr class="trlink" onclick="document.location = 'bedrijf-kandidaatprofiel.php?id=<?php echo $kandidaten['id']; ?>';"> -->
 					<tr class="trlink" onclick="document.location = 'bedrijf-panel.php?klantid=<?php echo $kandidaten['id']; ?>';">

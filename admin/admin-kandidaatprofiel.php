@@ -172,8 +172,7 @@ if(isset($_GET['delete'])) {
 						$pakketsql = "SELECT * FROM maatwerk WHERE klantid=".$_SESSION['klantid']." ";
 						$pakketresult = mysql_query($pakketsql)or die(mysql_error());
 						$pakket = mysql_fetch_assoc($pakketresult);
-						echo "<p>Pakketsamenstelling:</p>";
-						echo "<ul class='ul-disc'>";
+						echo "<ul class='ul-disc comment'>";
 						echo ($pakket['idcheck']==1) ? "<li>ID Check</li>" : ""; 
 						echo ($pakket['werkervaring']==1) ? "<li>Werkervaring</li>" : ""; 
 						echo ($pakket['opleiding']==1) ? "<li>Opleiding</li>" : ""; 
@@ -190,7 +189,7 @@ if(isset($_GET['delete'])) {
 				    	<a class="dz-remove">Verwijder bestand</a>
 				 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
 				</form>
-				<?php } ?>
+				
 
 			</div>
 			
