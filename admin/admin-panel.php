@@ -33,6 +33,10 @@ include "../connect.php";
 		$_SESSION['bedrijfid'] = $_GET['bedrijfid'];
 		header('location: admin-bedrijfsprofiel.php');
 	}
+	if(isset($_GET['klantid'])) {
+		$_SESSION['klantid'] = $_GET['klantid'];
+		header('location: admin-kandidaatprofiel.php');
+	}
 	?>
 
 		<div id="wrapper">
@@ -84,7 +88,7 @@ include "../connect.php";
 								elseif ($date1->diff($date2)->days == 1) { ?> <td>Gisteren</td> <?php } //Screening gisteren aangemaakt
 								else { ?><td><?php echo $date1->diff($date2)->days." dagen geleden"; ?></td> <?php } //Screening ouder dan gisteren
 							?>
-							<td class="cursive"><a href="admin-kandidaatprofiel.php?id=<?php echo $recentrow['id'] ;?>">link</a></td>
+							<td class="cursive"><a href="admin-panel.php?klantid=<?php echo $recentrow['id'] ;?>">link</a></td>
 						</tr>
 					<?php
 					} //ENDIF

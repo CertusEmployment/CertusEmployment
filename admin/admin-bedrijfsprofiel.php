@@ -117,7 +117,7 @@ if(isset($_GET['delete'])) {
 				</tr>
 				<tr>
 					<th colspan="2"><a class="download-link" href="maandoverzicht_excel.php?maand=<?php echo date('n'); ?>&jaar=<?php echo date('Y'); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><img src="../images/excel.png" width="25px"> Download maandoverzicht - <?php echo ucfirst($datumArray[date('n')])." ".date('Y'); ?></a></th>
-					<th>Oudere maandoverzichten </th>
+					<th style="color: #303030;">Oudere maandoverzichten </th>
 					<th>
 						<select onchange="javascript:location.href = this.value;">
 							<option selected value="#">--Selecteer overzicht--</option>
