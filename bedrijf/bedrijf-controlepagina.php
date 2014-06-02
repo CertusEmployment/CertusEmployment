@@ -165,7 +165,6 @@ if(!$posting) {
 				<tr><td><small><a href="bedrijf-addkandidaat.php">Gegevens wijzigen</a></small></td></tr>
 			</table>
 		</div>
-<?php echo "ID ".$_SESSION['identiteit']."<br>Werkervaring ". $_SESSION['werkervaring']."<br>Opleiding ".$_SESSION['opleiding']."<br>Online onderzoek ".$_SESSION['onderzoek']."<br>Financieel ".$_SESSION['financieel']."<br>VOG ".$_SESSION['vog']."<br>Klantid ".$klantid; ?>
 		<div class="content-block">
 			<table class="double-table">
 				<tr>

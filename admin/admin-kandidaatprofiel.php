@@ -20,7 +20,7 @@ if(isset($_GET['delete'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht bedrijven</title>
+	<title>Kandidaatprofiel</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -109,24 +109,37 @@ if(isset($_GET['delete'])) {
 
 			<div class="content-block">
 				<p class="content-head">Bestanden</p>
-				<table class="recenttable">
-					<tr>
-						<td><a style="color:black;" href="#">CV.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">ID.jpeg</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-					<tr>
-						<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
-						<td><a href="#">verwijderen</a></td>
-					</tr>
-				</table>
+				<table class="recentable">
+					<?php if ($row['cv']!=NULL) {?>
+						<tr>
+							<td>CV.docx</td>
+							<td><a href="#">Verwijderen</a></td>
+						</tr>
+					<?php } ?>
+					<?php if ($row['identiteit']!=NULL) {?>
+						<tr>
+							<td>ID.jpg</td>
+							<td><a href="#">Verwijderen</a></td>
+						</tr>
+					<?php } ?>
+					<?php if ($row['toestemming']!=NULL) {?>
+						<tr>
+							<td>Toestemmingsverklaring.docx</td>
+							<td><a href="#">Verwijderen</a></td>
+						</tr>
+					<?php } ?>
+					<?php if ($row['integriteit']!=NULL) {?>
+						<tr>
+							<td>Integriteitsverklaring.pdf</td>
+							<td><a href="#">Verwijderen</a></td>
+						</tr>
+					<?php } ?>
+					<?php if ($row['cv']==NULL&&$row['identiteit']==NULL&&$row['toestemming']==NULL&&$row['integriteit']==NULL) {?>
+						<tr>
+							<td class="comment">Geen bestanden geupload</td>
+						</tr>
+					<?php } ?>
+					</table>
 			</div>
 
 			<div class="content-block">
@@ -146,7 +159,7 @@ if(isset($_GET['delete'])) {
 						echo ($pakket['financieel']==1) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
 						echo ($pakket['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
 						echo "</ul>";
-					} else { echo"niet 3";}
+					}
 				?>
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>

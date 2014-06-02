@@ -1,6 +1,7 @@
 @import url(reset.css);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
 	background: #ccc;
@@ -34,10 +35,6 @@ label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 small { font-size: 11px; color: orange; }
 .comment { color: #999999; font-size: 13px; margin-top: 2px; }
 .red { color: darkred; }
-/*#pakketform label { color: red; }
-#pakketform label + input[type="radio"]:checked {
-    color: red;
-}*/
 .red:visited { color: darkred;}
 .loginred { color: darkred; position: absolute; margin-top: -25px;}
 .errormessage { color: #990000; }
@@ -202,7 +199,7 @@ MAIN
 	margin: 0px 15px 20px 15px;
 	padding: 10px 20px;
 	border: solid 1px black;
-	border-radius: 2px;	
+	border-radius: 2px;
 }
 	.content-block table { border-collapse: collapse; }
 	.content-block table td { font-size: 12px; padding: 5px 2px 5px 2px; }

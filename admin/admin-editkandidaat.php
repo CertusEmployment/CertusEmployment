@@ -191,22 +191,35 @@ if(!$posting) {
 				<div class="content-block">
 					<p class="content-head">Bestanden</p>
 					<table>
+					<?php if ($row['cv']!=NULL) {?>
 						<tr>
 							<td>CV.docx</td>
 							<td><a href="#">Verwijderen</a></td>
 						</tr>
+					<?php } ?>
+					<?php if ($row['identiteit']!=NULL) {?>
 						<tr>
 							<td>ID.jpg</td>
 							<td><a href="#">Verwijderen</a></td>
 						</tr>
+					<?php } ?>
+					<?php if ($row['toestemming']!=NULL) {?>
 						<tr>
 							<td>Toestemmingsverklaring.docx</td>
 							<td><a href="#">Verwijderen</a></td>
 						</tr>
+					<?php } ?>
+					<?php if ($row['integriteit']!=NULL) {?>
 						<tr>
 							<td>Integriteitsverklaring.pdf</td>
 							<td><a href="#">Verwijderen</a></td>
 						</tr>
+					<?php } ?>
+					<?php if ($row['cv']==NULL&&$row['identiteit']==NULL&&$row['toestemming']==NULL&&$row['integriteit']==NULL) {?>
+						<tr>
+							<td class="comment">Geen bestanden geupload</td>
+						</tr>
+					<?php } ?>
 					</table>
 				</div>
 

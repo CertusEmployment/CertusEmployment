@@ -34,9 +34,6 @@ $.fn.ddTableFilter = function(options) {
       });
       if(opts.length < options.minOptions){
         return;
-      } 
-      if(options.sortOpt) {
-        opts.sort(options.sortOptCallback);
       }
       $.each(opts, function() {
         $(selectbox).append('<option value="' + this.val + '">' + this.text + '</option>')
