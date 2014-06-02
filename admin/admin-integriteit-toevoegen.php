@@ -33,7 +33,8 @@ if(!isset($_POST['submit'])) {
 
 	if(!empty($vraagstelling)) {
 		$update = "INSERT INTO integriteit (vraag, radiobutton, toelichting, optieverplicht, textverplicht) VALUES ('".$vraagstelling."', ".$optie.", ".$toelichting.", ".$verplichtoptie.", ".$verplichttext." )";
-		mysql_query($update)or die(mysql_error());
+		mysql_query($update) or die(mysql_error());
+
 		header("Location: admin-integriteit-overzicht.php");
 	}
 }

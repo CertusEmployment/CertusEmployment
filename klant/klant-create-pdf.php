@@ -4,6 +4,7 @@ session_start();
 
 $sql = "SELECT * FROM integriteit";
 $result = mysql_query($sql);
+$tempid = $_SESSION['id'];
 
 require_once('../pdf/fpdf.php');
 require_once('../pdf/fpdi.php');
@@ -32,63 +33,81 @@ class PDF extends FPDF
 // Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
-$pdf->AddPage();
 $pdf->SetFont('Times','',12);
 
-//for($i=1;$i<=40;$i++)
-  //$pdf->Cell(0,10,'Printing line number '.$i,0,1);
+$space = 0;
 
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->setXY(10, 30);
-$pdf->Cell(0,1, '1.',0,1);
-$pdf->SetFont('Times','',12);
-$pdf->setXY(15, 28);
-$pdf->Multicell(0, 5, wordwrap('Vestibulum id ligula porta felis euismod semper. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor.', 90));
+// echo de content van de intergriteitsverklaring
+// in de PDF pagina. Posities worden gezet met SETXY
+// $space is om de spatie tussen de verschillende lijnen te bepalen
+// en worden dus ook alijd verdubbeld met hetzelfde getal (+84)
 
-$pdf->SetFont('Times','B',12);
-$pdf->SetXY(30, 44);
-$pdf->Cell(0,1, 'Ja',0,1);
+for($p = 1; $p<$_SESSION['i']; $p++) {
 
-$pdf->SetFont('Times','',12);
-$pdf->SetTextColor(243,146,11);
-$pdf->SetXY(15, 52);
-$pdf->Cell(0,1, 'Toelichting:',0,1);
+	$row=mysql_fetch_assoc($result);
+	$pdf->AddPage();
 
-$pdf->SetFont('Times','',12);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetXY(15, 56);
-$pdf->Multicell(0, 5, wordwrap('Vestibulum id ligula porta felis euismod semper. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor.', 90));
+	if(empty($_SESSION['toelichting'.$p.''])) {
+		$toelichting = "-";
+	} else {
+		$toelichting = $_SESSION['toelichting'.$p.''];
+	}
 
+	$pdf->SetFont('Times', 'B', 11);
+	$pdf->setXY(10, 30+$space);
+	$pdf->Cell(0,1, "".$p.".",0,1);
+	$pdf->SetFont('Times','',12);
+	$pdf->setXY(15, 28+$space);
+	$pdf->Multicell(0, 5, wordwrap("".$row['vraag']."", 90));
 
+	$pdf->SetFont('Times','B',12);
+	$pdf->SetXY(30, 54+$space);
+	$pdf->Cell(0,1, "Ja",0,1);
 
+	$pdf->SetFont('Times','',12);
+	$pdf->SetTextColor(243,146,11);
+	$pdf->SetXY(15, 64+$space);
+	$pdf->Cell(0,1, 'Toelichting:',0,1);
 
+	$pdf->SetFont('Times','',12);
+	$pdf->SetTextColor(0,0,0);
+	$pdf->SetXY(15, 68+$space);
+	$pdf->Multicell(0, 5, wordwrap("".$toelichting."", 90));
+	$space = $space+120;
+	$p++;
 
+	$pdf->SetFont('Times', 'B', 11);
+	$pdf->setXY(10, 30+$space);
+	$pdf->Cell(0,1, "".$p.". ",0,1);
+	$pdf->SetFont('Times','',12);
+	$pdf->setXY(15, 28+$space);
+	$pdf->Multicell(0, 5, wordwrap("".$row['vraag']."", 90));
 
+	$pdf->SetFont('Times','B',12);
+	$pdf->SetXY(30, 54+$space);
+	$pdf->Cell(0,1, "Ja",0,1);
 
+	$pdf->SetFont('Times','',12);
+	$pdf->SetTextColor(243,146,11);
+	$pdf->SetXY(15, 64+$space);
+	$pdf->Cell(0,1, 'Toelichting:',0,1);
 
+	$pdf->SetFont('Times','',12);
+	$pdf->SetTextColor(0,0,0);
+	$pdf->SetXY(15, 68+$space);
+	$pdf->Multicell(0, 5, wordwrap("".$toelichting."", 90));
 
-$pdf->SetFont('Arial', 'B', 11);
-$pdf->setXY(10, 94);
-$pdf->Cell(0,1, '2.',0,1);
-$pdf->SetFont('Times','',12);
-$pdf->setXY(15, 92);
-$pdf->Multicell(0, 5, wordwrap('Vestibulum id ligula porta felis euismod semper. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor.', 90));
+	$space=0;
 
-$pdf->SetFont('Times','B',12);
-$pdf->SetXY(30, 108);
-$pdf->Cell(0,1, 'Ja',0,1);
+}
 
-$pdf->SetFont('Times','',12);
-$pdf->SetTextColor(243,146,11);
-$pdf->SetXY(15, 116);
-$pdf->Cell(0,1, 'Toelichting:',0,1);
+// Output PDF
+mkdir("../file-upload/".$_SESSION['id']."/verklaring/", 0777);
+$pdf->Output("../file-upload/".$_SESSION['id']."/verklaring/integriteit.pdf", "F");
 
-$pdf->SetFont('Times','',12);
-$pdf->SetTextColor(0,0,0);
-$pdf->SetXY(15, 120);
-$pdf->Multicell(0, 5, wordwrap('Vestibulum id ligula porta felis euismod semper. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor.', 90));
+// Insert PDF link
+$sql = "UPDATE klant SET integriteit='../file-upload/".$tempid."/verklaring/integriteit.pdf' WHERE id=".$_SESSION['id']." ";
+mysql_query($sql);
 
-
-$pdf->Output();
-
+header("Location: klant-panel.php");
 ?>

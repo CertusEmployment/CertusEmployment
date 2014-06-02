@@ -32,6 +32,7 @@ label { font-size: 12px; font-family: 'Open Sans', sans-serif; }
 .trlink { cursor: pointer; }
 .bold { font-weight: bold; }
 .cursive { font-style: italic; }
+.big { font-size: 14px; }
 small { font-size: 11px; color: orange; }
 .comment { color: #999999; font-size: 13px; margin-top: 2px; }
 .red { color: darkred; }
