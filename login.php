@@ -3,6 +3,7 @@
 <head>
 	<title>Login</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<?php include "connect.php"; ?>
 	<link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>

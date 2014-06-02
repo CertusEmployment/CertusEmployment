@@ -17,6 +17,7 @@ $errorclass = "";
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<title>Klant wijzigen</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -216,18 +217,6 @@ if(!$posting) {
 						<tr>
 							<td colspan="2"><input value="<?php echo $row['gebruikersnaam']; ?>" type="text" name="username" id="username"></td>
 						</tr>
-						<!-- <tr>
-							<td colspan="2"><p class="comment">Gebruik minimaal 6 karakters, waarvaan een cijfer en een hoofdletter.</p></td>
-						</tr>
-						<?php echo (empty($errormessage)) ? "" : "<tr><td class='errormessage'>".$errormessage."</td></tr>" ;?>
-						<tr>
-							<td><label for="password">Wachtwoord</label></td>
-						</tr>
-
-						<tr>
-							<td><input type="text" name="password" id="password" <?php echo $errorclass; ?> ></td>
-						</tr>
- -->
 					</table>
 				</div>
 				<div class="content-block">

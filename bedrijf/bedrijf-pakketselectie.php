@@ -12,6 +12,7 @@ $pakketerrorclass = "";
 <head>
 	<title>Pakket selectie</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
@@ -55,12 +56,12 @@ if(!isset($_POST['submit'])) {
 		$pakketerrorclass = "class='errorinput'";
 	}
 	if($_SESSION['pakket']==3){
-		$_SESSION['identiteit'] = $_POST['identiteit'];
-		$_SESSION['opleiding'] = $_POST['opleiding'];
-		$_SESSION['werkervaring'] = $_POST['werkervaring'];
-		$_SESSION['onderzoek'] = $_POST['onderzoek'];
-		$_SESSION['financieel'] = $_POST['financieel'];
-		$_SESSION['vog'] = $_POST['vog'];
+		$_SESSION['identiteit'] = (isset($_POST['identiteit'])) ? $_POST['identiteit'] : 0 ;
+		$_SESSION['opleiding'] = (isset($_POST['opleiding'])) ? $_POST['opleiding'] : 0 ;
+		$_SESSION['werkervaring'] = (isset($_POST['werkervaring'])) ? $_POST['werkervaring'] : 0 ;
+		$_SESSION['onderzoek'] = (isset($_POST['onderzoek'])) ? $_POST['onderzoek'] : 0 ;
+		$_SESSION['financieel'] = (isset($_POST['financieel'])) ? $_POST['financieel'] : 0 ;
+		$_SESSION['vog'] = (isset($_POST['vog'])) ? $_POST['vog'] : 0 ;
 		$_SESSION['pakketboolean'] = 1;
 	}
 	//die();

@@ -4,6 +4,7 @@
 <head>
 	<title>Nieuw Wachtwoord</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 </head>
@@ -23,6 +24,8 @@ $errormessage = "";
 $errorclass = "";
 $errorclassold = "";
 
+$regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/'; //6 characters, 1 hoofdletter, 1 cijfer
+
 if(!isset($_POST['submit'])) {
 	$posting = false;
 } else {
@@ -31,9 +34,14 @@ if(!isset($_POST['submit'])) {
 	$repeat = $_POST['repeat'];
 	$password = hash('sha1',$temp);
 
-	if($temp != $repeat) {
+	if($temp !== $repeat) {
 		$posting = false;
 		$errormessage = "Wachtwoorden komen niet overeen";
+		$errorclass = "errorinput";
+	}
+	if(!preg_match($regex, $temp)){
+		$posting = false;
+		$errormessage = "Wachtwoord voldoet niet aan de eissen.";
 		$errorclass = "errorinput";
 	}
 
@@ -62,7 +70,7 @@ if(!$posting) {
 		<form id="settings-form" name="settings-form" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 			<div class="content-block settings-block">
 				<p>Omdat dit de eerste keer is dat u inlogt, is er een nieuw wachtwoord nodig.</p>
-				<p class="comment">Wachtwoord moet minimaal 6 karakters, een cijfer en een hoofdletter bevatten.</p>
+				<p class="comment">Wachtwoord moet minimaal:<ul class="ul-disc comment"><li>6 tekens bestaan</li><li>&eacute;&eacute;n hoofdletter bevatten</li><li>&eacute;&eacute;n cijfer</li><li>mag geen speciale tekens bevatten</li></ul></p>
 				<p class="red"><?php echo $errormessage; ?></p>
 				<table id="settings-table">
 					<tr>

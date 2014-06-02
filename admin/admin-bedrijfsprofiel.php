@@ -32,6 +32,7 @@ if(isset($_GET['delete'])) {
 <html>
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<title>Overzicht bedrijven</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
@@ -113,7 +114,7 @@ if(isset($_GET['delete'])) {
 					<td></td>
 				</tr>
 				<tr>
-					<th colspan="2"><a class="download-link" href=""><img src="../images/excel.png" width="25px"> Download maandoverzicht - Maart 2014</a></th>
+					<th colspan="2"><a class="download-link" href="exceltest.php?maand=<?php echo date('n'); ?>&jaar=<?php echo date('Y'); ?>&bedrijfid=<?php echo $row['id'] ?>"><img src="../images/excel.png" width="25px"> Download maandoverzicht - <?php echo ucfirst($datumArray[date('n')])." ".date('Y'); ?> </a></th>
 				</tr> 
 				<?php } //ENDWHILE ?>
 			</table>

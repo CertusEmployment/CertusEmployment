@@ -22,6 +22,7 @@ if(isset($_GET['delete'])) {
 <head>
 	<title>Overzicht bedrijven</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
@@ -130,8 +131,23 @@ if(isset($_GET['delete'])) {
 
 			<div class="content-block">
 				<p class="content-head">Screeningsinformatie</p>
-				<p>Pakket <?php echo $row['pakket']; ?></p>
 				<p>Opleverdatum: <?php echo date('d', strtotime($row['opleverdatum'])).' '.$datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></p>
+				<p>Pakket <?php echo $row['pakket']; ?></p>
+				<?php 
+					if($row['pakket']==3) {
+						$pakketsql = "SELECT * FROM maatwerk WHERE klantid=".$_SESSION['klantid']." ";
+						$pakketresult = mysql_query($pakketsql)or die(mysql_error());
+						$pakket = mysql_fetch_assoc($pakketresult);
+						echo "<p>Pakketsamenstelling:</p>";
+						echo "<ul class='ul-disc'>";
+						echo ($pakket['idcheck']==1) ? "<li>ID Check</li>" : ""; 
+						echo ($pakket['werkervaring']==1) ? "<li>Werkervaring</li>" : ""; 
+						echo ($pakket['opleiding']==1) ? "<li>Opleiding</li>" : ""; 
+						echo ($pakket['financieel']==1) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
+						echo ($pakket['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
+						echo "</ul>";
+					} else { echo"niet 3";}
+				?>
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 				 	<div class="fallback">
