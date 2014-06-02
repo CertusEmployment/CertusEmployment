@@ -29,6 +29,47 @@ if(isset($_GET['delete'])) {
 	<script src="../js/dropzone.js"></script> 
 	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
+
+<?php
+// Admin verwijderd een kandidaat bestand.
+if(isset($_POST['submit'])) {
+	$sql = "UPDATE klant SET cv='' WHERE id='".$_SESSION['klantid']."' ";
+	mysql_query($sql);
+
+	if(mysql_query($sql)) {
+		header("Location: admin-kandidaatprofiel.php");
+	}
+}
+
+if(isset($_POST['submit1'])) {
+	$sql = "UPDATE klant SET identiteit='' WHERE id='".$_SESSION['klantid']."' ";
+	mysql_query($sql);
+
+	if(mysql_query($sql)) {
+		header("Location: admin-kandidaatprofiel.php");
+	}
+}
+
+if(isset($_POST['submit2'])) {
+	$sql = "UPDATE klant SET toestemming='' WHERE id='".$_SESSION['klantid']."' ";
+	mysql_query($sql);
+
+	if(mysql_query($sql)) {
+		header("Location: admin-kandidaatprofiel.php");
+	}
+}
+
+if(isset($_POST['submit3'])) {
+	$sql = "UPDATE klant SET integriteit='' WHERE id='".$_SESSION['klantid']."' ";
+	mysql_query($sql);
+
+	if(mysql_query($sql)) {
+		header("Location: admin-kandidaatprofiel.php");
+	}
+}
+
+?>
+
 <body>
 
 <div id="container">
@@ -111,11 +152,13 @@ if(isset($_GET['delete'])) {
 				<p class="content-head">Bestanden</p>
 
 				<table class="recenttable">
+				<form id="settings-form" method="post">
+
 					<tr>
 						<td><p>CV</p></td>
 						<?php if(!empty($row['cv'])) { ?>
-						<td style="padding-left: 10px;"><a href="#">Download</td>
-						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<td style="padding-left: 10px;"><a href="<?php echo $row['cv']; ?>">Download</td>
+						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
 						<?php } ?>
@@ -123,8 +166,8 @@ if(isset($_GET['delete'])) {
 					<tr>
 						<td><p>Identiteit</p></td>
 						<?php if(!empty($row['identiteit'])) { ?>
-						<td style="padding-left: 10px;"><a href="#">Download</td>
-						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<td style="padding-left: 10px;"><a href="<?php echo $row['identiteit']; ?>">Download</td>
+						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit1" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
 						<?php } ?>
@@ -132,8 +175,8 @@ if(isset($_GET['delete'])) {
 					<tr>
 						<td><p>Toestemmingsverklaring</p></td>
 						<?php if(!empty($row['toestemming'])) { ?>
-						<td style="padding-left: 10px;"><a href="#">Download</td>
-						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<td style="padding-left: 10px;"><a href="<?php echo $row['toestemming']; ?>">Download</td>
+						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit2" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
 						<?php } ?>
@@ -141,12 +184,13 @@ if(isset($_GET['delete'])) {
 					<tr>
 						<td><p>Integriteit</p></td>
 						<?php if(!empty($row['integriteit'])) { ?>
-						<td style="padding-left: 10px;"><a href="#">Download</td>
-						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<td style="padding-left: 10px;"><a href="<?php echo $row['integriteit']; ?>">Download</td>
+						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit3" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
 						<?php } ?>
 					</tr>
+				</form>
 				</table>
 
 			</div>
@@ -181,6 +225,10 @@ if(isset($_GET['delete'])) {
 						echo ($pakket['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
 						echo "</ul>";
 					}
+
+				if(!empty($rapport)) {
+					echo "<p style='margin-left: 20px;'><img src='../images/excel.png' style='width: 25px; vertical-align:middle; padding-right: 5px;' /><a href='".$row['rapport']."'>Rapport beschikbaar, Download.</a></p>";
+				} else {
 				?>
 				<!-- dropzone -->
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
@@ -190,7 +238,8 @@ if(isset($_GET['delete'])) {
 				    	<a class="dz-remove">Verwijder bestand</a>
 				 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
 				</form>
-				<?php } ?>
+				<div><input class="upload-button" type="submit" name="upload" value="Upload" /></div>
+				<?php } //endif ?>
 
 			</div>
 			
@@ -201,7 +250,6 @@ if(isset($_GET['delete'])) {
 		<?php include "../footer.php"; ?>
 
 	</div> <!-- wrapper -->
-
 </div>
 
 </body>
