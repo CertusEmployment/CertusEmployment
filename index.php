@@ -52,7 +52,14 @@ if(!isset($_POST['submit'])) {
 			//check temp password
 			if($klantdata['temppassword'] == '1') {
 				header("Location: klant/klant-new-pw.php");
-			} else {
+			}
+			if($klantdata['temppassword'] == '2') {
+				header("Location: klant/klant-upload.php");
+			}
+			if($klantdata['temppassword'] == '3') {
+				header("Location: klant/klant-integriteit.php");
+			}
+			if($klantdata['temppassword'] == '0') {
 				header("Location: klant/klant-panel.php");
 			}
 		} else {

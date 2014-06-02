@@ -111,20 +111,40 @@ if(isset($_GET['delete'])) {
 				<p class="content-head">Bestanden</p>
 				<table class="recenttable">
 					<tr>
-						<td><a style="color:black;" href="#">CV.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
+						<td><p>CV</p></td>
+						<?php if(!empty($row['cv'])) { ?>
+						<td style="padding-left: 10px;"><a href="#">Download</td>
+						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<?php } else { ?>
+						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
+						<?php } ?>
 					</tr>
 					<tr>
-						<td><a style="color:black;" href="#">ID.jpeg</a></td>
-						<td><a href="#">verwijderen</a></td>
+						<td><p>Identiteit</p></td>
+						<?php if(!empty($row['identiteit'])) { ?>
+						<td style="padding-left: 10px;"><a href="#">Download</td>
+						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<?php } else { ?>
+						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
+						<?php } ?>
 					</tr>
 					<tr>
-						<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
-						<td><a href="#">verwijderen</a></td>
+						<td><p>Toestemmingsverklaring</p></td>
+						<?php if(!empty($row['toestemming'])) { ?>
+						<td style="padding-left: 10px;"><a href="#">Download</td>
+						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<?php } else { ?>
+						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
+						<?php } ?>
 					</tr>
 					<tr>
-						<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
-						<td><a href="#">verwijderen</a></td>
+						<td><p>Integriteit</p></td>
+						<?php if(!empty($row['integriteit'])) { ?>
+						<td style="padding-left: 10px;"><a href="#">Download</td>
+						<td style="padding-left: 10px;"><a href="#">verwijderen</a></td>
+						<?php } else { ?>
+						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
+						<?php } ?>
 					</tr>
 				</table>
 			</div>
@@ -132,7 +152,19 @@ if(isset($_GET['delete'])) {
 			<div class="content-block">
 				<p class="content-head">Screeningsinformatie</p>
 				<p>Opleverdatum: <?php echo date('d', strtotime($row['opleverdatum'])).' '.$datumArray[date('n', strtotime($row['opleverdatum']))].' '.date('Y', strtotime($row['opleverdatum'])); ?></p>
-				<p>Pakket <?php echo $row['pakket']; ?></p>
+				<p>
+				<?php
+					if($row['pakket'] == 1) {
+						echo  "Pakket 1: Een volledige Employment Screening op alle onderdelen.";
+					} elseif($row['pakket'] == 2) {
+						echo "Pakket 2: Controle van een kandidaat met een buitenlands diploma.";
+					} elseif($row['pakket'] == 3) {
+						echo "Pakket 3: Samengesteld pakket.";
+					} elseif($row['pakket'] == 4) {
+						echo "Maatwerk pakket.";
+					}
+				?>
+				</p>
 				<?php 
 					if($row['pakket']==3) {
 						$pakketsql = "SELECT * FROM maatwerk WHERE klantid=".$_SESSION['klantid']." ";
@@ -146,8 +178,15 @@ if(isset($_GET['delete'])) {
 						echo ($pakket['financieel']==1) ? "<li>Financiele situatie en gerechtelijke uitspraken</li>" : ""; 
 						echo ($pakket['vog']==1) ? "<li>Verklaring Omtrent Gedrag &amp; Integriteitsverklaring</li>" : ""; 
 						echo "</ul>";
-					} else { echo"niet 3";}
+					}
+
+				if(!empty($row['rapport'])) {
 				?>
+				<a href="#">Download rapport</a>
+				<?php
+				} else { 	
+				?>
+				<!-- dropzone -->
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 				 	<div class="fallback">
@@ -155,8 +194,10 @@ if(isset($_GET['delete'])) {
 				    	<a class="dz-remove">Verwijder bestand</a>
 				 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
 				</form>
+				<?php } ?>
 
 			</div>
+			
 		<?php
 	
 		?>

@@ -16,6 +16,7 @@ include "../connect.php";
 
 	<?php 
 
+	// Klant profiel
 	include "toolbar-klant.php";
 	echo $_SESSION['id'];
 	$sql = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";

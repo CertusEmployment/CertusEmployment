@@ -49,7 +49,7 @@ if(!isset($_POST['submit'])) {
 		// Update Query
 		$update_sql = "UPDATE klant SET 
 		wachtwoord='".$password."',
-		temppassword=0
+		temppassword=2
 		WHERE id=".$_SESSION['id']." ";
 		$update = mysql_query($update_sql) or die("<br>error : ".mysql_error());
 		header("Location: klant-upload.php");

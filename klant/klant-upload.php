@@ -1,6 +1,10 @@
 <?php include "../connect.php"; 
 session_start();
-mkdir("../file-upload/".$_SESSION['id'], 0777);
+
+// Maak alleen klantmap aan als die niet bestaat.
+if(!glob("../file-upload/".$_SESSION['id']."")) {
+	mkdir("../file-upload/".$_SESSION['id'], 0777);
+}
 
 ?>
 <!DOCTYPE html>
@@ -14,7 +18,6 @@ mkdir("../file-upload/".$_SESSION['id'], 0777);
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script>
 	<script src="../js/dropzoneIMG.js"></script>
-
 </head>
 
 <?php
@@ -24,6 +27,9 @@ if(!isset($_POST['submit'])){
 } else {
 	$posting = true;
 	$digid = 0;
+
+	$verklaring = "";
+	$identiteit = "";
 
 	//If digiD box is ticket set to 1
 	if(isset($_POST['digid'])) { $digid = 1; }
@@ -55,11 +61,9 @@ if(!isset($_POST['submit'])){
 	}
 
 	if($posting) {
-		$sql = "INSERT INTO klant(identiteit, toestemming, digid) VALUES ('".$identiteit."','".$verklaring."', ".$digid.")";
-		$result = mysql_query($sql);
+		$sql = "UPDATE klant SET identiteit='".$identiteit."', toestemming='".$verklaring."', digid=".$digid.", temppassword=3 WHERE id=".$_SESSION['id']." ";
+		$result = mysql_query($sql) or die(mysql_error());
 		header("Location: klant-integriteit.php");
-		echo $verklaring;
-		echo "<br>".$identiteit;
 	}
 
 }
@@ -143,8 +147,6 @@ if(!$posting) {
 
 </body>
 </html>
-
-<!-- INSTEAD OF UPLOAD.PHP -->
 
 <?php
 }

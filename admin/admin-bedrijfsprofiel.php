@@ -97,7 +97,7 @@ if(isset($_GET['delete'])) {
 					<td><?php echo ucfirst($row['plaats']); ?></td>
 				</tr>
 				<tr>
-					<td>Plaats</td>
+					<td>Land</td>
 					<td><?php echo ucfirst($row['land']); ?></td>
 				</tr>
 				<tr>

@@ -106,7 +106,7 @@ mkdir("../file-upload/".$_SESSION['id']."/verklaring/", 0777);
 $pdf->Output("../file-upload/".$_SESSION['id']."/verklaring/integriteit.pdf", "F");
 
 // Insert PDF link
-$sql = "UPDATE klant SET integriteit='../file-upload/".$tempid."/verklaring/integriteit.pdf' WHERE id=".$_SESSION['id']." ";
+$sql = "UPDATE klant SET integriteit='../file-upload/".$tempid."/verklaring/integriteit.pdf', temppassword=0 WHERE id=".$_SESSION['id']." ";
 mysql_query($sql);
 
 header("Location: klant-panel.php");
