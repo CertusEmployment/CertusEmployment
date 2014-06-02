@@ -211,6 +211,7 @@ MAIN
 
 .profiletable td { width: 160px; }
 .rapporttable td { width: 300px; text-align: center; }
+.rapporttable td img { padding-right: 5px; }
 
 .settings-block { padding: 25px; }
 	.settings-block p, .settings-block label { font-size: 13px; }
@@ -506,7 +507,6 @@ DROPZONE
 .integriteit-vraag {
 	margin: 10px 0 10px 0;
 }
-
 
 
 /*

@@ -24,21 +24,21 @@ include "../connect.php";
 	$info = mysql_fetch_assoc($result);
 
 	if(!empty($info['identiteit'])) {
-		$identiteit = "<a href='#'>Download</a>";
+		$identiteit = "<a href='".$info['identiteit']."'>Download</a>";
 	} else {
 		$identiteit = "ID niet goed leesbaar of ongeschikt. <a href='klant-upload.php'>Upload hier</a>";
 	}
 
 	if(!empty($info['toestemming'])) {
-		$toestemming = "<a href='#'>Download</a>";
+		$toestemming = "<a href='".$info['toestemming']."'>Download</a>";
 	} else {
 		$toestemming = "Geen Toestemmingsverklaring geupload. <a href='klant-upload.php'>Upload hier</a>";
 	}
 
 	if(!empty($info['rapport'])) {
-		$rapport = "<a href='#'>Download</a>";
+		$rapport = "<a href='".$info['rapport']."'>Download</a>";
 	} else {
-		$rapport = "Rapport nog niet beschikbaar";
+		$rapport = "Helaas, er is nog geen rapport beschikbaar.";
 	}
 
 	?>
@@ -122,7 +122,7 @@ include "../connect.php";
 			<p class="content-head">Rapport</p>
 			<table class="rapporttable">
 				<tr>
-					<td class="wideCell"><?php echo $rapport; ?></td>
+					<td><?php if(!empty($info['rapport'])) { ?><img src="../images/excel.png" style="width:25px;" ><?php } echo $rapport; ?></td>
 				</tr>
 			</table>
 		</div>
