@@ -7,11 +7,13 @@ include "../connect.php";
 session_start();
 
 $bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_SESSION['bedrijfid']."";
-$bedrijfresult = mysql_query($bedrijfquery);
+$bedrijfresult = mysql_query($bedrijfquery)or die(mysql_error());
 $tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']."";
-$tableresult = mysql_query($tablequery);
-$maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_SESSION['bedrijfid']."";
-$maatwerkresult = mysql_query($maatwerkquery);
+$tableresult = mysql_query($tablequery)or die(mysql_error());
+$overzichtquery = "SELECT aanmaakdatum FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']." GROUP BY MONTH(aanmaakdatum) ORDER BY aanmaakdatum DESC LIMIT 1,18446744073709551615";
+$overzichtresult = mysql_query($overzichtquery);
+$maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_SESSION['bedrijfid']." ";
+$maatwerkresult = mysql_query($maatwerkquery)or die(mysql_error());
 $pakket = mysql_fetch_assoc($maatwerkresult);
 
 $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
@@ -33,7 +35,7 @@ if(isset($_GET['delete'])) {
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
-	<title>Overzicht bedrijven</title>
+	<title>Bedrijfsprofiel</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
@@ -114,7 +116,16 @@ if(isset($_GET['delete'])) {
 					<td></td>
 				</tr>
 				<tr>
-					<th colspan="2"><a class="download-link" href="exceltest.php?maand=<?php echo date('n'); ?>&jaar=<?php echo date('Y'); ?>&bedrijfid=<?php echo $row['id'] ?>"><img src="../images/excel.png" width="25px"> Download maandoverzicht - <?php echo ucfirst($datumArray[date('n')])." ".date('Y'); ?> </a></th>
+					<th colspan="2"><a class="download-link" href="maandoverzicht_excel.php?maand=<?php echo date('n'); ?>&jaar=<?php echo date('Y'); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><img src="../images/excel.png" width="25px"> Download maandoverzicht - <?php echo ucfirst($datumArray[date('n')])." ".date('Y'); ?></a></th>
+					<th>Oudere maandoverzichten </th>
+					<th>
+						<select onchange="javascript:location.href = this.value;">
+							<option selected value="#">--Selecteer overzicht--</option>
+						<?php while ($klantdata=mysql_fetch_assoc($overzichtresult)) { ?>
+							<option value="maandoverzicht_excel.php?maand=<?php echo date('n', strtotime($klantdata['aanmaakdatum'])); ?>&jaar=<?php echo date('Y', strtotime($klantdata['aanmaakdatum'])); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><?php echo ucfirst($datumArray[date('n', strtotime($klantdata['aanmaakdatum']))])." ".date('Y', strtotime($klantdata['aanmaakdatum'])); ?></option>
+						<?php } ?>
+						</select>
+					</th>
 				</tr> 
 				<?php } //ENDWHILE ?>
 			</table>
@@ -136,10 +147,10 @@ if(isset($_GET['delete'])) {
 				<thead>
 				<tr class="table-header-filter">
 					<th class="skip-filter"></th>
-					<th class="noskip-filter"><select><option>--Opleverperiode--</option></select></th>
+					<th class="noskip-filter"><select><option selected disabled>--Opleverperiode--</option></select></th>
 					<th class="skip-filter"></th>
 					<th class="skip-filter"></th>
-					<th class="noskip-filter"><select><option>--Rapport--</option></select></th>
+					<th class="noskip-filter"><select><option selected disabled>--Rapport--</option></select></th>
 					<th class="skip-filter"><form name="filter" id="filter"><input type="text" name="filter" data-table="order-table" class="light-table-filter" placeholder="FILTER"></form></th>
 				</tr>
 				</thead>

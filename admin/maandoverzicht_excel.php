@@ -3,10 +3,10 @@ include "../connect.php";
 
 $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
 
-$sql = "SELECT id as 'klantid', voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr as 'telefoonnummer', email, opleverdatum, aanmaakdatum FROM klant WHERE bedrijfid = ".$_GET['bedrijfid']." ";
+$sql = "SELECT id as 'klantid', voornaam, achternaam, geslacht, straatnaam, huisnummer, huistoevoeging, postcode, plaats, land, geboortedatum, geboorteplaats, telnr as 'telefoonnummer', email, opleverdatum, aanmaakdatum FROM klant WHERE bedrijfid = ".$_GET['bedrijfid']." AND MONTH(aanmaakdatum)=".$_GET['maand']." ";
 $result = mysql_query($sql) or die(mysql_error());
 
-$filename = "Overzicht_".$datumArray[$_GET['maand']]."_".$_GET['jaar'];
+$filename = "maandoverzicht_".$_GET['bedrijfnaam']."_".$datumArray[$_GET['maand']]."_".$_GET['jaar'];
 $file_ending = "xls";
 $sep = "\t"; //tabbed character
 
@@ -16,14 +16,14 @@ header("Content-Disposition: attachment; filename=$filename.xls");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-//start of printing column names as names of MySQL fields
+//Kollom namen
 for ($i = 0; $i < mysql_num_fields($result); $i++) {
     echo mysql_field_name($result,$i) . "\t";
 }
 print("\n");	
-//end of printing column names	
+//Eind kollomnamen
  	
-while($row = mysql_fetch_row($result))	{	//start while loop to get data
+while($row = mysql_fetch_row($result))	{	//Data ophalen
     $schema_insert = "";
     
     for($j=0; $j<mysql_num_fields($result); $j++) {
