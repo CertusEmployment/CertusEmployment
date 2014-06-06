@@ -1,11 +1,6 @@
 <?php include "../connect.php"; 
 session_start();
 
-// Maak alleen klantmap aan als die niet bestaat.
-if(!glob("../file-upload/".$_SESSION['id']."")) {
-	mkdir("../file-upload/".$_SESSION['id'], 0777);
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,42 +21,19 @@ if(!isset($_POST['submit'])){
 	$posting = false;
 } else {
 	$posting = true;
-	$digid = 0;
-
 	$verklaring = "";
-	$identiteit = "";
-
-	//If digiD box is ticket set to 1
-	if(isset($_POST['digid'])) { $digid = 1; }
 
 	//Search folder for files (verklaring) matching the specified extentions.
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.pdf") as $filename) {
+	foreach (glob("../file-upload/".$_SESSION['id']."/toestemming/*") as $filename) {
 		$verklaring = $filename;
 	}
 
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.doc") as $filename) {
-		$verklaring = $filename;
-	}
-
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.docx") as $filename) {
-		$verklaring = $filename;
-	}
-
-	//Search folder for files (ID Kaart) matching the below extentions.
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.png") as $filename) {
-		$identiteit = $filename;
-	}
-
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.jpg") as $filename) {
-		$identiteit= $filename;
-	}
-
-	foreach (glob("../file-upload/".$_SESSION['id']."/*.jpeg") as $filename) {
-		$identiteit = $filename;
+	if(empty($verklaring)) {
+		$posting = false;
 	}
 
 	if($posting) {
-		$sql = "UPDATE klant SET identiteit='".$identiteit."', toestemming='".$verklaring."', digid=".$digid.", temppassword=3 WHERE id=".$_SESSION['id']." ";
+		$sql = "UPDATE klant SET toestemming='".$verklaring."', temppassword=5 WHERE id=".$_SESSION['id']." ";
 		$result = mysql_query($sql) or die(mysql_error());
 		header("Location: klant-integriteit.php");
 	}
@@ -91,7 +63,7 @@ if(!$posting) {
 				Upload hier uw <b>toestemming verklaring</b>, deze kunt u vinden in uw mail of <a href="#">download hem hier</a>.
 			</p>
 				<ul>
-					<li class="help-item pos1 alert">
+					<li class="help-item pos3 alert">
 						<a class="grey help" href="#"><i class="fa fa-question-circle"></i>Wat is dit?</a>
 						<ul class="notification">
 							<li>Met een toestemmingsverklaring verklaart u dat Certus Employment
@@ -99,40 +71,12 @@ if(!$posting) {
 						</ul>
 					</li>
 				</ul>
-			<form action="klant-upload.php" class="dropzone">
+			<form action="klant-upload-verklaring.php" class="dropzone">
 				<i class="fa font" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
 			    	<a class="dz-remove">Verwijder bestand</a>
 			 	</div><p class="comment">Bestandtypes: ,pdf, doc, docx</p>
-			</form>
-		
-			<p class="block">
-				Upload hier een afbeelding van uw <b>paspoort of identiteitskaart</b>, het is belangrijk dat alle gegevens goed leesbaar zijn.
-			</p>
-			<form action="klant-upload.php" class="dropzoneIMG">
-				<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
-			 	<div class="fallback">
-			    	<input name="file" type="file" multiple />
-			    	<a class="dz-remove">Verwijder bestand</a>
-			 	</div><p class="comment">Bestandtypes: jpg, png, pdf</p>
-			</form>
-
-			<form action="#" method="post">
-				<p class="block">
-					<input type="checkbox" id="digid" name="digid" />
-					<label for="digid">Ik beschik over een geldig DigiD.</label>
-				</p>
-				<ul>
-					<li class="help-item pos3 alert">
-						<a class="grey help" href="#"><i class="fa fa-question-circle"></i>Wat is dit?</a>
-						<ul class="notification">
-							<li>DigiD staat voor Digitale Identiteit en is een persoonlijke combinatie van een
-								gebruikersnaam en een wachtwoord. U gebruikt DigiD om u te legitimeren op 
-								internet. Zo weten organisaties dat ze ook echt met u te maken hebben.</li>
-						</ul>
-					</li>
-				</ul>
 			</form>
 			<br class="clear-float">
 		</div>
@@ -154,7 +98,7 @@ if(!$posting) {
 
 $ds = DIRECTORY_SEPARATOR; 
  
-$storeFolder = "../file-upload/".$_SESSION['id'];  
+$storeFolder = "../file-upload/".$_SESSION['id']."/toestemming/";  
  
 if (!empty($_FILES)) {
      

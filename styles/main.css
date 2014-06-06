@@ -432,6 +432,7 @@ ul.notification { z-index: 2; background: white; width: 245px; margin-top: 5px; 
 	.help-item i { color:grey; margin: 5px 0 0 7px; font-size: 20px; vertical-align: bottom; }
 
 .block {
+	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 70%;
 	display: block;
@@ -439,7 +440,7 @@ ul.notification { z-index: 2; background: white; width: 245px; margin-top: 5px; 
 }
 
 .pos1 { top: 238px; }
-.pos3 { top: 655px; }
+.pos3 { top: 225px; }
 
 .block input[type=checkbox] { display:none; }
 .block input[type=checkbox] + label:before {
@@ -523,12 +524,15 @@ DROPZONE
 }
 
 .upload-button {
+	margin-bottom: 20px;
+	margin-left: 90px;
+	text-align: center;
 	border: 1px solid #606060;
 	background: #fff;
 	border-radius: 2px;
 	box-shadow: inset 0 0 1px 1px rgb(236,236,236);
 	padding: 13px;
-	width: 120px;
+	width: 600px;
 	font-size: 11px; 
 	text-decoration: none; 
 	color: black; 
@@ -538,6 +542,26 @@ DROPZONE
 	border: 1px solid orange;
 	cursor: pointer;
 }
+
+.notify {
+	padding: 5px 5px 5px 5px;
+	font-size: 14px;
+	max-width: 840px;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	top: 12px;
+	height: 40px;
+	width: 100%;
+	position: relative;
+	/*display: none;*/
+}
+
+	.friendly { background: darkgreen; }
+	.bad { background: darkred; }
+
+	.notify p {
+		padding-top: 10px;
+	}
 
 /*
 MEDIAQUERIES

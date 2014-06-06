@@ -1,4 +1,4 @@
-<?php $messageklantwelkom = "
+<?php $messageklantfiledelete = "
 <html>
 <head>
 	<title>Welkom bij Certus Employment</title>
@@ -26,16 +26,10 @@
                                 <td align='left' valign='top' style='font-size: 14px;'>
                                     Geachte ".$aanhef." ".$_SESSION['an'].",
                                     <br><br>
-                                    Welkom bij Certus Employment, recentelijk heeft <? //bedrijfnaam ?> u aangemeld voor een employment screening.
-                                    <br><br>
-                                    Hieronder vind u uw tijdelijke <b>login details</b>.
-                                    <br><br>
-                                    Gebruikersnaam: ".$_SESSION['username']."
+                                    Een van de door u upgeloade bestanden voldoet helaas niet aan de eisen. Wij verzoeken u om deze te verbeteren en opnieuw te uploaden.
                                     <br>
-                                    Wachtwoord: ".$_SESSION['temp']."
+                                    Op uw <a href='http://www.cairansteverink.com/certusemployment'>account pagina</a> kunt u zien om welk bestand het gaat.
                                     <br><br>
-                                    Deze informatie kunt u gebruiken om <a href='http://www.cairansteverink.com/certusemployment'>hier</a> in te loggen.
-
                                     <table border='0' cellpadding='20' cellspacing='0' width='100%' id='mailbutton'>
                                     	<tr>
                                     		<td align='center' valign='top'>

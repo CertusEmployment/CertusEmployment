@@ -1,4 +1,4 @@
-<?php
+i<?php
 include "../connect.php"; 
 session_start();
 
@@ -61,8 +61,8 @@ for($p = 1; $p<$_SESSION['i']; $p++) {
 	$pdf->Multicell(0, 5, wordwrap("".$row['vraag']."", 90));
 
 	$pdf->SetFont('Times','B',12);
-	$pdf->SetXY(30, 54+$space);
-	$pdf->Cell(0,1, "Ja",0,1);
+	$pdf->SetXY(15, 54+$space);
+	$pdf->Cell(0,1, "".$_SESSION['antwoord'.$p.'']."",0,1);
 
 	$pdf->SetFont('Times','',12);
 	$pdf->SetTextColor(243,146,11);
@@ -72,7 +72,7 @@ for($p = 1; $p<$_SESSION['i']; $p++) {
 	$pdf->SetFont('Times','',12);
 	$pdf->SetTextColor(0,0,0);
 	$pdf->SetXY(15, 68+$space);
-	$pdf->Multicell(0, 5, wordwrap("".$toelichting."", 90));
+	$pdf->Multicell(0, 5, wordwrap("".$_SESSION['toelichting'.$p.'']."", 90));
 	$space = $space+120;
 	$p++;
 
@@ -84,8 +84,8 @@ for($p = 1; $p<$_SESSION['i']; $p++) {
 	$pdf->Multicell(0, 5, wordwrap("".$row['vraag']."", 90));
 
 	$pdf->SetFont('Times','B',12);
-	$pdf->SetXY(30, 54+$space);
-	$pdf->Cell(0,1, "Ja",0,1);
+	$pdf->SetXY(15, 54+$space);
+	$pdf->Cell(0,1, "".$_SESSION['antwoord'.$p.'']."",0,1);
 
 	$pdf->SetFont('Times','',12);
 	$pdf->SetTextColor(243,146,11);
@@ -95,7 +95,7 @@ for($p = 1; $p<$_SESSION['i']; $p++) {
 	$pdf->SetFont('Times','',12);
 	$pdf->SetTextColor(0,0,0);
 	$pdf->SetXY(15, 68+$space);
-	$pdf->Multicell(0, 5, wordwrap("".$toelichting."", 90));
+	$pdf->Multicell(0, 5, wordwrap("".$_SESSION['toelichting'.$p.'']."", 90));
 
 	$space=0;
 

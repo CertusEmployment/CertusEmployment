@@ -44,6 +44,13 @@ include "../connect.php";
 	?>
 
 	<div id="wrapper">
+		<!--
+		<div class="notify friendly">
+			<p>Het screening rapport is beschikbaar. <a href="">Download.</a></p>
+		</div>
+		<div class="notify bad">
+			<p>Helaas voldeed uw ... niet aan de eisen. Deze kan <a href="">hier</a> opnieuw geupload worden</p>
+		</div> -->
 
 		<div id="logo">
 			<img src="../images/certus_logo.png" />

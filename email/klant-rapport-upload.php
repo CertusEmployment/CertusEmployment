@@ -1,4 +1,4 @@
-<?php $messageklantwelkom = "
+<?php $messageklantrapport = "
 <html>
 <head>
 	<title>Welkom bij Certus Employment</title>
@@ -26,15 +26,9 @@
                                 <td align='left' valign='top' style='font-size: 14px;'>
                                     Geachte ".$aanhef." ".$_SESSION['an'].",
                                     <br><br>
-                                    Welkom bij Certus Employment, recentelijk heeft <? //bedrijfnaam ?> u aangemeld voor een employment screening.
+                                    Uw screening is voltooid en het rapport is beschikbaar. U kunt inloggen om het rapport te downloaden.
                                     <br><br>
-                                    Hieronder vind u uw tijdelijke <b>login details</b>.
-                                    <br><br>
-                                    Gebruikersnaam: ".$_SESSION['username']."
-                                    <br>
-                                    Wachtwoord: ".$_SESSION['temp']."
-                                    <br><br>
-                                    Deze informatie kunt u gebruiken om <a href='http://www.cairansteverink.com/certusemployment'>hier</a> in te loggen.
+                                    U kunt <a href='http://www.cairansteverink.com/certusemployment'>hier</a> inloggen.
 
                                     <table border='0' cellpadding='20' cellspacing='0' width='100%' id='mailbutton'>
                                     	<tr>

@@ -54,9 +54,15 @@ if(!isset($_POST['submit'])) {
 				header("Location: klant/klant-new-pw.php");
 			}
 			if($klantdata['temppassword'] == '2') {
-				header("Location: klant/klant-upload.php");
+				header("Location: klant/klant-upload-identiteit.php");
 			}
 			if($klantdata['temppassword'] == '3') {
+				header("Location: klant/klant-upload-cv.php");
+			}
+			if($klantdata['temppassword'] == '4') {
+				header("Location: klant/klant-upload-verklaring.php");
+			}
+			if($klantdata['temppassword'] == '5') {
 				header("Location: klant/klant-integriteit.php");
 			}
 			if($klantdata['temppassword'] == '0') {

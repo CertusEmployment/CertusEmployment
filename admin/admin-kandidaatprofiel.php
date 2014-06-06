@@ -5,6 +5,13 @@ include "../connect.php";
 
 session_start();
 
+ob_start();
+
+// Maak alleen rapportmap aan als deze niet bestaat.
+if(!glob("../file-upload/".$_SESSION['klantid']."/rapport")) {
+	mkdir("../file-upload/".$_SESSION['klantid']."/rapport", 0777);
+}
+
 if(isset($_GET['bedrijfid'])) {
 	$_SESSION['bedrijfid'] = $_GET['bedrijfid'];
 	header('location: admin-bedrijfsprofiel.php');
@@ -13,6 +20,8 @@ if(isset($_GET['bedrijfid'])) {
 if(isset($_GET['delete'])) {
 	$delsql = "DELETE FROM klant WHERE id = ".$_SESSION['klantid']." ";
 	mysql_query($delsql);
+	//Delete klant directory
+	rmdir("../file-upload/".$_SESSION['klantid']);
 	header('location: admin-bedrijfsprofiel.php');
 }
 
@@ -27,12 +36,13 @@ if(isset($_GET['delete'])) {
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script> 
-	<!--<script src="../js/dropzone.min.js"></script> -->
 </head>
-
 <?php
+
 // Admin verwijderd een kandidaat bestand.
 if(isset($_POST['submit'])) {
+	unlink($row['cv']);
+
 	$sql = "UPDATE klant SET cv='' WHERE id='".$_SESSION['klantid']."' ";
 	mysql_query($sql);
 
@@ -42,8 +52,9 @@ if(isset($_POST['submit'])) {
 }
 
 if(isset($_POST['submit1'])) {
+	unlink($row['identiteit']);
 	$sql = "UPDATE klant SET identiteit='' WHERE id='".$_SESSION['klantid']."' ";
-	mysql_query($sql);
+	mysql_query($sql) or die(mysql_error());
 
 	if(mysql_query($sql)) {
 		header("Location: admin-kandidaatprofiel.php");
@@ -51,6 +62,7 @@ if(isset($_POST['submit1'])) {
 }
 
 if(isset($_POST['submit2'])) {
+	unlink($row['toestemming']);
 	$sql = "UPDATE klant SET toestemming='' WHERE id='".$_SESSION['klantid']."' ";
 	mysql_query($sql);
 
@@ -60,16 +72,17 @@ if(isset($_POST['submit2'])) {
 }
 
 if(isset($_POST['submit3'])) {
+	unlink($row['integriteit']);
 	$sql = "UPDATE klant SET integriteit='' WHERE id='".$_SESSION['klantid']."' ";
 	mysql_query($sql);
 
 	if(mysql_query($sql)) {
 		header("Location: admin-kandidaatprofiel.php");
+
 	}
 }
 
 ?>
-
 <body>
 
 <div id="container">
@@ -225,10 +238,11 @@ if(isset($_POST['submit3'])) {
 						echo "</ul>";
 					}
 
-				if(!empty($rapport)) {
+				if(!empty($row['rapport'])) {
 					echo "<p style='margin-left: 20px;'><img src='../images/excel.png' style='width: 25px; vertical-align:middle; padding-right: 5px;' /><a href='".$row['rapport']."'>Rapport beschikbaar, Download.</a></p>";
 				} else {
 				?>
+
 				<!-- dropzone -->
 				<form action="admin-kandidaatprofiel.php" class="dropzone">
 					<i class="fa" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
@@ -238,16 +252,75 @@ if(isset($_POST['submit3'])) {
 				 	</div><p class="comment">Bestandtypes: pdf, doc, docx</p>
 				</form>
 
-				<div><input class="upload-button" type="submit" name="upload" value="Upload" /></div>
+				<form id="upload" method="post">
+					<div><input class="upload-button" type="submit" name="upload" value="Upload" /></div>
+				</form>
 				<?php } //endif ?>
-
 			</div>
 			
 		<?php
-	
-		?>
 
-		<?php include "../footer.php"; ?>
+		$ds = DIRECTORY_SEPARATOR; 
+ 		$storeFolder = "../file-upload/".$_SESSION['klantid']."/rapport/";  
+	 
+		if (!empty($_FILES)) {
+    		$tempFile = $_FILES['file']['tmp_name'];                         
+    		$targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;    
+    		$targetFile =  $targetPath. $_FILES['file']['name']; 
+    		move_uploaded_file($tempFile,$targetFile);
+    	}
+
+	
+		if(isset($_POST['upload'])) {
+			
+			// Maak default $vars aan.
+			$rapport = "";
+			$getbedrijf = "SELECT * FROM bedrijf WHERE id='".$row['bedrijfid']."'";
+			$outcome = mysql_query($getbedrijf);
+			$bedrijfdata = mysql_fetch_assoc($outcome);
+			$to = $row['email'];
+			$subject = "Er is een screening rapport beschikbaar";
+			$mail = 0;
+			$tobedrijf = $bedrijfdata['email_contact'];
+			$contact_an = $bedrijfdata['an_contact'];
+			$_SESSION['an'] = $row['achternaam'];
+			
+			//mail header
+			$header = "MIME-version: 1.0\n"; 
+			$header .= "content-type: text/html;charset=utf-8\n";
+			$header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+
+			if($row['geslacht'] == 'm') {
+    			$aanhef = "heer";
+    		} else {
+    			$aanhef = "mevrouw";
+    		}
+
+    		// Include HTML emails
+			include "../email/bedrijf-rapport-upload.php";
+			include "../email/klant-rapport-upload.php";
+
+			foreach (glob("../file-upload/".$_SESSION['klantid']."/rapport/*") as $filename) {
+				$rapport = $filename;
+			}
+
+			$sql = "UPDATE klant SET rapport='".$rapport."' WHERE id='".$_SESSION['klantid']."' ";
+			mysql_query($sql) or die(mysql_error());
+		
+			if(mysql_query($sql)) {
+				if($bedrijfdata['sentmail'] == 1) {
+					mail($to, $subject, $messageklantrapport, $header);				
+				}
+
+				if($bedrijfdata['sentmail'] == 1) {
+					mail($tobedrijf, $subject, $messagebedrijfrapport, $header);		
+				}
+				header("Location: admin-kandidaatprofiel.php");
+			}
+	}
+
+
+		include "../footer.php"; ?>
 
 	</div> <!-- wrapper -->
 </div>
@@ -259,17 +332,35 @@ if(isset($_POST['submit3'])) {
 
 <?php
 
-$ds          = DIRECTORY_SEPARATOR; 
- 
-$storeFolder = 'file-upload';  
- 
-if (!empty($_FILES)) {
-     
-    $tempFile = $_FILES['file']['tmp_name'];                         
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;    
-    $targetFile =  $targetPath. $_FILES['file']['name']; 
-    move_uploaded_file($tempFile,$targetFile);
-     
+
+
+// Deleten van items
+// Mail versturen naar kandidaat bij een verandering
+/*
+$to = $row['email'];
+$subject = "Melding Certus-Employment";
+$subject2 = "Uw rapport is beschikbaar";
+$subject3 = "Screening afgerond";
+//mail message
+if($row['geslacht'] == 'm') {
+	$aanhef = "heer";
+} else {
+	$aanhef = "mevrouw";
 }
 
+
+
+include "../email/klant-file-delete.php";
+include "../email/klant-rapport-upload.php";
+*/
+
+
+
+
+
+
+
+
+
 ?>
+
