@@ -29,7 +29,7 @@
 					<ul class="sub-menu-option">
 						<li><a href="../editwachtwoord.php">Wachtwoord wijzingen</a></li>
 						<li><a href="../editemail.php">E-mail wijzigen</a></li>
-						<label><li><input type="checkbox"> E-mail ontvangen</li></label>
+						<label><li><input type="checkbox" name="check[]" onChange="check(this)" value="1" > DigiD</li></label>
 					</ul>
 				</li>
 				<?php } ?>

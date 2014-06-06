@@ -9,6 +9,9 @@ include "../connect.php";
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
+	<script type="text/javascript" src="checkbox.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
 </head>
 <body>
 
@@ -18,7 +21,6 @@ include "../connect.php";
 
 	// Klant profiel
 	include "toolbar-klant.php";
-	echo $_SESSION['id'];
 	$sql = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
 	$result = mysql_query($sql);
 	$info = mysql_fetch_assoc($result);

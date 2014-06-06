@@ -104,7 +104,7 @@ if(!$posting) {
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
 			    	<a class="dz-remove">Verwijder bestand</a>
-			 	</div><p class="comment">Bestandtypes: ,pdf, doc, docx</p>
+			 	</div><p class="comment">Bestandtypes: doc, docx</p>
 			</form>
 		
 			<p class="block">
