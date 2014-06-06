@@ -77,6 +77,7 @@ if(!$posting) {
 		<div class="content-block">
 			<p class="content-head">Informatievoorziening</p>
 
+
 			<form action="#" method="post">
 				<p class="block">
 					<input type="checkbox" id="digid" name="digid" />

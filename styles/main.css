@@ -65,6 +65,8 @@ TOOLBAR
 .toolbar-list-left {float: left;}
 .toolbar-list-right {float: right;}
 
+.toolbar-list-right form {display: inline;}
+
 .toolbar-item {
 	font-family: 'Open Sans', sans-serif;
 	background: inherit;
