@@ -10,7 +10,7 @@ $bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_SESSION['bedrijfid']."";
 $bedrijfresult = mysql_query($bedrijfquery)or die(mysql_error());
 $tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']."";
 $tableresult = mysql_query($tablequery)or die(mysql_error());
-$overzichtquery = "SELECT aanmaakdatum FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']." GROUP BY MONTH(aanmaakdatum) ORDER BY aanmaakdatum DESC LIMIT 1,18446744073709551615";
+$overzichtquery = "SELECT aanmaakdatum, COUNT(*) as 'counter' FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']." GROUP BY MONTH(aanmaakdatum) ORDER BY aanmaakdatum DESC LIMIT 1,18446744073709551615";
 $overzichtresult = mysql_query($overzichtquery);
 $maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_SESSION['bedrijfid']." ";
 $maatwerkresult = mysql_query($maatwerkquery)or die(mysql_error());
@@ -65,9 +65,7 @@ if(isset($_GET['delete'])) {
 
 		<div class="content-block">
 			<table class="profiletable">
-			<?php
-			while ($row = mysql_fetch_array($bedrijfresult)) {
-				?>
+			<?php $row = mysql_fetch_array($bedrijfresult); ?>
 				<tr>
 					<th colspan="2">Bedrijfsgegevens</th>
 					<th>Accountgegevens</th>
@@ -123,11 +121,11 @@ if(isset($_GET['delete'])) {
 							<option selected value="#">--Selecteer overzicht--</option>
 						<?php while ($klantdata=mysql_fetch_assoc($overzichtresult)) { ?>
 							<option value="maandoverzicht_excel.php?maand=<?php echo date('n', strtotime($klantdata['aanmaakdatum'])); ?>&jaar=<?php echo date('Y', strtotime($klantdata['aanmaakdatum'])); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><?php echo ucfirst($datumArray[date('n', strtotime($klantdata['aanmaakdatum']))])." ".date('Y', strtotime($klantdata['aanmaakdatum'])); ?></option>
-						<?php } ?>
+						<?php } //ENDIF
+						 } //ENDHWILE ?>
 						</select>
 					</th>
-				</tr> 
-				<?php } //ENDWHILE ?>
+				</tr>
 			</table>
 		</div>
 
