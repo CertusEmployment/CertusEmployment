@@ -41,11 +41,12 @@ if(!isset($_POST['submit'])){
 	//If digiD box is ticket set to 1
 	if(isset($_POST['digid'])) { $digid = 1; }
   
-	//Search folder for files (ID Kaart) matching the below extentions.
+	//Search folder for files (ID Kaart).
 	foreach (glob("../file-upload/".$_SESSION['id']."/identiteit/*") as $filename) {
 		$identiteit = $filename;
 	}
 
+	// $identiteit can't be empty
 	if(empty($identiteit)) {
 		$posting = false;
 	}

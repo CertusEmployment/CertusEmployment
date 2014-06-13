@@ -44,7 +44,8 @@ if(!isset($_POST['submit'])) {
 	$admindata = mysql_fetch_assoc($a);
 
 	/* Query list end */
-
+	/* Alle mogelijke pagina's waar de kandidaat */
+	/* Op kan komen bij het inloggen op value temppassword */
 	if(!empty($klantdata['wachtwoord'])) {
 		if($password==$klantdata['wachtwoord']) {
 			$_SESSION['id'] = $klantdata['id'];

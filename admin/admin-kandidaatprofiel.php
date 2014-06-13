@@ -4,7 +4,6 @@
 include "../connect.php";
 
 session_start();
-
 ob_start();
 
 // Maak alleen rapportmap aan als deze niet bestaat.
@@ -308,13 +307,17 @@ if(isset($_POST['submit3'])) {
 			mysql_query($sql) or die(mysql_error());
 		
 			if(mysql_query($sql)) {
-				if($bedrijfdata['sentmail'] == 1) {
-					mail($to, $subject, $messageklantrapport, $header);				
+
+				if($row['sentmail'] == 1) {
+					//Kandidaat ontvangt mail als dit aan staat
+					mail($to, $subject, $messageklantrapport, $header);			
 				}
 
 				if($bedrijfdata['sentmail'] == 1) {
+					//Bedrijf ontvangt mail als dit aan staat
 					mail($tobedrijf, $subject, $messagebedrijfrapport, $header);		
 				}
+
 				header("Location: admin-kandidaatprofiel.php");
 			}
 	}
