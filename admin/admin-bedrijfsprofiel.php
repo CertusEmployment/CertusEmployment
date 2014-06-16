@@ -121,8 +121,7 @@ if(isset($_GET['delete'])) {
 							<option selected value="#">--Selecteer overzicht--</option>
 						<?php while ($klantdata=mysql_fetch_assoc($overzichtresult)) { ?>
 							<option value="maandoverzicht_excel.php?maand=<?php echo date('n', strtotime($klantdata['aanmaakdatum'])); ?>&jaar=<?php echo date('Y', strtotime($klantdata['aanmaakdatum'])); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><?php echo ucfirst($datumArray[date('n', strtotime($klantdata['aanmaakdatum']))])." ".date('Y', strtotime($klantdata['aanmaakdatum'])); ?></option>
-						<?php } //ENDIF
-						 } //ENDHWILE ?>
+						<?php } //ENDIF ?>
 						</select>
 					</th>
 				</tr>

@@ -443,6 +443,7 @@ ul.notification { z-index: 2; background: white; width: 245px; margin-top: 5px; 
 
 .pos1 { top: 238px; }
 .pos3 { top: 225px; }
+.pos4 {	top: 400px; }
 
 .block input[type=checkbox] { display:none; }
 .block input[type=checkbox] + label:before {
