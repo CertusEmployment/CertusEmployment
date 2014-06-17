@@ -33,7 +33,11 @@ $message = "
                                     <br><br>
                                     Zojuist heeft u het wachtwoord opgevraagd van uw gebruikersaccount. Om veiligheidsredenen kunnen wij echter het huidige wachtwoord niet uitlezen.
                                     <br><br>
-                                    Bij de volgende keer dat u inlogt zal u gevraagd worden een nieuw wachtwoord in te voeren.
+                                    Er is een tijdelijk wachtwoord voor u gegenereerd, bij de volgende keer dat u inlogt zal u gevraagd worden een nieuw wachtwoord in te voeren.
+                                    <br><br>
+                                    <b>Tijdelijke login:</b>
+                                    <br><br>
+                                    Wachtwoord: ".$password."
                                     <br><br>
                                     <table border='0' cellpadding='20' cellspacing='0' width='100%' id='mailbutton'>
                                     	<tr>

@@ -15,11 +15,24 @@ include "connect.php";
 
 <?php
 
+function randomPassword() {
+	$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+	$pass = array();
+	$alphaLength = strlen($alphabet) - 1;
+	for ($i = 0; $i < 8; $i++) {
+	    $n = rand(0, $alphaLength);
+	    $pass[] = $alphabet[$n];
+	}
+	return implode($pass);
+}
+
 // DEFAULT MAIL
 $header = "MIME-version: 1.0\n"; 
 $header .= "content-type: text/html;charset=utf-8\n";
 $header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 $subject = "U heeft een wachtwoord wijziging opgevraagd";
+$password = randomPassword();
+$hashed = hash('sha1', $password);
 include "email/email-reset.php";
 
 if(!isset($_POST['submit'])){
@@ -42,7 +55,7 @@ if(!isset($_POST['submit'])){
 
 	if(!empty($klant['email'])) {
 		//Update
-		$sql = "UPDATE klant SET temppassword=1";
+		$sql = "UPDATE klant SET wachtwoord='".$hashed."', temppassword=1";
 		mysql_query($sql);
 
 		//Mail
@@ -52,7 +65,7 @@ if(!isset($_POST['submit'])){
 
 	} else if(!empty($admin['email'])) {
 		//Update
-		$sql = "UPDATE admin SET temppassword=1";
+		$sql = "UPDATE admin SET wachtwoord='".$hashed."', temppassword=1";
 		mysql_query($sql);
 
 		//Mail
@@ -62,7 +75,7 @@ if(!isset($_POST['submit'])){
 
 	} else if(!empty($bedrijf['email_contact'])) {
 		//Update
-		$sql = "UPDATE bedrijf SET temppassword=1";
+		$sql = "UPDATE bedrijf SET wachtwoord='".$hashed."', temppassword=1";
 		mysql_query($sql);
 
 		//Mail
