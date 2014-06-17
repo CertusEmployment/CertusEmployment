@@ -24,6 +24,7 @@ if(!glob("../file-upload/".$_SESSION['id']."/")) {
 
 $query = "SELECT * FROM klant WHERE id = '".$_SESSION['id']."'";
 $result = mysql_query($query);
+$row = mysql_fetch_assoc($result);
 
 // Empty error vars
 $errormessage = "";
@@ -35,6 +36,7 @@ $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/'; //6 characters, 1 h
 if(!isset($_POST['submit'])) {
 	$posting = false;
 } else {
+	$check = 0;
 	$posting = true;
 	$temp = $_POST['password'];
 	$repeat = $_POST['repeat'];
@@ -51,13 +53,22 @@ if(!isset($_POST['submit'])) {
 		$errorclass = "errorinput";
 	}
 
-	if ($posting) {
-		$update_sql = "UPDATE klant SET 
-		wachtwoord='".$password."',
-		temppassword=2
-		WHERE id=".$_SESSION['id']." ";
-		$update = mysql_query($update_sql) or die("<br>error : ".mysql_error());
-		header("Location: klant-upload-identiteit.php");
+	if($posting) {
+		if(empty($row['identiteit'])) {
+			$update_sql = "UPDATE klant SET 
+			wachtwoord='".$password."',
+			temppassword=2
+			WHERE id=".$_SESSION['id']." ";
+			$update = mysql_query($update_sql) or die("<br>error : ".mysql_error());
+			header("Location: klant-upload-identiteit.php");
+		} else {
+			$update_sql = "UPDATE klant SET 
+			wachtwoord='".$password."',
+			temppassword=0
+			WHERE id=".$_SESSION['id']." ";
+			$update = mysql_query($update_sql) or die("<br>error : ".mysql_error());
+			header("Location: klant-panel.php");
+		}
 	}
 }
 

@@ -565,6 +565,13 @@ DROPZONE
 		padding-top: 10px;
 	}
 
+	#password-recovery {
+		display: block;
+		background-color: #efe;
+		border: 2px solid #2d2;
+		padding: 10px;
+	}
+
 /*
 MEDIAQUERIES
 */
