@@ -15,11 +15,17 @@ include "connect.php";
 
 <?php
 
-$posting=false;
+// DEFAULT MAIL
+$header = "MIME-version: 1.0\n"; 
+$header .= "content-type: text/html;charset=utf-8\n";
+$header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+$subject = "U heeft een wachtwoord wijziging opgevraagd";
+include "email/email-reset.php";
+
 if(!isset($_POST['submit'])){
 	$posting=false;
+	$send = 0;
 } else{
-
 	$posting=true;
 
 	$queryklant = "SELECT * FROM klant WHERE email ='".$_POST['email']."' ";
@@ -34,35 +40,41 @@ if(!isset($_POST['submit'])){
 	$a = mysql_query($queryadmin);
 	$admin = mysql_fetch_assoc($a);
 
-	if(isset($klant['email'])) {
+	if(!empty($klant['email'])) {
+		//Update
+		$sql = "UPDATE klant SET temppassword=1";
+		mysql_query($sql);
+
+		//Mail
 		$to = $klant['email'];
-		$header = "MIME-version: 1.0\n"; 
-	    $header .= "content-type: text/html;charset=utf-8\n";
-	    $header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-	    $message = 
-    "
-    Geachte ".$klant['voornaam']." ".$klant['achternaam'].",<br><br>
-    
-    ";
-		
-	} else {
-		$posting=false;
+		mail($to, $subject, $message, $header);
+		$send = 1;
+
+	} else if(!empty($admin['email'])) {
+		//Update
+		$sql = "UPDATE admin SET temppassword=1";
+		mysql_query($sql);
+
+		//Mail
+		$to = $admin['email'];
+		mail($to, $subject, $message, $header);
+		$send = 1;
+
+	} else if(!empty($bedrijf['email_contact'])) {
+		//Update
+		$sql = "UPDATE bedrijf SET temppassword=1";
+		mysql_query($sql);
+
+		//Mail
+		$to = $bedrijf['email_contact'];
+		mail($to, $subject, $message, $header);
+		$send = 1;
+
 	}
-	if(isset($bedrijf['email_contact'])) {
-		echo "bedrijf ".$bedrijf['email_contact'];
-		
-	} else {
-		$posting=false;
-	}
-	if(isset($admin['email'])) {
-		echo "admin ".$admin['email'];
-		
-	} else {
-		$posting=false;
-	}
+
+
 }
 
-if(!$posting) {
 ?>
 
 <div id="container">
@@ -74,33 +86,59 @@ if(!$posting) {
 		</div>
 		<p id="breadcrumbs"><a href="index.php">Startscherm</a> > <a class="activepage" href="#">Wachtwoord vergeten</a></p>
 		<div class="content-block settings-block">
-			
-				<h3 >Wachtwoord herstellen</h3>
-				<p>
-					Geef het e-mailadres op waarmee u geregistreerd staat in het systeem.
-					Wanneer u later uw e-mailadres heeft gewijzigd bij uw gegevens, geeft 
-					u dan het gewijzigde e-mailadres op. Er kan dan voor u een link worden 
-					gegenereerd, waar u uw wachtwoord kunt aanpassen.
-				</p>
-				<br>
-				<form id="settings-form" name="password-forget" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-					<label for="password-forget">E-mail adres: </label>
-					<input id="password-forget" type="text" required name="email">&nbsp;
-					<input type="submit" id="settings-btn" value="Verzenden" name="submit">
-				</form>
-				<br>
-				<p class="comment">
-					Wanneer u niet meer weet met welk e-mailadres u bent geregistreerd kunt
-					u contact op nemen met <br><a href="mailto:info@certus-employment.nl">info@certus-employment.nl</a> om deze op te vragen.
-				</p>
-				<br>
-				<a href="#">Terug naar de inlog pagina</a>
+
+			<h3 >Wachtwoord herstellen</h3>
+			<p>
+				Geef het e-mailadres op waarmee u geregistreerd staat in het systeem.
+				Wanneer u later uw e-mailadres heeft gewijzigd bij uw gegevens, geeft 
+				u dan het gewijzigde e-mailadres op. Er kan dan voor u een link worden 
+				gegenereerd, waar u uw wachtwoord kunt aanpassen.
+			</p>
+			<br>
+
+			<?php
+
+			if($send == 0) {
+
+			?>
+
+			<form id="settings-form" name="password-forget" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+				<label for="password-forget">E-mail adres: </label>
+				<input id="password-forget" type="text" required name="email">&nbsp;
+				<input type="submit" id="settings-btn" value="Verzenden" name="submit">
+			</form>
+
+			<?php
+
+			} else {
+
+			?>
+
+			<div id="password-recovery">
+				<h3>Hartelijk bedankt!</h3>
+				<p>Als u bij ons een geregistreerd account heeft met dit e-mail adres ontvangt u zo spoedig mogelijk een e-mail.</p>
+			</div>
+
+
+
+			<?php
+
+			}
+
+			?>
+
+			<br>
+			<p class="comment">
+				Wanneer u niet meer weet met welk e-mailadres u bent geregistreerd kunt
+				u contact op nemen met <br><a href="mailto:info@certus-employment.nl">info@certus-employment.nl</a> om deze op te vragen.
+			</p>
+
+			<br>
+			<a href="index.php">Terug naar de inlog pagina</a>
 				
-			
 		</div>
 		<?php include "footer.php"; ?>
 	</div> <!-- END WRAP -->
-	<?php } ?>
 
 </div>
 
