@@ -1,8 +1,10 @@
-<?php include "../connect.php" ?>
+<?php include "../connect.php"; 
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Nieuw Wachtwoord</title>
+	<title>Nieuw Wachtwoord | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
@@ -15,6 +17,10 @@
 <div id="container">
 
 <?php include "toolbar-klant.php";
+
+if(!glob("../file-upload/".$_SESSION['id']."/")) {
+	mkdir("../file-upload/".$_SESSION['id']."/", 0777);
+}
 
 $query = "SELECT * FROM klant WHERE id = '".$_SESSION['id']."'";
 $result = mysql_query($query);

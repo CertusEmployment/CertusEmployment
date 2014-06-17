@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht bedrijven</title>
+	<title>Upload toestemmingsverklaring | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -33,9 +33,22 @@ if(!isset($_POST['submit'])){
 	}
 
 	if($posting) {
-		$sql = "UPDATE klant SET toestemming='".$verklaring."', temppassword=5 WHERE id=".$_SESSION['id']." ";
+		$sql = "UPDATE klant SET toestemming='".$verklaring."' WHERE id=".$_SESSION['id']." ";
 		$result = mysql_query($sql) or die(mysql_error());
 		header("Location: klant-integriteit.php");
+
+		$getklant = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
+		$data = mysql_query($getklant);
+		$row = mysql_fetch_assoc($data);
+
+		if($row['temppassword']==0) {
+			header("Location: klant-panel.php");
+		} else {
+			$sql2 = "UPDATE klant SET temppassword=5 WHERE id=".$_SESSION['id']." ";
+			mysql_query($sql2);
+			header("Location: klant-integriteit.php");
+		}
+
 	}
 
 }
@@ -60,7 +73,7 @@ if(!$posting) {
 			<p class="content-head">Informatievoorziening</p>
 			
 			<p class="block">
-				Upload hier uw <b>toestemming verklaring</b>, deze kunt u vinden in uw mail of <a href="#">download hem hier</a>.
+				Upload hier uw <b>toestemming verklaring</b>, deze kunt u vinden in uw mail of <a target="_blank" href="../file-upload/default/toestemmingsverklaring.pdf">download hem hier</a>.
 			</p>
 				<ul>
 					<li class="help-item pos3 alert">

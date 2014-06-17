@@ -4,7 +4,7 @@ include "../connect.php";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Uw overzicht</title>
+	<title>Klantoverzicht | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -25,19 +25,22 @@ include "../connect.php";
 	$info = mysql_fetch_assoc($result);
 
 	if(!empty($info['identiteit'])) {
-		$identiteit = "<a href='".$info['identiteit']."'>Download</a>";
+		$identiteit = "<a target='_blank' href='".$info['identiteit']."'>Download</a>";
 	} else {
-		$identiteit = "ID niet goed leesbaar of ongeschikt. <a href='klant-upload.php'>Upload hier</a>";
+		$identiteit = "ID niet goed leesbaar of ongeschikt. <a href='klant-upload-identiteit.php'>Upload hier</a>";
 	}
-
+	if(!empty($info['cv'])) {
+		$cv = "<a target='_blank' href='".$info['cv']."'>Download</a>";
+	} else {
+		$cv = "Geen Toestemmingsverklaring geupload. <a href='klant-upload-verklaring.php'>Upload hier</a>";
+	}
 	if(!empty($info['toestemming'])) {
-		$toestemming = "<a href='".$info['toestemming']."'>Download</a>";
+		$toestemming = "<a target='_blank' href='".$info['toestemming']."'>Download</a>";
 	} else {
-		$toestemming = "Geen Toestemmingsverklaring geupload. <a href='klant-upload.php'>Upload hier</a>";
+		$toestemming = "Geen Toestemmingsverklaring geupload. <a href='klant-upload-verklaring.php'>Upload hier</a>";
 	}
-
 	if(!empty($info['rapport'])) {
-		$rapport = "<a href='".$info['rapport']."'>Download</a>";
+		$rapport = "<a target='_blank' href='".$info['rapport']."'>Download</a>";
 	} else {
 		$rapport = "Helaas, er is nog geen rapport beschikbaar.";
 	}
@@ -114,6 +117,10 @@ include "../connect.php";
 				<tr>
 					<td>Identiteitsbewijs</td>
 					<td class="bold"><?php echo $identiteit; ?></td>
+				</tr>
+				<tr>
+					<td>CV</td>
+					<td class="bold"><?php echo $cv; ?></td>
 				</tr>
 				<tr>
 					<td>Toestemmingsverklaring</td>

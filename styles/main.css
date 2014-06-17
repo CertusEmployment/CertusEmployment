@@ -4,7 +4,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300);
 
 body {
-	background: #ccc;
+	background: url('../images/bg.jpg') ;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 12px;
 }
@@ -40,7 +40,7 @@ small { font-size: 11px; color: orange; }
 .loginred { color: darkred; position: absolute; margin-top: -25px;}
 .errormessage { color: #990000; }
 .errorinput { background: rgba(204, 0, 0, 0.2);border: 1px solid red; }
-.download-link { color: #303030!important; }
+.download-link { color: #303030!important; font-weight: bold; }
 .fa-empty { padding-left: 14px; color: #999; }
 .ul-disc li { list-style: disc; }
 .wideCell { width: 230px!important; }
@@ -221,7 +221,7 @@ MAIN
 	.settings-block a { color: orange; font-size: 13px; }
 	.settings-block h3 { padding-bottom: 10px; font-weight: bold; font-size: 14px;}
 
-#settings-form #next, #settings-form #cancel {
+#next, #cancel {
 	border: 1px solid #606060;
 	background: #fff;
 	border-radius: 2px;
@@ -233,9 +233,9 @@ MAIN
 	color: black; 
 }
 #settings-form-buttonblock {height: 44px;}
-#settings-form #next { /*margin: 0 0 0 715px;*/ float: right; margin-right: 15px; }
-#settings-form a#next {width: 92px; text-align: center;}
-#settings-form #cancel { /*margin: 0 0 0 590px;*/ position: relative; float: right; margin-right: 10px; }
+#next { /*margin: 0 0 0 715px;*/ float: right; margin-right: 15px; }
+a#next {width: 92px; text-align: center;}
+#cancel { /*margin: 0 0 0 590px;*/ position: relative; float: right; margin-right: 10px; }
 
 #settings-btn { 
 	border: 1px solid #606060;
@@ -443,7 +443,6 @@ ul.notification { z-index: 2; background: white; width: 245px; margin-top: 5px; 
 
 .pos1 { top: 238px; }
 .pos3 { top: 225px; }
-.pos4 {	top: 400px; }
 
 .block input[type=checkbox] { display:none; }
 .block input[type=checkbox] + label:before {
@@ -483,7 +482,7 @@ DROPZONE
 	border-radius: 5px;
 }
 
-.integriteit textarea {
+.integriteit textarea, #deletetext {
 	max-width: 100%;
 	width: 100%; 
 	height: 60px; 

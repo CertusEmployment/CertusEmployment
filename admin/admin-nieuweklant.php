@@ -13,7 +13,7 @@ $errorclass = "";
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
-	<title>Nieuwe klant</title>
+	<title>Nieuwe klant | Certus Employment</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css">
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
@@ -169,9 +169,13 @@ if(!$posting) {
 							<select id="iCountry" name="iCountry">
 								<?php	
 									foreach ($arrayLanden as $code => $landnaam) {
-										if ($landnaam == $row['land']) {
+										if ($landnaam == $row['land'] OR $landnaam == $_SESSION['land']) {
 											$isSelected = " selected='' "; 
-										} else {
+										}
+										elseif (!isset($row['land']) && $landnaam == 'Nederland') {
+											$isSelected = " selected='' "; 
+										}
+										 else {
 											$isSelected = "";
 										}
 										echo "<option value='".$landnaam."' ".$isSelected.">".$landnaam."</option>";

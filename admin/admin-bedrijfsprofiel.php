@@ -35,7 +35,7 @@ if(isset($_GET['delete'])) {
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
-	<title>Bedrijfsprofiel</title>
+	<title>Bedrijfsprofiel | Certus Employment</title>
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
 	<link rel="stylesheet" href="../font-awesome-4.0.3/css/font-awesome.min.css">
 	<script src="../js/main.js"></script>
@@ -121,7 +121,7 @@ if(isset($_GET['delete'])) {
 							<option selected value="#">--Selecteer overzicht--</option>
 						<?php while ($klantdata=mysql_fetch_assoc($overzichtresult)) { ?>
 							<option value="maandoverzicht_excel.php?maand=<?php echo date('n', strtotime($klantdata['aanmaakdatum'])); ?>&jaar=<?php echo date('Y', strtotime($klantdata['aanmaakdatum'])); ?>&bedrijfid=<?php echo $row['id']; ?>&bedrijfnaam=<?php echo $row['bedrijfnaam']; ?>"><?php echo ucfirst($datumArray[date('n', strtotime($klantdata['aanmaakdatum']))])." ".date('Y', strtotime($klantdata['aanmaakdatum'])); ?></option>
-						<?php } //ENDIF ?>
+						<?php } //ENDHWILE ?>
 						</select>
 					</th>
 				</tr>

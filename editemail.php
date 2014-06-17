@@ -12,7 +12,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Email wijzigen</title>
+	<title>Email wijzigen | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="styles/main.css">

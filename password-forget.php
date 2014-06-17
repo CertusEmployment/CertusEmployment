@@ -4,7 +4,7 @@ include "connect.php";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Wachtwoord vergeten</title>
+	<title>Wachtwoord vergeten | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="styles/main.css" media="screen" />

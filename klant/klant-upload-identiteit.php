@@ -18,7 +18,7 @@ if(!glob("../file-upload/".$_SESSION['id']."/cv")) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht bedrijven</title>
+	<title>Upload ID | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -34,27 +34,36 @@ if(!isset($_POST['submit'])){
 	$posting = false;
 } else {
 	$posting = true;
-	$digid = 0;
 	$verklaring = "";
 	$identiteit = "";
 
 	//If digiD box is ticket set to 1
-	if(isset($_POST['digid'])) { $digid = 1; }
+	if(isset($_POST['digid'])) { $digid = 1; } else { $digid = 0; }
   
-	//Search folder for files (ID Kaart).
+	//Search folder for files (ID Kaart) matching the below extentions.
 	foreach (glob("../file-upload/".$_SESSION['id']."/identiteit/*") as $filename) {
 		$identiteit = $filename;
 	}
 
-	// $identiteit can't be empty
 	if(empty($identiteit)) {
 		$posting = false;
 	}
 
 	if($posting) {
-		$sql = "UPDATE klant SET identiteit='".$identiteit."', temppassword=3 WHERE id=".$_SESSION['id']." ";
+		$sql = "UPDATE klant SET identiteit='".$identiteit."', digid=".$digid." WHERE id=".$_SESSION['id']." ";
 		$result = mysql_query($sql) or die(mysql_error());
-		header("Location: klant-upload-cv.php");
+
+		$getklant = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
+		$data = mysql_query($getklant);
+		$row = mysql_fetch_assoc($data);
+
+		if($row['temppassword']==0) {
+			header("Location: klant-panel.php");
+		} else {
+			$sql2 = "UPDATE klant SET temppassword=3 WHERE id=".$_SESSION['id']." ";
+			mysql_query($sql2);
+			header("Location: klant-upload-cv.php");
+		}
 	}
 
 }
@@ -79,21 +88,8 @@ if(!$posting) {
 			<p class="content-head">Informatievoorziening</p>
 
 
-			<form action="#" method="post">
-				<p class="block">
-					<input type="checkbox" id="digid" name="digid" />
-					<label for="digid">Ik beschik over een geldig DigiD.</label>
-				</p>
-				<ul>
-					<li class="help-item pos3 alert">
-						<a class="grey help" href="#"><i class="fa fa-question-circle"></i>Wat is dit?</a>
-						<ul class="notification">
-							<li>DigiD staat voor Digitale Identiteit en is een persoonlijke combinatie van een
-								gebruikersnaam en een wachtwoord. U gebruikt DigiD om u te legitimeren op 
-								internet. Zo weten organisaties dat ze ook echt met u te maken hebben.</li>
-						</ul>
-					</li>
-				</ul>
+			<form id="digid-form" method="post">
+				
 			</form>
 			
 			<p class="block">
@@ -108,10 +104,27 @@ if(!$posting) {
 			</form>
 
 			<br class="clear-float">
-		</div>
+		
 		<form method="post" action="#" id="settings-form">	
+		<p class="block">
+					<input type="checkbox" id="digid" name="digid" value="1">
+					<label for="digid">Ik beschik over een geldig DigiD.</label>
+				</p>
+				<ul>
+					<li class="help-item alert">
+						<a class="grey help" href="#"><i class="fa fa-question-circle"></i>Wat is dit?</a>
+						<ul class="notification">
+							<li>DigiD staat voor Digitale Identiteit en is een persoonlijke combinatie van een
+								gebruikersnaam en een wachtwoord. U gebruikt DigiD om u te legitimeren op 
+								internet. Zo weten organisaties dat ze ook echt met u te maken hebben.</li>
+						</ul>
+					</li>
+				</ul>
+			<br class="clear-float">
+			</div>
 		<div id="settings-form-buttonblock"><input type="submit" id="next" name="submit" value="Opslaan"></div>
 		</form>
+		
 		<?php include "../footer.php"; ?>
 
 	</div> <!-- wrapper -->

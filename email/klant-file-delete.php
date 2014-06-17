@@ -28,6 +28,12 @@
                                     <br><br>
                                     Een van de door u upgeloade bestanden voldoet helaas niet aan de eisen. Wij verzoeken u om deze te verbeteren en opnieuw te uploaden.
                                     <br>
+                                    <br>
+                                    Toelichting:
+                                    <br>
+                                    ".$_SESSION['deletetext']."
+                                    <br>
+                                    <br>
                                     Op uw <a href='http://www.cairansteverink.com/certusemployment'>account pagina</a> kunt u zien om welk bestand het gaat.
                                     <br><br>
                                     <table border='0' cellpadding='20' cellspacing='0' width='100%' id='mailbutton'>

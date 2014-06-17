@@ -13,7 +13,7 @@ unset($_SESSION['vn']); unset($_SESSION['an']); unset($_SESSION['straat']); unse
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Bedrijfs panel</title>
+	<title>Bedrijf panel | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />

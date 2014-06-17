@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Overzicht bedrijven</title>
+	<title>Upload CV | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -33,9 +33,20 @@ if(!isset($_POST['submit'])){
 	}
 
 	if($posting) {
-		$sql = "UPDATE klant SET cv='".$cv."', temppassword=4 WHERE id=".$_SESSION['id']." ";
+		$sql = "UPDATE klant SET cv='".$cv."' WHERE id=".$_SESSION['id']." ";
 		$result = mysql_query($sql) or die(mysql_error());
-		header("Location: klant-upload-verklaring.php");
+
+		$getklant = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
+		$data = mysql_query($getklant);
+		$row = mysql_fetch_assoc($data);
+
+		if($row['temppassword']==0) {
+			header("Location: klant-panel.php");
+		} else {
+			$sql2 = "UPDATE klant SET temppassword=4 WHERE id=".$_SESSION['id']." ";
+			mysql_query($sql2);
+			header("Location: klant-upload-verklaring.php");
+		}
 	}
 
 }

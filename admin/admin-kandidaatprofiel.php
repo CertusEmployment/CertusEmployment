@@ -4,6 +4,7 @@
 include "../connect.php";
 
 session_start();
+
 ob_start();
 
 // Maak alleen rapportmap aan als deze niet bestaat.
@@ -28,7 +29,7 @@ if(isset($_GET['delete'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kandidaatprofiel</title>
+	<title>Kandidaatprofiel | Certus Employment</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="../styles/main.css" media="screen" />
@@ -36,52 +37,6 @@ if(isset($_GET['delete'])) {
 	<link href="../styles/dropzone.css" type="text/css" rel="stylesheet" />
 	<script src="../js/dropzone.js"></script> 
 </head>
-<?php
-
-// Admin verwijderd een kandidaat bestand.
-if(isset($_POST['submit'])) {
-	unlink($row['cv']);
-
-	$sql = "UPDATE klant SET cv='' WHERE id='".$_SESSION['klantid']."' ";
-	mysql_query($sql);
-
-	if(mysql_query($sql)) {
-		header("Location: admin-kandidaatprofiel.php");
-	}
-}
-
-if(isset($_POST['submit1'])) {
-	unlink($row['identiteit']);
-	$sql = "UPDATE klant SET identiteit='' WHERE id='".$_SESSION['klantid']."' ";
-	mysql_query($sql) or die(mysql_error());
-
-	if(mysql_query($sql)) {
-		header("Location: admin-kandidaatprofiel.php");
-	}
-}
-
-if(isset($_POST['submit2'])) {
-	unlink($row['toestemming']);
-	$sql = "UPDATE klant SET toestemming='' WHERE id='".$_SESSION['klantid']."' ";
-	mysql_query($sql);
-
-	if(mysql_query($sql)) {
-		header("Location: admin-kandidaatprofiel.php");
-	}
-}
-
-if(isset($_POST['submit3'])) {
-	unlink($row['integriteit']);
-	$sql = "UPDATE klant SET integriteit='' WHERE id='".$_SESSION['klantid']."' ";
-	mysql_query($sql);
-
-	if(mysql_query($sql)) {
-		header("Location: admin-kandidaatprofiel.php");
-
-	}
-}
-
-?>
 <body>
 
 <div id="container">
@@ -98,6 +53,52 @@ if(isset($_POST['submit3'])) {
 	$navrow = mysql_fetch_array($navresult);
 
 	$datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december' );
+	
+	//mail header
+	$header = "MIME-version: 1.0\n"; 
+	$header .= "content-type: text/html;charset=utf-8\n";
+	$header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+
+	// Maak default $vars aan.
+	$rapport = "";
+	$getbedrijf = "SELECT * FROM bedrijf WHERE id='".$row['bedrijfid']."'";
+	$outcome = mysql_query($getbedrijf);
+	$bedrijfdata = mysql_fetch_assoc($outcome);
+	$to = $row['email'];
+	$subject = "Er is een screening rapport beschikbaar";
+	$subject3 = "Er zijn een of meerdere bestanden verwijderd";
+	$mail = 0;
+	$tobedrijf = $bedrijfdata['email_contact'];
+	$contact_an = $bedrijfdata['an_contact'];
+	$_SESSION['an'] = $row['achternaam'];
+
+	if($row['geslacht'] == 'm') {
+		$aanhef = "heer";
+	} else {
+		$aanhef = "mevrouw";
+	}
+
+	if(isset($_POST['submit1'])) {
+		$_SESSION['filedelete'] = 1;
+	}
+	if(isset($_POST['submit2'])) {
+		$_SESSION['filedelete'] = 2;
+	}
+	if(isset($_POST['submit3'])) {
+		$_SESSION['filedelete'] = 3;
+	}
+
+	if(isset($_POST['submit4'])) {
+		$_SESSION['filedelete'] = 4;
+	}
+
+	if(isset($_POST['deleterapport'])) {
+		unlink($row['rapport']);
+		$sql = "UPDATE klant SET rapport='' WHERE id='".$_SESSION['klantid']."' ";
+		mysql_query($sql) or die(mysql_error());
+		header('Location: admin-kandidaatprofiel.php');
+	}
+
 	?>
 
 	<div id="wrapper">
@@ -164,13 +165,13 @@ if(isset($_POST['submit3'])) {
 				<p class="content-head">Bestanden</p>
 
 				<table class="recenttable">
-				<form id="settings-form" method="post">
+				<form id="settings-form" method="post" action="admin-deletefiles.php">
 
 					<tr>
 						<td><p>CV</p></td>
 						<?php if(!empty($row['cv'])) { ?>
-						<td style="padding-left: 10px;"><a href="<?php echo $row['cv']; ?>">Download</td>
-						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit" value="Verwijderen" /></td>
+						<td style="padding-left: 10px;"><a target="_blank" href="<?php echo $row['cv']; ?>">Download</td>
+						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit4" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
 						<?php } ?>
@@ -178,7 +179,7 @@ if(isset($_POST['submit3'])) {
 					<tr>
 						<td><p>Identiteit</p></td>
 						<?php if(!empty($row['identiteit'])) { ?>
-						<td style="padding-left: 10px;"><a href="<?php echo $row['identiteit']; ?>">Download</td>
+						<td style="padding-left: 10px;"><a target="_blank" href="<?php echo $row['identiteit']; ?>">Download</td>
 						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit1" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
@@ -187,7 +188,7 @@ if(isset($_POST['submit3'])) {
 					<tr>
 						<td><p>Toestemmingsverklaring</p></td>
 						<?php if(!empty($row['toestemming'])) { ?>
-						<td style="padding-left: 10px;"><a href="<?php echo $row['toestemming']; ?>">Download</td>
+						<td style="padding-left: 10px;"><a target="_blank" href="<?php echo $row['toestemming']; ?>">Download</td>
 						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit2" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
@@ -196,7 +197,7 @@ if(isset($_POST['submit3'])) {
 					<tr>
 						<td><p>Integriteit</p></td>
 						<?php if(!empty($row['integriteit'])) { ?>
-						<td style="padding-left: 10px;"><a href="<?php echo $row['integriteit']; ?>">Download</td>
+						<td style="padding-left: 10px;"><a target="_blank" href="<?php echo $row['integriteit']; ?>">Download</td>
 						<td style="padding-left: 10px;"><input class="nostyle" type="submit" name="submit3" value="Verwijderen" /></td>
 						<?php } else { ?>
 						<td style="padding-left: 10px;"><p class="comment">Niet beschikbaar</p></td>
@@ -238,7 +239,8 @@ if(isset($_POST['submit3'])) {
 					}
 
 				if(!empty($row['rapport'])) {
-					echo "<p style='margin-left: 20px;'><img src='../images/excel.png' style='width: 25px; vertical-align:middle; padding-right: 5px;' /><a href='".$row['rapport']."'>Rapport beschikbaar, Download.</a></p>";
+					?><form method="post" action="#" style="margin:15px 0;"><span style='margin-left: 20px;'><img src='../images/pdf.png' style='width: 30px; vertical-align:middle; padding-right: 5px;' /><a href='<?php echo $row['rapport']; ?>'>Rapport beschikbaar, Download.</a></span>
+					<span style="margin-left:51px;"><input class="nostyle" type="submit" name="deleterapport" value="Verwijderen"></span></form> <?php
 				} else {
 				?>
 
@@ -271,29 +273,6 @@ if(isset($_POST['submit3'])) {
 
 	
 		if(isset($_POST['upload'])) {
-			
-			// Maak default $vars aan.
-			$rapport = "";
-			$getbedrijf = "SELECT * FROM bedrijf WHERE id='".$row['bedrijfid']."'";
-			$outcome = mysql_query($getbedrijf);
-			$bedrijfdata = mysql_fetch_assoc($outcome);
-			$to = $row['email'];
-			$subject = "Er is een screening rapport beschikbaar";
-			$mail = 0;
-			$tobedrijf = $bedrijfdata['email_contact'];
-			$contact_an = $bedrijfdata['an_contact'];
-			$_SESSION['an'] = $row['achternaam'];
-			
-			//mail header
-			$header = "MIME-version: 1.0\n"; 
-			$header .= "content-type: text/html;charset=utf-8\n";
-			$header .= "From: noreply@certus-employment.nl" . "\r\n" . "Reply-To: noreply@certus-employment.nl" . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-
-			if($row['geslacht'] == 'm') {
-    			$aanhef = "heer";
-    		} else {
-    			$aanhef = "mevrouw";
-    		}
 
     		// Include HTML emails
 			include "../email/bedrijf-rapport-upload.php";
@@ -307,17 +286,13 @@ if(isset($_POST['submit3'])) {
 			mysql_query($sql) or die(mysql_error());
 		
 			if(mysql_query($sql)) {
-
 				if($row['sentmail'] == 1) {
-					//Kandidaat ontvangt mail als dit aan staat
-					mail($to, $subject, $messageklantrapport, $header);			
+					mail($to, $subject, $messageklantrapport, $header);				
 				}
 
 				if($bedrijfdata['sentmail'] == 1) {
-					//Bedrijf ontvangt mail als dit aan staat
 					mail($tobedrijf, $subject, $messagebedrijfrapport, $header);		
 				}
-
 				header("Location: admin-kandidaatprofiel.php");
 			}
 	}
