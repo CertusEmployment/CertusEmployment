@@ -85,7 +85,7 @@ if(!$posting) {
 					<tr class="trlink" onclick="document.location = 'admin-integriteit-overzicht.php?integriteitid=<?php echo $row['id']; ?>';">
 
 						<td><?php echo $p; ?></td>
-						<td><?php echo substr($row['vraag'], 0, 15); ?></td>
+						<td><?php echo substr($row['vraag'], 0, 15)."..."; ?></td>
 
 						<td><?php echo $radiobutton; ?></td>
 						<td><?php echo $toelichting; ?></td>

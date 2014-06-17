@@ -101,18 +101,30 @@ $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 
 				<div class="content-block">
 					<p class="content-head">Bestanden</p>
 					<table class="recenttable">
+						<?php if(!empty($row['cv'])) { ?>
 						<tr>
 							<td><a style="color:black;" href="#">CV.docx</a></td>
 						</tr>
+						<?php }
+						if(!empty($row['identiteit'])) { ?>
 						<tr>
 							<td><a style="color:black;" href="#">ID.jpeg</a></td>
 						</tr>
+						<?php }
+						if(!empty($row['toestemming'])) { ?>
 						<tr>
 							<td><a style="color:black;" href="#">Toestemmingsverklaring.docx</a></td>
 						</tr>
+						<?php }
+						if(!empty($row['integriteit'])) { ?>
 						<tr>
 							<td><a style="color:black;" href="#">Integriteitstest.pdf</a></td>
 						</tr>
+						<?php } 
+						if(empty($row['cv']) && empty($row['identiteit']) && empty($row['toestemming']) && empty($row['integriteit'])) { 
+							echo "<p class='comment'>Kandidaat heeft nog geen bestanden geupload.</p>";
+						}
+						?>
 					</table>
 				</div>
 

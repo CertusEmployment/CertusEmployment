@@ -2,6 +2,10 @@
 session_start();
 
 // Maak alleen klantmap aan als die niet bestaat.
+if(!glob("../file-upload/".$_SESSION['id'])) {
+	mkdir("../file-upload/".$_SESSION['id']);
+}
+
 if(!glob("../file-upload/".$_SESSION['id']."/identiteit")) {
 	mkdir("../file-upload/".$_SESSION['id']."/identiteit", 0777);
 }
