@@ -75,7 +75,7 @@ $result_klant = mysql_query($query_klant);
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo (strlen($bedrijfinfo['postcode'])==6)? chunk_split(strtoupper($bedrijfinfo['postcode']), 4, " ") : $bedrijfinfo['postcode'] ; ?></td>
+					<td><?php echo $bedrijfinfo['postcode']; ?></td>
 				</tr>
 				<tr>
 					<td>Plaats</td>

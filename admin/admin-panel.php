@@ -19,6 +19,7 @@ include "../connect.php";
 
 <div id="container">
 	<?php
+
 	include "toolbar-admin.php"; 
 	$query_admin = "SELECT * FROM admin WHERE id = ".$_SESSION['id']." ";
 	$result_admin = mysql_query($query_admin);
@@ -74,24 +75,39 @@ include "../connect.php";
 				<tr><th collspan="4">Recente screenings</th></tr>
 				<?php
 					while ($recentrow = mysql_fetch_array($recentresult)) {
-						$date1 = new DateTime(date('d-m-Y', strtotime($recentrow['aanmaakdatum']))); //aanmaakdatum
-						$date2 = new DateTime(date('d-m-Y')); //huidige datum
-						if ($date1 <= $date2) {
+						$now = time(); // or your date as well
+					    $your_date = strtotime($recentrow['aanmaakdatum']);
+					    $datediff = $now - $your_date;
+					    $recentdays = floor($datediff/(60*60*24));
+
 						?>
 						<tr>
+							<?php if($recentdays <= 15) { ?>
 							<td><?php echo ucfirst($recentrow['voornaam'])." ".ucfirst($recentrow['achternaam']); ?></td>
 							<td><?php echo $recentrow['bedrijfnaam']; ?></td>
+							<?php } ?>
 
 							<!-- Verschil tussen de aanmaakdatum en de huidige datum in dagen -->
-							<?php 
-								if($date1->diff($date2)->days == 0) { ?> <td>Vandaag</td> <?php } //Screening vandaag aangemaakt
-								elseif ($date1->diff($date2)->days == 1) { ?> <td>Gisteren</td> <?php } //Screening gisteren aangemaakt
-								else { ?><td><?php echo $date1->diff($date2)->days." dagen geleden"; ?></td> <?php } //Screening ouder dan gisteren
-							?>
+							<?php
+								if($recentdays == 0)
+								{ ?>
+									<td>Vandaag</td>
+								<?php }
+								if($recentdays == 1)
+								{ ?>
+									<td>Gisteren</td>
+								<?php }
+								if($recentdays > 1 && $recentdays<= 15) {
+									echo "<td>".$recentrow['aanmaakdatum']."</td>";							
+								} else {
+									//niks
+								} ?>
+							<?php if($recentdays <= 15) { ?>
 							<td class="cursive"><a href="admin-panel.php?klantid=<?php echo $recentrow['id'] ;?>">link</a></td>
+							<?php } ?>
 						</tr>
 					<?php
-					} //ENDIF
+					//} //ENDIF
 				} //ENDWHILE
 				?>
 			</table>

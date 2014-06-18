@@ -71,7 +71,7 @@ if(!$posting) {
 		</div>
 
 		<form method="post" id="settings-form">	
-		<?
+		<?php
 		
 		while ($row=mysql_fetch_assoc($result)) {
 		echo "<div class='content-block integriteit'>";

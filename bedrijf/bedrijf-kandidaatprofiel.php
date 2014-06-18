@@ -69,7 +69,7 @@ $datumArray = array('', 'januari', 'februari', 'maart', 'april', 'mei', 'juni', 
 						</tr>
 						<tr>
 							<td>Postcode</td>
-							<td><?php echo chunk_split(strtoupper($row['postcode']), 4, " "); ?></td>
+							<td><?php echo $row['postcode']; ?></td>
 							<td>Wachtwoord</td>
 							<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
 						</tr>

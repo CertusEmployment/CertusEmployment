@@ -7,7 +7,7 @@
 <table border='0' cellpadding='0' cellspacing='0' height='100%' width='100%' id='bodyTable'>
     <tr>
         <td align='center' valign='top'>
-            <table style='border: 1px; border-collapse: collapse; border-color: #cbe1f0;' border='1px' cellpadding='0' cellspacing='0' width='600' id='emailContainer'>
+            <table style='border: 1px; border-collapse: collapse; border-color: orange;' border='1px' cellpadding='0' cellspacing='0' width='600' id='emailContainer'>
                 <tr>
                     <td align='center' valign='top' border='0'>
                         <table border='0' cellpadding='0' cellspacing='0' width='100%' id='emailHeader'>
@@ -33,7 +33,11 @@
                                     <table border='0' cellpadding='20' cellspacing='0' width='100%' id='mailbutton'>
                                     	<tr>
                                     		<td align='center' valign='top'>
-                                    			<button href='http://www.cairansteverink.com/certusemployment' style='border-radius: 2px; border: 1px solid ; background: darkorange; width: 200px; height: 50px; border-color: #CD661D; color: white; font-weight: bold; font-size: 14px; text-shadow: 1px 0px #8B8878; cursor: pointer;'>inloggen</button>
+                                    			<a style='text-decoration: none;' href='http://www.cairansteverink.com/certusemployment'>                                                
+                                                    <div style='border-radius: 2px; border: 1px solid ; background: darkorange; width: 200px; height: 50px; border-color: #CD661D; color: white; font-weight: bold; font-size: 14px; text-shadow: 1px 0px #8B8878; cursor: pointer;'>
+                                                        <p style='text-decoration: none; margin-top: 15px;'>Inloggen</p>
+                                                    </div>
+                                                </a>
                                     		</td>
                                     	</tr>
                                     </table>

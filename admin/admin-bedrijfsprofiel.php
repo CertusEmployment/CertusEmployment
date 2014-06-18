@@ -5,14 +5,15 @@
 include "../connect.php";
 
 session_start();
+$bedrijfid = $_SESSION['bedrijfid'];
 
-$bedrijfquery = "SELECT * FROM bedrijf WHERE id=".$_SESSION['bedrijfid']."";
+$bedrijfquery = "SELECT * FROM bedrijf WHERE id='$bedrijfid'";
 $bedrijfresult = mysql_query($bedrijfquery)or die(mysql_error());
-$tablequery = "SELECT * FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']."";
+$tablequery = "SELECT * FROM klant WHERE bedrijfid='$bedrijfid'";
 $tableresult = mysql_query($tablequery)or die(mysql_error());
-$overzichtquery = "SELECT aanmaakdatum, COUNT(*) as 'counter' FROM klant WHERE bedrijfid=".$_SESSION['bedrijfid']." GROUP BY MONTH(aanmaakdatum) ORDER BY aanmaakdatum DESC LIMIT 1,18446744073709551615";
+$overzichtquery = "SELECT aanmaakdatum, COUNT(*) as 'counter' FROM klant WHERE bedrijfid='$bedrijfid' GROUP BY MONTH(aanmaakdatum) ORDER BY aanmaakdatum DESC LIMIT 1,18446744073709551615";
 $overzichtresult = mysql_query($overzichtquery);
-$maatwerkquery = "SELECT * FROM maatwerk WHERE id=".$_SESSION['bedrijfid']." ";
+$maatwerkquery = "SELECT * FROM maatwerk WHERE id='$bedrijfid' ";
 $maatwerkresult = mysql_query($maatwerkquery)or die(mysql_error());
 $pakket = mysql_fetch_assoc($maatwerkresult);
 
@@ -90,7 +91,7 @@ if(isset($_GET['delete'])) {
 				</tr>
 				<tr>
 					<td>Postcode</td>
-					<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
+					<td><?php echo $row['postcode']; ?></td>
 				</tr>
 				<tr>
 					<td>Plaats</td>

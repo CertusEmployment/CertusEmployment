@@ -52,11 +52,11 @@
 					<ul class="sub-menu-alert">
 						<p style="border-bottom:1px solid #ddd;"><b>Meldingen</b></p>
 						<?php while($alert = mysql_fetch_assoc($alertresult)) { 
-							$date1 = new DateTime(date('d-m-Y', strtotime($alert['opleverdatum']))); //opleverdatum
-							$date2 = new DateTime(date('d-m-Y')); //huidige datum
-							if($date1 > $date2 && $alert['rapport']==0) {
+							$date1 = strtotime($alert['opleverdatum']).'<br>'; //opleverdatum
+							$date2 = time(); //huidige datum
+							if($date1 < $date2 && empty($alert['rapport'])) {
 								?><li class="errorinput" style="border:none;"><a href="bedrijf-panel.php?klantid=<?php echo $alert['id'] ?>">Leverdatum <?php echo $alert['voornaam']." ".$alert['achternaam']; ?> verstreken</a></li><?php
-							} elseif ($date1 < $date2) {
+							} elseif ($date1 > $date2) {
 						?><li><a href="bedrijf-panel.php?klantid=<?php echo $alert['id'] ?>"><?php echo $alert['voornaam']." ".$alert['achternaam']; ?> screening aangemaakt</a></li><?php 
 							}
 						} ?>

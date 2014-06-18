@@ -18,7 +18,7 @@ if(isset($_GET['bedrijfid'])) {
 }
 
 if(isset($_GET['delete'])) {
-	$delsql = "DELETE FROM klant WHERE id = ".$_SESSION['klantid']." ";
+	$delsql = "DELETE FROM klant WHERE id = '".$_SESSION['klantid']."' ";
 	mysql_query($delsql);
 	//Delete klant directory
 	rmdir("../file-upload/".$_SESSION['klantid']);
@@ -130,7 +130,7 @@ if(isset($_GET['delete'])) {
 					</tr>
 					<tr>
 						<td>Postcode</td>
-						<td><?php echo (strlen($row['postcode'])==6)? chunk_split(strtoupper($row['postcode']), 4, " ") : $row['postcode'] ; ?></td>
+						<td><?php echo $row['postcode']); ?></td>
 						<td>Wachtwoord</td>
 						<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
 					</tr>
