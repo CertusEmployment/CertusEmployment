@@ -2,8 +2,8 @@
 
 $host = 'localhost';
 $dbnaam = 'certustest';
-$user = 'superuser';
-$passw = 'Steverink23';
+$user = 'root';
+$passw = '';
 
 $db = mysql_connect($host,$user,$passw) or die(mysql_error());
 mysql_select_db($dbnaam, $db) or die(mysql_error());

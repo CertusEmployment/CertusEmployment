@@ -65,7 +65,7 @@ if(!isset($_POST['submit'])) {
 			 		".$_SESSION['pakket'].")";
 		$result = mysql_query($sql) or die(mysql_error());
 		$klantid = mysql_insert_id();
-		
+		$_SESSION['klantid'] = mysql_insert_id();
 		
 		if($_SESSION['pakket'] == 3) {
 			$maatwerksql = "INSERT INTO maatwerk(idcheck, werkervaring, opleiding, onderzoek, financieel, vog, klantid) VALUES(".$_SESSION['identiteit'].", ".$_SESSION['werkervaring'].", ".$_SESSION['opleiding'].", ".$_SESSION['onderzoek'].", ".$_SESSION['financieel'].", ".$_SESSION['vog'].", ".$klantid.") ";
@@ -96,7 +96,7 @@ if(!isset($_POST['submit'])) {
 			unset($_SESSION['werkervaring']);
 			unset($_SESSION['financieel']);
 			unset($_SESSION['vog']);
-    		header("Location: bedrijf-panel.php");
+    		header("Location: bedrijf-upload-cv.php");
     	} else {
     		$posting = false;
     		die(mysql_error());

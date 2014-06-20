@@ -66,7 +66,7 @@ if(!isset($_POST['submit'])){
 		} else {
 			$sql2 = "UPDATE klant SET temppassword=3 WHERE id=".$_SESSION['id']." ";
 			mysql_query($sql2);
-			header("Location: klant-upload-cv.php");
+			header("Location: klant-upload-verklaring.php");
 		}
 	}
 

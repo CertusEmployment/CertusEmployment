@@ -23,6 +23,10 @@ if(!isset($_POST['submit'])){
 	$posting = true;
 	$verklaring = "";
 
+	$pakket = "SELECT * FROM maatwerk WHERE id=".$_SESSION['id']." ";
+	$p = mysql_query($pakket);
+	$custom = mysql_fetch_assoc($p);
+
 	//Search folder for files (verklaring) matching the specified extentions.
 	foreach (glob("../file-upload/".$_SESSION['id']."/toestemming/*") as $filename) {
 		$verklaring = $filename;
@@ -44,9 +48,16 @@ if(!isset($_POST['submit'])){
 		if($row['temppassword']==0) {
 			header("Location: klant-panel.php");
 		} else {
-			$sql2 = "UPDATE klant SET temppassword=5 WHERE id=".$_SESSION['id']." ";
+			$sql2 = "UPDATE klant SET temppassword=4 WHERE id=".$_SESSION['id']." ";
 			mysql_query($sql2);
-			header("Location: klant-integriteit.php");
+
+			if($row['pakket'] == 1 && $row['pakket'] == 2) {
+				header("Location: klant-integriteit.php");	
+			} else if($custom['vog'] == 1) {
+				header("Location: klant-integriteit.php");
+			} else {
+				header("Location: klant-panel.php");
+			}			
 		}
 
 	}

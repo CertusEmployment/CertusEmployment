@@ -1,6 +1,14 @@
 <?php include "../connect.php"; 
 session_start();
 
+if(!glob("../file-upload/".$_SESSION['klantid'])) {
+	mkdir("../file-upload/".$_SESSION['klantid'], 0777);
+}
+
+if(!glob("../file-upload/".$_SESSION['klantid']."/cv")) {
+	mkdir("../file-upload/".$_SESSION['klantid']."/cv", 0777);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +32,7 @@ if(!isset($_POST['submit'])){
 	$cv = "";
 
 	//Search folder for files (verklaring) matching the specified extentions.
-	foreach (glob("../file-upload/".$_SESSION['id']."/cv/*") as $filename) {
+	foreach (glob("../file-upload/".$_SESSION['klantid']."/cv/*") as $filename) {
 		$cv = $filename;
 	}
 
@@ -33,22 +41,17 @@ if(!isset($_POST['submit'])){
 	}
 
 	if($posting) {
-		$sql = "UPDATE klant SET cv='".$cv."' WHERE id=".$_SESSION['id']." ";
+		$sql = "UPDATE klant SET cv='".$cv."' WHERE id=".$_SESSION['klantid']." ";
 		$result = mysql_query($sql) or die(mysql_error());
 
-		$getklant = "SELECT * FROM klant WHERE id=".$_SESSION['id']."";
+		$getklant = "SELECT * FROM klant WHERE id=".$_SESSION['klantid']."";
 		$data = mysql_query($getklant);
 		$row = mysql_fetch_assoc($data);
 
-		if($row['temppassword']==0) {
-			header("Location: klant-panel.php");
-		} else {
-			$sql2 = "UPDATE klant SET temppassword=4 WHERE id=".$_SESSION['id']." ";
-			mysql_query($sql2);
-			header("Location: klant-upload-verklaring.php");
+		if(!empty($row['cv'])) {
+			header("Location: bedrijf-panel.php");
 		}
 	}
-
 }
 
 if(!$posting) {
@@ -59,7 +62,7 @@ if(!$posting) {
 
 <div id="container">
 
-	<?php include "toolbar-klant.php"; ?>
+	<?php include "toolbar-bedrijf.php"; ?>
 
 	<div id="wrapper">
 
@@ -68,13 +71,13 @@ if(!$posting) {
 		</div>
 		
 		<div class="content-block">
-			<p class="content-head">Informatievoorziening</p>
+			<p class="content-head">De laatste stap.</p>
 			
 			<p class="block">
-				Upload hier uw <b>CV</b>.
+				U bent er bijna, maar om het screeningsprocess te voltooien hebben we alleen nog het desbetreffende <b>CV</b> nodig.
 			</p>
 			
-			<form action="klant-upload-cv.php" class="dropzone">
+			<form action="bedrijf-upload-cv.php" class="dropzone">
 				<i class="fa font" style="font-size:30px;color:#ccc;">Sleep het bestand hier <br>of klik op dit vlak.</i><br>
 			 	<div class="fallback">
 			    	<input name="file" type="file" multiple />
@@ -101,7 +104,7 @@ if(!$posting) {
 
 $ds = DIRECTORY_SEPARATOR; 
  
-$storeFolder = "../file-upload/".$_SESSION['id']."/cv";  
+$storeFolder = "../file-upload/".$_SESSION['klantid']."/cv";  
  
 if (!empty($_FILES)) {
      

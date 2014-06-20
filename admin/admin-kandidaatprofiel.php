@@ -80,16 +80,20 @@ if(isset($_GET['delete'])) {
 
 	if(isset($_POST['submit1'])) {
 		$_SESSION['filedelete'] = 1;
+		header("Location: admin-deletefiles.php");
 	}
 	if(isset($_POST['submit2'])) {
 		$_SESSION['filedelete'] = 2;
+		header("Location: admin-deletefiles.php");
 	}
 	if(isset($_POST['submit3'])) {
 		$_SESSION['filedelete'] = 3;
+		header("Location: admin-deletefiles.php");
 	}
 
 	if(isset($_POST['submit4'])) {
 		$_SESSION['filedelete'] = 4;
+		header("Location: admin-deletefiles.php");
 	}
 
 	if(isset($_POST['deleterapport'])) {
@@ -130,7 +134,7 @@ if(isset($_GET['delete'])) {
 					</tr>
 					<tr>
 						<td>Postcode</td>
-						<td><?php echo $row['postcode']); ?></td>
+						<td><?php echo $row['postcode']; ?></td>
 						<td>Wachtwoord</td>
 						<td>&#8226;&#8226;&#8226;&#8226;&#8226;</td>
 					</tr>
@@ -165,7 +169,7 @@ if(isset($_GET['delete'])) {
 				<p class="content-head">Bestanden</p>
 
 				<table class="recenttable">
-				<form id="settings-form" method="post" action="admin-deletefiles.php">
+				<form id="settings-form" method="post" action="#">
 
 					<tr>
 						<td><p>CV</p></td>

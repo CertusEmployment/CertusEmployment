@@ -90,8 +90,8 @@ if(!isset($_POST['submit'])) {
 
 	if($posting) {
 		header("Location: bedrijf-pakketselectie.php");
-		echo randomPassword();
-		}
+		//echo randomPassword();
+	}
 }
 
 if(!$posting) { 

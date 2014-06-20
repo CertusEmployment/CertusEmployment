@@ -56,9 +56,6 @@ if(!isset($_POST['submit'])) {
 			if($klantdata['temppassword'] == '2') {
 				header("Location: klant/klant-upload-identiteit.php");
 			}
-			if($klantdata['temppassword'] == '3') {
-				header("Location: klant/klant-upload-cv.php");
-			}
 			if($klantdata['temppassword'] == '4') {
 				header("Location: klant/klant-upload-verklaring.php");
 			}

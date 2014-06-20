@@ -36,9 +36,6 @@ if($row['geslacht'] == 'm') {
 	$aanhef = "mevrouw";
 }
 
-
-
-
 if(isset($_POST['textsubmit'])) {
 	$_SESSION['deletetext'] = $_POST['deletetext'];
 	include "../email/klant-file-delete.php";
@@ -47,17 +44,23 @@ if(isset($_POST['textsubmit'])) {
 		$sql = "UPDATE klant SET identiteit='' WHERE id='".$_SESSION['klantid']."' ";
 		mysql_query($sql) or die(mysql_error());
 
-	} else if($_SESSION['filedelete'] == 2) {
+	} 
+
+	if($_SESSION['filedelete'] == 2) {
 		unlink($row['toestemming']);
 		$sql = "UPDATE klant SET toestemming='' WHERE id='".$_SESSION['klantid']."' ";
 		mysql_query($sql);
 
-	} else if($_SESSION['filedelete'] == 3) {
+	}
+
+	if($_SESSION['filedelete'] == 3) {
 		unlink($row['integriteit']);
 		$sql = "UPDATE klant SET integriteit='' WHERE id='".$_SESSION['klantid']."' ";
 		mysql_query($sql);
 
-	} else {
+	} 
+
+	if($_SESSION['filedelete'] == 4) {
 		unlink($row['cv']);
 		$sql = "UPDATE klant SET cv='' WHERE id='".$_SESSION['klantid']."' ";
 		mysql_query($sql);
